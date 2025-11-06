@@ -1,0 +1,190 @@
+/* Cambio en el comportamiento del html para que al hacer click en un enlace interno en vez 
+de recargar la página se deslize */
+html 
+{
+    scroll-behavior: smooth;
+}
+/* Fondo principal negro, texto blanco y márgenes interiores */
+body
+{
+    background-color: black;
+    color: white;
+    margin: 70px 100px;
+}
+/* Header con imagen y título centrados vertical y horizontalmente */
+header 
+{
+    height: 500px;
+    background-color: #1A1A1A;
+    display: flex;
+    flex-direction: column;    
+    justify-content: center; 
+    align-items: center;   
+    gap: 20px;   
+}
+/* Imagen del perfil dentro del header */
+header img 
+{
+    width: 200px;
+    height: auto;      
+    border-radius: 100px;        
+}
+/* Título principal del header */
+header h1 
+{
+    font-size: 40px;
+    font-family: 'Trebuchet MS', 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+    color: #C31A1A;
+}
+/* Barra de navegación centrada horizontal y verticalmente */
+nav 
+{
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    height: 100px;            
+}
+/* Lista de navegación en formato horizontal con separación entre elementos y enlaces internos */
+nav ul 
+{
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+nav li, nav a
+{
+    width: 200px;
+    height: 60px;
+    display: flex;            
+    justify-content: center;
+    align-items: center;
+    background-color: #6F3434;
+    border-radius: 15px;
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+}
+nav li a:hover
+{
+    background-color: #442B2B;
+    color: gray;
+}
+header hr
+{
+    border: 2px solid #2E7099;
+    width: 1700px;
+}
+/* Contenedor principal usando display flex */
+main
+{
+    display: flex;
+    padding: 10px 50px;
+    background-color: #1A1A1A;
+}
+/* Sección principal del contenido con ancho fijo y separación del aside */
+main section
+{
+    width: 800px;
+    margin-right: 150px;
+}
+main section a
+{
+    color: white;
+}
+main section a:hover
+{
+    color: gray;
+}
+main h2
+{
+    color: #2E7099;
+}
+main hr
+{
+    border: 1px #2E7099 solid;
+}
+aside li
+{
+    padding: 10px;
+}
+/* Clase para editar solamente la lista de información de contacto  */
+.info_contacto
+{
+    padding: 10px;
+    list-style: none;
+    position: relative; /*Position usado como padre para el siguiente position*/
+    padding-left: 35px;
+}
+/* Iconos decorativos a la izquierda de cada elemento de contacto */
+aside li::before
+{
+    /* Hacer visible el pseudoelemento (Se necesita content para verse obligatoriamente)*/
+    content: ""; 
+    position: absolute; /* Usando el position relative anterior como padre se fija al lado de la info*/
+    
+    /* Posicionamos al lado de la información correspondiente*/
+    left: 0px;
+    width: 24px;
+    height: 24px;
+    background-size: contain; /* Hace que la imagen se vea correctamente*/
+    border-radius: 25px;
+}
+#linkedin a
+{
+    color: white;
+}
+#linkedin a:hover
+{
+    color: gray;
+}
+/* Iconos específicos para cada tipo de contacto */
+#contact::before
+{
+    background-image: url("img/telephone_icon.png");
+}
+#email::before
+{
+    background-image: url("img/email_icon.png");
+}
+#address::before
+{
+    background-image: url("img/address_icon.jpg");
+}
+#linkedin::before
+{
+    background-image: url("img/linkedin_icon.jpg");
+}
+footer
+{
+    font-size: 20px;
+}
+/* Contenedor del botón centrado */
+footer ul 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    height: 50px;
+}
+/* Botón del footer para ir al inicio centrando texto*/
+footer li, footer li a
+{
+    background-color: #6F3434;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 60px;
+    border-radius: 20px;
+}
+footer li a
+{
+    text-decoration: none;
+    color: white;
+}
+footer li a:hover
+{
+    background-color: #442B2B;
+    color: gray;
+}

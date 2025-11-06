@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        //Creamos la función para mostrar por consola
+        function mostrar(array)
+        {
+            /*Creamos una variable para mostrar en consola
+            Inicializamos con "[" para abrir y cerrar el array con corchetes*/
+            let arrayConsola = "[";
+
+            /*Recorremos el array verificando si es el último elemento
+            Si no lo es, añadimos una coma, si lo es, cerramos con corchete*/
+            for (let i in array)
+            {
+                arrayConsola += (i != array.length - 1) ? (array[i] + ", ") : (array[i] + "]");    
+            }
+            //Mostramos por consola
+            console.log(arrayConsola);
+        }
+        //Creamos la función para buscar un valor en el array
+        function buscarItem(entrada, array)
+        {
+            //Recorremos el array y si algún valor coincide lo devolvemos
+            for (let i in array)
+            {
+                if (entrada == array[i])
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        //Inicializamos el array
+        array = ['Juan', 'Pedro', 'Luis', 'María', 'Julia'];
+
+        //Llamamos a la función para mostrar en consola
+        mostrar(array);
+
+        //Pedimos un nombre al usuario
+        let entrada = prompt("Introduce un nombre");
+
+        //Llamamos a la función para buscar el nombre
+        let indicePalabra = buscarItem(entrada, array);
+
+        /*Si se encontró el nombre devolvemos su índice
+        Si no avisamos al usuario de que el nombre no ha sido encontrado*/
+        console.log((indicePalabra != -1) ? (`El nombre ${entrada} se encuentra en la posición ${indicePalabra}`) 
+                                        : (`No se encontró el nombre ${entrada} en el array`));
+    </script>
+</body>
+</html>

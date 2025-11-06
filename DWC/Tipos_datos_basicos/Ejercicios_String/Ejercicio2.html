@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        let ObjetoString = new String("Hoy hace un buen día"); //Inicializamos el objeto String
+
+        console.log(ObjetoString.charAt(2)); //Devuelve el cáracter del índice 2 ("y")
+        console.log(ObjetoString.concat(" y mañana también lo hará")); // Concatena el string específicado con el anterior String (Hoy hace un buen día y mañana también lo hará)
+        console.log(ObjetoString.endsWith("día")); //Busca si termina con ese carácter o conjunto de caracteres (true)
+        console.log(ObjetoString.includes("ayer")); //Busca si el String contiene el cáracter o conjunto de caracteres (false)
+        console.log(ObjetoString.lastIndexOf("u")); //Devuelve el último índice que contiene "u" (13)
+        console.log(ObjetoString.length); //Devuelve el número de caracteres que contiene la cadena (20)
+        console.log(ObjetoString.repeat(3)); //Repite la cadena cuantas veces pongamos (Si queremos que se repita dos veces debemos escribir 3)
+        console.log(ObjetoString.split(" ")); //Devuelve un array separando los elementos entre espacios (['Hoy', 'hace', 'un', 'buen', 'día']) 
+        console.log(ObjetoString.replace("buen", "mal")); //Intercambia el cáracter o conjunto de cáracteres de la cadena por la cadena especificada 
+        console.log(ObjetoString.substring(4)); //Devuelve un substring desde el final de la cadena hasta el índice especificado (hace un buen día)
+    </script>
+</body>
+</html>

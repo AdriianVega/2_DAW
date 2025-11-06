@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        let menu = prompt("Escribe el menú deseado (Carne, pescado o verdura): "); // Pedimos al usuario el menú
+        let bebidaRecomendada; // Inicializamos la bebida para asignarlo después
+
+        switch(menu) /* Dependiendo del menú se le recomienda una bebida
+                        Se usa "Carne" y/o "carne" para evitar errores*/
+        {
+            case "Carne":
+            case "carne":
+                bebidaRecomendada = "Le recomendamos Vino tinto";
+                break;
+            case "Pescado":
+            case "pescado":
+                bebidaRecomendada = "Le recomendamos Vino blanco";
+                break;
+            case "Verdura":
+            case "verdura":
+                bebidaRecomendada = "Le recomendamos Agua";
+                break;
+            default:
+                bebidaRecomendada = "Escriba carne, pescado o verdura."
+        }
+        console.log(bebidaRecomendada); // Se  muestra en la consola la bebida recomendada
+    </script>
+</body>
+</html>

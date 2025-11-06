@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 13 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        let caracter = prompt("Introduce un carácter");
+        let lineas = prompt("Introduce un número de líneas"); // Pedimos al usuario el carácter y líneas deseadas
+        let i = 1;
+        let j = 1; //Inicializamos i y j
+        
+        do /* Inicializamos cada línea vacía y cada vez que la variable i 
+            vaya subiendo se añaden mas caracteres */
+        {
+            let linea = "";
+
+            do
+            {
+                linea += caracter;
+                j++
+            }
+            while (j <= i);
+
+            console.log(linea); // Muestra por consola cada línea
+            i++;
+            j = 1;
+        }
+        while (i <= lineas);
+    </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+*
+{
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+}
+body
+{
+    font-family: Arial, Helvetica, sans-serif;
+}
+header
+{
+    background-image: url("img/img1.jpg");
+    color: whitesmoke;
+    height: 150px;
+}
+header > h1
+{
+    padding: 20px;
+}
+header > button
+{
+    background-color: #00649D;
+    color: red;
+    width: 250px;
+    height: 40px;
+    border-radius: 25px;
+    border: 1px solid white;
+}
+header > button > a
+{
+    color: whitesmoke;
+    text-decoration: none;
+}
+nav
+{
+    background-color: #00659F;
+    height: 20px;
+    padding: 20px;
+}
+nav > ul > li
+{
+    list-style-type: none;
+    display: inline;
+}
+nav > ul > li > a
+{
+    padding-right: 40px;
+    color: peru;
+    text-decoration: none;
+}
+nav > ul
+{
+    text-align: left;
+}
+main
+{
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+    gap: 50px;
+}
+main h2 
+{
+    text-align: left;
+}
+section img
+{
+    width: 250px;
+}
+footer
+{
+    display: flex;
+    justify-content: space-between;
+    background-color: #00649D;
+    padding-left: 100px;
+}
+footer h2
+{
+    text-align: left;
+    color: peru;
+}
+footer hr
+{
+    border: 1px solid peru;
+}
+footer form
+{
+    text-align: left;
+}
+footer form label
+{
+    display: inline-block;
+    color: peru;
+    text-align: left;
+    margin-right: 40px;
+    width: 50px;
+}
+footer form input
+{
+    text-align: left;
+    margin-bottom: 10px;
+    width: 115px;
+}
+footer form button
+{
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border-color: whitesmoke;
+}
+footer img
+{
+    padding: 20px;
+    width: 100px;
+}
+footer ul li
+{
+    text-align: left;
+    list-style-type: none;
+    text-decoration: none;
+}
+footer ul li a
+{
+    text-decoration: none;
+    color: peru;
+}
+#contact
+{
+    padding: 10px;
+}
+#policies
+{
+    padding: 40px;
+}

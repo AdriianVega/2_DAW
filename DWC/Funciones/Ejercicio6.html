@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6 hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        //Constante de PI
+        const PI = 3.14159;
+        let radio = prompt("Introduzca el radio del círculo"); //Pedimos al usuario el radio
+
+        //Funciones para hacer los respectivos cálculos
+        let $area = radio => PI * radio ** 2;
+        let $perimetro = radio => 2 * PI * radio;
+
+        //Imprimimos resultados redondeados a dos decimales
+        console.log("El área del círculo es: " + $area(radio).toFixed(2));
+        console.log("El perímetro del círculo es: " + $perimetro(radio).toFixed(2));
+    </script>
+</body>
+</html>

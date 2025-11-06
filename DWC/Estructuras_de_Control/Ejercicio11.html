@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        let lineas = 13; // Inicializamos las líneas
+
+        for (let i = 1 ; i <= lineas ; i++) /* Inicializamos cada línea vacía y cada vez que la variable i 
+                                            vaya subiendo se añaden mas asteriscos */
+        {
+            let linea = "";
+
+            for (let j = 1 ; j < i ; j++)
+            {
+                linea += "*"
+            }
+            console.log(linea); // Mostramos por consola la figura
+        }
+    </script>
+</body>
+</html>

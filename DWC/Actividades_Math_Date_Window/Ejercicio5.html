@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        //Hacemos la función para calcular la diferencia de días
+        function fechaMayor(fecha1, fecha2)
+        {
+            //Transformamos las variables en fechas
+            fecha1 = new Date(fecha1);
+            fecha2 = new Date(fecha2);
+
+            //Calculamos la diferencia en milisegundos y después lo transformamos a días
+            let sumarDiferencia = Math.abs(fecha1.getTime() - fecha2.getTime());
+            let milisegundosToDias = Math.round(sumarDiferencia / 1000 / 60 / 60 / 24);
+
+            //Devolvemos la diferencia
+            return milisegundosToDias;
+        }
+        //Declaramos las fechas en string
+        let fecha1 = "2023/03/10";
+        let fecha2 = "2022/03/15";
+
+        //Imprimimos por consola la diferencia de días
+        console.log("Hay " + fechaMayor(fecha1, fecha2) + " días de diferencia");
+    </script>
+</body>
+</html>

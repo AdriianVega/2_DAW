@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        input:not([name*="form"], [type="range"])
+        {
+            display: block;
+            margin-bottom: 20px;
+        }
+        label[for="experience"], label[for="satisfaction"]
+        {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+    <title>Formulario 4</title>
+</head>
+<body>
+    <header></header>
+    <nav></nav>
+    <main>
+        <h1>Cuestionario de Conocimientos Generales</h1>
+        <p>Rangos, escalas, fechas y tiempos. Usa las nuevas características de HTML5.</p>
+        <section>
+            <article>
+                <h2>Escalas y Rangos</h2>
+
+                <label for="satisfaction">¿Qué tan satisfecho estás con este cuestionario? (1-10)</label>
+                <input type="range" min="1" max="10" name="satisfaction" id="satisfaction">
+                <span>Valor seleccionado</span>
+
+                <label for="experience">Años de experiencia con HTML:</label>
+                <input type="number" placeholder="0.5" id="experience" name="experience" style="width: 60px;" value="50">
+
+                <h2>Fechas y tiempos</h2>
+
+                <label for="first_register">¿Cuándo te registraste por primera vez en internet?</label>
+                <input type="date" name="first_register" id="first_register">
+
+                <label for="study_hour">¿A qué hora del día prefieres estudiar?</label>
+                <input type="time" name="study_hour" id="study_hour">
+
+                <label for="birth_month">Mes de nacimiento:</label>
+                <input type="month" name="birth_month" id="birth_month">
+
+                <label for="holidays_week">¿En qué semana del año prefieres tomar vacaciones?</label>
+                <input type="week" name="holidays_week" id="holidays_week"> 
+                
+                <input type="submit" name="submit_form" value="Enviar Cuestionario" id="submit">
+                <input type="reset" name="reset_form" value="Limpiar Formulario" id="reset">
+            </article>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        // Actividad 1 Estrucuras de Control
+        // let numero = prompt("Introduce un número")
+
+        // if (numero >= 0) 
+        // {
+        //     console.log("El número introducido es positivo")
+        // }
+        // else 
+        // {
+        //     console.log ("El número introducido es negativo")
+        // }
+        
+        //Actividad 1 Mejorada
+        numero = Number(prompt("Introduce un número")); //Introduzco un número
+
+        //Capturamos errores
+        try
+        {
+            //Si el número introducido no es válido lanzamos un error
+            if (isNaN(numero))
+            {
+                throw new Error("El número introducido no es válido") 
+            }
+            else
+            {
+                if (numero >= 0) //Si el número es mayor o igual a 0 muestra en la consola que es positivo, si no que es negativo
+                {
+                    console.log("El número introducido es positivo");
+                }
+                else 
+                {
+                    console.log ("El número introducido es negativo");
+                }
+            }
+        }
+        catch (error)
+        {
+            console.error("Error: " + error.message)
+        }
+        //Actividad 2 Estructuras de Control
+        // let edad = prompt("Introduce tu edad") //Introduzco una edad
+
+        // if (edad < 18) //Si el número introducido es menor a 18 muestra en la consola que es menor de edad
+        // {
+        //     console.log("Eres menor de edad")
+        // }
+        // else if (edad >= 18 && edad < 65) //Si el número introducido es mayor a 18 y menor a 65  muestra en la consola que es un adulto
+        // {
+        //     console.log ("Eres un adulto")
+        // }
+        // else //Si no se cumple las otras dos condiciones  muestra en la consola que es un anciano
+        // {
+        //     console.log ("Eres un anciano")
+        // 
+        
+        //Actividad Mejorada
+        let edad = prompt("Introduce tu edad") //Introduzco una edad
+
+        //Capturamos errores
+        try
+        {
+            //Si la edad no es un número lanzamos un error
+            if (isNaN(edad))
+            { 
+                throw new Error("No se ha introducido una edad válida");
+            }
+            else
+            {
+                if (edad < 18) //Si el número introducido es menor a 18 muestra en la consola que es menor de edad
+                {
+                    console.log("Eres menor de edad")
+                }
+                else if (edad >= 18 && edad < 65) //Si el número introducido es mayor a 18 y menor a 65  muestra en la consola que es un adulto
+                {
+                    console.log ("Eres un adulto")
+                }
+                else //Si no se cumple las otras dos condiciones  muestra en la consola que es un anciano
+                {
+                    console.log ("Eres un anciano")
+                }
+            }
+        }
+        catch (error)
+        {
+            console.error("Error: " + error.message)
+        }
+        //Actividad 4 Funciones
+        // /* Creamos la función que calculará de forma incremental cada número por dos 
+        // Y guardamos en variable resultado */
+        // let secuenciaNumeros = (numero1, numero2) =>
+        // {
+        //     let resultado = "";
+
+        //     for (let i = 0 ; i < numero1 ; i++)
+        //     {
+        //         resultado += numero2 + " ";
+        //         numero2 *= 2;
+        //     }   
+        //     return resultado;
+        // }
+        // //Imprimimos por consola el resultado de cada pareja elegida de números
+        // console.log(secuenciaNumeros(4, 6));
+        // console.log(secuenciaNumeros(3, 7));
+        // console.log(secuenciaNumeros(1, 3));
+
+        //Actividad Mejorada
+        /* Creamos la función que calculará de forma incremental cada número por dos 
+        Y guardamos en variable resultado */
+        let secuenciaNumeros = (numero1, numero2) =>
+        {
+            let resultado = "";
+
+            for (let i = 0 ; i < numero1 ; i++)
+            {
+                resultado += numero2 + " ";
+                numero2 *= 2;
+            }   
+            return resultado;
+        }
+        //Capturamos errores
+        try
+        {
+            //Imprimimos por consola el resultado de cada pareja elegida de números
+            console.log(secuenciaNumeros(3, e()));
+        }
+        catch (error)
+        {
+            console.error("Error: " + error.message)
+        }
+        //Actividad 6 Funciones
+        //Constante de PI
+        // const PI = 3.14159;
+        // let radio = prompt("Introduzca el radio del círculo"); //Pedimos al usuario el radio
+
+        // //Funciones para hacer los respectivos cálculos
+        // let $area = radio => PI * radio ** 2;
+        // let $perimetro = radio => 2 * PI * radio;
+
+        // //Imprimimos resultados redondeados a dos decimales
+        // console.log("El área del círculo es: " + $area(radio).toFixed(2));
+        // console.log("El perímetro del círculo es: " + $perimetro(radio).toFixed(2));
+
+        //Actividad mejorada
+        //Capturamos errores
+        try
+        {   
+            //Constante de PI
+            const PI = 3.14159;
+
+            //Funciones para hacer los respectivos cálculos
+            let area = radio => PI * radio ** 2;
+            let perimetro = radio => 2 * PI * radio;
+
+            //Imprimimos resultados redondeados a dos decimales
+            console.log("El área del círculo es: " + area(radio).toFixed(2));
+            console.log("El perímetro del círculo es: " + perimetro(radio).toFixed(2));
+        }
+        catch (error)
+        {
+            console.error("Error: " + error.message)
+        }
+    </script>
+</body>
+</html>

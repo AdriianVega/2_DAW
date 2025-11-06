@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        let numero = prompt("Escribe un número"); //Pedimos número
+
+        function cuboNumero(numero) //Calculamos el cubo con una función
+        {
+            return numero ** 3;
+        }
+        console.log("El cubo de " + numero + " es " + cuboNumero(numero)); //Imprimimos resultado
+
+        let resultado = numero => numero ** 3; //El mismo procedimiento pero con Arrow Functions
+
+        console.log("El cubo de " + numero + " es " + resultado(numero));
+    </script>
+</body>
+</html>

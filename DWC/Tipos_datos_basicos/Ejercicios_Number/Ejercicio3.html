@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        //Hacemos un arrow function para comprobar si es un cubo y hacer su cálculo 
+        let cuboNumero = numero =>
+        {
+            //Comprobamos que es un número
+            if (isNaN(Number(numero)))
+            {
+                alert("Error: el valor introducido no es un número");
+                
+                return false;
+            }
+            //Comprobamos que es un entero
+            if (!Number.isInteger(numero))
+            {
+                alert("Error: el valor introducido no es un entero");
+
+                return false;
+            }
+            return numero ** 3;
+        }
+        //Imprimimos por pantalla
+        console.log(cuboNumero("T"));
+        console.log(cuboNumero(3.65));
+        console.log(cuboNumero(5));
+    </script>
+</body>
+</html>

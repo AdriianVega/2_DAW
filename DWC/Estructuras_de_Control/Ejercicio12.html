@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 12 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        let caracter = prompt("Introduce un carácter");
+        let lineas = 13; // Inicializamos las líneas y pedimos al usuario el carácter deseado
+        let i = 1;
+        let j = 1; //Inicializamos i y j
+        
+        while (i <= lineas) /* Inicializamos cada línea vacía y cada vez que la variable i 
+                            vaya subiendo se añaden mas caracteres */
+        {
+            let linea = "";
+
+            while (j <= i)
+            {
+                linea += caracter;
+                j++
+            }
+            console.log(linea); // Muestra por consola cada línea
+
+            i++;
+            j = 1;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+	<input id="myInput" type="text" value="Tutti Frutti">
+        <button onclick="actividad5()">Check Fruit</button>
+        <p id="demo"></p>
+    <script>
+		let actividad1 = numero => numero >= 0 ? "El número introducido es positivo" : "El número introducido es negativo"; //Arrow Function al ser un problema sencillo
+
+		//Arrow Function al ser un problema no muy complejo y fácil de depurar
+		let actividad2 = edad =>
+		{
+			if (edad < 18) //Si el número introducido es menor a 18 muestra en la consola que es menor de edad
+			{
+				return "Eres menor de edad";
+			}
+			else if (edad >= 18 && edad < 65) //Si el número introducido es mayor a 18 y menor a 65  muestra en la consola que es un adulto
+			{
+				return "Eres un adulto";
+			}
+			else //Si no se cumple las otras dos condiciones muestra en la consola que es un anciano
+			{
+				return "Eres un anciano";
+			}
+		}
+		//Arrow Function al ser fácil de depurar
+		let actividad3 = (numero1, numero2) => numero1 > numero2 ? numero1 : numero2;
+
+		//Arrow Function al ser fácil de depurar
+		let actividad4 = (nota1, nota2, nota3) =>
+		{
+			let mediaNotas = (nota1 + nota2 + nota3) / 3; // Calculamos la media
+			let resultado = mediaNotas >= 5 ? "aprobado" : "suspenso";
+
+			return "El alumno está " + resultado + "\nNota: " + mediaNotas.toFixed(2)
+		}
+		//Aquí se complica un poco más así que opté por function tradicional
+        function actividad5() 
+		{
+			let text; //Inicializamos text
+			let fruits = document.getElementById("myInput").value; //Introducimos la fruta en la caja de texto
+			
+			switch(fruits) //Dependiendo de la fruta, aparece un texto determinado 
+			{
+				case "Banana":
+				case "banana":
+					text = "Banana is good!";
+					break;
+				case "Orange":
+				case "orange":
+					text = "I am not a fan of orange.";
+					break;
+				case "Apple":
+				case "apple":
+					text = "How you like them apples?";
+					break;
+				default:
+					text = "Nunca he visto esa fruta";
+			}
+			document.getElementById("demo").innerHTML = text; //Imprimimos en la página la respuesta
+		}
+		//Function tradicional al ser una función larga
+		function actividad6(numeroMes)
+		{
+			switch(numeroMes) // Dependiendo del número se asigna un mes
+			{
+				case 1:
+					mes = "Enero";
+					break;
+				case 2:
+					mes = "Febrero";
+					break;
+				case 3:
+					mes = "Marzo";
+					break;
+				case 4:
+					mes = "Abril";
+					break;
+				case 5:
+					mes = "Mayo";
+					break;
+				case 6:
+					mes = "Junio";
+					break;
+				case 7:
+					mes = "Julio";
+					break;
+				case 8:
+					mes = "Agosto";
+					break;
+				case 9:
+					mes = "Septiembre";
+					break;
+				case 10:
+					mes = "Octubre";
+					break;
+				case 11:
+					mes = "Noviembre";
+					break;
+				case 12:
+					mes = "Diciembre";
+					break;
+				default:
+					mes = "Mes no encontrado"
+			}
+        		return "El més correspondiente al número " + numeroMes + " es: " + mes; //Imprimimos por pantalla el mes correspondiente al número
+		}
+		//Aquí no estaba seguro por cual optar pero opté por Function tradicional
+		function actividad7(menu)
+		{
+			let bebidaRecomendada; // Inicializamos la bebida para asignarlo después
+
+			switch(menu) /* Dependiendo del menú se le recomienda una bebida
+						Se usa "Carne" y/o "carne" para evitar errores*/
+			{
+				case "Carne":
+				case "carne":
+					bebidaRecomendada = "Le recomendamos Vino tinto";
+					break;
+				case "Pescado":
+				case "pescado":
+					bebidaRecomendada = "Le recomendamos Vino blanco";
+					break;
+				case "Verdura":
+				case "verdura":
+					bebidaRecomendada = "Le recomendamos Agua";
+					break;
+				default:
+					bebidaRecomendada = "Escriba carne, pescado o verdura."
+			}
+			return bebidaRecomendada;
+		}
+		//Aquí me parecía que los dos tipos de funciones estaban igual de bien
+		function actividad8()
+		{
+			for (let i = 1 ; i <= 30 ; i++) //Mostramos por consola los multiplos de dos que no sean múltiplos de 3
+			{
+				if (i % 2 == 0)
+				{
+					if (i % 3 == 0)
+					{
+						continue;
+					}
+					console.log(i + " ");
+				}
+			}
+		}
+		//También opté por tradicional function ya que no pide variables
+		function actividad9()
+		{
+			for (let i = 5 ; i < 300 ; i++) // Se  muestra por consola desde el 5 al 300 elevando a la potencia de 2
+			{
+				console.log(i ** 2);
+			}
+		}
+		//Al igual que las dos funciones anteriores usé la función tradicional
+		function actividad10(numeroFactorial)
+		{ 
+			let factorial = 1; //Inicializamos el factorial
+
+			for (let i = 2 ; i <= numeroFactorial ; i++) //Calculamos el factorial del número
+			{
+				factorial *= i;
+			}
+
+			return "El factorial de " + numeroFactorial + " es " + factorial; // Muestra en la consola el factorial del número elegido
+		}
+		//Ya que no pide variables usé la función tradicional
+		function actividad11()
+		{
+			let lineas = 13; // Inicializamos las líneas
+
+			for (let i = 1 ; i <= lineas ; i++) /* Inicializamos cada línea vacía y cada vez que la variable i 
+										vaya subiendo se añaden mas asteriscos */
+			{
+				let linea = "";
+
+				for (let j = 1 ; j < i ; j++)
+				{
+					linea += "*"
+				}
+				console.log(linea); // Mostramos por consola la figura
+			}
+		}
+		//Debido a que es bastante larga usé una función tradicional
+		function actividad12(caracter)
+		{
+			let lineas = 13; // Inicializamos las líneas y pedimos al usuario el carácter deseado
+			let i = 1;
+			let j = 1; //Inicializamos i y j
+			
+			while (i <= lineas) /* Inicializamos cada línea vacía y cada vez que la variable i 
+							vaya subiendo se añaden mas caracteres */
+			{
+				let linea = "";
+
+				while (j <= i)
+				{
+					linea += caracter;
+					j++
+				}
+				console.log(linea); // Muestra por consola cada línea
+
+				i++;
+				j = 1;
+			}
+		}
+		//Debido a que es bastante larga usé una función tradicional
+		function actividad13(caracter2, lineas)
+		{
+			let i = 1;
+			let j = 1; //Inicializamos i y j
+			
+			do /* Inicializamos cada línea vacía y cada vez que la variable i 
+				vaya subiendo se añaden mas caracteres */
+			{
+				let linea = "";
+
+				do
+				{
+					linea += caracter2;
+					j++
+				}
+				while (j <= i);
+
+				console.log(linea); // Muestra por consola cada línea
+				i++;
+				j = 1;
+			}
+			while (i <= lineas);
+		}
+		//Debido a que es bastante larga y no pide variables usé una función tradicional
+		function actividad14()
+		{
+			let numero = Math.round(Math.random() * 100 + 1); //El script elige al azar un número del 1 al 100 y redondeamos
+			let adivinado = false; //Inicializamos adivinado en false
+
+			while (!adivinado)
+			{
+				let entrada = prompt("Introduce un número"); //Pedimos entrada al usuario
+
+				if (entrada == null) //Si da click en cancelar se acaba el juego
+				{
+					alert("Has cancelado el juego");
+					break;
+				}
+				if (numero == entrada) //Si adivina se acaba el juego
+				{
+					adivinado = true;
+					
+					alert("¡Has ganado!");
+					break;
+				}
+				else if (entrada > numero) //Dependiendo del número del usuario le avisamos si es mayor o menor que el número
+					alert("El número que buscas es menor");
+				else
+					alert("El número que buscas es mayor");
+			}
+		}
+		let actividad = parseInt(prompt("Escribe el número de la actividad")); //Pedimos la actividad al usuario
+
+		//Dependiendo de la actividad pedimos los parámetros necesarios si necesita llamamos a la función e imprimimos
+		switch(actividad)
+		{
+			case 1:
+				let numero = prompt("Escribe un número");
+
+				console.log(actividad1(numero));
+				break;
+			case 2:
+				edad = prompt("Escribe tu edad");
+
+				console.log(actividad2(edad));
+				break;
+			case 3:
+				let numero1 = prompt("Escribe un número");
+				let numero2 = prompt("Escribe otro número"); //Pedimos que se introduzcan dos números
+
+				console.log(actividad3(numero1,numero2));
+				break;
+			case 4:
+				let nota1 = parseInt(prompt("Escriba una nota"));
+				let nota2 = parseInt(prompt("Escriba la segunda nota"));
+				let nota3 = parseInt(prompt("Escriba la tercera nota")); // Escribimos las 3 notas del alumno
+
+				console.log(actividad4(nota1, nota2, nota3));
+				break;
+			case 5:
+				actividad5();
+				break;
+			case 6:
+				let numeroMes = parseInt(prompt("Escribe un número"));
+
+				console.log(actividad6(numeroMes));
+				break;
+			case 7:
+				let menu = prompt("Escribe el menú deseado (Carne, pescado o verdura): "); // Pedimos al usuario el menú
+				
+				console.log(actividad7(menu));
+				break;
+			case 8:
+				actividad8();
+				break;
+			case 9:
+				actividad9();
+				break;
+			case 10:
+				let numeroFactorial = prompt("Introduce un número para sacar su factorial");
+
+				console.log(actividad10(numeroFactorial));
+				break;
+			case 11:
+				actividad11();
+				break;
+			case 12:
+				let caracter = prompt("Introduce un carácter");
+
+				actividad12(caracter);
+				break;
+			case 13:
+				let caracter2 = prompt("Introduce un carácter");
+				let lineas = prompt("Introduce un número de líneas"); // Pedimos al usuario el carácter y líneas deseadas
+				
+				actividad13(caracter2, lineas);
+				break;
+			case 14:
+				actividad14();
+				break;
+		}
+    </script>
+</body>
+</html>

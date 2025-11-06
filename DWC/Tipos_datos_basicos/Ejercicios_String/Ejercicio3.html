@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        //Creamos la función para hacer cada primera letra de cada palabra mayúscula
+        function titleCase(string)
+        {
+            let stringTitleCase = "";
+
+            for (let i = 0 ; i < string.length ; i++)
+            {
+                //Si el cáracter es el primero o va después de un espacio se cambia a mayúscula
+                stringTitleCase += (string.charAt(i - 1) == " " || i == 0)  
+                                    ? string.charAt(i).toUpperCase() 
+                                    : string.charAt(i);
+            }
+            return stringTitleCase;
+        }
+        //Pedimos al usuario una frase
+        let entrada = prompt("Escriba una frase");
+
+        //Imprimimos usando la función
+        console.log("Frase inicial: " + entrada + "\nTitle case: " + titleCase(entrada));
+    </script>
+</body>
+</html>

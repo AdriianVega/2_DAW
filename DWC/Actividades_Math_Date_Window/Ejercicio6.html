@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        // Creamos la función para calcular la hora mayor
+        function horaMayor(hora1, hora2)
+        {
+            //Creamos una fecha por defecto para poder transformar a formato Date
+            let fechaDefault = "2000-12-12T";
+            let hora1Mayor;
+    
+            //Recogemos las horas en milisegundos
+            hora1 = new Date(fechaDefault + hora1).getTime();
+            hora2 = new Date(fechaDefault + hora2).getTime();
+
+            //Si las horas son la misma lo imprime
+            if (hora1 == hora2)
+            {
+                return "Las dos horas son iguales";
+            }
+            //Si no imprime la hora mayor
+            else
+            {
+                hora1Mayor = hora1 > hora2;
+                return hora1Mayor ? "La primera hora es mayor a la segunda" : "La segunda hora es mayor a la primera";
+            }
+        }
+        //Declaramos las variables
+        let hora1 = "12:20:00";
+        let hora2 = "11:10:00";
+
+        //Imprimimos por consola
+        console.log(horaMayor(hora1, hora2));
+    </script>
+</body>
+</html>

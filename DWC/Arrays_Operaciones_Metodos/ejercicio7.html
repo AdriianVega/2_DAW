@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        //Inicializamos el array
+        let array = ["Dragonborn", "Skyrim", "Dovahkiin", "Dragon", "Fire", "Game"];
+
+        //Mostramos en consola la cantidad de valores y el contenido del array
+        console.log("Número de valores del array: " + array.length);
+        console.log(`Contenido del array: [${array.join(", ")}]`);
+
+        //Pedimos al usuario que introduzca un carácter que actuará como separador
+        let separador = prompt("Introduce un cáracter que actúe como separador");
+
+        //Unimos los valores del array en una sola cadena usando el separador indicado
+        let stringArray = array.join(` ${separador} `);
+
+        //Mostramos en consola la longitud de la cadena resultante y su contenido
+        console.log("\nNúmero de valores de la cadena: " + stringArray.length);
+        console.log(`Contenido de la cadena: ${stringArray}`);
+    </script>
+</body>
+</html>

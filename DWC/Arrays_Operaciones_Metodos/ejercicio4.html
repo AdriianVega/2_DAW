@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        //Inicializamos el array
+        let array = ["Dragonborn", "Skyrim", "Dovahkiin", "Dragon", "Fire", "Game"];
+
+        /*Mostramos en consola el contenido y el número de valores del array
+        Usamos join para separar los valores con comas y que se vea como un array*/
+        console.log("Número de valores del array: " + array.length);
+        console.log(`Contenido del array: [${array.join(", ")}]`);
+
+        //Eliminamos el último elemento del array usando pop y lo almacenamos en una variable
+        let elementoEliminado = array.pop();
+
+        //Mostramos nuevamente el número de valores y el contenido del array
+        console.log("Número de valores del array: " + array.length);
+        console.log(`Contenido del array: [${array.join(", ")}]`);
+
+        //Mostramos en consola el elemento que ha sido eliminado
+        console.log(`Elemento eliminado del array: ${elementoEliminado}`);
+    </script>
+</body>
+</html>

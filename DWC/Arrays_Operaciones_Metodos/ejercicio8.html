@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        //Inicializamos el string
+        let cadena = "Adrián Nataniel:Vega Pérez:+34612345678:AdrianNataniel@budapest.com:09876";
+
+        //Separamos la cadena en un array usando ':' como separador
+        let arrayCadena = cadena.split(":");
+
+        //Mostramos en consola los datos extraídos del array
+        console.log("Datos:");
+        console.log("- Código Postal: " + arrayCadena[4]);
+        console.log("- Apellidos: " + arrayCadena[1]);
+
+        //Mostramos el email completo y el servidor de correo obtenido del email
+        console.log("- Email: " + arrayCadena[3] + ", Servidor: " + arrayCadena[3].split("@")[1]);
+    </script>
+</body>
+</html>

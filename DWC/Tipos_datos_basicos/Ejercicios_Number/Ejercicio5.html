@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5 hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        function sumaDigitos(string)
+        {
+            //Inicializamos las variables
+            let digitos = "(";
+            let sumaTotal = 0;
+
+            for (let i = 0 ; i < string.length ; i++)
+            {
+                //Si el cáracter no es un espacio y es un número
+                if (string.charAt(i) != " " && !isNaN(Number(string.charAt(i))))
+                {
+                    //Añadimos a la suma el número
+                    sumaTotal += parseInt(string.charAt(i));
+
+                    /* Esto sé que no es necesario pero quería ponerlo para que quedase mejor
+                    Añade a la secuencia el número */
+                    digitos += string.charAt(i) + "+";
+                }
+            }
+            //Eliminamos de la secuencia el último "+" y lo cambiamos por un ")" para que cierre correctamente
+            digitos = digitos.substring(0, digitos.length - 1) + ")";
+
+            return "La suma de todos los digitos es: " + sumaTotal + " " + digitos;
+        }
+        //Imprimimos por pantalla los resultados
+        console.log(sumaDigitos("Estamos a 2 días del finde y faltan 90 días para fin del año 2025"));
+        console.log(sumaDigitos("Si pedro tiene 4 manzanas y Daniel le regala 5 ¿Cuántas manzanas tiene en total?"));
+    </script>
+</body>
+</html>

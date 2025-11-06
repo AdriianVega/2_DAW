@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        let nota1 = parseInt(prompt("Escriba una nota"))
+        let nota2 = parseInt(prompt("Escriba la segunda nota"))
+        let nota3 = parseInt(prompt("Escriba la tercera nota")) // Escribimos las 3 notas del alumno
+
+        let mediaNotas = (nota1 + nota2 + nota3) / 3 // Calculamos la media
+
+        if (mediaNotas >= 5) // Si es mayor o igual a 5 está aprobado, si no está suspenso
+        {
+            console.log("El alumno está aprobado\nNota: " + mediaNotas.toFixed(2)) /* El método toFixed sirve para redondear a una cantidad 
+                                                                                        establecida de decimales */
+        }
+        else
+        {
+            console.log("El alumno está suspenso\nNota: " + mediaNotas.toFixed(2))
+        }
+    </script>
+</body>
+</html>

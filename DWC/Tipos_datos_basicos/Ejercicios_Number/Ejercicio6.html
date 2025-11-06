@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6 hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        /* Hacemos un arrow Function sacando un número aleatorio
+        (Math.Random) Devuelve un número decimal aleatorio entre los dos números
+        (Math.floor) Ese número decimal lo redondeamos para que sea entero*/
+        let numeroAleatorio = (min, max) => Math.floor((Math.random() * (max - min + 1))) + min;
+        
+        //Imprimimos los resultados
+        console.log(numeroAleatorio(1, 5));
+        console.log(numeroAleatorio(1, 2));
+        console.log(numeroAleatorio(100, 200));
+    </script>
+</body>
+</html>

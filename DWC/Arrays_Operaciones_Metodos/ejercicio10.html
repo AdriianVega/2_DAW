@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 10 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        //Función que solicita al usuario introducir los sueldos y los guarda en el array proporcionado
+        function cargar(sueldos)
+        {
+            for (let i = 0 ; i < sueldos.length ; i++)
+            {
+                sueldos[i] = prompt("Introduce el " + (i + 1) + "º sueldo"); 
+            }
+        }
+
+        //Función que calcula la suma de todos los sueldos del array
+        function calcularGastos(sueldos)
+        {
+            let sumaSueldos = 0;
+
+            for (let i = 0 ; i < sueldos.length ; i++)
+            {  
+                sumaSueldos += Number(sueldos[i]);
+            }
+            return sumaSueldos;
+        }
+
+        //Inicizalizamos el objeto array
+        let sueldos = new Array(5);
+
+        //Llamamos a la función para cargar los sueldos en el array
+        cargar(sueldos);
+
+        //Mostramos en consola la suma total de los sueldos
+        console.log(`La suma total de todos los sueldos es de ${calcularGastos(sueldos)} €`);
+    </script>
+</body>
+</html>

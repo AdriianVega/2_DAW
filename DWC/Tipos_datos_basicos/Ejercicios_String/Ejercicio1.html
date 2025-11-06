@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        (()=>
+        {
+            const conversions = [];
+            
+            // String to Number
+            conversions.push(Number("123")); //Esto devolverá 123
+            conversions.push(Number("123abc")); //No es posible convertir abc a número
+            conversions.push(Number("")); //Devuelve 0
+            conversions.push(Number(" ")); //Devolverá también 0 debido a que java hace trim (elimina espacios al inicio y final) antes de hacer la conversión a número
+            
+            // Boolean to Number
+            conversions.push(Number(true)); //Devuelve 1
+            conversions.push(Number(false)); //Devuelve 0
+            
+            // Null and Undefined to Number
+            conversions.push(Number(null)); //Devuelve 0
+            conversions.push(Number(undefined)); //Devuelve NaN porque no se puede pasar undefined a número
+            
+            // String to Boolean
+            conversions.push(Boolean(""));  //Devuelve false ya que "" = 0
+            conversions.push(Boolean(" ")); //Devuelve true ya que la longitud de " " > 0
+            conversions.push(Boolean("false")); //Devuelve true ya que la longitud de "false" > 0
+            
+            // Number to String
+            conversions.push(String(123)); //Devuelve "123"
+            conversions.push(String(0));  //Devuelve "0"
+            conversions.push(String(NaN)); //Devuelve "NaN"
+            conversions.push(String(Infinity)); //Devuelve "Infinity"
+            
+            // Boolean to String
+            conversions.push(String(true)); //Devuelve "true"
+            conversions.push(String(false)); //Devuelve "false"
+            
+            // Null and Undefined to String
+            conversions.push(String(null)); //Devuelve "null"
+            conversions.push(String(undefined)); //Devuelve "undefined"
+            
+            // Number to Boolean
+            conversions.push(Boolean(0)); //Devuelve false
+            conversions.push(Boolean(1)); //Devuelve true
+            conversions.push(Boolean(NaN)); //Devuelve false
+            conversions.push(Boolean(Infinity)); //Devuelve true
+            
+            // Implicit Coercion in Operations
+            conversions.push("5" + 1); //Devuelve "51" al concatenar Strings
+            conversions.push("5" - 1); //Devuelve 4 ya que el "-" no se usa para concatenar
+            conversions.push("5" * 2); //Devuelve 10 por el mismo motivo
+            conversions.push("5" / 2); //Devuelve 2.5
+            conversions.push("5" % 2); //Devuelve 1
+            
+            // Coercion with ==
+            conversions.push(5 == "5"); //Devuelve true ya que no compara el tipo de dato, solo su contenido
+            conversions.push(false == 0); //Devuelve true ya que false es igual a 0 en número
+            conversions.push(null == undefined); //Devuelve true
+            conversions.push([] == false); //Devuelve true al ser un array vacío
+            conversions.push([] == ""); //Devuelve true al ser array vacío entonces al hacer la conversión [].toString() sería "" == "" 
+            conversions.push([1,2] == "1,2"); //Devuelve true debido a que java hace [1,2].toString() entonces "1,2" == "1,2"
+            
+            // Coercion with ===
+            conversions.push(5 === "5"); //Devuelve false al no ser el mismo tipo de dato
+            conversions.push(false === 0); //Devuelve false al no ser el mismo tipo de dato
+            conversions.push(null === undefined); //Devuelve false al no ser el mismo tipo de dato
+            conversions.push([] === false); //Devuelve false al no ser el mismo tipo de dato
+            conversions.push([] === "");//Devuelve false al no ser el mismo tipo de dato
+            conversions.push([1,2] === "1,2"); //Devuelve false al no ser el mismo tipo de dato
+            
+            console.log(conversions);
+        })();
+        conversions();
+    </script>
+</body>
+</html>

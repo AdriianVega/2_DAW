@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        // Inicializamos un array con el nombre y la edad de cada persona
+        const personas = 
+        [  
+            {name: "María", age: 20},  
+            {name: "Bernardo", age: 28},  
+            {name: "Pancracio", age: 22},  
+            {name: "Andrea", age: 19},  
+            {name: "Sara", age: 29},  
+            {name: "Jorge", age: 32},  
+            {name: "Yurena", age: 38},  
+            {name: "Ayoze", age: 18}  
+        ];  
+
+        // Pedimos al usuario una edad
+        let entrada = prompt("Introduce una edad");
+        let media = 0;
+
+        // Buscamos la primera persona cuya edad coincida con la introducida
+        let personaEncontrada = personas.find(persona => persona.age == entrada);
+
+        // Mostramos el resultado si se encontró la persona o un mensaje si no existe
+        console.log(personaEncontrada != undefined 
+            ? `Nombre: ${personaEncontrada.name}, Edad: ${personaEncontrada.age}` 
+            : "No se encontró ninguna persona con esa edad"
+        );
+
+        // Calculamos la media de edad sumando todas las edades
+        personas.forEach(function(persona)
+        {
+            media += persona.age;
+        });
+
+        // Mostramos la media de edad con dos decimales
+        console.log("Media de edad: " + (media / personas.length).toFixed(2));
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5 hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        /* Creamos la función que calculará de forma incremental cada número por dos 
+        Y guardamos en variable resultado */
+        let secuenciaNumeros = (numero1, numero2) =>
+        {
+            let resultado = "";
+
+            for (let i = 0 ; i < numero1 ; i++)
+            {
+                resultado += numero2 + " ";
+                numero2 *= 2;
+            }   
+            return resultado;
+        }
+        //Imprimimos por consola el resultado de cada pareja elegida de números
+        console.log(secuenciaNumeros(4, 6));
+        console.log(secuenciaNumeros(3, 7));
+        console.log(secuenciaNumeros(1, 3));
+    </script>
+</body>
+</html>

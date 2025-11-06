@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        // Inicializamos un array con números del 1 al 100
+        const array = 
+        [  
+            95, 95, 14, 83, 58, 33, 65, 52, 7, 72, 13, 46, 19, 31, 27, 36, 30, 86, 88, 88, 68, 16, 5, 14, 41, 56, 89, 11,  
+            6, 29, 72, 11, 69, 36, 16, 11, 82, 84, 32, 84, 95, 98, 76, 99, 100, 12, 89, 1, 92, 27, 66, 48, 38, 49, 30, 40,  
+            87, 19, 31, 37, 5, 32, 9, 33, 98, 94, 5, 15, 4, 88, 47, 34, 83, 8, 31, 4, 2, 72, 31, 39, 15, 10, 46, 78, 11,  
+            21, 92, 22, 83, 3, 6, 71, 39, 54, 50, 77, 13, 85, 7, 36  
+        ];  
+
+        // Creamos una copia del array para que no afecte al original y lo ordenamos de menor a mayor
+        let arrayOrdenado = [...array].sort((a, b) => a - b);
+        console.log(arrayOrdenado);
+
+        // Filtramos los números impares del array ordenado
+        let arrayOrdenadoImpar = arrayOrdenado.filter(numero => numero % 2 != 0);
+        console.log(arrayOrdenadoImpar);
+
+        // Eliminamos los números impares menores de 10
+        arrayOrdenadoImpar = arrayOrdenadoImpar.filter(numero => numero >= 10);
+
+        // Creamos un nuevo array lleno con ceros para contar la cantidad de veces que aparece cada número
+        let arrayConteo = new Array(101).fill(0);
+
+        // Recorremos el array original e incrementamos el contador según el número
+        array.forEach(function(numero)
+        {
+            arrayConteo[numero]++;
+        });
+
+        // Mostramos el conteo final de cada número
+        console.log(arrayConteo);
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        //Declaramos la constante de fecha e inicializamos diaSemana
+        const fecha = new Date();
+        let diaSemana;
+
+        //Dependiendo del día número sacamos la cadena con su respectivo día de la semana
+        switch (fecha.getDay())
+        {
+            case 1:
+                diaSemana = "lunes";
+                break;
+            case 2:
+                diaSemana = "martes";
+                break;
+            case 3:
+                diaSemana = "miércoles";
+                break;
+            case 4:
+                diaSemana = "jueves";
+                break;
+            case 5:
+                diaSemana = "viernes";
+                break;
+            case 6:
+                diaSemana = "sábado";
+                break;
+            case 7:
+                diaSemana = "domingo";
+                break;
+            default:
+                diaSemana = -1;
+        }
+        //Imprimimos por consola cada caso menos cuando de -1, en ese caso marcamos que hay un error
+        console.log((diaSemana != -1) ? "Hoy es " + diaSemana : "Error 404");
+    </script>
+</body>
+</html>

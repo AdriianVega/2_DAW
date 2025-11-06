@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        //Inicializamos el array
+        let array = ["Dragonborn", "Skyrim", "Dovahkiin", "Dragon", "Fire", "Game"];
+
+        /*Mostramos en consola el contenido y el número de valores del array
+        Usamos join para separar los valores con comas y que se vea como un array*/
+        console.log("Número de valores del array: " + array.length);
+        console.log(`Contenido del array: [${array.join(", ")}]`);
+
+        //Añadimos dos nuevos valores al inicio del array usando unshift
+        array.unshift("Videojuego", "Dragones");
+
+        //Mostramos el número de valores y el contenido del array
+        console.log("Número de valores del array: " + array.length);
+        console.log(`Contenido del array: [${array.join(", ")}]`);
+
+        /*Pedimos al usuario que introduzca una cadena de caracteres
+        y la añadimos al inicio del array usando unshift*/
+        array.unshift(prompt("Introduce una cadena de caracteres"));
+
+        //Mostramos el contenido del array incluyendo el valor añadido por el usuario
+        console.log("Número de valores del array: " + array.length);
+        console.log(`Contenido del array: [${array.join(", ")}]`);
+    </script>
+</body>
+</html>

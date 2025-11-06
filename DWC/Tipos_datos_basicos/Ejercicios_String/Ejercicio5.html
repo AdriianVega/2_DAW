@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        function caracteresComunes(string1, string2)
+        {
+            //Pasamos las cadenas a minúsculas para que no haya diferencia entre mayúsculas o minúsculas
+            string1 = string1.toLowerCase();
+            string2 = string2.toLowerCase();
+
+            //Calculamos cual String es mayor para usarlo para el límite de for
+            let stringMayor = string1.length > string2.length ? string1.length : string2.length;
+            let combinacionStrings = "";
+
+            for (let i = 0 ; i < stringMayor ; i++)
+            {
+                //Si el valor no es un espacio y está en la otra cadena se incluye
+                if (string1.charAt(i) != " " && string2.includes(string1.charAt(i)))
+                {
+                    //Si el valor no ha sido añadido todavía al string se añade
+                    if (!combinacionStrings.includes(string1.charAt(i)))
+                    {
+                        combinacionStrings += string1.charAt(i);
+                    }
+                }
+            }
+            return combinacionStrings
+        }
+        //Imprimimos las diferentes posibilidades
+        console.log(caracteresComunes("Ciudad","Cuando"));
+        console.log(caracteresComunes("Tigre", "Gorila"));
+        console.log(caracteresComunes("Paracaidas", "Rascacielos"));
+    </script>
+</body>
+</html>

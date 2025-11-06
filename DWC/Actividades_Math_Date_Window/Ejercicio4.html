@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        //Declaramos la constante y variable e inicializamos mensajeBienvenida
+        const fechaActual = new Date();
+        let HoraActual = fechaActual.getHours();
+        let mensajeBienvenida;
+
+        //Si la hora actual está entre las 6 de la mañaana y 12 imprime buenos días
+        if (HoraActual >= 6 && HoraActual < 12)
+        {
+            mensajeBienvenida = "Buenos días";
+        }
+        //Si está entre las 12 y 7 de la tarde escribe buenas tardes
+        else if (HoraActual >= 12 && HoraActual < 20)
+        {
+            mensajeBienvenida = "Buenas tardes";
+        }
+        //En los demás casos imprime buenas noches
+        else
+        {
+            mensajeBienvenida = "Buenas noches";
+        }
+        //Imprime por consola el mensaje de bienvenida
+        console.log(mensajeBienvenida);
+    </script>
+</body>
+</html>

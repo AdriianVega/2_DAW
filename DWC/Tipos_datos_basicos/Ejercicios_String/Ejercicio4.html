@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        function decodificarProducto(codigo)
+        {
+            //Dividimos el string usando el "-"
+            codigo = codigo.split("-");
+            let codigoDecodificado = "";
+
+            //Creamos un switch para cada caso
+            switch (codigo[0])
+            {
+                case "CP":
+                    codigoDecodificado += "Cliente particular ";
+                    break;
+                case "CE":
+                    codigoDecodificado += "Cliente de empresa ";
+                    break;
+                default:
+                    return "Error: Código de cliente no reconocido";
+            }
+            switch (codigo[1])
+            {
+                case "10":
+                    codigoDecodificado += "local ";
+                    break;
+                
+                case "11":
+                    codigoDecodificado += "autonómico ";
+                    break;
+                
+                case "12":
+                    codigoDecodificado += "nacional ";
+                    break;
+                
+                case "20":
+                    codigoDecodificado += "internacional ";
+                    break;
+                default:
+                    return "Error: Dígitos de cliente no reconocidos"
+            }
+            //Si valor introducido no es un número devuelve el error, si no, termina de crearse la frase
+            return !isNaN(Number(codigo[2])) ? codigoDecodificado + "con " + codigo[2] + " años de antiguedad" : 
+                                                "Error: Tiempo de antiguedad de cliente no reconocido";
+        }
+        //Imprimimos las diferentes posibilidades
+        console.log(decodificarProducto("CP-12-3"));
+        console.log(decodificarProducto("C4-12-3"));
+        console.log(decodificarProducto("CP-18-3"));
+        console.log(decodificarProducto("CP-12-T"));
+    </script>
+</body>
+</html>

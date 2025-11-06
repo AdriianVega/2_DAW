@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        //Función que ordena un array de personas primero por cargo, luego por edad descendente y finalmente por nombre
+        function ordenarPersonas(personas)
+        {
+            //Ordenamos inicialmente por orden alfabético de nombres
+            personas.sort();
+            
+            //Recorremos el array para aplicar la ordenación personalizada
+            for (let i in personas)
+            {
+                for (let j = i ; j > 0 ; j--)
+                {
+                    //Priorizamos los cargos: Profesor > Administrativo > Estudiante
+                    if (personas[j][2] == "Profesor" && personas[j - 1][2] != "Profesor" ||
+                        personas[j][2] == "Administrativo" && personas[j - 1][2] == "Estudiante")
+                    {
+                        //Hacemos el intercambio de variables para ir ordenando poco a poco
+                        let temp = personas[j - 1];
+                        personas[j - 1] = personas[j];
+                        personas[j] = temp;
+                    }
+                    //Si los cargos son iguales, ordenamos por edad descendente
+                    if (personas[j][2] == personas[j - 1][2])
+                    {
+                        if (personas[j][1] > personas[j - 1][1])
+                        {
+                            let temp = personas[j - 1];
+                            personas[j - 1] = personas[j];
+                            personas[j] = temp; 
+                        }
+                    }
+                }
+            }
+        }
+
+        //Inicializamos el array personas
+        let personas=
+        [
+            ["Adrián",47, "Profesor"],
+            ["Luisa",60, "Profesor"],
+            ["Ana",20, "Estudiante"],
+            ["Blas",36, "Estudiante"],
+            ["Agustín",50, "Profesor"],
+            ["Felipe",25, "Estudiante"],
+            ["Pedro",19, "Estudiante"],
+            ["Zoraida",36, "Estudiante"],
+            ["Juan",36, "Administrativo"],
+            ["Toñi",48, "Administrativo"],
+            ["Juan",16, "Estudiante"],
+            ["Miriam",15, "Estudiante"],
+            ["Rosa",75, "Estudiante"],
+            ["Pepe",31, "Estudiante"],
+            ["Fermín",64, "Estudiante"],
+            ["Jose",47, "Profesor"]
+        ];
+
+        //Ordenamos el array personas
+        ordenarPersonas(personas);
+
+        //Mostramos en consola la lista de personas ordenada
+        for (let i = 0 ; i < personas.length ; i++)
+        {
+            console.log(`${personas[i][0]}, de ${personas[i][1]} años es ${personas[i][2]}`);
+        }
+    </script>
+</body>
+</html>

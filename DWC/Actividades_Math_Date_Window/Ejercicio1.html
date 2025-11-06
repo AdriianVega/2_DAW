@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        // Creamos la arrow function para sacar la fecha formateada
+        // Sumamos uno a mes para que coíncida el índice con el mes real
+        let fechaFormateada = fecha => fecha.getDate() + "-" + (eval(fecha.getMonth() + 1) + "-" + fecha.getFullYear());
+
+        //Declaramos la constante de fecha
+        const fecha = new Date(2018, 11, 24, 10);
+
+        //Imprimimos por consola la fecha
+        console.log(fechaFormateada(fecha));
+    </script>
+</body>
+</html>

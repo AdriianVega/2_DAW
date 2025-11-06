@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        let numero; //Declaramos número
+
+        //Se ejecuta de forma infinita hasta que el usuario introduzca un número
+        while (true)
+        {
+            let numero = prompt("Introduce un número");
+
+            //Comprobamos si es un número
+            if (isNaN(numero))
+            {
+                console.log("Error: El valor introducido no es un número");
+                continue;
+            }
+            break;
+        }
+    </script>
+</body>
+</html>

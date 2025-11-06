@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        //Inicializamos el array con valores relacionados con Skyrim
+        let array = ["Dragonborn", "Skyrim", "Dovahkiin", "Dragon", "Fire", "Game"];
+
+        //Recorremos el array mostrando en consola los valores del array junto con sus índices
+        console.log("Array:")
+        for (let i in array)
+        {
+            console.log(`${i}: ${array[i]}`);
+        }
+        //Pedimos al usuario que introduzca los índices para el primer y último elemento
+        let primerIndice = prompt("Elige un índice para el primer elemento del nuevo array");
+        let ultimoIndice = prompt("Elige un índice para el último elemento del nuevo array");
+
+        /*Eliminamos los valores en los índices especificados por el usuario
+        Y los guardamos en una variable*/
+        elementoEliminado1 = array.splice(primerIndice, 1);
+        elementoEliminado2 = array.splice(ultimoIndice, 1);
+
+        /*Añadimos al inicio y al final del array los valores eliminados
+        Especificamos con [0] ya que splice devuelve un array*/
+        array.unshift(elementoEliminado1[0]);
+        array.push(elementoEliminado2[0]);
+
+        //Mostramos en consola los valores del array junto con sus índices
+        console.log("\nNuevo array:")
+        
+        for (let i in array)
+        {
+            console.log(`${i}: ${array[i]}`);
+        }
+    </script>
+</body>
+</html>

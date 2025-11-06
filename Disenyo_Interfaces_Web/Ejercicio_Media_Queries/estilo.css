@@ -1,0 +1,56 @@
+
+a
+{
+    text-decoration: none;
+}
+main
+{
+    display: flex;
+}
+section
+{
+    display: flex;
+    flex-direction: row;
+}
+@media (min-width: 600px) and (max-width: 1199px)
+{
+    section
+    {
+        flex-direction: column;
+    }
+    section:first-child strong
+    {
+        display: block;
+    }
+    section:first-child li
+    {
+        list-style-type: none;
+    }
+    section:first-child ul
+    {
+        padding: 0px;
+    }
+}
+@media (max-width: 599px)
+{
+    main, section
+    {
+        display: block;
+    }
+    section h3
+    {
+        border-bottom: 1px solid black;
+    }
+    section ul
+    {
+        padding: 0px;
+    }
+    section li
+    {
+        list-style-type: none;
+    }
+    section strong
+    {
+        display: block;
+    }
+}

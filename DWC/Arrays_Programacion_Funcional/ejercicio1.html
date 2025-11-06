@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        // Inicializamos array con los días de la semana
+        let diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+
+        // Pasamos los días a minúsculas para evitar errores
+        let diasLower = diasSemana.map(dia => dia.toLowerCase());
+
+        // Filtramos Días que empiezan por "m"
+        console.log(diasLower.filter(dia => dia.startsWith("m")));
+
+        // Buscamos el primer día que empieza por "m"
+        console.log(diasLower.find(dia => dia.startsWith("m")));
+
+        // Buscamos el índice del primer día que empieza por "m"
+        console.log(diasLower.findIndex(dia => dia.startsWith("m")));
+
+        // Buscamos algun día que empieza por "s"
+        console.log(diasLower.some(dia => dia.startsWith("s")));
+
+        // Buscamos si todos los días empiezan por "s"
+        console.log(diasLower.every(dia => dia.startsWith("s")));
+
+        // Hacemos que los días del array aparezcan en mayúsculas
+        console.log(diasLower.map(dia => dia.toUpperCase()));
+
+        // Buscamos si algun día corresponde al martes
+        console.log(diasLower.some(dia => dia == "martes"));
+    </script>
+</body>
+</html>

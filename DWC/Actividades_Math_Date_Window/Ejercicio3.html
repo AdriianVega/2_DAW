@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        //Declaramos las constantes
+        const fecha = new Date(2018, 11, 24, 10);
+        const fechaActual = new Date();
+        
+        //Creamos el arrow function que calcule cuantos años han pasado
+        let anyosTranscurridos = (fechaActual, fecha) => fechaActual.getFullYear() - fecha.getFullYear();
+
+        //Imprimimos por consola el resultado del cálculo de años
+        console.log("Han pasado " + anyosTranscurridos(fechaActual, fecha) + " años");
+    </script>
+</body>
+</html>

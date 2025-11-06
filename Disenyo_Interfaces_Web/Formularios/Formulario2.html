@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        fieldset:nth-of-type(3)
+        {
+            margin-bottom: 20px;
+        }
+    </style>
+    <title>Formulario 2</title>
+</head>
+<body>
+    <header></header>
+    <nav></nav>
+    <main>
+        <section>
+            <article>
+                <h1>Cuestionario de Conocimientos Generales</h1>
+                <p>- Usa las nuevas características de HTML5.</p>
+                <h2>Preguntas de Opción Mútliple</h2>
+                <form>
+                    <fieldset>
+                        <legend>1. ¿Cuál es la cápital de Francia?</legend>
+                        <label>
+                            <input type="radio" name="capital" value="paris">
+                            París
+                        </label>
+                        <label>
+                            <input type="radio" name="capital" value="londres">
+                            Londres
+                        </label>
+                        <label>
+                            <input type="radio" name="capital" value="berlin">
+                            Berlín
+                        </label>
+                        <label>
+                            <input type="radio" name="capital" value="madrid">
+                            Madrid
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>2. ¿Cuáles de estos son lenguajes de programación? 
+                        (Selecciona todos los que apliquen)</legend>
+                        <label>
+                            <input type="checkbox" name="lenguajes" value="js">
+                            JavaScript
+                        </label>
+                        <label>
+                            <input type="checkbox" name="lenguajes" value="python">
+                            Python
+                        </label>
+                        <label>
+                            <input type="checkbox" name="lenguajes" value="html">
+                            HTML
+                        </label>
+                        <label>
+                            <input type="checkbox" name="lenguajes" value="java">
+                            Java
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>3. ¿Cuál es tu color favorito?</legend>
+                            <label for="color">Selecciona tu color: </label>
+                            <input type="color" value="#1e90ff" id="color">
+                    </fieldset>
+                    
+                    <input type="submit" id="submit_form" value="Enviar Cuestionario">
+                    <input type="reset" id="clean_form" value="Limpiar Formulario">      
+                </form>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

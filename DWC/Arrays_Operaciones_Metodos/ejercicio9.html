@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        //Función que pide números al usuario y los almacena en un array hasta que escriba "x"
+        function pideYComprueba()
+        {
+            let arrayNumeros = [];
+            let numero;
+
+            do
+            { 
+                //Solicitamos un número al usuario
+                numero = prompt("Introduzca un número (Escriba x para cancelar)");
+
+                //Si el valor introducido es un número, lo añadimos al array
+                if (!isNaN(Number(numero)))
+                {
+                    arrayNumeros.push(numero);
+                }
+            }
+            while (numero != "x") //Repetimos hasta que el usuario escriba "x"
+
+            return arrayNumeros;
+        }
+        //Función que divide por 2 cada elemento del array modificando el array original
+        function mitad(array)
+        {
+            for (let i in array)
+            {
+                array[i] /= 2;
+            }
+        }
+        //Función que devuelve un nuevo array con los elementos divididos por 2, sin modificar el original
+        function porLaMitad(array)
+        {
+            let nuevoArray = [];
+
+            for (let i in array)
+            {
+                nuevoArray.push(array[i] / 2);   
+            }
+            return nuevoArray;
+        }
+        //Llamamos a la función para pedir números y almacenarlos en el array
+        array = pideYComprueba();
+
+        //Mostramos en consola el array original
+        console.log(`Array por defecto: [${array.join(", ")}]`);
+
+        //Mostramos un nuevo array dividido por la mitad sin modificar el original
+        console.log(`\nSin modificar Array Original: [${porLaMitad(array).join(", ")}]`);
+        console.log(`Array original: [${array.join(", ")}]`);
+
+        //Dividimos entre 2 los elementos del array original
+        mitad(array);
+
+        //Mostramos el array original ya modificado
+        console.log(`\nModificando Array Original: [${array.join(", ")}]`);
+    </script>
+</body>
+</html>

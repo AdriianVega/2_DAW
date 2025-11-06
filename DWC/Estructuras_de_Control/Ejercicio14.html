@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 14 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        let numero = Math.round(Math.random() * 100 + 1); //El script elige al azar un número del 1 al 100 y redondeamos
+        let adivinado = false; //Inicializamos adivinado en false
+
+        while (true)
+        {
+            let entrada = prompt("Introduce un número"); //Pedimos entrada al usuario
+
+            if (entrada == null) //Si da click en cancelar se acaba el juego
+            {
+                alert("Has cancelado el juego");
+                break;
+            }
+            if (numero == entrada) //Si adivina se acaba el juego
+            {
+                adivinado = true;
+                
+                alert("¡Has ganado!");
+                break;
+            }
+            else if (entrada > numero) //Dependiendo del número del usuario le avisamos si es mayor o menor que el número
+                alert("El número que buscas es menor");
+            else
+                alert("El número que buscas es mayor");
+        }
+    </script>
+</body>
+</html>

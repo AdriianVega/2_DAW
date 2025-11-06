@@ -1,0 +1,49 @@
+body
+{
+    background-image: url("Imagenes/fondo.jpg");
+}
+main
+{
+    margin: auto 600px;
+    background-color: #DEB887;
+}
+h1, h2
+{
+    text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+h1
+{
+    font-size: 40px;
+    padding-top: 30px;
+}
+h2
+{
+    font-size: 30px;
+}
+img
+{
+    display: block;
+    margin: auto;
+}
+hr
+{
+    background-color: #913222;
+    height: 5px;
+    margin: 15px 25px;
+}
+div
+{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 25px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.nombre 
+{
+    text-align: left;
+}
+.precio 
+{
+    text-align: right;
+}

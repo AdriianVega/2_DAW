@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        label
+        {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+    <title>Formulario 5</title>
+</head>
+<body>
+    <header></header>
+    <nav></nav>
+    <main>
+        <section>
+            <article>
+                <h2>Preferencias</h2>
+
+                <form>
+                    <label for="OS">Sistema operativo preferido:</label>
+                    <select name="OS" id="OS" required>
+                        <option value="" disabled selected>Selecciona una opción...</option>
+                        <option value="windows">Windows</option>
+                        <option value="linux">Linux</option>
+                        <option value="max">Mac OS</option>
+                    </select>
+                    
+                    <label for="browsers">¿Qué navegadores usas habitualmente?</label>
+                    <select name="browsers" id="browsers" multiple required>
+                        <option value="google_chrome">Google Chrome</option>
+                        <option value="mozilla_firefox">Mozilla Firefox</option>
+                        <option value="safari">Safari</option>
+                        <option value="microsoft_edge">Microsoft Edge</option>
+                    </select> <br>
+                    <small>Mantén presionado Ctrl (o Cmd en Mac) para seleccionar múltiples opciones</small>
+
+                    <label for="html_level">Nivel de conocimiento en HTML5:</label>
+                    <select name="html_level" id="html_level" required>
+                        <option value="muy_basico">Muy básico</option>
+                        <option value="basico">Básico</option>
+                        <option value="promedio">Promedio</option>
+                        <option value="avanzado">Avanzado</option>
+                        <option value="muy_avanzado">Muy avanzado</option>
+                    </select>
+
+                    <h2>Archivos y Búsquedas</h2>
+
+                    <label for="upload_cv">Sube tu CV (opcional):</label>
+                    <input type="file" id="upload_cv" name="upload_cv">
+
+                    <label for="upload_img">Sube algunas imágenes (opcional):</label>
+                    <input type="file" id="upload_img" name="upload_img" multiple>
+
+                    <label for="favourite_tech">Busca tu tecnología favorita</label>
+                    <input type="search" id="favourite_tech" name="favourite_tech" placeholder="JavaScript, Python, HTML...">
+                    <datalist id="favourite_techs">
+                        <option value="javascript">JavaScript</option>
+                        <option value="python">Python</option>
+                        <option value="html">HTML</option>
+                        <option value="css">CSS</option>
+                        <option value="php">PhP</option>
+                    </datalist>
+
+                    <label for="password">Crea una contraseña:</label>
+                    <input type="password" id="password" name="password" placeholder="Mínimo 8 caracteres" min="8">
+
+                    <h2>Finalizar</h2>
+
+                    <label>
+                        <input type="checkbox" name="terms_condition" required> 
+                        Acepto los términos y condiciones (obligatorio)
+                    </label>
+                    <label>
+                        <input type="checkbox" name="info_email"> 
+                        Deseo recibir información por correo electrónico
+                    </label>
+                    <label>
+                        <input type="checkbox" name="privacy_policy" required> 
+                        He leído la política de privacidad
+                    </label>
+
+                    <label for="additional_comments">Comentarios adicionales</label>
+                    <textarea name="additional_comments" id="additional_comments" placeholder="¿Algo más que quieras agregar?" rows="4" cols="50"></textarea>
+                    <br><br>
+
+                    <input type="submit" value="Enviar Cuestionario" id="submit">
+                    <input type="reset" value="Limpiar Formulario" id="reset">
+                    <input type="button" value="Guardar borrador" id="save" disabled>
+
+                </form>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        function compresorEspacios(string)
+        {
+            //Cadena nueva para imprimir los espacios comprimidos
+            let stringComprimido = "";
+
+            for (let i = 0 ; i < string.length ; i++)
+            {
+                //Si el cáracter no es un espacio o si lo es y no le sigue un espacio se añade a la nueva cadena
+                if (string.charAt(i) != " " || (string.charAt(i) == " " && string.charAt(i + 1) != " "))
+                {
+                    stringComprimido += string.charAt(i);
+                }
+            }
+            return stringComprimido
+        }
+        //Imprimimos el resultado
+        console.log(compresorEspacios("JavaScript    es       muy    fácil"));
+    </script>
+</body>
+</html>

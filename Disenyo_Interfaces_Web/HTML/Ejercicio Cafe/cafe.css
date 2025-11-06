@@ -1,0 +1,23 @@
+body
+{
+    background-image: url("Imagenes/fondo.jpg");
+    padding: 100px;
+    background-color:bisque;
+
+}
+header
+{
+    text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: bolder;
+    
+}
+main
+{
+    
+}
+.titulo
+{
+    text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}

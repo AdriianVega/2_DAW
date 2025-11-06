@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        input:not([name*="form"]), textarea
+        {
+            display: block;
+            margin-bottom: 20px;
+        }
+    </style>
+    <title>Formulario 3</title>
+</head>
+<body>
+    <header></header>
+    <nav></nav>
+    <main>
+        <h1>Cuestionario de Conocimientos Generales</h1>
+        <p>Cuestionario Preguntas Abiertas. Usa las nuevas características de HTML5.</p>
+        <section>
+            <article>
+                <h2>Preguntas Abiertas</h2>
+                <form>
+                    <label for="hobby">¿Cuál es tu hobby favorito?</label>
+                    <input type="text" name="hobby" placeholder="Ejemplo: leer, deportes, música..." id="hobby" required>
+
+                    <label for="tech_opinion">¿Qué opinas sobre la tecnología actual? (máximo 200 caracteres)</label> <br>
+                    <textarea maxlength= "200" name="tech_opinion" placeholder="Escribe tu opinión aquí..." rows="4" cols="50" id="tech_opinion" required></textarea>
+
+                    <label for="personal_web">¿Tienes un sitio web personal? (opcional)</label>
+                    <input type="url" name="personal_web" placeholder="https://tusitio.com" id="personal_web">
+
+                    <label for="telephone_number">Número de telefono (opcional)</label>
+                    <input type="tel" id="telephone_number" placeholder="+34 123 456 789" id="telephone_number">
+
+                    <input type="submit" id="submit" name="submit_form" value="Enviar Cuestionario">
+                    <input type="reset" id="reset" name="reset_form" value="Limpiar Formulario">
+                </form>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

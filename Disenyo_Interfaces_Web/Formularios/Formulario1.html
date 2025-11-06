@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        input:not([type="submit"], [type="reset"])
+        {
+            display: block;
+            margin-bottom: 20px;
+        }
+    </style>
+    <title>Formulario 1</title>
+</head>
+<body>
+    <header></header>
+    <nav></nav>
+    <main>
+        <h1>Cuestionario de Conocimientos Generales</h1>
+        <p>Completa este breve cuestionario. Usa las nuevas características de HTML5.</p>
+        <section>
+            <article>
+                <h2>Información Personal</h2>
+                <form>
+                    <label for="name">Nombre completo:</label>
+                    <input type="text" id="name "placeholder="Ingresa tu nombre completo">
+                    
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" id="email" placeholder="tu@email.com">
+                    
+                    <label for="age">Edad:</label>
+                    <input type="number" id="age" style="width: 60px;">
+                    
+                    <label for="date">Fecha de Nacimiento:</label>
+                    <input type="date" id="date"> 
+                    
+                    <input type="submit" id="submit_form" value="Enviar Cuestionario">
+                    <input type="reset" id="clean_form" value="Limpiar Formulario">
+                </form>
+            </article>
+        </section>
+        
+    </main>
+</body>
+</html>

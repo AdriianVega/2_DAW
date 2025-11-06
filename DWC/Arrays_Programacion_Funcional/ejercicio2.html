@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        // Inicializamos un array con el nombre y la población de cada ciudad
+        const ciudades = 
+        [  
+            {nombre: 'Alicante', poblacion: 3792621},  
+            {nombre: 'Elche', poblacion: 8175133},  
+            {nombre: 'Torrevieja', poblacion: 2695598},  
+            {nombre: 'Orihuela', poblacion: 2099451},  
+            {nombre: 'Callosa', poblacion: 1526006}  
+        ]; 
+
+        // Pedimos al usuario una cantidad mínima de población
+        let entrada = prompt("Introduce la cantidad mínima de población");
+
+        // Recorremos el array de ciudades
+        ciudades.forEach(function(ciudad) 
+        {
+            // Si la población de la ciudad es mayor que la introducida, la mostramos en consola
+            if (ciudad.poblacion > entrada)
+            {
+                console.log(`Nombre: ${ciudad.nombre}, Población: ${ciudad.poblacion}`);
+            }
+        });
+    </script>
+</body>
+</html>
