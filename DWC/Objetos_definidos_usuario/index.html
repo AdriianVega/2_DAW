@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="data-artistas.js"></script>
+    <script src="functions.js"></script>
+    <title>Ejercicios Hechos por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <script>
+        let entrada;
+        let opcion;
+        let menu;
+
+        menu = "----------------- MENÚ ARTISTAS -----------------\n" +
+            "Opciones disponibles:\n" +
+            "   1. Buscar Máximo\n" +
+            "   2. Filtrar\n" +
+            "   3. Contar\n" +
+            "   4. Salir\n" +
+            "-----------------------------------------------------\n" +
+            "Seleccione una opción";
+
+        opcion = Number(prompt(menu));
+
+        switch (opcion)
+        {
+            case 1:
+                menuBuscarMaximo();
+                break;
+            case 2:
+                menuFiltrar();
+                break;
+            case 3:
+                menuContar();
+                break;
+            case 4:
+                console.log("Saliendo del programa...");
+                break;
+            default:
+                console.log("Por favor, elija una de entre las opciones disponibles");
+        }
+    </script>
+</body>
+</html>
