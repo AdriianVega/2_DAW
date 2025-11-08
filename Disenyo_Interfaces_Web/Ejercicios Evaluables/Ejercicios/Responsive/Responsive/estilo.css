@@ -1,0 +1,132 @@
+/* Elimina márgenes por defecto y define una fuente general para todo el documento */
+*
+{
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* Header, nav y footer usan display flex para centrar su contenido tanto horizontal como verticalmente */
+header, nav, footer
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Color de los enlaces de forma predeterminada y al pasar el ratón */
+a
+{
+    color: white;
+}
+a:hover
+{
+    color: gray;
+}
+/* Fondo gris oscuro y texto en blanco para encabezado y pie de página */
+header, footer
+{
+    background-color: #333333;
+    color: white;
+}
+/* Altura fija del encabezado */
+header
+{
+    height: 150px;
+}
+/* Color de fondo intermedio y altura específica para la barra de navegación */
+nav
+{
+    background-color: #444444;
+    height: 50px;
+}
+/* Lista de navegación mostrada en una fila, sin decoración y con separación entre elementos */
+nav ul
+{
+    display: flex;
+    list-style-type: none;
+    gap: 20px;
+}
+/* El main usa flexbox para separar los elementos en las diferentes esquinas */
+main
+{
+    display: flex;
+    justify-content: space-between;
+    height: 250px;
+}
+main section
+{
+    margin: 20px;
+}
+main section h2
+{
+    padding: 20px 0;
+}
+/* Fondo gris claro, tamaño fijo y relleno interno para separar el texto de los bordes */
+aside
+{
+    padding: 40px 20px;
+    background-color: #EEEEEE;
+    width: 250px;
+    height: 100px;
+}
+aside h2
+{
+    padding-bottom: 20px;
+}
+/* Texto alineado, altura fija y elementos ordenados verticalmente */
+footer
+{
+    gap: 40px;
+    height: 138px;
+    text-align: center;
+    align-items: flex-start;
+    padding: 60px 40px;
+}
+/* Evita que el contenido de la primera sección del footer se divida en varias líneas */
+footer section:first-child
+{
+    white-space: nowrap;
+}
+footer section:last-child
+{
+    padding: 0 100px;
+}
+footer h3
+{
+    padding: 20px;
+}
+/* Enlaces del footer sin subrayado */
+footer a
+{
+    text-decoration: none;
+}
+@media (max-width: 600px)
+{
+    /* Elimina restricciones de altura y ancho para adaptarse al contenido */
+    nav, main, aside, footer
+    {
+        height: auto;
+        width: auto;
+    }
+    /* Cambia el orden de los contenedores a bloque para ordenarse verticalmente */
+    nav ul, main, footer
+    {
+        display: block;
+    }
+    /* Centra el texto de los elementos del menú de navegación */
+    nav ul
+    {
+        text-align: center;
+        padding: 10px;
+    }
+    nav li
+    {
+        padding: 5px;
+    }
+    footer section
+    {
+        padding-bottom: 50px;
+    }
+    footer section:last-child
+    {
+        padding-top: 20px;
+    }
+}
