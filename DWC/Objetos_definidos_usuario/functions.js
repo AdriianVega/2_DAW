@@ -26,7 +26,7 @@ function cantidadDeArtistasPorInstrumento(artistas)
         // Sumamos 1 al instrumento correspondiente
         cantidad[artista.instrumento]++;
 
-        // Retornamos el objeto actualizado para el siguiente elemento
+        // Retornamos el objeto actualizado
         return cantidad;
     }, {}); // {} es el valor inicial del acumulador
 
