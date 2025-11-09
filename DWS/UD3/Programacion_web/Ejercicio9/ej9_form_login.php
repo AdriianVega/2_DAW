@@ -24,10 +24,33 @@
 </head>
 <body>
     <?php
-        // Comprobamos si se ha recibido un error y lo mostramos
+        // Comprobamos si se ha recibido un error y mostramos el error correspondiente
         if (isset($_GET["error"]))
         {
-            echo "<div class='alert alert-danger' role='alert'>❌ Error: Debe rellenar el ". ($_GET["error"] + 1). "º campo correctamente</div>";
+            if ($_GET["error"] == 1 || $_GET["error"] == 2)
+            {
+                echo "<div class='alert alert-danger' role='alert'>❌ Error: Debe rellenar el ". $_GET["error"]. "º campo correctamente</div>";
+            }
+            elseif ($_GET["error"] == 3)
+            {
+                echo "<div class='alert alert-danger' role='alert'>❌ Error: Usuario incorrecto, intente de nuevo</div>";
+            }
+            elseif ($_GET["error"] == 4)
+            {
+                echo "<div class='alert alert-danger' role='alert'>❌ Error: Contraseña incorrecta, intente de nuevo</div>";
+            }
+        }
+        // Comprobamos si se ha recibido la señal de logout
+        if (isset($_GET["logout"]))
+        {
+            // Iniciamos la sesión para poder destruirla
+            session_start();
+
+            // Destruimos la sesión
+            session_destroy();
+
+            // Mostramos un mensaje indicando que la sesión se cerró
+            echo "<div class='alert alert-success' role='alert'>✅ Se ha cerrado sesión con éxito</div>";
         }
     ?>
     <main class="container my-5">
@@ -35,10 +58,10 @@
             
             <img src="https://ael.es/_next/image?url=%2Fimages%2FloginImage.webp&w=3840&q=75" alt="Login" class="mb-3">
 
-            <form action="ej4_result_login.php" method="post">
+            <form action="ej9_result_form_login.php" method="post">
 
-                <input type="email" name="email" id="email" placeholder="Email" class="form-control mb-1">
-                <small class="text-muted">Email</small>
+                <input type="user" name="user" id="user" placeholder="Usuario" class="form-control mb-1">
+                <small class="text-muted">Usuario</small>
 
                 <input type="password" name="password" id="password" placeholder="Contraseña" class="form-control mb-1 mt-4">
                 <small class="text-muted">Password</small>

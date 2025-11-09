@@ -18,18 +18,10 @@
 </head>
 <body>
     <?php
-        $campos = array("1º Campo", "2º Campo", "3º Campo");
-
-        if (isset($_GET["error"]) && !empty($_GET["error"]))
+        // Comprobamos si se ha recibido un error y lo mostramos
+        if (isset($_GET["error"]))
         {
-            for ($i = 0 ; $i < count($campos) ; $i++)
-            {
-                if ($_GET["error"] == $i + 1)
-                {
-                    echo "<div class='alert alert-error' role='alert'>❌ Error: Debe rellenar el
-                    campo ". $campos[$i]. " correctamente</div>";
-                }
-            }
+            echo "<div class='alert alert-danger' role='alert'>❌ Error: Debe rellenar el " .$_GET["error"]. "º Campo correctamente</div>";
         }
     ?>
     <h1>Buscador de Libros</h1>
