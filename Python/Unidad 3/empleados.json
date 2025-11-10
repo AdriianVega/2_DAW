@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "nombre": "Ana García",
+        "departamento": "Ventas",
+        "salario": 25100.5
+    },
+    {
+        "id": 2,
+        "nombre": "Jorge Pérez",
+        "departamento": "Marketing",
+        "salario": 28300.75
+    },
+    {
+        "id": 3,
+        "nombre": "Marta López",
+        "departamento": "Recursos Humanos",
+        "salario": 30500.0
+    },
+    {
+        "id": 4,
+        "nombre": "Luis Torres",
+        "departamento": "IT",
+        "salario": 32700.4
+    },
+    {
+        "id": 5,
+        "nombre": "Clara Ruiz",
+        "departamento": "Finanzas",
+        "salario": 31900.6
+    }
+]
