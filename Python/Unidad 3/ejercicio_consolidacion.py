@@ -32,7 +32,6 @@ with open("empleados.json", "r", encoding="utf-8") as j:
 with open("empleados.csv", "r", encoding="utf-8") as c:
     lector = csv.reader(c)
     
-    
     next(lector)
     
     print("Empleados con salario mayor a 30.000€: ")
