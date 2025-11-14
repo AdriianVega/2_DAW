@@ -15,6 +15,12 @@
 </head>
 <body>
     <?php
+        //Comprobamos si se está intentando acceder desde la url directamente sin rellenar campos
+        if (!isset($_POST["departamento"]) || empty($_POST["departamento"]))
+        {
+            header("location:form_dep.php");
+            die();
+        }
         // Buscamos el presupuesto correspondiente al departamento
         function calcularPresupuestoCampo($campo)
         {

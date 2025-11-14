@@ -1,3 +1,12 @@
+<?php
+    session_start();
+
+    if (isset($_SESSION["usuario"]) && !isset($_GET["logout"]))
+    {
+        header("location:ej9_result_form_login.php");
+        die();
+    }
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,6 +33,11 @@
 </head>
 <body>
     <?php
+        //Comprobamos si la sesion ha sido borrada e informamos al usuario
+        if (isset($_GET["sesion_borrada"]))
+        {
+            echo "<div class='alert alert-success' role='alert'> ✔ La sesión ha sido borrada con éxito </div>";
+        }
         // Comprobamos si se ha recibido un error y mostramos el error correspondiente
         if (isset($_GET["error"]))
         {
@@ -43,9 +57,6 @@
         // Comprobamos si se ha recibido la señal de logout
         if (isset($_GET["logout"]))
         {
-            // Iniciamos la sesión para poder destruirla
-            session_start();
-
             // Destruimos la sesión
             session_destroy();
 

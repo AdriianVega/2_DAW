@@ -26,7 +26,7 @@
         // Comprobamos si se ha recibido un error y lo mostramos
         if (isset($_GET["error"]))
         {
-            echo "<div class='alert alert-danger' role='alert'> ❌ Error: No se ha introducido el valor del campo nº ". ($_GET["error"] + 1);
+            echo "<div class='alert alert-danger' role='alert'> ❌ Error: No se ha introducido el valor del campo nº ". ($_GET["error"] + 1). "</div>";
         }
     ?>
     <form action="result_form_registro.php" method="post" class="p-3">

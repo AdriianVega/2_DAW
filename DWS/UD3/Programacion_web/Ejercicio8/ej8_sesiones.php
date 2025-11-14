@@ -37,7 +37,7 @@
         // Comprobamos si se ha recibido un error y mostramos
         if (isset($_GET["error"]))
         {
-            echo "<div class='alert alert-danger' role='alert'> ❌ Error: No se ha introducido el valor del campo nº ". ($_GET["error"] + 1);
+            echo "<div class='alert alert-danger' role='alert'> ❌ Error: No se ha introducido el valor del campo nº ". ($_GET["error"] + 1). "</div>";
         }
         // Comprobamos si se ha cerrado la sesión y mostramos
         if (isset($_GET["sesion_borrada"]))
