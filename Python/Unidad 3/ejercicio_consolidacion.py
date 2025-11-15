@@ -32,6 +32,7 @@ with open("empleados.json", "r", encoding="utf-8") as j:
 with open("empleados.csv", "r", encoding="utf-8") as c:
     lector = csv.reader(c)
     
+    
     next(lector)
     
     print("Empleados con salario mayor a 30.000€: ")
@@ -47,13 +48,15 @@ with open("empleados.csv", "r", encoding="utf-8") as c:
     print("Salario medio: ", salario_medio)
 
 with open("empleados.csv", "r", encoding="utf-8") as c:
-    lector = csv.DictReader(c)
+    lector = csv.reader(c)
     empleados_destacados = []
+    
+    next(lector)
     
     with open("empleados_destacados.json", "w", encoding="utf-8") as j:
         for empleado in lector:
-            if float(empleado["salario"]) > 30000:
-                empleados_destacados.append(empleado)
+            if float(empleado[3]) > 30000:
+                empleados_destacados.append({"id": empleado[0], "nombre": empleado[1], "departamento": empleado[2], "salario": empleado[3]},)
 
         json.dump(empleados_destacados, j, indent=4, ensure_ascii=False)
 
