@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Bootstrap evaluable</title>
+</head>
+<body>
+    <header class="bg-dark">
+        <!-- Creamos la barra de navegación -->
+        <nav class="navbar navbar-dark navbar-expand-lg mx-4 py-2">
+            <!-- Container-fluid para rellenar la página -->
+            <div class="container-fluid">
+                <!-- Agrupamos logo y título -->
+                <div>
+                    <img src="imgs/logo.png" alt="logo bici" height="20">
+                    <a class="navbar-brand text-white m-3 m-md-2" href="#">BY BIKE!!</a>
+                </div>
+
+                <!-- Creamos el botón responsive del menú -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon text-white"></span>
+                </button>
+
+                <!-- Creamos los enlaces de navegación y el formulario de búsqueda -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Bicicletas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Accesorios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Componentes</a>
+                        </li>
+
+                        <!-- Creamos dropdown para productos -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Productos
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Sillines</a></li>
+                                <li><a class="dropdown-item" href="#">Cascos</a></li>
+                                <li><a class="dropdown-item" href="#">Tijas</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Creamos dropdown para información -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Sobre nosotros...
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">About</a></li>
+                                <li><a class="dropdown-item" href="#">Contact</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- Creamos formulario de búsqueda -->
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <!-- Container-fluid para rellenar la página -->
+        <div class="container-fluid">
+            <!-- Distribuimos las tarjetas en filas y columnas con g-5 -->
+            <div class="row d-flex g-5">
+                <div class="col-12 col-md-4">
+                    <div class="card">
+                        <img src="imgs/orbea.jpg" class="card-img-top" alt="Bicicleta">
+
+                        <div class="card-body">
+                            <h5 class="card-title">Bicicletas</h5>
+                            <p class="card-text">
+                                Accede a nuestra sección de Bicicletas donde podrás encontrar las mejores de esta temporada.
+                            </p>
+
+                            <small class="text-muted">Last updated 3 mins ago</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="card">
+                        <img src="imgs/accesorios.jpg" class="card-img-top" alt="Bicicleta">
+                        <div class="card-body">
+                            <h5 class="card-title">Bicicletas</h5>
+                            <p class="card-text">
+                                Accede a nuestra sección de accesorios donde encontrarás todos los accesorios que necesites al mejor precio.
+                            </p>
+
+                            <small class="text-muted">Last updated 3 mins ago</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="card">
+                        <img src="imgs/componentes.jpg" class="card-img-top" alt="Bicicleta">
+                        <div class="card-body">
+                            <h5 class="card-title">Bicicletas</h5>
+                            <p class="card-text">
+                                Accede a nuestra sección de componentes.
+                            </p>
+
+                            <small class="text-muted">Last updated 3 mins ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Creamos footer con borde y fondo claro -->
+    <footer class="bg-light border text-muted pb-3 px-3 mt-5">
+        <!-- Container-fluid para rellenar la página -->
+        <div class="container-fluid bg-white py-3 m-0">
+            © Adrián Nataniel Vega Pérez
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
