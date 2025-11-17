@@ -9,15 +9,14 @@
 <body>
     <header class="bg-dark">
         <!-- Creamos la barra de navegación -->
-        <nav class="navbar navbar-dark navbar-expand-lg mx-4 py-2">
+        <nav class="navbar navbar-dark navbar-expand-lg ">
             <!-- Container-fluid para rellenar la página -->
             <div class="container-fluid">
                 <!-- Agrupamos logo y título -->
-                <div>
-                    <img src="imgs/logo.png" alt="logo bici" height="20">
-                    <a class="navbar-brand text-white m-3 m-md-2" href="#">BY BIKE!!</a>
-                </div>
-
+                <a class="navbar-brand px-3 m-md-2" href="#">
+                    <img src="imgs/logo.png" alt="logo bici" height="20" class="mx-3"> 
+                    <span class="">BY BIKE!!</span>
+                </a>
                 <!-- Creamos el botón responsive del menú -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon text-white"></span>
@@ -30,13 +29,13 @@
                             <a class="nav-link active" aria-current="page" href="#">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Bicicletas</a>
+                            <a class="nav-link active" href="#">Bicicletas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Accesorios</a>
+                            <a class="nav-link active" href="#">Accesorios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Componentes</a>
+                            <a class="nav-link active" href="#">Componentes</a>
                         </li>
 
                         <!-- Creamos dropdown para productos -->
@@ -72,59 +71,55 @@
         </nav>
     </header>
     <main>
-        <!-- Container-fluid para rellenar la página -->
-        <div class="container-fluid">
-            <!-- Distribuimos las tarjetas en filas y columnas con g-5 -->
-            <div class="row d-flex g-5">
-                <div class="col-12 col-md-4">
-                    <div class="card">
-                        <img src="imgs/orbea.jpg" class="card-img-top" alt="Bicicleta">
+        <!-- Distribuimos las tarjetas en filas y columnas con g-5 -->
+        <div class="row d-flex g-5">
+            <div class="col-12 col-sm-4">
+                <div class="card">
+                    <img src="imgs/orbea.jpg" class="card-img-top" alt="Bicicleta">
 
-                        <div class="card-body">
-                            <h5 class="card-title">Bicicletas</h5>
-                            <p class="card-text">
-                                Accede a nuestra sección de Bicicletas donde podrás encontrar las mejores de esta temporada.
-                            </p>
-
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Bicicletas</h5>
+                        <p class="card-text">
+                            Accede a nuestra sección de Bicicletas donde podrás encontrar las mejores de esta temporada.
+                        </p>
+                        <small class="text-muted">Last updated 3 mins ago</small>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-12 col-md-4">
-                    <div class="card">
-                        <img src="imgs/accesorios.jpg" class="card-img-top" alt="Bicicleta">
-                        <div class="card-body">
-                            <h5 class="card-title">Bicicletas</h5>
-                            <p class="card-text">
-                                Accede a nuestra sección de accesorios donde encontrarás todos los accesorios que necesites al mejor precio.
-                            </p>
+            <div class="col-12 col-sm-4">
+                <div class="card">
+                    <img src="imgs/accesorios.jpg" class="card-img-top" alt="Bicicleta">
+                    <div class="card-body">
+                        <h5 class="card-title">Accesorios</h5>
+                        <p class="card-text">
+                            Accede a nuestra sección de accesorios donde encontrarás todos los accesorios que necesites al mejor precio.
+                        </p>
 
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
+                        <small class="text-muted">Last updated 3 mins ago</small>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-12 col-md-4">
-                    <div class="card">
-                        <img src="imgs/componentes.jpg" class="card-img-top" alt="Bicicleta">
-                        <div class="card-body">
-                            <h5 class="card-title">Bicicletas</h5>
-                            <p class="card-text">
-                                Accede a nuestra sección de componentes.
-                            </p>
+            <div class="col-12 col-sm-4">
+                <div class="card">
+                    <img src="imgs/componentes.jpg" class="card-img-top" alt="Bicicleta">
+                    <div class="card-body">
+                        <h5 class="card-title">Componentes</h5>
+                        <p class="card-text">
+                            Accede a nuestra sección de componentes.
+                        </p>
 
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
+                        <small class="text-muted">Last updated 3 mins ago</small>
                     </div>
                 </div>
             </div>
         </div>
     </main>
     <!-- Creamos footer con borde y fondo claro -->
-    <footer class="bg-light border text-muted pb-3 px-3 mt-5">
+    <footer class="bg-light border pb-3 px-3 mt-5">
         <!-- Container-fluid para rellenar la página -->
-        <div class="container-fluid bg-white py-3 m-0">
+        <div class="container-fluid border bg-white py-3 m-0">
             © Adrián Nataniel Vega Pérez
         </div>
     </footer>
