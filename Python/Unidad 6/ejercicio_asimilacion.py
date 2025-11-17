@@ -53,3 +53,8 @@ with open("alumnos_completo.csv", "w", newline="", encoding="utf-8") as c:
     
     for estudiante in estudiantes:
         escritor.writerow([estudiante["nombre"], estudiante["edad"], estudiante["nota"], estudiante["grupo"]])
+        
+# Borrar archivos para .json para poder hacer pruebas, comentar si se quiere revisar los .json
+for archivo in os.listdir():
+    if archivo.endswith(".json"):
+        os.remove(archivo)
