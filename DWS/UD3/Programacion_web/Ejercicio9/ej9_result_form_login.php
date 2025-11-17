@@ -93,6 +93,6 @@
 <body>
     <h1>Hola, <?= $_SESSION["usuario"] ?></h1>
 
-    <p><a href="ej9_form_login.php?logout">Desconectar</a></p>
+    <p><a href="ej9_logout.php">Desconectar</a></p>
 </body>
 </html>

@@ -54,15 +54,6 @@
                 echo "<div class='alert alert-danger' role='alert'>❌ Error: Contraseña incorrecta, intente de nuevo</div>";
             }
         }
-        // Comprobamos si se ha recibido la señal de logout
-        if (isset($_GET["logout"]))
-        {
-            // Destruimos la sesión
-            session_destroy();
-
-            // Mostramos un mensaje indicando que la sesión se cerró
-            echo "<div class='alert alert-success' role='alert'>✅ Se ha cerrado sesión con éxito</div>";
-        }
     ?>
     <main class="container my-5">
         <section class="d-flex align-items-center justify-content-center gap-4">
