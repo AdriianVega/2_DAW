@@ -1,0 +1,134 @@
+/* Quitamos márgenes por defecto y añadimos la familia Verdana */
+*
+{
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+/* Centramos horizontal y verticalmente */
+header
+{
+    background-color:  #ece0cf;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+/* Volvemos a centrar horizontal y verticalmente y le damos una altura por defecto */
+nav
+{
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    justify-content: center;
+    background-color: #1a0c01;
+    height: 50px;
+}
+/* Hacemos que ocupe todo el menú de navegación y quitamos el tipo de lista */
+nav ul
+{
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+}
+/* Quitamos la decoración al texto */
+nav ul a
+{
+    text-decoration: none;
+    color: white;
+}
+/* Creamos un display flex para alinear el texto, le damos una altura por defecto al main*/
+/* Para el fondo añadimos una imagen, le quitamos la repetición, hacemos que cubra todo el fondo y la centramos */
+main
+{
+    display: flex;
+    flex-direction: column;
+    height: 800px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20%;
+    background-image: url("imagenes/imagen central.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+/* Hacemos que el corazón y el h2 estén en la misma línea */
+main img, main h2
+{
+    display: inline;
+}
+/* Separamos el párrafo del encabezado */
+main p
+{
+    margin-top: 10px;
+}
+/* Añadimos un borde blanco encima del texto, centramos el texto y añadimos un color para el fondo*/
+#copyright
+{
+    border-top: 1px solid white;
+    padding: 10px;
+    text-align: center;
+    background-color: #f57c00;
+}
+/* Añadimos color para el fondo del footer */
+footer
+{
+    background-color: #ece0cf;
+}
+/* Cambiamos el color de la letra */
+footer h2:not(#copyright h2), #perros small
+{
+    color: #f57c00;
+}
+/* Añadimos margenes para ajustar el texto, también añadimos un paddin para separar el texto del borde */
+/* Añadimos gap para separar los elementos, align-items para que el texto se alinee y centramos el texto  */
+#perros
+{
+    margin: 50px 100px;
+    padding: 80px 0;
+    display: flex;
+    gap: 50px;
+    align-items: start;
+    text-align: center;
+}
+/* Le añadimos p para separar el encabezado del borde */
+#perros p 
+{
+    margin-top: 10px;
+}
+/* Modificamos cada input del formulario */
+footer form input, form textarea
+{
+    height: 30px;
+    margin-top: 10px;
+    width: 400px;
+    border-radius: 5px;
+    border-color: white;
+}
+/* Cambiamos el tamaño del text-area */
+#message
+{
+    height: 100px;
+}
+/* Modificamos el botón de enviar del formulario */
+#submit
+{
+    background-color: #f57c00;
+    color: white;
+    height: 40px;
+}
+@media (max-width: 650px)
+{
+    /* Cambiamos el orden de fila a columna de la segunda seccion */
+    /* Modificamos el padding */
+    #perros
+    {
+        display: block;
+        padding: 0;
+    }
+    /* Modificamos el margin de cada article */
+    #perros article
+    {
+        margin: 40px 0;
+    }
+}
