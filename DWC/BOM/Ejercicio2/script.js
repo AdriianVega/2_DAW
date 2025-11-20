@@ -15,12 +15,14 @@ if (confirm('¿Desea redimensionar la ventana?'))
     let entradaAncho = prompt("Escriba el ancho de la ventana a redimensionar");
     console.log("Ancho: ", entradaAncho);
 
+    //Si se ingresa un número
     if (entradaAncho !== null && !isNaN(Number(entradaAncho)))
         { 
             // Solicitamos al usuario que ingrese el alto de la ventana
             let entradaAlto = prompt("Escriba el alto de la ventana a redimensionar");
             console.log("Alto: ", entradaAlto); // Mostramos el valor ingresado por consola
 
+            //Si se ingresa un número
             if (entradaAlto !== null && !isNaN(Number(entradaAlto))) 
             {
                 // Pedimos confirmación al usuario para redimensionar
