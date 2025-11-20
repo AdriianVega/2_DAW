@@ -20,7 +20,7 @@
 
         // Obtenemos la ruta temporal y el nombre original del archivo subido
         $archivo_temporal = $_FILES["imagen"]["tmp_name"];
-        $archivo_original = $_FILES["imagen"]["name"];
+        $archivo_original = uniqid().$_FILES["imagen"]["name"];
 
         // Comprobamos si se ha subido un archivo correctamente
         if (!isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] != 0)
