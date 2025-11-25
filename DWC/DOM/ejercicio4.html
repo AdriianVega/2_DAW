@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <p id="raw">Pantalla, Batería, Cámara</p>
+    <ul id="lista"></ul>
+
+    <script>
+        const raw = document.getElementById("raw");
+        const lista = document.getElementById("lista");
+
+        const elementos = raw.textContent.split(",");
+
+        for (let i = 0 ; i < elementos.length ; i++)
+        {
+            lista.innerHTML += `<li> ${elementos[i]} </li>`;
+        }
+    </script>
+</body>
+</html>

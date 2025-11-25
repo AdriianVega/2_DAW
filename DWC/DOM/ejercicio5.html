@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>Ejercicio 5 Hecho por Adrián Nataniel Vega Pérez</title>
+</head>
+<body>
+    <p id="precioBruto">El precio final es 199</p>
+    <p id="precioFinal"></p>
+
+    <script>
+        const precioBruto = document.getElementById("precioBruto");
+        const precioFinal = document.getElementById("precioFinal");
+
+        let elementos = precioBruto.textContent.split(" ");
+
+        for (let i = 0 ; i < elementos.length ; i++)
+        {
+            if (!isNaN(Number(elementos[i])))
+            {
+                precioFinal.innerHTML = elementos[i] + " €";
+                break;
+            }
+        }
+    </script>
+</body>
+</html>
