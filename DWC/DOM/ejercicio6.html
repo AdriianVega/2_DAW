@@ -6,5 +6,19 @@
     <title>Ejercicio 6 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
+    <p id="origen">Pequeño,Mediano,Grande</p>
+    <select id="tallas"></select>
+
+    <script>
+        const origen = document.getElementById("origen");
+        const tallas = document.getElementById("tallas");
+
+        const elementos = raw.textContent.split(",");
+
+        for (let i = 0 ; i < elementos.length ; i++)
+        {
+            lista.innerHTML += `<li> ${elementos[i]} </li>`;
+        }
+    </script>
 </body>
 </html>
