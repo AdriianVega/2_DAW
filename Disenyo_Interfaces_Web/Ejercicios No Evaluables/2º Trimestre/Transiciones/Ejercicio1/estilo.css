@@ -1,0 +1,118 @@
+*
+{
+    font-family: Arial, Helvetica, sans-serif;
+}
+main
+{
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+    align-items: center;
+}
+section
+{
+    display: flex;
+    gap: 40px;
+}
+article
+{
+    color: white;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.caja1
+{
+    background-color: #C0392B;
+    color: white;
+    transition: background 1s;
+}
+.caja1:hover
+{
+    background-color: darkred;
+}
+.caja2
+{
+    background-color: #9B59B6;
+    transition: font-size 1s;
+}
+.caja2:hover
+{
+    font-size: 25px;
+}
+.caja3
+{
+    background-color: #2980B9;
+    transition: color 1s;
+}
+.caja3:hover
+{
+    color: gray;
+}
+.caja4
+{
+    background-color: #3498DB;
+    transition: padding 1s;
+}
+.caja4:hover
+{
+    line-height: 100px;
+    /* Simulando line-height con una línea usamos padding vertical */
+    padding: 10px 0;
+}
+.caja5
+{
+    background-color: #17A589;
+    transition: border-radius 1s;
+}
+.caja5:hover
+{
+    border-radius: 15px;
+}
+.caja6
+{
+    background-color: #F1C40F;
+    transition: box-shadow 1s;
+}
+.caja6:hover
+{
+    box-shadow: 50px 0 10px 40px black;
+}
+.caja7
+{
+    background-color: #E67E22;
+    transition: opacity 1s;
+}
+.caja7:hover
+{
+    opacity: 0.5;
+}
+.caja8
+{
+    background-color: #95A5A6;
+    transition: border 1s;
+}
+.caja8:hover
+{
+    border: 3px solid black;
+}
+.caja9
+{
+    background-color: #2C3E50;
+    transition: margin 1s;
+}
+.caja9:hover
+{
+    margin: 20px;
+}
+.caja10
+{
+    background-color: #000000;
+    transition: padding 1s;
+}
+.caja10:hover
+{
+    padding: 20px;
+}
