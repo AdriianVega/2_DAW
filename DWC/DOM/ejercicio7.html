@@ -6,6 +6,25 @@
     <title>Ejercicio 7 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
-    
+    <div id="u">
+        <p>Nombre: Ana</p>
+        <p>Edad: 20</p>
+        <p>Ciudad: Málaga</p>
+    </div>
+
+    <p id="resumen"></p>
+
+    <script>
+        const info = document.getElementById("u");
+        const resumen = document.getElementById("resumen");
+
+        // Lo convertimos en una cadena y eliminamos los espacios e índices en blanco
+        let infoCadena = info.textContent.split("\n").map(elemento => elemento.trim()).filter(elemento => elemento != "");
+        // Lo convertimos en una cadena separando los datos
+        let infoResumen = infoCadena.join(" | ")
+
+        // Transformamos el contenido del párrafo con id = resumen
+        resumen.textContent = infoResumen;
+    </script>
 </body>
 </html>

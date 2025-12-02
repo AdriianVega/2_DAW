@@ -6,5 +6,25 @@
     <title>Ejercicio 8 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
+    <div id="pasos">
+        <p>Encender</p>
+        <p>Configurar</p>
+        <p>Finalizar</p>
+    </div>
+    <ol id="listaPasos"></ol>
+
+    <script>
+        const pasos = document.getElementById("pasos");
+        const listaPasos = document.getElementById("listaPasos");
+
+        let pasosArray = pasos.textContent.split("\n").map(elemento => elemento.trim()).filter(elemento => elemento != "");
+
+        listaPasos.innerHTML = pasosArray.reduce((acum, valor) => 
+        {
+            acum += `<li> ${valor} </li>`;
+
+            return acum;
+        }, "");
+    </script>
 </body>
 </html>

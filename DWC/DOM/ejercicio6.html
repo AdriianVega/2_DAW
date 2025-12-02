@@ -13,11 +13,11 @@
         const origen = document.getElementById("origen");
         const tallas = document.getElementById("tallas");
 
-        const elementos = raw.textContent.split(",");
+        const elementos = origen.textContent.split(",");
 
         for (let i = 0 ; i < elementos.length ; i++)
         {
-            lista.innerHTML += `<li> ${elementos[i]} </li>`;
+            tallas.innerHTML += `<option> ${elementos[i]} </option>`;
         }
     </script>
 </body>

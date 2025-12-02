@@ -6,5 +6,16 @@
     <title>Ejercicio 10 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
+    <p id="marca">ACME</p>
+    <p id="modelo">TurboMax</p>
+    <h1 id="titulo"></h1>
+
+    <script>
+        const marca = document.getElementById("marca");
+        const modelo = document.getElementById("modelo");
+        const titulo = document.getElementById("titulo");
+
+        titulo.innerHTML = `${marca.textContent} ${modelo}`
+    </script>
 </body>
 </html>
