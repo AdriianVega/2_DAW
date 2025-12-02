@@ -6,6 +6,19 @@
     <title>Ejercicio 11 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
-    
+    <input id="usuario" value="">
+    <p id="error"></p>
+
+    <script>
+        // Obtenemos los elementos con id "usuario" y "error"
+        const usuario = document.getElementById("usuario");
+        const error = document.getElementById("error");
+
+        // Verificamos si el campo de usuario está vacío y mostramos un mensaje de error
+        if (usuario.value === "") 
+        {
+            error.innerHTML = "Error: El usuario está vacío"
+        }
+    </script>
 </body>
 </html>

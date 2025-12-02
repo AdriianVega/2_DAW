@@ -6,6 +6,24 @@
         <title>Ejercicio 15 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
-    
+    <p id="texto">Esto es un ejemplo interesante de análisis</p>
+    <p id="resultado"></p>
+
+    <script>
+        // Obtenemos los elementos con id "texto" y "resultado"
+        const texto = document.getElementById("texto");
+        const resultado = document.getElementById("resultado");
+
+        // Buscamos la palabra más larga del texto usando reduce
+        let palabraMasLarga = texto.textContent.split(" ").reduce((acum, valor) => 
+        {
+            acum = (valor.length > acum.length) ? valor : acum;
+
+            return acum;
+        }, "");
+
+        // Mostramos la palabra más larga en el elemento "resultado"
+        resultado.innerHTML = palabraMasLarga;
+    </script>
 </body>
 </html>

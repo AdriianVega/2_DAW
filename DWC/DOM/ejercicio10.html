@@ -11,11 +11,14 @@
     <h1 id="titulo"></h1>
 
     <script>
+        // Obtenemos los elementos con id "marca", "modelo" y "titulo"
         const marca = document.getElementById("marca");
         const modelo = document.getElementById("modelo");
         const titulo = document.getElementById("titulo");
 
-        titulo.innerHTML = `${marca.textContent} ${modelo}`
+        // Mostramos la combinación de marca y modelo dentro del elemento "titulo"
+        titulo.innerHTML = `${marca.textContent} ${modelo.textContent}`
     </script>
+
 </body>
 </html>

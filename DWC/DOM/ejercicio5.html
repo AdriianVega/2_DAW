@@ -10,19 +10,13 @@
     <p id="precioFinal"></p>
 
     <script>
+        // Obtenemos los elementos con id "precioBruto" y "precioFinal"
         const precioBruto = document.getElementById("precioBruto");
         const precioFinal = document.getElementById("precioFinal");
 
-        let elementos = precioBruto.textContent.split(" ");
-
-        for (let i = 0 ; i < elementos.length ; i++)
-        {
-            if (!isNaN(Number(elementos[i])))
-            {
-                precioFinal.innerHTML = elementos[i] + " €";
-                break;
-            }
-        }
+        // Buscamos la primera palabra que sea un número y la mostramos con el símbolo € en "precioFinal"
+        precioFinal.innerHTML = precioBruto.textContent.split(" ").find(elemento => !isNaN(Number(elemento))) + " €";
     </script>
+
 </body>
 </html>

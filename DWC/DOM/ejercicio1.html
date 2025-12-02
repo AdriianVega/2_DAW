@@ -10,9 +10,11 @@
     <h2 id="saludo"></h2>
 
     <script>
+        // Obtenemos los elementos con id "saludo" y "nombre" para manipular su contenido
         const saludo = document.getElementById("saludo");
         const nombre = document.getElementById("nombre");
 
+        // Mostramos un mensaje de bienvenida personalizado usando el valor del input
         saludo.innerHTML = `Bienvenido, ${nombre.value}`;
     </script>
 </body>

@@ -6,6 +6,35 @@
         <title>Ejercicio 17 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
-    
+    <div id="curso">
+        <p>Módulo 1: 20h</p>
+        <p>Módulo 2: 30h</p>
+    </div>
+    <p id="total"></p>
+
+    <script>
+        // Obtenemos los elementos con id "curso" y "total"
+        const curso = document.getElementById("curso");
+        const total = document.getElementById("total");
+
+        // Inicializamos la variable para acumular las horas
+        let suma = 0;
+
+        // Recorremos cada hijo de "curso" para sumar las horas
+        for (let elemento of curso.children) 
+        {
+            // Separamos el texto por ":" y obtenemos la parte de horas, quitando espacios
+            let [, horas] = elemento.textContent.split(":").map(elemento => elemento.trim());
+
+            // Convertimos el valor de horas en número eliminando la letra "h"
+            let tiempoTotal = Number(horas.slice(0, -1));
+
+            // Sumamos las horas al total
+            suma += tiempoTotal;
+        }
+
+        // Mostramos el total acumulado en el elemento "total"
+        total.innerHTML = `Total: ${suma}h`;
+    </script>
 </body>
 </html>

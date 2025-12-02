@@ -6,6 +6,27 @@
     <title>Ejercicio 21 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
-    
+    <div id="info">
+        <h2>Título del bloque</h2>
+        <p id="detalle">Detalle del contenido</p>
+    </div>
+    <p id="salida"></p>
+
+    <script>
+        // Obtenemos los elementos con id "info" y "salida"
+        const info = document.getElementById("info");
+        const salida = document.getElementById("salida");
+
+        // Recorremos cada hijo de "info" para encontrar el elemento con id "detalle"
+        for (let elemento of info.children) 
+        {
+            // Si encontramos el detalle, mostramos el texto del bloque anterior en "salida"
+            if (elemento.id == "detalle") 
+            {
+                salida.innerHTML = `Título del bloque: ${elemento.previousElementSibling.textContent}`;
+                break;
+            }
+        }
+    </script>
 </body>
 </html>

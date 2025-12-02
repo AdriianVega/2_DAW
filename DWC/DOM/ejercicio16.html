@@ -6,6 +6,24 @@
         <title>Ejercicio 16 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
-    
+    <div id="productos">
+        <p>Manzana - 1€</p>
+        <p>Pera - 2€</p>
+        <p>Melón - 4€</p>
+    </div>
+    <ul id="catalogo"></ul>
+
+    <script>
+        // Obtenemos los elementos con id "productos" y "catalogo"
+        const productos = document.getElementById("productos");
+        const catalogo = document.getElementById("catalogo");
+
+        // Recorremos cada hijo de "productos" y lo agregamos como un ítem de lista dentro de "catalogo"
+        for (let elemento of productos.children) 
+        {
+            catalogo.innerHTML += `<li> ${elemento.textContent} </li>`;
+        } 
+    </script>
+
 </body>
 </html>

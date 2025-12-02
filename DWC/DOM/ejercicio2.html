@@ -10,9 +10,11 @@
     <div id="info"></div>
 
     <script>
+        // Obtenemos los elementos con id "stock" e "info" para leer la cantidad disponible y mostrarla
         const stock = document.getElementById("stock");
         const info = document.getElementById("info");
 
+        // Mostramos en pantalla la cantidad de stock disponible usando el contenido del elemento "stock"
         info.innerHTML = `Stock disponible: ${stock.textContent} unidades`;
     </script>
 </body>

@@ -6,6 +6,24 @@
     <title>Ejercicio 18 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
-    
+    <div id="comentarios">
+        <p>Bien explicado</p>
+        <p>Podría ser mejor</p>
+        <p>Excelente clase</p>
+    </div>
+    <ul id="mostrar"></ul>
+
+    <script>
+        // Obtenemos los elementos con id "comentarios" y "mostrar"
+        const comentarios = document.getElementById("comentarios");
+        const mostrar = document.getElementById("mostrar");
+
+        // Recorremos cada hijo de "comentarios" y lo agregamos como un ítem de lista dentro de "mostrar"
+        for (let elemento of comentarios.children) 
+        {
+            mostrar.innerHTML += `<li> ${elemento.textContent} </li>`;
+        }
+    </script>
+
 </body>
 </html>

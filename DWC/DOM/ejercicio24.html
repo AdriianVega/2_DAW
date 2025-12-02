@@ -6,6 +6,21 @@
     <title>Ejercicio 24 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
-    
+    <div id="comentarios">
+        <p>Buen post</p>
+        <p>Interesante</p>
+        <p>Gracias por compartir</p>
+    </div>
+    <p id="salida"></p>
+
+    <script>
+        // Obtenemos los elementos con id "comentarios" y "salida"
+        const comentarios = document.getElementById("comentarios");
+        const salida = document.getElementById("salida");
+
+        // Mostramos el texto del último hijo de "comentarios" en "salida"
+        salida.innerHTML = `Último comentario: ${comentarios.lastElementChild.textContent}`;
+    </script>
+
 </body>
 </html>

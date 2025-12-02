@@ -6,6 +6,18 @@
     <title>Ejercicio 13 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
-    
+    <p id="cat">Tecnología</p>
+    <p id="tit">Nuevo microchip</p>
+    <h2 id="final"></h2>
+
+    <script>
+        // Obtenemos los elementos con id "cat", "tit" y "final"
+        const categoria = document.getElementById("cat");
+        const titulo = document.getElementById("tit");
+        const final = document.getElementById("final");
+
+        // Mostramos la categoría entre corchetes seguida del título en el elemento "final"
+        final.innerHTML = `[${categoria.textContent}] ${titulo.textContent}`;
+    </script>
 </body>
 </html>

@@ -6,6 +6,21 @@
     <title>Ejercicio 19 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
-    
+    <p id="n">Laura</p>
+    <p id="c">laura@mail.com</p>
+    <input id="nombre">
+    <input id="correo">
+
+    <script>
+        // Obtenemos los elementos con id "n", "c", "nombre" y "correo"
+        const nombre = document.getElementById("n");
+        const correo = document.getElementById("c");
+        const inputNombre = document.getElementById("nombre");
+        const inputCorreo = document.getElementById("correo");
+
+        // Colocamos el texto del nombre y correo en los campos correspondientes
+        inputNombre.value = nombre.textContent;
+        inputCorreo.value = correo.textContent;
+    </script>
 </body>
 </html>

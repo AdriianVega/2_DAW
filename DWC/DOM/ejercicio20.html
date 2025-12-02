@@ -6,6 +6,32 @@
     <title>Ejercicio 20 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
-    
+    <table id="factura">
+        <tr>
+            <td>Artículo A</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>Artículo B</td>
+            <td>20</td>
+        </tr>
+    </table>
+    <div id="resumen"></div>
+
+    <script>
+        // Obtenemos los elementos con id "factura" y "resumen"
+        const factura = document.getElementById("factura");
+        const resumen = document.getElementById("resumen");
+
+        // Recorremos cada fila de la tabla "factura"
+        for (let elemento of factura.getElementsByTagName("tr")) 
+        {
+            // Obtenemos los elementos de la fila actual
+            let elementosFila = elemento.getElementsByTagName("td");
+
+            // Agregamos el contenido de la fila como un párrafo dentro de "resumen"
+            resumen.innerHTML += `<p> ${elementosFila[0].textContent}: ${elementosFila[1].textContent} </p>`;
+        }
+    </script>
 </body>
 </html>

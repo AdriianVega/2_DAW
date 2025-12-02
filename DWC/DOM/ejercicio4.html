@@ -10,15 +10,15 @@
     <ul id="lista"></ul>
 
     <script>
+        // Obtenemos los elementos con id "raw" y "lista"
         const raw = document.getElementById("raw");
         const lista = document.getElementById("lista");
 
-        const elementos = raw.textContent.split(",");
-
-        for (let i = 0 ; i < elementos.length ; i++)
+        // Separamos el texto por comas y usamos reduce para construir los elementos <li> y agregarlos al contenido de "lista"
+        lista.innerHTML = raw.textContent.split(",").reduce((acum, valor) => 
         {
-            lista.innerHTML += `<li> ${elementos[i]} </li>`;
-        }
+            return acum + `<li> ${valor} </li>`;
+        }, "");
     </script>
 </body>
 </html>

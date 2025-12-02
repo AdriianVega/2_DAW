@@ -10,10 +10,13 @@
     <input id="email">
 
     <script>
+        // Obtenemos los elementos con id "dato" y "email" para leer el correo y asignarlo al input
         const dato = document.getElementById("dato");
         const email = document.getElementById("email");
 
+        // Colocamos el correo leído del párrafo dentro del campo de texto del input
         email.value = dato.textContent;
     </script>
+
 </body>
 </html>

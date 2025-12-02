@@ -6,6 +6,23 @@
         <title>Ejercicio 14 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
-    
+    <div id="enlaces">
+        <p>Inicio</p>
+        <p>Servicios</p>
+        <p>Contacto</p>
+    </div>
+    <ul id="menu"></ul>
+
+    <script>
+        // Obtenemos los elementos con id "enlaces" y "menu"
+        const enlaces = document.getElementById("enlaces");
+        const menu = document.getElementById("menu");
+
+        // Recorremos cada hijo de "enlaces" y lo agregamos como un ítem de lista dentro de "menu"
+        for (let elemento of enlaces.children) 
+        {
+            menu.innerHTML += `<li> ${elemento.textContent} </li>`;
+        }
+    </script>
 </body>
 </html>

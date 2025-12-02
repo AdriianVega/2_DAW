@@ -14,17 +14,15 @@
     <ol id="listaPasos"></ol>
 
     <script>
+        // Obtenemos los elementos con id "pasos" y "listaPasos"
         const pasos = document.getElementById("pasos");
         const listaPasos = document.getElementById("listaPasos");
 
-        let pasosArray = pasos.textContent.split("\n").map(elemento => elemento.trim()).filter(elemento => elemento != "");
-
-        listaPasos.innerHTML = pasosArray.reduce((acum, valor) => 
+        // Recorremos cada hijo del elemento "pasos" y lo agregamos como un ítem de lista dentro de "listaPasos"
+        for (let elemento of pasos.children) 
         {
-            acum += `<li> ${valor} </li>`;
-
-            return acum;
-        }, "");
+            listaPasos.innerHTML += `<li> ${elemento.textContent} </li>`
+        }
     </script>
 </body>
 </html>

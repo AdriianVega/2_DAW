@@ -6,6 +6,20 @@
     <title>Ejercicio 22 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
-    
+    <ul>
+        <li id="producto1">Laptop</li>
+        <li>Lámpara</li>
+        <li>Mouse</li>
+    </ul>
+    <p id="salida"></p>
+
+    <script>
+        // Obtenemos los elementos con id "producto1" y "salida"e
+        const producto1 = document.getElementById("producto1");
+        const salida = document.getElementById("salida");
+
+        // Mostramos el texto del siguiente elemento hermano de "producto1" en "salida"
+        salida.innerHTML = `Producto siguiente: ${producto1.nextElementSibling.textContent}`;
+    </script>
 </body>
 </html>

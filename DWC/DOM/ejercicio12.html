@@ -6,6 +6,32 @@
     <title>Ejercicio 12 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
+    <table id="t">
+        <tr>
+            <td>Nombre</td>
+            <td>Luis</td>
+        </tr>
+        <tr>
+            <td>Edad</td>
+            <td>30</td>
+        </tr>
+    </table>
+    <textarea id="salida"></textarea>
     
+    <script>
+        // Obtenemos los elementos con id "t" y "salida"
+        const tabla = document.getElementById("t");
+        const salida = document.getElementById("salida");
+
+        // Recorremos cada fila de la tabla
+        for (let elemento of tabla.getElementsByTagName("tr")) 
+        {
+            // Obtenemos los elementos de la fila actual
+            let elementosFila = elemento.getElementsByTagName("td");
+
+            // Agregamos el contenido de la fila al textarea
+            salida.value += `${elementosFila[0].textContent}: ${elementosFila[1].textContent}\n`;
+        }
+    </script>
 </body>
 </html>

@@ -10,15 +10,15 @@
     <select id="tallas"></select>
 
     <script>
+        // Obtenemos los elementos con id "origen" y "tallas"
         const origen = document.getElementById("origen");
         const tallas = document.getElementById("tallas");
 
-        const elementos = origen.textContent.split(",");
-
-        for (let i = 0 ; i < elementos.length ; i++)
+        // Separamos el contenido de "origen" por comas y usamos reduce para construir las opciones del select
+        tallas.innerHTML = origen.textContent.split(",").reduce((acum, valor) => 
         {
-            tallas.innerHTML += `<option> ${elementos[i]} </option>`;
-        }
+            return acum + `<option> ${valor} </option>`;
+        }, "");
     </script>
 </body>
 </html>

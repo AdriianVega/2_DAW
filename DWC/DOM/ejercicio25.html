@@ -6,6 +6,38 @@
     <title>Ejercicio 25 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
-    
+    <div id="precios">
+        <p>15</p>
+        <p id="central">25</p>
+        <p>35</p>
+    </div>
+    <p id="salida"></p>
+
+<script>
+    // Obtenemos los elementos con id "precios" y "salida"
+    const precios = document.getElementById("precios");
+    const salida = document.getElementById("salida");
+
+    // Inicializamos la variable para almacenar la suma
+    let suma;
+
+    // Recorremos cada hijo de "precios" para encontrar el elemento con id "central"
+    for (let elemento of precios.children) 
+    {
+        // Si encontramos el central, sumamos los valores del elemento anterior y siguiente
+        if (elemento.id == "central") 
+        {
+            let numeroAnterior = Number(elemento.previousElementSibling.textContent);
+            let numeroSiguiente = Number(elemento.nextElementSibling.textContent);
+
+            suma = numeroAnterior + numeroSiguiente;
+            break;
+        }
+    }
+
+    // Mostramos el resultado de la suma en "salida"
+    salida.innerHTML = suma;
+</script>
+
 </body>
 </html>

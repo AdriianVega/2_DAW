@@ -15,16 +15,21 @@
     <p id="resumen"></p>
 
     <script>
+        // Obtenemos los elementos con id "u" y "resumen"
         const info = document.getElementById("u");
         const resumen = document.getElementById("resumen");
 
-        // Lo convertimos en una cadena y eliminamos los espacios e índices en blanco
-        let infoCadena = info.textContent.split("\n").map(elemento => elemento.trim()).filter(elemento => elemento != "");
-        // Lo convertimos en una cadena separando los datos
-        let infoResumen = infoCadena.join(" | ")
+        // Creamos un array vacío para almacenar el contenido de cada hijo
+        let elementos = [];
 
-        // Transformamos el contenido del párrafo con id = resumen
-        resumen.textContent = infoResumen;
+        // Recorremos cada hijo del elemento "info" y agregamos su texto al array
+        for (let elemento of info.children) 
+        {
+            elementos.push(elemento.textContent);
+        }
+        // Unimos los elementos del array con " | " y los mostramos en el párrafo de resumen
+        resumen.textContent = elementos.join(" | ");
     </script>
+
 </body>
 </html>

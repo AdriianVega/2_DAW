@@ -6,6 +6,20 @@
     <title>Ejercicio 23 Hecho por Adrián Nataniel Vega Pérez</title>
 </head>
 <body>
-    
+    <ul>
+        <li>Tarea 1</li>
+        <li id="tarea2">Tarea 2</li>
+        <li>Tarea 3</li>
+    </ul>
+    <p id="salida"></p>
+
+    <script>
+        // Obtenemos los elementos con id "tarea2" y "salida"
+        const tarea2 = document.getElementById("tarea2");
+        const salida = document.getElementById("salida");
+
+        // Mostramos el texto del elemento hermano anterior de "tarea2" en "salida"
+        salida.innerHTML = `Tarea anterior: ${tarea2.previousElementSibling.textContent}`;
+    </script>
 </body>
 </html>
