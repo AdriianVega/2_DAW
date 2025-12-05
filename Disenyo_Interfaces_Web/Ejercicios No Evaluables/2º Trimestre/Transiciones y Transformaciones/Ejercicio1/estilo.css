@@ -2,27 +2,14 @@
 {
     font-family: Arial, Helvetica, sans-serif;
 }
-header
-{
+header {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-nav
-{
-    background-color: black;
-    color: white;
-}
-nav ul
-{
-    list-style-type: none;
-    display: flex;
-    gap: 20px;
-}
 main
 {
-    margin-top: 20px;
     display: flex;
     flex-direction: column;
     gap: 20px; 
@@ -45,7 +32,6 @@ article
 .caja1
 {
     background-color: #C0392B;
-    color: white;
     transition: background 1s;
 }
 .caja1:hover

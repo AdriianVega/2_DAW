@@ -2,8 +2,71 @@
 {
     font-family: Arial, Helvetica, sans-serif;
 }
+header
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+nav ul
+{
+    list-style-type: none;
+    display: flex;
+    padding: 0 40px;
+}
+nav
+{
+    margin: 40px 0;
+}
+a
+{
+    background-color: black;
+    text-decoration: none;
+    color: white;
+    padding: 30px;
+    border-top: 5px solid black;
+    transition: box-shadow 1s;
+}
+#enlace1
+{
+    box-shadow: inset 0 0 0 0 orange;
+    border-color: orange;
+}
+#enlace1:hover
+{
+    box-shadow: inset 0 100px 0 0 orange;
+}
+#enlace2
+{
+    box-shadow: inset 0 0 0 0 green;
+    border-color: green;
+}
+#enlace2:hover 
+{
+    box-shadow: inset 0 100px 0 0 green;
+}
+#enlace3
+{
+    box-shadow: inset 0 0 0 0 darkred;
+    border-color: darkred;
+}
+#enlace3:hover 
+{
+    box-shadow: inset 0 100px 0 0 darkred;
+}
+#enlace4
+{
+    box-shadow: inset 0 0 0 0 purple;
+    border-color: purple;
+}
+#enlace4:hover 
+{
+    box-shadow: inset 0 100px 0 0 purple;
+}
 main
 {
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     gap: 20px; 
@@ -23,96 +86,95 @@ article
     align-items: center;
     justify-content: center;
 }
-.caja1
-{
+.caja1 {
     background-color: #C0392B;
     color: white;
     transition: background 1s;
 }
-.caja1:hover
-{
+
+.caja1:hover {
     background-color: darkred;
 }
-.caja2
-{
+
+.caja2 {
     background-color: #9B59B6;
     transition: font-size 1s;
 }
-.caja2:hover
-{
+
+.caja2:hover {
     font-size: 25px;
 }
-.caja3
-{
+
+.caja3 {
     background-color: #2980B9;
     transition: color 1s;
 }
-.caja3:hover
-{
+
+.caja3:hover {
     color: gray;
 }
-.caja4
-{
+
+.caja4 {
     background-color: #3498DB;
     transition: padding 1s;
 }
-.caja4:hover
-{
+
+.caja4:hover {
     line-height: 100px;
     /* Simulando line-height con una línea usamos padding vertical */
     padding: 10px 0;
 }
-.caja5
-{
+
+.caja5 {
     background-color: #17A589;
     transition: border-radius 1s;
 }
-.caja5:hover
-{
+
+.caja5:hover {
     border-radius: 15px;
 }
-.caja6
-{
+
+.caja6 {
     background-color: #F1C40F;
     transition: box-shadow 1s;
 }
-.caja6:hover
-{
+
+.caja6:hover {
     box-shadow: 50px 0 10px 40px black;
 }
-.caja7
-{
+
+.caja7 {
     background-color: #E67E22;
     transition: opacity 1s;
 }
-.caja7:hover
-{
+
+.caja7:hover {
     opacity: 0.5;
 }
-.caja8
-{
+
+.caja8 {
     background-color: #95A5A6;
     transition: border 1s;
 }
-.caja8:hover
-{
+
+.caja8:hover {
     border: 3px solid black;
 }
-.caja9
-{
+
+.caja9 {
     background-color: #2C3E50;
     transition: margin 1s;
 }
-.caja9:hover
-{
+
+.caja9:hover {
     margin: 20px;
 }
-.caja10
-{
+
+.caja10 {
     background-color: #000000;
     transition: padding 1s;
 }
-.caja10:hover
-{
+
+.caja10:hover {
     padding: 20px;
 }
