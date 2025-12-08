@@ -1,0 +1,19 @@
+*
+{
+    font-family: Arial, Helvetica, sans-serif;
+}
+section
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+article
+{
+    border: 1px solid gray;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    border-radius: 10px;
+    padding: 20px;
+}

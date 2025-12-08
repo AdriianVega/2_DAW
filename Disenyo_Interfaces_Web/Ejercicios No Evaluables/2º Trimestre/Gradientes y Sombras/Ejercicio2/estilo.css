@@ -1,0 +1,19 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+article {
+    border: 1px solid gray;
+    color: white;
+    background: linear-gradient(to top, #1f587d, 25%, #3498db 100%);
+    width: 300px;
+    border-radius: 10px;
+    padding: 20px;
+}
