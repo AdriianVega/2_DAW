@@ -16,7 +16,7 @@ try:
     if title_tag:
         print(f"Título de la página: {title_tag.text}")
 
-    first_paragraphs = first_paragraphs = soup.find_all("p")[:3]
+    first_paragraphs = first_paragraphs = soup.find_all("p", limit=3)
 
     if first_paragraphs:
         print(f"Primer párrafo: {first_paragraphs[0].text}")

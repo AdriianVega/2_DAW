@@ -20,7 +20,7 @@ try:
 
             print(f"Texto: {enlace.text}\nEnlace: {href}\n")
 
-            diccionario_enlaces.append({"texto": enlace.text, "enlace": href})
+            diccionario_enlaces.append({"texto": enlace.get_text(strip=True), "enlace": href})
 
         print(json.dumps(diccionario_enlaces, indent=4, ensure_ascii=False))
 
