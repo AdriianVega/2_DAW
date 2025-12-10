@@ -1,0 +1,35 @@
+$color_fondo: gray;
+$color_titulo: red;
+$color_menu: black;
+$color_enlace: white;
+$color_hover: blue;
+
+body
+{
+    background-color: $color_fondo;
+}
+h1
+{
+    color: $color_titulo;
+}
+ul
+{
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+
+    a 
+    {
+        color: $color_enlace;
+        text-decoration: none;
+
+        &:hover 
+        {
+            color: $color_hover;
+        }
+    }
+    .menu 
+    {
+        color: $color_menu;
+    }
+}
