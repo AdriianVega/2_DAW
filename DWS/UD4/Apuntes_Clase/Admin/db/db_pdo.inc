@@ -12,7 +12,7 @@
         $pdo = new PDO($dsn, $usuario, $password);
         
         // La conexión fue exitosa
-        echo "Conexión exitosa con PDO.";
+        //echo "Conexión exitosa con PDO.";
     } 
     catch (\PDOException $e) 
     {
