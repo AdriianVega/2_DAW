@@ -1,5 +1,43 @@
+// Variables para el diseño
+$primary-dark: #070e17; // Color de fondo más oscuro
+$secondary-dark: #0e1a2c; // Color de fondo del pie
+$neon-blue: #00bfff; // Color para los bordes y textos destacados
+$light-text: #e0f7ff; // Color de texto principal
+$link-color: #3b90ff; // Color de los enlaces
 
 header
 {
     display: flex;
+}
+.search-bar 
+{
+    max-width: 450px;
+    background-color: white;
+    border: 2px solid rgba(0, 0, 0, 0.6);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
+    .form-control 
+    {
+        border: none;
+        background: transparent;
+        padding-left: 1rem;
+
+        &:focus
+        {
+            box-shadow: none;
+        }
+    }
+
+    .btn 
+    {
+        background: transparent;
+        border: none;
+        color: #333;
+        padding-right: 1rem;
+
+        &:hover 
+        {
+            color: $neon-blue;
+        }
+    }
 }

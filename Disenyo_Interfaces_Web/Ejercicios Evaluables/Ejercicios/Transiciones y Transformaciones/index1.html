@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aserva - Tienda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+    <header class="header-main">
+        <div class="container-fluid d-flex align-items-center justify-content-between py-3">
+
+            <div class="d-flex align-items-center flex-grow-1">
+                <a href="#" class="logo me-4">
+                    <svg class="logo-icon" viewBox="0 0 100 100"></svg>
+                    Logo
+                </a>
+
+                <div class="input-group search-bar rounded-pill flex-grow-1 mx-3">
+                    <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar">
+                    <button class="btn" type="button">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center">
+                <button class="btn btn-outline-light btn-sm login-btn me-3">Iniciar Sesión</button>
+                <a href="#" class="cart-icon">
+                    <i class="bi bi-cart"></i>
+                </a>
+            </div>
+        </div>
+
+        <nav class="nav-secondary">
+            <div class="container-fluid">
+                <ul class="nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Catálogo
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Ayuda y Ajustes</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content container-fluid">
+
+        <section class="highlight-section row mt-4">
+            <div class="col-md-4">
+                <div class="highlight-card"></div>
+            </div>
+            <div class="col-md-4">
+                <div class="highlight-card"></div>
+            </div>
+            <div class="col-md-4">
+                <div class="highlight-card"></div>
+            </div>
+        </section>
+
+        <div class="text-center my-5">
+            <a href="#" class="btn btn-explore">
+                Explorar <i class="bi bi-arrow-right"></i>
+            </a>
+        </div>
+
+        <section class="tabs-section text-center my-4">
+            <div class="btn-group nav-pills custom-tabs" role="group">
+                <button type="button" class="btn active">Novedades</button>
+                <button type="button" class="btn">Lo más Buscado</button>
+                <button type="button" class="btn">Próximamente</button>
+            </div>
+        </section>
+
+        <section class="product-cards row justify-content-center mb-5">
+            <div class="col-md-4 mb-4">
+                <div class="product-card">
+                    <div class="card-image"></div>
+                    <div class="card-body">
+                        <h5>Título de la tarjeta</h5>
+                        <p class="price">Precio €</p>
+                        <p class="description">Descripción...</p>
+                        <a href="#" class="details-link">
+                            Ver más... <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="product-card">
+                    <div class="card-image"></div>
+                    <div class="card-body">
+                        <h5>Título de la tarjeta</h5>
+                        <p class="price">Precio €</p>
+                        <p class="description">Descripción...</p>
+                        <a href="#" class="details-link">
+                            Ver más... <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="product-card">
+                    <div class="card-image"></div>
+                    <div class="card-body">
+                        <h5>Título de la tarjeta</h5>
+                        <p class="price">Precio €</p>
+                        <p class="description">Descripción...</p>
+                        <a href="#" class="details-link">
+                            Ver más... <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="text-center mb-5">
+            <button class="btn btn-outline-light login-btn-bottom">Iniciar Sesión</button>
+        </div>
+
+    </main>
+
+    <footer class="footer-main">
+        <div class="container-fluid d-flex justify-content-between align-items-end">
+            <div class="footer-links">
+                <a href="#">Aviso de privacidad</a>
+                <a href="#">Términos y condiciones</a>
+                <a href="#">Mapa web</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-twitter"></i></a>
+                <a href="#"><i class="bi bi-xbox"></i></a>
+            </div>
+        </div>
+        <div class="copyright container-fluid">
+            © 2024 Aserva. Todos los derechos reservados
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
