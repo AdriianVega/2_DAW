@@ -19,13 +19,19 @@
             $provincia = htmlspecialchars(($_POST["provincia"]));
             $id = $_POST["id"];
             
-            $sql = "UPDATE clientes SET nombre = '$nombre', apellidos = '$apellidos', genero = '$genero', direccion = '$direccion', 
-                    codpostal = '$codpostal', poblacion = '$poblacion', provincia = '$provincia', email = '$email' WHERE id = $id";
-
-            $sql_email = "SELECT email FROM clientes";
+            $sql_email = "SELECT * FROM clientes WHERE email='$email'";
             $res = mysqli_query($conn, $sql_email);
             
-            if (mysqli_num_rows($res) <= 0 && mysqli_query($conn, $sql)) 
+            if (mysqli_num_rows($res) > 0)
+            {
+                header("location:gestion_clientes.php?cli=1");
+                die();
+            }
+
+            $sql = "UPDATE clientes SET nombre = '$nombre', apellidos = '$apellidos', genero = '$genero', direccion = '$direccion', 
+                    codpostal = '$codpostal', poblacion = '$poblacion', provincia = '$provincia', email = '$email' WHERE id = $id";
+            
+            if (mysqli_query($conn, $sql)) 
             {
                 header("location:gestion_clientes.php?cli=0"); //Si todo ok
             }

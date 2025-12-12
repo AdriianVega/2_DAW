@@ -19,13 +19,20 @@
         $sql_email = "SELECT * FROM clientes WHERE email='$email'";
         $res = mysqli_query($conn, $sql_email);
         
+        if (mysqli_num_rows($res) > 0)
+        {
+            header("location:gestion_clientes.php?cli=1");
+            die();
+        }
         $sql = "INSERT INTO clientes(nombre, apellidos, genero, direccion, codpostal, poblacion, provincia, password, email)
         VALUES ('$nombre', '$apellidos', '$genero', '$direccion', '$codpostal', '$poblacion', '$provincia', '$password', '$email');";
         
-        if (mysqli_num_rows($res) == 1 && mysqli_query($conn, $sql)) {
+        if (mysqli_query($conn, $sql)) 
+        {
             header("location:gestion_clientes.php?cli=0");
         }
-        else {
+        else 
+        {
             header("location:gestion_clientes.php?cli=2");
         }
         die();
@@ -51,35 +58,35 @@
                     <div class="row">
                         <div class="col-md-6 mt-3">
                             <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre">
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
                         </div>
                         <div class="col-md-6 mt-3">
                             <label for="apellidos" class="form-label">Apellidos</label>
-                            <input type="text" class="form-control" id="apellidos" name="apellidos">
+                            <input type="text" class="form-control" id="apellidos" name="apellidos" required>
                         </div>
                         <div class="col-md-6 mt-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email">
+                            <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="col-md-6 mt-3">
                             <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" name="password">
+                            <input type="password" class="form-control" id="password" name="password" required>
                         </div>
                         <div class="col-md-6 mt-3">
                             <label for="direccion" class="form-label">Dirección</label>
-                            <input type="text" class="form-control" id="direccion" name="direccion">
+                            <input type="text" class="form-control" id="direccion" name="direccion" required>
                         </div>
                         <div class="col-md-6 mt-3">
                             <label for="codpostal" class="form-label">Código Postal</label>
-                            <input type="text" class="form-control" id="codpostal" name="codpostal">
+                            <input type="text" class="form-control" id="codpostal" name="codpostal" required>
                         </div>
                         <div class="col-md-6 mt-3">
                             <label for="poblacion" class="form-label">Población</label>
-                            <input type="text" class="form-control" id="poblacion" name="poblacion">
+                            <input type="text" class="form-control" id="poblacion" name="poblacion" required>
                         </div>
                         <div class="col-md-6 mt-3">
                             <label for="provincia" class="form-label">Provincia</label>
-                            <input type="text" class="form-control" id="provincia" name="provincia">
+                            <input type="text" class="form-control" id="provincia" name="provincia" required>
                         </div>
                         <div class="col-md-6 mt-3">
                             <label for="genero" class="form-label">Género</label>
