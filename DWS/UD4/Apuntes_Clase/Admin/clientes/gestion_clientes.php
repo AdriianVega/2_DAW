@@ -123,11 +123,8 @@
                             <td><?= htmlspecialchars($c['provincia']) ?></td>
                             <td>
                                 <a href="edit_cli_mysqli.php?edit=<?= $c['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
-                                <a href="?eliminar=<?= $c['id'] ?>" 
-                                    class="btn btn-danger btn-sm"
-                                    onclick="return confirm('¿Eliminar cliente?');">
-                                    🗑️
-                                </a>
+                                <button type="button" class="btn btn-danger" onclick="eliminarCliente(<?=
+                                $c['id']; ?>)">🗑️ </button>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -163,7 +160,7 @@
             modal.show();
             document.getElementById('confirmDeleteBtn').onclick = () => 
             {
-                window.location.href = 'gestion_cli.php?eliminar=' + numcliente;
+                window.location.href = 'gestion_clientes.php?eliminar=' + numcliente;
                 modal.hide();
             };
         }

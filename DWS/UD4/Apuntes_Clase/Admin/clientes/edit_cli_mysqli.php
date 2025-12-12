@@ -22,7 +22,7 @@
             $sql_email = "SELECT * FROM clientes WHERE email='$email'";
             $res = mysqli_query($conn, $sql_email);
             
-            if (mysqli_num_rows($res) > 0)
+            if (mysqli_num_rows($res) > 1)
             {
                 header("location:gestion_clientes.php?cli=1");
                 die();
@@ -112,7 +112,7 @@
                         </div>
                         <div class="col-md-6 mt-3">
                             <label for="genero" class="form-label">Genero:</label>
-                            <select name="genero" id="genero" class="form-select">
+                            <select name="genero" id="genero" class="form-select" required>
                                 <option value="default" selected disabled>Selecciona una opción</option>
                                     <?php
                                         $genero = $cli['genero'];
