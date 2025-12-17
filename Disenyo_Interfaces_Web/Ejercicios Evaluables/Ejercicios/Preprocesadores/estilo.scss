@@ -1,0 +1,62 @@
+$color: #eee;
+$color_hover: lighten($color, 10%);
+$color_fondo: #15a;
+$color_fondo_hover: lighten($color_fondo, 10%);
+$color_titulo: darken($color_fondo, 10%);
+
+@mixin transition($property, $duration, $timing: linear) {
+    -webkit-transition: $property $duration $timing;
+    -moz-transition: $property $duration $timing;
+    -o-transition: $property $duration $timing;
+    transition: $property $duration $timing;
+}
+
+@mixin animation($name, $duration, $timing: linear)
+{
+    -webkit-animation: $name, $duration, $timing;
+    -moz-animation: $name, $duration, $timing;
+    -o-animation: $name, $duration, $timing;
+    animation: $name, $duration, $timing; 
+}
+
+@keyframes slideIn 
+{
+    from 
+    {
+        transform: scale(-100%)
+    }
+    to 
+    {
+        transform: scale(0%);
+    }
+}
+
+@mixin responsive($size)
+{
+    @if $size == medium
+    {
+        @media (max-width: 1024px)
+        {
+            @content
+        }
+    }
+    @else if $size == small
+    {
+        @media (max-width: 800px)
+        {
+            @content
+        }
+    }
+}
+header
+{
+    font-size: large;
+    color: #444444;
+    background-color: #EEEEEE;
+
+    &:hover
+    {
+        color: $color_hover;
+        background-color: $color_fondo_hover;
+    }
+}
