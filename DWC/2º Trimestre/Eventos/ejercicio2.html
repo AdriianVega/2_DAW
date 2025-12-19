@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+    <style>
+        div
+        {
+            border: 1px solid black; 
+            text-align: center; 
+            padding: 20px; 
+            margin: 300px 800px
+        }
+    </style>
+</head>
+<body>
+    <div>
+        Pasa por aquí
+    </div>
+    <div id="efecto">
+        Efectos del movimiento
+    </div>
+    <script>
+        function color()
+        {
+            efecto.style.backgroundColor = "green";
+        }
+        const primerDiv = document.getElementsByTagName("div")[0];
+        const efecto = document.getElementById("efecto");
+
+        primerDiv.addEventListener("mouseover", color);
+        primerDiv.addEventListener("mouseout", () => { efecto.removeAttribute("style") });
+    </script>
+</body>
+</html>

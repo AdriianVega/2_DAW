@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+</head>
+<body>
+    <div></div>
+    <script>
+            const nuevoDiv = document.createElement("div")
+            const body = document.getElementsByTagName("body")[0];
+
+            nuevoDiv.style.border = "1px solid black";
+            nuevoDiv.style.textAlign = "center";
+            nuevoDiv.style.margin = "300px 800px";
+            nuevoDiv.style.padding = "20px";
+            
+            nuevoDiv.textContent = "Pulsa aquí";
+
+            nuevoDiv.addEventListener('click', () => {
+                alert("Pulsaste sobre el botón");
+            })
+
+            body.append(nuevoDiv);
+    </script>
+</body>
+</html>

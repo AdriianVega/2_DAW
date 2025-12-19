@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+</head>
+<body>
+    <form>
+        <input id="precio" type="number">
+        <input id="cantidad" type="number">
+        <input type="button" id="enviar" value="Calcular">
+        <input id="total" readonly>
+    </form>
+
+    <script>
+        function productoCampos()
+        {
+            total.value = Number(precio.value) * Number(cantidad.value);
+        }
+
+        const precio = document.getElementById("precio");
+        const cantidad = document.getElementById("cantidad");
+        const enviar = document.getElementById("enviar");
+        const total = document.getElementById("total");
+
+        enviar.addEventListener("click", productoCampos);
+    </script>
+</body>
+</html>
