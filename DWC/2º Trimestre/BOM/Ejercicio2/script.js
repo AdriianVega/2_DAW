@@ -3,7 +3,7 @@ const ventana = window.open("", "", "width=500, height=200, left=100, top=200");
 ventana.focus();
 
 // Función para alertar si se cancela la redimensión
-cancelarRedimension = function() 
+let cancelarRedimension = function() 
 {
     alert("Se ha cancelado la redimensión de la ventana correctamente");
 }

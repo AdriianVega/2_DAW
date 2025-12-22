@@ -22,15 +22,26 @@
         Efectos del movimiento
     </div>
     <script>
-        function color()
-        {
+        // Definimos una función que cambia el color de fondo del elemento con id "efecto"
+        function color() {
             efecto.style.backgroundColor = "green";
         }
+
+        // Obtenemos el primer elemento div del documento
         const primerDiv = document.getElementsByTagName("div")[0];
+
+        // Obtenemos el elemento que tendrá el efecto visual
         const efecto = document.getElementById("efecto");
 
+        // Añadimos un evento cuando el ratón entra sobre el div
+        // Al producirse el evento, se ejecuta la función que cambia el color
         primerDiv.addEventListener("mouseover", color);
-        primerDiv.addEventListener("mouseout", () => { efecto.removeAttribute("style") });
+
+        // Añadimos un evento cuando el ratón sale del div
+        // Se elimina el estilo aplicado anteriormente
+        primerDiv.addEventListener("mouseout", () => {
+            efecto.style.backgroundColor = "";
+        });
     </script>
 </body>
 </html>

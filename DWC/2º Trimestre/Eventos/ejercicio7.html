@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+    <title>Ejercicio 7</title>
+</head>
+
+<body>
+    <div id="c1" style="background: red"></div>
+    <div id="c2" style="background: white"></div>
+    <div id="c3" style="background: blue"></div>
+
+    <script>
+        // Obtenemos el elemento con id "c2"
+            const c2 = document.getElementById("c2");
+
+        // Declaramos una variable para almacenar el color activo
+        let colorActivo;
+
+        // Añadimos un evento al documento que detecta cuando el ratón pasa sobre cualquier elemento
+        // Si el elemento no es "c2", guardamos su color de fondo actual
+        document.addEventListener("mouseover", (e) => {
+            if (e.target.id != "c2") {
+                colorActivo = e.target.style.backgroundColor || "white";
+            }
+        });
+
+        // Añadimos un evento cuando el ratón entra en el elemento "c2"
+        // Cambiamos el color de fondo de "c2" al color que estaba activo en el último elemento sobre el que pasó el ratón
+        c2.addEventListener("mouseenter", () => {
+            c2.style.backgroundColor = colorActivo;
+        });
+    </script>
+</body>
+</html>

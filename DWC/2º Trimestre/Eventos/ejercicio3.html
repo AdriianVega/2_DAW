@@ -14,16 +14,19 @@
     </form>
 
     <script>
-        function productoCampos()
-        {
+       // Definimos una función que calcula el total multiplicando precio por cantidad
+        function productoCampos() {
             total.value = Number(precio.value) * Number(cantidad.value);
         }
 
+        // Obtenemos los elementos del formulario por su id
         const precio = document.getElementById("precio");
         const cantidad = document.getElementById("cantidad");
         const enviar = document.getElementById("enviar");
         const total = document.getElementById("total");
 
+        // Añadimos un evento al botón de enviar
+        // Al hacer clic, se ejecuta la función que calcula el total
         enviar.addEventListener("click", productoCampos);
     </script>
 </body>

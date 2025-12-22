@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8</title>
+</head>
+<body>
+    <form>
+        <label for="letras">No se aceptan dígitos</label>
+        <input type="text" id="letras">
+    </form>
+
+    <script>
+        // Obtenemos el elemento con id "letras"
+        const letras = document.getElementById("letras");
+
+        // Añadimos un evento al documento que se ejecuta cada vez que se presiona una tecla
+        // Se verifica si la tecla presionada es un dígito y, en ese caso, se previene su ingreso
+        document.addEventListener("keypress", (e) => {
+
+            // Expresión regular para detectar dígitos
+            let digitos = /^\d$/;
+
+            // Si la tecla presionada es un número, se cancela la acción por defecto
+            if (digitos.test(e.key)) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

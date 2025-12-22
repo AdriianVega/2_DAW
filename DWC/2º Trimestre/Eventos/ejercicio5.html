@@ -10,20 +10,23 @@
             border: 1px solid black
         }
     </style>
+    <title>Ejercicio 5</title>
 </head>
 <body>
     <div id="boton1" class="boton">Pulsar aquí</div>
     <div id="boton2" class="boton">Pulsar aquí</div>
 
     <script>
-        function pulsar(e)
-        {
+        // Definimos una función que muestra una alerta con el id del elemento pulsado
+        function pulsar(e) {
             alert(e.target.id);
         }
+        // Obtenemos todos los elementos con la clase "boton"
         const botones = document.getElementsByClassName("boton");
 
-        for (let boton of botones)
-        {
+        // Recorremos cada botón y añadimos un evento de clic
+        // Al pulsar el botón, se ejecuta la función que muestra su id
+        for (let boton of botones) {
             boton.addEventListener("click", pulsar);
         }
     </script>

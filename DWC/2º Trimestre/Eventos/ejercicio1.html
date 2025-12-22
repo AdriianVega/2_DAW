@@ -6,23 +6,31 @@
     <title>Ejercicio 1</title>
 </head>
 <body>
-    <div></div>
     <script>
-            const nuevoDiv = document.createElement("div")
-            const body = document.getElementsByTagName("body")[0];
+        // Creamos un nuevo elemento div de forma dinámica
+        const nuevoDiv = document.createElement("div");
 
-            nuevoDiv.style.border = "1px solid black";
-            nuevoDiv.style.textAlign = "center";
-            nuevoDiv.style.margin = "300px 800px";
-            nuevoDiv.style.padding = "20px";
-            
-            nuevoDiv.textContent = "Pulsa aquí";
+        // Obtenemos una referencia al elemento body del documento
+        const body = document.getElementsByTagName("body")[0];
 
-            nuevoDiv.addEventListener('click', () => {
-                alert("Pulsaste sobre el botón");
-            })
+        // Aplicamos distintos estilos al div creado
+        // Se define un borde, alineación del texto, márgenes y espacio interno
+        nuevoDiv.style.border = "1px solid black";
+        nuevoDiv.style.textAlign = "center";
+        nuevoDiv.style.margin = "300px 800px";
+        nuevoDiv.style.padding = "20px";
 
-            body.append(nuevoDiv);
+        // Asignamos el texto que se mostrará dentro del div
+        nuevoDiv.textContent = "Pulsa aquí";
+
+        // Añadimos un evento de tipo click al div
+        // Cuando el usuario pulse sobre él, se mostrará un mensaje por pantalla
+        nuevoDiv.addEventListener('click', () => {
+            alert("Pulsaste sobre el botón");
+        });
+
+        // Insertamos el div creado dentro del body del documento
+        body.append(nuevoDiv);
     </script>
 </body>
 </html>

@@ -5,16 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 4</title>
     <script>
+        // Esperamos a que todo el contenido del DOM esté cargado antes de ejecutar el código
         document.addEventListener("DOMContentLoaded", () => {
+
+            // Definimos una función que cambia el color de fondo del cuadro
             function color() {
                 cuadro.style.backgroundColor = "red";
             }
-
+            // Obtenemos el div con id cuadro
             const cuadro = document.getElementById("cuadro");
 
+            // Añadimos un evento cuando el ratón entra sobre el cuadro
+            // Al producirse el evento, se ejecuta la función que cambia el color
             cuadro.addEventListener("mouseover", color);
-            cuadro.addEventListener("mouseout", () => { cuadro.removeAttribute("style") });
-        })
+
+            // Añadimos un evento cuando el ratón sale del cuadro
+            // Se elimina el estilo aplicado anteriormente
+            cuadro.addEventListener("mouseout", () => {
+                cuadro.style.backgroundColor = "";
+            });
+        });
     </script>
 </head>
 <body>

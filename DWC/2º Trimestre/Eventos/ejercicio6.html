@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6</title>
+</head>
+<body>
+    <div>
+        <label for="cX">Coordenada X</label>
+        <input id="cX">
+    </div>
+    <div>
+        <label for="cY">Coordenada Y</label>
+        <input id="cY">
+    </div>
+
+    <script>
+       // Obtenemos los elementos donde se mostrarán las coordenadas X e Y del ratón
+        const coordenadaX = document.getElementById("cX");
+        const coordenadaY = document.getElementById("cY");
+
+        // Añadimos un evento al documento que se ejecuta cada vez que el ratón se mueve
+        // Actualiza los valores de los campos con las coordenadas actuales del cursor
+        document.addEventListener("mousemove", (e) => {
+            coordenadaX.value = e.clientX;
+            coordenadaY.value = e.clientY;
+        });
+    </script>
+</body>
+</html>
