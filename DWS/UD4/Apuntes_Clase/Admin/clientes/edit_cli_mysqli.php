@@ -19,10 +19,10 @@
             $provincia = htmlspecialchars(($_POST["provincia"]));
             $id = $_POST["id"];
             
-            $sql_email = "SELECT * FROM clientes WHERE email='$email'";
+            $sql_email = "SELECT * FROM clientes WHERE email='$email' and id != '$id'";
             $res = mysqli_query($conn, $sql_email);
-            
-            if (mysqli_num_rows($res) > 1)
+            //print $sql_email;
+            if (mysqli_num_rows($res) > 0)
             {
                 header("location:gestion_clientes.php?cli=1");
                 die();
