@@ -1,0 +1,225 @@
+// Definimos las variables para los colores de la página
+$color: #eee;
+$color_hover: lighten($color, 10%);
+$color_fondo: #15a;
+$color_fondo_hover: lighten($color_fondo, 10%);
+$color_titulo: darken($color_fondo, 10%);
+
+// Creamos un mixin para las transiciones 
+@mixin transition($property, $duration, $timing: linear) {
+    -webkit-transition: $property $duration $timing;
+    -moz-transition: $property $duration $timing;
+    -o-transition: $property $duration $timing;
+    transition: $property $duration $timing;
+}
+
+// Creamos un mixin para las animaciones
+@mixin animation($name, $duration, $timing: linear) {
+    -webkit-animation: $name $duration $timing;
+    -moz-animation: $name $duration $timing;
+    -o-animation: $name $duration $timing;
+    animation: $name $duration $timing;
+}
+
+// Definimos la animación para los menús desplegables
+@keyframes menu_desplegable {
+    // Ya que display none y block es díficil de animar
+    // Le quitamos y damos opacidad para darle el efecto
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+// Creamos un mixin para gestionar el responsive
+@mixin responsive($size) {
+
+    // Configuramos los estilos para pantallas medianas y pequeñas
+    @if $size == medium {
+        @media (max-width: 1024px) {
+            @content
+        }
+    }
+    
+    @else if $size == small {
+        @media (max-width: 800px) {
+            @content
+        }
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// Editamos el título
+header {
+    font-size: 30px;
+    font-weight: bold;
+    background-color: $color;
+    padding: 15px 20px;
+    color: lighten(#000, 30%);
+}
+
+// Configuramos la barra de navegación con ayuda de las variables
+nav {
+    background-color: $color_fondo;
+    padding: 5px 0;
+
+    ul {
+        list-style-type: none;
+        display: flex;
+        padding: 0;
+
+        li {
+            padding: 0 70px;
+
+            // Aplicamos una transición al fondo
+            @include transition(background-color, 0.5s, ease-out);
+
+            // Ocultamos el submenú y lo posicionamos
+            ul {
+                display: none;
+                color: $color;
+                background-color: $color_fondo;
+                position: absolute;
+                left: 0;
+            }
+
+            a {
+                color: $color;
+                text-decoration: none;
+
+                //Le damos una transición al cambio de color
+                @include transition(color, 0.5s, linear);
+            }
+
+            // Definimos el comportamiento al pasar el ratón
+            &:hover {
+                background-color: $color_fondo_hover;
+
+                a {
+                    color: $color_hover;
+                }
+
+                // Mostramos el submenú con la animación definida anteriormente
+                ul {
+                    display: block;
+
+                    @include animation(menu_desplegable, 0.5s, ease);
+
+                    li {
+                        margin: 10px 0;
+                    }
+                }
+
+            }
+
+            position: relative;
+        }
+    }
+
+    // Ocultamos el menú de navegación en pantallas pequeñas
+    @include responsive(small) {
+        display: none;
+    }
+
+}
+
+// Estructuramos el contenido principal
+main {
+    padding-bottom: 20px;
+
+    // Hacemos que sea float para que ocupe el lado izquierdo
+    article:first-child {
+        float: left;
+        width: 25%;
+        padding: 20px;
+
+        form {
+            p {
+                margin-bottom: 15px;
+
+                input, button {
+                    // Definimos que ocupen el 90% del article
+                    width: 90%;
+                    padding: 5px 0;
+                    border-radius: 5px;
+                    border: 1px solid gray;
+
+                    // Ajustamos el ancho al 100%
+                    @include responsive(small) {
+                        width: 100%;
+                    }
+                }
+
+                input {
+                    padding-left: 10px;
+                }
+
+                button {
+                    color: $color;
+                    background-color: $color_fondo;
+
+                    // Debido a que son varios efectos los que queremos aplicar
+                    // Pasamos como variable que use todos los efectos posibles
+                    @include transition(all, 0.3s, ease-out);
+
+                    &:hover {
+                        background-color: $color_fondo_hover;
+                        color: $color_hover;
+                    }
+                }
+            }
+        }
+
+        // Quitamos el modo float al formulario para que se apilen
+        @include responsive(small) {
+            float: none;
+            width: 100%;
+            padding: 50px 20px;
+        }
+
+    }
+
+    // Configuramos la columna de contenido principal
+    article:last-child {
+        float: left;
+        width: 70%;
+        margin: 20px 0;
+
+        h1 {
+            font-size: 20px;
+            color: $color_titulo;
+        }
+
+        p {
+            margin: 20px 0;
+        }
+
+        // Quitamos el modo float para apilar los elementos
+        @include responsive(small) {
+            float: none;
+            width: 95%;
+            margin: 0 20px;
+        }
+    }
+}
+
+footer {
+    clear: left;
+    color: $color;
+    background-color: $color_fondo;
+    padding: 5px;
+
+    // Fijamos el footer y lo posicionamos
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}

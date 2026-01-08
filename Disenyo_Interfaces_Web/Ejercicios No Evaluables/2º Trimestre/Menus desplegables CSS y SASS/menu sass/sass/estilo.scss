@@ -1,0 +1,35 @@
+/* Scss Document */
+
+$textColor: #eee;
+$textColorHover: #fff;
+$backgroundColor: #666;
+$backgroundColorHover: #888;
+
+@mixin textAndBackColor ($text, $background){
+	color: $text;
+	background-color: $background;
+}
+
+@mixin textAndBackColorHover ($text, $background){
+	color: $text;
+	background-color: $background;
+}
+
+@mixin box-sizing ($x: border-box){
+	-webkit-box-sizing: $x;
+	box-sizing: $x;
+}
+
+@mixin transitions ($property, $duration, $timing:linear) {  //propiedad CSS que se utiliza (transform,background..)
+	-webkit-transition: #{$property} $duration $timing;
+	-moz-transition: #{$property} $duration $timing;
+	transition: #{$property} $duration $timing;
+}
+
+@mixin animations ($name, $duration, $timing:linear) {
+	-webkit-animation: #{$name} $duration $timing;
+	-moz-animation: #{$name} $duration $timing;
+	animation: #{$name} $duration $timing;
+}
+
+@import "menu";

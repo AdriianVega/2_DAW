@@ -1,0 +1,55 @@
+body{
+    margin:0;
+    padding:0;
+    text-align: center;
+    background-color:azure;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    color:whitesmoke;
+}
+
+header{
+    background-color: rgb(223, 209, 193);
+}
+
+nav{
+    background-color: bisque;
+}
+
+main{
+    width: 90%;
+    background-color: #faebd7;
+    height:125px;
+    margin:0 auto;
+    
+}
+
+.derecha{
+    background-color:pink;
+    height:100px;
+    margin-top:12px;
+    float:left;
+    width:25%;
+    
+}
+
+.centro{
+    background-color: rgba(229, 7, 44, 0.621);
+    width:40%;
+    height: 100px;
+     margin-top:12px;
+     float:right;
+}
+
+.izquierda{
+    background-color: rgba(132, 6, 27, 0.63);
+    float:left;
+    height:100px;
+     margin-top:12px;
+}
+
+footer{
+    clear:both;
+    background-color:rgb(246, 39, 201);
+    height:20px;
+}

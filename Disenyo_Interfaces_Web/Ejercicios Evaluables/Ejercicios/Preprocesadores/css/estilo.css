@@ -1,0 +1,138 @@
+@keyframes menu_desplegable {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  font-size: 30px;
+  font-weight: bold;
+  background-color: #eee;
+  padding: 15px 20px;
+  color: rgb(76.5, 76.5, 76.5);
+}
+
+nav {
+  background-color: #15a;
+  padding: 5px 0;
+}
+nav ul {
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+}
+nav ul li {
+  padding: 0 70px;
+  transition: background-color 0.5s ease-out;
+  position: relative;
+}
+nav ul li ul {
+  display: none;
+  color: #eee;
+  background-color: #15a;
+  position: absolute;
+  left: 0;
+}
+nav ul li a {
+  color: #eee;
+  text-decoration: none;
+  transition: color 0.5s linear;
+}
+nav ul li:hover {
+  background-color: rgb(21.6363636364, 108.1818181818, 216.3636363636);
+}
+nav ul li:hover a {
+  color: white;
+}
+nav ul li:hover ul {
+  display: block;
+  animation: menu_desplegable 0.5s ease;
+}
+nav ul li:hover ul li {
+  margin: 10px 0;
+}
+@media (max-width: 800px) {
+  nav {
+    display: none;
+  }
+}
+
+main {
+  padding-bottom: 20px;
+}
+main article:first-child {
+  float: left;
+  width: 25%;
+  padding: 20px;
+}
+main article:first-child form p {
+  margin-bottom: 15px;
+}
+main article:first-child form p input, main article:first-child form p button {
+  width: 90%;
+  padding: 5px 0;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+@media (max-width: 800px) {
+  main article:first-child form p input, main article:first-child form p button {
+    width: 100%;
+  }
+}
+main article:first-child form p input {
+  padding-left: 10px;
+}
+main article:first-child form p button {
+  color: #eee;
+  background-color: #15a;
+  transition: all 0.3s ease-out;
+}
+main article:first-child form p button:hover {
+  background-color: rgb(21.6363636364, 108.1818181818, 216.3636363636);
+  color: white;
+}
+@media (max-width: 800px) {
+  main article:first-child {
+    float: none;
+    width: 100%;
+    padding: 50px 20px;
+  }
+}
+main article:last-child {
+  float: left;
+  width: 70%;
+  margin: 20px 0;
+}
+main article:last-child h1 {
+  font-size: 20px;
+  color: rgb(12.3636363636, 61.8181818182, 123.6363636364);
+}
+main article:last-child p {
+  margin: 20px 0;
+}
+@media (max-width: 800px) {
+  main article:last-child {
+    float: none;
+    width: 95%;
+    margin: 0 20px;
+  }
+}
+
+footer {
+  clear: left;
+  color: #eee;
+  background-color: #15a;
+  padding: 5px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}/*# sourceMappingURL=estilo.css.map */

@@ -1,0 +1,58 @@
+@keyframes iluminar {
+	from {
+		background-color: $backgroundColor;
+		color: $textColor;
+	}
+	to {
+		background-color: $backgroundColorHover;
+		color: $textColorHover;
+	}
+}
+
+body {
+	padding: 0px;
+	margin: 0px;
+}
+
+header {
+	padding: 12px 30px;
+	font-size: 1.8em;
+	color: #444;
+	background-color: #eee;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px #aaa;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+nav {
+
+	width: 100%;
+	font-family: Arial, Helvetica, sans-serif;
+	
+	ul {
+		list-style-type: none;
+		padding: 0px;
+		margin: 0px;
+	}
+	
+	
+	&> ul {
+		width: 100%;
+		height: 32px;
+		@include textAndBackColor($textColor, $backgroundColor);
+	}
+	
+	a {
+		@include textAndBackColor($textColor, $backgroundColor);
+		text-decoration: none;
+		width: 160px;
+		padding: 7px 20px;
+		text-align: center;
+		cursor: pointer;
+		
+	&:hover {
+			@include textAndBackColorHover($textColorHover, $backgroundColorHover);
+			@include animations(iluminar, 0.4s);
+		}
+	}
+}

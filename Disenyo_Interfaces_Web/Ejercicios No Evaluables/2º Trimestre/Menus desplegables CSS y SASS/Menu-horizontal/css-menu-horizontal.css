@@ -1,0 +1,46 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-size:0;
+}
+
+nav a{
+    text-decoration: none;
+    color:inherit;
+    font-size:14px;
+}
+
+nav li{
+    display:inline-block;
+    width: 150px;
+    height: 30px;
+    padding: 5px 10px;
+    background-color: black;
+    border: 1px solid black;
+    text-align:center;
+    color:white;
+    position:relative;
+}
+
+nav li:hover{
+    background-color:#fff;
+    color:black;
+}
+/*Elementos ul directament despues de un li. Esto eS el submenú al que se le da la propiedad display:none*/
+
+nav li>ul{         
+    display:none;
+}
+
+/*Al pasar el ratón por encima de cualquier <li> que directamente después tenga un <ul>,
+el <ul> pase a ser de tipo display:block o inline-block*/
+
+/*El elemento <ul> contenido dentro de un li pasa a mostrarse pero debemos darle un posicionamento
+  absoluto referenciado respecto de su <li>. Exactamente deberemos desplazarlo la altura del elemento<li>.*/
+li:hover>ul{
+    display:block;
+    position:absolute;
+    top:30px;
+    left:0px;
+}
