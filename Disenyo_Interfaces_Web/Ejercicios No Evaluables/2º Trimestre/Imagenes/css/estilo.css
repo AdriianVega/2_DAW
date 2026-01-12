@@ -1,0 +1,66 @@
+* {
+  color: white;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: url("../img/Imagen 2.jpg");
+}
+
+header h1 {
+  text-align: center;
+  padding: 20px;
+}
+header h1 img {
+  width: 60px;
+}
+header nav {
+  background-image: url("../img/Imagen 5.jpg");
+  padding: 10px 0;
+  height: 50px;
+}
+header nav ul {
+  display: flex;
+  list-style-type: none;
+  align-items: center;
+  justify-content: center;
+}
+header nav ul li {
+  padding: 0 20px;
+}
+header nav ul li a {
+  text-decoration: none;
+  background-color: white;
+  color: black;
+}
+header nav ul li a img {
+  width: 20px;
+}
+
+main {
+  background-color: black;
+  text-align: center;
+  height: 740px;
+}
+main h2 {
+  padding: 40px 0;
+}
+main img {
+  width: 800px;
+}
+
+footer {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer p {
+  background-color: black;
+}
+footer img {
+  background-color: white;
+  width: 50px;
+}/*# sourceMappingURL=estilo.css.map */
