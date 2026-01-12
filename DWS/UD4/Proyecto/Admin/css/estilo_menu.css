@@ -1,0 +1,30 @@
+@keyframes animacion_inicial {
+  from {
+    transform: scale(-100px);
+  }
+  to {
+    transform: scale(0px);
+  }
+}
+body {
+  animation: animacion_inicial 0.3s linear;
+}
+
+header {
+  text-align: center;
+  padding-top: 50px;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6rem 2rem;
+  justify-content: center;
+  padding: 100px;
+}
+main a {
+  text-decoration: none;
+}
+main a article {
+  text-align: center;
+}/*# sourceMappingURL=estilo_menu.css.map */
