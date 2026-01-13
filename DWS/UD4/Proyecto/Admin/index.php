@@ -49,7 +49,7 @@
                                 $_SESSION["rol"] = $rol;
                                 $_SESSION["email"] = $emailDB;
 
-                                header("location: ./clientes/gestion_clientes.php");
+                                header("location: ./menu/menu_inicio.php");
                                 die();
 
                             } else { 

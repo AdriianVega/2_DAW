@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @keyframes animacion_inicial {
   from {
     opacity: 0;
@@ -9,10 +10,10 @@
   }
 }
 body {
-  animation: animacion_inicial 0.7s linear;
-  background-image: url("../img/menu/fondo.png");
-  background-repeat: no-repeat;
-  background-size: cover;
+  animation: animacion_inicial 0.4s linear;
+  font-family: "Inter", sans-serif;
+  background: #1e3c72;
+  background: linear-gradient(30deg, #1e3c72 0%, #2a5298 100%);
   min-height: 100vh;
 }
 
@@ -20,6 +21,10 @@ header {
   text-align: center;
   padding-top: 50px;
   color: white;
+}
+header img {
+  border-radius: 100%;
+  width: 150px;
 }
 
 main {
@@ -32,15 +37,14 @@ main {
 }
 main a {
   text-decoration: none;
+  color: black;
   flex: 0 1 30%;
 }
 main a article {
   text-align: center;
   border-radius: 10px;
   background-color: white;
-  -webkit-animation: transform 0.3s ease-out;
-  -moz-animation: transform 0.3s ease-out;
-  -o-animation: transform 0.3s ease-out;
+  border: 3px solid rgb(87.3298969072, 131.4536082474, 208.6701030928);
   transition: transform 0.3s ease-out;
 }
 main a article:hover {
