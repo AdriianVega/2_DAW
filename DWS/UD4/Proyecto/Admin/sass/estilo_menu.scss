@@ -47,8 +47,12 @@ body {
     @include animation(animacion_inicial, $duracion-entrada);
     font-family: 'Inter', sans-serif;
 
+    
     background: $color-inicio;
-    background: linear-gradient(30deg, $color-inicio 0%, $color-fin 100%);
+    background-image: url("../img/menu/fondo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
     min-height: 100vh;
 }
 

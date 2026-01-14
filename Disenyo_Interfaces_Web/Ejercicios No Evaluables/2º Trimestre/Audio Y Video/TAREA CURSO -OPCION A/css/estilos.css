@@ -1,0 +1,30 @@
+* {
+  font-family: Courier, "Courier New", monospace;
+  color: white;
+  margin: 0px;
+}
+
+body {
+  background: linear-gradient(#D34627, white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+body div {
+  width: 960px;
+}
+body div > header {
+  background: linear-gradient(#0a6faf, #28a6da);
+  border-radius: 10px;
+  padding: 0 10px;
+}
+body div nav {
+  background: linear-gradient(#d7bd26, #f8d95c);
+}
+body div main {
+  background-color: white;
+}
+body div footer {
+  background: linear-gradient(#0a6faf, #28a6da);
+}/*# sourceMappingURL=estilos.css.map */

@@ -1,0 +1,42 @@
+$color_gradiente: linear-gradient(#D34627, white);
+$color_fondo: linear-gradient(#0a6faf, #28a6da);
+$color_nav: linear-gradient(#d7bd26, #f8d95c);
+*
+{
+    font-family:Courier, 'Courier New', monospace;
+    color: white;
+    margin: 0px;
+}
+
+body
+{
+    background: $color_gradiente;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    div
+    {
+        width: 960px;
+
+        & > header
+        {
+            background: $color_fondo;
+            border-radius: 10px;
+            padding: 0 10px;
+        }
+        nav
+        {
+            background: $color_nav;
+        }
+        main 
+        {
+            background-color: white;
+        }
+        footer
+        {
+            background: $color_fondo;
+        }
+    }
+}

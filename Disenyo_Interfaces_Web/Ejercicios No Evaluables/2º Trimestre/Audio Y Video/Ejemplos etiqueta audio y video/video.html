@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIDEO</title>
+    <style>
+    /*  #video{
+            width: 500px;
+            height: 250px;
+        }*/
+
+        h2{
+            color:blue;
+            text-shadow: rgba(198, 163, 231, 0.852) 1px 1px;
+        }
+        span{
+            font-weight: bold;
+            color: blue;
+        }
+    </style> 
+</head>
+<body>
+    <H2>ETIQUETAS HTML DE VIDEO</H2>
+    <p>Los videos se incrustan con la etiqueta <video></p>
+        <video id="video" src="./video/emoticonos.mp4" width="500" height="250" controls poster="./img/carita sonriente.webp" ></video>
+        <video src="./video/emoticonos.ogg" width="500" height="250" controls poster="./img/carita sonriente.webp"></video>
+
+        <p>El atributo <span>controls</span> permite poder controlar reproducción del video y del audio.</p> 
+        <p>El atributo <span>autoplay</span> hace que el audio o el vídeo empiece a reproducise 
+            de inmediato, mientras se carga el resto de la página </p>
+        <p>El atributo <span>loop</span> hace que el vídeo o audio comience a preproducirse cada vez que finaiza.</p> 
+        <p>El atributo <span>mute</span> hace que los medios se reproduzcan con el sonido apagado de forma predeterminada.</p>
+        <p>El atributo <span>preload</span> se utiliza para almacenar en búfer archivos grandes. Puede tomar uno de estos tres valores
+            <ul>
+                <li><span>"none":</span> no almacena el archivo en el búfer</li>
+                <li><span>"auto":</span> almacena el archivo multimedia</li>
+                <li><span>"metadata":</span> almacena solo los metadatos del archivo</li>
+            </ul>
+        </p>   
+        <p>El atributo <span>poster</span> situa una portada fija en el video antes de comenzar.</p> 
+</body>
+</html>
