@@ -31,10 +31,10 @@ try:
 
             datos.append(
                 {
-                    "pais": columnas[1].text,
-                    "casos_totales": columnas[2].text || 0,
-                    "total_muertes": columnas[3].text,
-                    "total_recuperados": columnas[4].text,
+                    "pais": columnas[1].get_text(strip=True),
+                    "casos_totales": columnas[2].get_text(strip=True) or "N/A",
+                    "total_muertes": columnas[4].get_text(strip=True) or "N/A",
+                    "total_recuperados": columnas[6].get_text(strip=True) or "N/A",
                 }
             )
 
