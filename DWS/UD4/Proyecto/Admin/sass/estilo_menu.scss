@@ -7,6 +7,7 @@ $texto-claro: white;
 $texto-oscuro: black;
 $fondo-tarjeta: white;
 $borde-tarjeta: 3px solid lighten(#2a5298, 20%);
+$color-magenta: #f06;
 
 $duracion-entrada: 0.4s;
 $duracion-hover: 0.3s;
@@ -87,10 +88,11 @@ main {
             background-color: $fondo-tarjeta;
             border: $borde-tarjeta;
 
-            @include transition(transform, $duracion-hover, ease-out);
+            @include transition(all, $duracion-hover, ease-out);
 
             &:hover {
                 transform: scale(1.1);
+                border-color: $color-magenta;
             }
 
             img {

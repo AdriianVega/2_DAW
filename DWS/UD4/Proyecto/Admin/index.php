@@ -12,8 +12,13 @@
 </head>
 <body>
     <main class="container">
-        <div class="col-4 mx-auto vh-100 d-flex align-items-center">
-            <div class="bg-white w-100 p-5 rounded-2">
+
+        <div class="col-4 mx-auto vh-100 d-flex align-items-center border-3">
+            <div class="gradient-border-card bg-white w-100 p-5 rounded-2">
+                <div class="text-center mb-4">
+                    <img src="./img/menu/logo.png" alt="Logo" class="img-fluid" style="max-width: 200px;">
+                </div>
+
                 <?php
                     if (isset($_POST["email"]) && !empty($_POST["email"]) &&
                         filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
@@ -70,13 +75,13 @@
                     }
                 ?>
                 <form method="post">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control mb-3" placeholder="example@gmail.com" data-bs-theme="dark" required>
 
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" id="password" name="password" class="form-control">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" id="password" name="password" placeholder="psswd1234" class="form-control" data-bs-theme="dark" required>
 
-                    <input type="submit" value="Acceder" id="submit" name="submit" class="btn btn-primary w-100 mt-4" required>
+                    <input type="submit" value="Acceder" id="submit" name="submit" class="gradient-button btn btn-primary w-100 mt-4" required>
                 </form>
             </div>
         </div>

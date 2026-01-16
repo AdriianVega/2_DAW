@@ -7,15 +7,20 @@
 
     // Incluimos la conexión a la BD
     include("../db/db_pdo.inc"); 
-    // Obtener todos los clientes
-    $clientes = $pdo->query("SELECT * FROM clientes ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Obtener todos los PRODUCTOS
+    // Asumo que la tabla se llama 'productos' basándome en los campos
+    $productos = $pdo->query("SELECT * FROM productos ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
+    
     $nombre = $_SESSION["nombre"];
     $rol = $_SESSION["rol"];
 
+    // Lógica de eliminación
     if (isset($_GET["eliminar"])) {
-        $id_cliente = intval($_GET["eliminar"]); // código en mi bd del cliente a eliminar
-        $pdo->prepare("DELETE FROM clientes WHERE id = ?")->execute([$id_cliente]);
-        header("location:gestion_productos.php");
+        $id_prod = intval($_GET["eliminar"]);
+        // Opcional: Aquí podrías añadir código para borrar el archivo físico de la imagen si fuera necesario
+        $pdo->prepare("DELETE FROM productos WHERE id = ?")->execute([$id_prod]);
+        header("location:gestion_productos.php"); // Asegúrate de que este archivo se llame así
         exit;
     }
 ?>
@@ -24,9 +29,16 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Clientes</title>
-
+    <title>Gestión de Productos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .img-thumb {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <aside class="bg-primary text-white d-flex flex-column p-3"
@@ -47,84 +59,84 @@
         <hr>
 
         <div class="list-group">
-
-            <a href="gestion_productos.php"
-                class="list-group-item list-group-item-action"
-                <?= basename($_SERVER['PHP_SELF']) == 'gestion_productos.php' ? 'active' : '' ?>">
+            <a href="../clientes/gestion_clientes.php" class="list-group-item list-group-item-action">
                 👥 Clientes
             </a>
 
-            <a href="../productos/gestion_productos.php" 
-                class="list-group-item list-group-item-action">
+            <a href="gestion_productos.php" 
+                class="list-group-item list-group-item-action active">
                 📦 Productos
             </a>
 
-            <a href="../pedidos/gestion_pedidos.php" 
-                class="list-group-item list-group-item-action">
+            <a href="../pedidos/gestion_pedidos.php" class="list-group-item list-group-item-action">
                 🧾 Pedidos
             </a>
-
         </div>
-
     </aside>
 
     <div class="container mt-4" style="margin-left: 280px;">
 
-        <h2 class="text-center mb-4">📋 Gestión de Clientes</h2>
+        <h2 class="text-center mb-4">📦 Gestión de Productos</h2>
 
         <div class="card shadow">
-            <div class="card-header bg-primary text-white">📋 Lista de Clientes</div>
+            <div class="card-header bg-primary text-white">📋 Inventario</div>
             <div class="card-body">
 
                 <?php
-                    if (isset($_GET["cli"])) {
-                        if ($_GET["cli"] == 0) {
-                            echo '<div class="alert alert-success">✅ Cliente insertado correctamente.</div>';
-                        }
-                        if ($_GET["cli"] == 1) {
-                            echo '<div class="alert alert-warning">⚠️ El email ya existe en la base de datos.</div>';
-                        }
-                        if ($_GET["cli"] == 2) {
-                            echo '<div class="alert alert-danger">❌ Ha ocurrido un error al intentar insertar el usuario.</div>';
-                        }
+                    if (isset($_GET["prod"])) {
+                        if ($_GET["prod"] == 0) echo '<div class="alert alert-success">✅ Producto añadido correctamente.</div>';
+                        if ($_GET["prod"] == 1) echo '<div class="alert alert-warning">⚠️ Error en la operación.</div>';
+                        if ($_GET["prod"] == 2) echo '<div class="alert alert-danger">❌ Error crítico al guardar.</div>';
                     }
                 ?>
 
                 <div class="row mb-3 me-2 float-end">
-                    <a href="ins_cli_mysqli.php" class="btn btn-success">➕ Nuevo Cliente</a>
+                    <a href="ins_producto.php" class="btn btn-success">➕ Nuevo Producto</a>
                 </div>
 
                 <table class="table table-striped table-hover align-middle">
                     <thead class="table-dark">
                         <tr>
                             <th>ID</th>
+                            <th>Imagen</th>
                             <th>Nombre</th>
-                            <th>Apellidos</th>
-                            <th>Email</th>
-                            <th>Género</th>
-                            <th>Dirección</th>
-                            <th>Código Postal</th>
-                            <th>Población</th>
-                            <th>Provincia</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Categoría</th> <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($clientes as $c): ?>
+                        <?php foreach ($productos as $p): ?>
                         <tr>
-                            <td><?= $c['id'] ?></td>
-                            <td><?= htmlspecialchars($c['nombre']) ?></td>
-                            <td><?= htmlspecialchars($c['apellidos']) ?></td>
-                            <td><?= htmlspecialchars($c['email']) ?></td>
-                            <td><?= $c['genero'] ?></td>
-                            <td><?= htmlspecialchars($c['direccion']) ?></td>
-                            <td><?= $c['codpostal'] ?></td>
-                            <td><?= htmlspecialchars($c['poblacion']) ?></td>
-                            <td><?= htmlspecialchars($c['provincia']) ?></td>
+                            <td><?= $p['id'] ?></td>
                             <td>
-                                <a href="edit_cli_mysqli.php?edit=<?= $c['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
-                                <button type="button" class="btn btn-danger" onclick="eliminarCliente(<?=
-                                $c['id']; ?>)">🗑️ </button>
+                                <?php 
+                                    $ruta_img = !empty($p['imagen']) ? "../img/" . htmlspecialchars($p['imagen']) : "../img/no-photo.png";
+                                ?>
+                                <img src="<?= $ruta_img ?>" alt="Prod" class="img-thumb">
+                            </td>
+                            <td>
+                                <strong><?= htmlspecialchars($p['nombre']) ?></strong><br>
+                                <small class="text-muted"><?= substr(htmlspecialchars($p['descripcion']), 0, 50) ?>...</small>
+                            </td>
+                            <td><?= number_format($p['precio'], 2) ?> €</td>
+                            <td>
+                                <span class="badge <?= $p['stock'] < 5 ? 'bg-danger' : 'bg-success' ?>">
+                                    <?= $p['stock'] ?> u.
+                                </span>
+                            </td>
+                            <td class="text-center"><?= $p['categoria_id'] ?></td>
+                            <td>
+                                <?php if($p['estado'] == 1): ?>
+                                    <span class="badge bg-primary">Activo</span>
+                                <?php else: ?>
+                                    <span class="badge bg-secondary">Inactivo</span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <a href="edit_producto.php?id=<?= $p['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
+                                <button type="button" class="btn btn-danger btn-sm" onclick="eliminarProducto(<?= $p['id']; ?>)">🗑️</button>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -134,7 +146,7 @@
             </div>
         </div>
     </div>
-    <!-- Modal de confirmación (añádelo al final del body) -->
+
     <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -143,7 +155,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    ¿Seguro que deseas eliminar este Cliente?
+                    <p>¿Seguro que deseas eliminar este <strong>Producto</strong>?</p>
+                    <small class="text-muted">Esta acción no se puede deshacer.</small>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -154,13 +167,12 @@
     </div>
 
     <script>
-        function eliminarCliente(numcliente) 
-        {
+        function eliminarProducto(id) {
             const modal = new bootstrap.Modal(document.getElementById('confirmModal'));
             modal.show();
-            document.getElementById('confirmDeleteBtn').onclick = () => 
-            {
-                window.location.href = 'gestion_productos.php?eliminar=' + numcliente;
+            document.getElementById('confirmDeleteBtn').onclick = () => {
+                // Asegúrate de que este archivo PHP sea el mismo en el que estás (self)
+                window.location.href = '?eliminar=' + id;
                 modal.hide();
             };
         }

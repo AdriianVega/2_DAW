@@ -1,0 +1,51 @@
+$color-magenta: #f06;
+$color-blue: #4a90e2;
+$color-dark: #1a1a1a;
+$border-thickness: 6px;
+$card-radius: 12px;
+$color_texto: white;
+
+@mixin gradient-border-effect($bg-color, $gradient) {
+    border: $border-thickness solid transparent;
+    background-image: linear-gradient($bg-color, $bg-color), $gradient;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    border-radius: $card-radius !important;
+}
+
+body {
+    background: {
+        image: url("../img/menu/fondo.jpg");
+        repeat: no-repeat;
+        size: cover;
+    }
+
+    min-height: 100vh;
+
+    form 
+    {
+        label
+        {
+            color: $color_texto;
+        }
+    }
+}
+
+.gradient-border-card {
+    @include gradient-border-effect($color-dark, linear-gradient(45deg, $color-magenta, $color-blue));
+    
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.gradient-button {
+    border: 2px solid $color-magenta;
+    background-color: $color-magenta;
+    transition: all 0.3s ease;
+    font-weight: bold;
+
+    &:hover {
+        background-color: $color-magenta;
+        border-color: $color-blue;
+        transform: translateY(-2px);
+    }
+}

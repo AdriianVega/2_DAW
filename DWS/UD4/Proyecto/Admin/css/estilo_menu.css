@@ -47,10 +47,11 @@ main a article {
   border-radius: 10px;
   background-color: white;
   border: 3px solid rgb(87.3298969072, 131.4536082474, 208.6701030928);
-  transition: transform 0.3s ease-out;
+  transition: all 0.3s ease-out;
 }
 main a article:hover {
   transform: scale(1.1);
+  border-color: #f06;
 }
 main a article img {
   width: 70px;
