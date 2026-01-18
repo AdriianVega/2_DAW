@@ -1,5 +1,5 @@
 <?php
-    include("db/db.inc");
+    include "db/db.inc";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -57,17 +57,17 @@
                                 header("location: ./menu/menu_inicio.php");
                                 die();
 
-                            } else { 
+                            } else {
                                 // Si no existe el email o contraseña incorrectos
                                 echo '<div class="alert alert-warning">⚠️ El email y la contraseña NO existen.</div>';
                             }
 
-                        } else { 
+                        } else {
                             // Password vacío o no enviado
                             echo '<div class="alert alert-warning">⚠️ Error en el campo Password.</div>';
                         }
 
-                    } else { 
+                    } else {
                         // Email no válido
                         if (isset($_POST["email"])) {
                             echo '<div class="alert alert-warning">⚠️ El email no es válido.</div>';
@@ -81,7 +81,7 @@
                     <label for="password" class="form-label">Contraseña</label>
                     <input type="password" id="password" name="password" placeholder="psswd1234" class="form-control" data-bs-theme="dark" required>
 
-                    <input type="submit" value="Acceder" id="submit" name="submit" class="gradient-button btn btn-primary w-100 mt-4" required>
+                    <input type="submit" value="Acceder" id="submit" name="submit" class="gradient-button btn btn-primary w-100 mt-4">
                 </form>
             </div>
         </div>

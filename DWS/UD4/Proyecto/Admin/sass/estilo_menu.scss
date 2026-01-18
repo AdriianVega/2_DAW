@@ -47,14 +47,24 @@ $tamano-img-perfil: 150px;
 body {
     @include animation(animacion_inicial, $duracion-entrada);
     font-family: 'Inter', sans-serif;
+    position: relative;
 
-    
-    background: $color-inicio;
-    background-image: url("../img/menu/fondo.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    
-    min-height: 100vh;
+    &::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: -1;
+
+        background-image: url("../img/fondo.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        filter: blur(8px);
+        transform: scale(1.1);
+    }
 }
 
 header {

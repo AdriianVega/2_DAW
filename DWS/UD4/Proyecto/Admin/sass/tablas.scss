@@ -1,0 +1,357 @@
+$neon_magenta: #D500F9;
+$neon_cian: #00E5FF;
+$neon_rojo: #ff1744;
+$texto_claro: #e2e8f0;
+
+$fondo_menu: rgba(15, 23, 42, 0.90);
+$fondo_tarjeta: rgba(0, 0, 0, 0.65);
+$borde_cristal: 1px solid rgba(255, 255, 255, 0.15);
+
+$gradiente_cabecera: linear-gradient(135deg, #240b36, #2d1b4e);
+$gradiente_hover: linear-gradient(90deg, rgba(213, 0, 249, 0.2), transparent);
+
+$btn_success: #2ecc71;
+$btn_sm: $btn_sm;
+
+@mixin transicion($propiedad: all, $tiempo: 0.3s) {
+    transition: $propiedad $tiempo ease-in-out;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: $texto_claro;
+    position: relative;
+    min-height: 100vh;
+
+    &::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: -1;
+
+        background-image: url("../img/fondo.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+
+        filter: blur(5px);
+        transform: scale(1.05);
+    }
+}
+
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 260px;
+    height: 100vh;
+    z-index: 1050;
+
+    background-color: $fondo_menu;
+    backdrop-filter: blur(10px);
+    border-right: 1px solid $neon_magenta;
+    box-shadow: 5px 0 25px rgba(213, 0, 249, 0.2);
+
+    @include transicion(left);
+
+    img
+    {
+        margin: 0 auto;
+        border-radius: 100%;
+    }
+    span
+    {
+        font-weight: bold;
+        text-align: center;
+        margin: 5px;
+        padding: 10px 0;
+    }
+    small
+    {
+        text-align: center;
+    }
+    .border-bottom
+    {
+        border-bottom: 1px solid $neon_cian !important;
+    }
+    .icon
+    {
+        width: 20px;
+
+        filter: invert(100);
+    }
+    
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -200px;
+        width: 200px;
+        height: 100%;
+        background: transparent;
+    }
+
+    &:hover {
+        left: 0;
+        right: -100px;
+    }
+
+    h4 {
+        color: $neon_cian;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+        font-weight: 700;
+    }
+
+    .list-group-item {
+        background: transparent;
+        color: rgba(255, 255, 255, 0.7);
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        @include transicion;
+
+        &:hover,
+        &.active {
+            background: $gradiente_hover;
+            color: $neon_cian;
+            border-left: 4px solid $neon_cian;
+            padding-left: 25px;
+            text-shadow: 0 0 5px $neon_cian;
+        }
+    }
+
+    .mt-auto .btn-danger {
+        background: transparent;
+        border: 1px solid $neon_rojo;
+        color: $neon_rojo;
+        width: 100%;
+        @include transicion;
+
+        &:hover {
+            background: $neon_rojo;
+            color: white;
+            box-shadow: 0 0 15px $neon_rojo;
+        }
+    }
+}
+
+.card {
+    background-color: $fondo_tarjeta;
+    backdrop-filter: blur(15px);
+    border: $borde_cristal;
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.6);
+    color: white;
+}
+
+.card-header,
+.table-dark {
+    background: $gradiente_cabecera !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.table {
+    color: $texto_claro !important;
+    border-color: rgba(255, 255, 255, 0.1);
+    margin-bottom: 0;
+
+    tr, th, td {
+        color: white;
+        white-space: nowrap;
+        vertical-align: middle;
+        background-color: transparent;
+        box-shadow: none;
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+
+    thead th {
+        color: $neon_cian;
+        border-bottom: 2px solid $neon_magenta;
+    }
+
+    tbody tr {
+        @include transicion(background-color, 0.2s);
+
+        &:hover {
+            background-color: rgba(0, 229, 255, 0.15) !important;
+
+            td {
+                color: white;
+            }
+        }
+    }
+}
+.form-control,
+.form-select {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    /* Un fondo oscuro sutil */
+    border: $borde_cristal;
+    color: white !important;
+    /* Fuerza el color del texto */
+    backdrop-filter: blur(5px);
+
+    /* El placeholder (texto de ayuda) necesita su propio color */
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* IMPORTANTE: Gestionar el foco (cuando escribes) */
+    &:focus {
+        background-color: rgba(0, 0, 0, 0.4) !important;
+        border-color: $neon_cian;
+        color: $neon_cian !important;
+        box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+    }
+
+    /* Para el select, las opciones suelen ser blancas por defecto del SO, 
+           pero podemos intentar oscurecerlas */
+    option {
+        background-color: #1a1a1a;
+        color: white;
+    }
+}
+
+.btn-primary {
+    background: transparent;
+    border: 1px solid $neon_cian;
+    color: $neon_cian;
+
+    &:hover {
+        background: $neon_cian;
+        color: #000;
+        box-shadow: 0 0 15px $neon_cian;
+    }
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid gray;
+    color: white;
+
+    &:hover {
+        background: gray;
+        box-shadow: 0 0 15px gray;
+    }
+}
+
+.btn-success {
+    background: rgba(46, 204, 113, 0.1);
+    border: 1px solid $btn_success;
+
+    &:hover {
+        background: $btn_success;
+        box-shadow: 0 0 15px $btn_success;
+    }
+}
+
+.btn-sm {
+    @include transicion;
+
+    &.btn-warning {
+        background: transparent;
+        border: 1px solid $btn_sm;
+        color: $btn_sm;
+
+        &:hover {
+            background: $btn_sm;
+            color: #000;
+            box-shadow: 0 0 10px $btn_sm;
+        }
+    }
+
+    &.btn-danger {
+        background: transparent;
+        border: 1px solid $neon_rojo;
+        color: $neon_rojo;
+
+        &:hover {
+            background: $neon_rojo;
+            color: #fff;
+            box-shadow: 0 0 10px $neon_rojo;
+        }
+    }
+}
+.btn-light {
+    background: rgba(46, 204, 113, 0.1);
+    border: 1px solid white;
+
+    &:hover {
+        background: white;
+        box-shadow: 0 0 15px white;
+    }
+}
+
+.pagination {
+    margin-top: 1rem;
+
+    .page-link {
+        background-color: transparent;
+        border: $borde_cristal;
+        color: $texto_claro;
+
+        &:hover {
+            background-color: rgba(213, 0, 249, 0.3);
+            border-color: $neon_magenta;
+        }
+    }
+
+    .page-item.disabled .page-link {
+        background-color: rgba(255, 255, 255, 0.02);
+        border-color: transparent;
+    }
+}
+.container-fluid
+{
+    max-width: 1500px;
+    margin: 0 auto;
+}
+.modal-backdrop {
+    z-index: 1060 !important;
+}
+
+.modal {
+    z-index: 1070 !important;
+}
+
+.modal-content {
+    background-color: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(10px);
+    border: 1px solid #ff1744;
+    /* Rojo neón */
+    color: white;
+    box-shadow: 0 0 30px rgba(255, 23, 68, 0.4);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .modal-title {
+        color: #ff1744;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-shadow: 0 0 5px rgba(255, 23, 68, 0.5);
+    }
+
+    .btn-close {
+        filter: invert(1) grayscale(100%) brightness(200%);
+    }
+}
+
+.modal-body {
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 2rem;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    justify-content: center;
+    gap: 15px;
+}

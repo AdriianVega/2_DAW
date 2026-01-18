@@ -12,11 +12,21 @@
 body {
   animation: animacion_inicial 0.4s linear;
   font-family: "Inter", sans-serif;
-  background: #1e3c72;
-  background-image: url("../img/menu/fondo.jpg");
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  background-image: url("../img/fondo.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 100vh;
+  filter: blur(8px);
+  transform: scale(1.1);
 }
 
 header {

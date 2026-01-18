@@ -1,42 +1,46 @@
 <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     session_start();
-    if(!isset($_SESSION["nombre"])) { header("location:../index.php"); die(); }
-    include("../db/db.inc");
 
-    // PROCESAR EDICIÓN
-    if (isset($_POST["accion"]) && $_POST["accion"] == "editar") {
-        $id = intval($_POST["id"]);
-        $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
-        $estado = intval($_POST["estado"]);
-
-        // Validar duplicado (Nombre existe en OTRO ID diferente al actual)
-        $sql_check = "SELECT id FROM categorias WHERE nombre = '$nombre' AND id != $id";
-        $res = mysqli_query($conn, $sql_check);
-        
-        if (mysqli_num_rows($res) > 0) {
-            header("location:gestion_categorias.php?cat=1"); // Error: Nombre ocupado
-            die();
-        }
-
-        $sql = "UPDATE categorias SET nombre = '$nombre', estado = '$estado' WHERE id = $id";
-        
-        if (mysqli_query($conn, $sql)) {
-            header("location:gestion_categorias.php?cat=0");
-        } else {
-            header("location:gestion_categorias.php?cat=2");
-        }
+    if(!isset($_SESSION["nombre"])) {
+        header("location:../index.php");
         die();
     }
+    include "../db/db.inc";
 
-    // OBTENER DATOS
-    if(!isset($_GET["id"])) { header("location:gestion_categorias.php"); die(); }
-    
-    $id = intval($_GET["id"]);
-    $res = mysqli_query($conn, "SELECT * FROM categorias WHERE id = $id");
-    
-    if($row = mysqli_fetch_assoc($res)){
-        $cat = $row;
-    } else {
+    $nombre_usuario = $_SESSION["nombre"];
+    $rol = $_SESSION["rol"];
+
+    if (isset($_POST["accion"]) && $_POST["accion"] == "editar") {
+        
+        if(isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
+            $id = intval($_POST["id"]);
+            $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
+            $estado = intval($_POST["estado"]);
+
+            try {
+                $sql = "UPDATE categorias SET
+                        nombre = '$nombre',
+                        estado = $estado
+                    WHERE id = $id";
+
+                mysqli_query($conn, $sql);
+
+                header("location:gestion_categorias.php?msg=0");
+            }
+            catch (mysqli_sql_exception $e) {
+                //mysqli_error($conn); die();
+                header("location:gestion_categorias.php?msg=error");
+            }
+
+            die();
+        }
+    }
+
+    if(!isset($_GET["id"])) {
         header("location:gestion_categorias.php");
         die();
     }
@@ -46,41 +50,109 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Categoría</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/tablas.css">
+    <title>Editar Categoría</title>
 </head>
 <body class="bg-light">
-    <div class="container mt-5" style="max-width: 600px;">
+
+    <aside id="sidebar" class="text-white d-flex flex-column p-3">
+        <h4 class="mb-4 text-center">Admin Panel</h4>
+
+        <div class="d-flex flex-column justify-content-center align-items-center border-bottom pb-4">
+            <?php
+                $ruta_icono = "../img/usuarios/" . $_SESSION["nombre"] .".jpg";
+
+                if (!file_exists($ruta_icono)) {
+                    $ruta_icono = "../img/usuarios/admin.jpg";
+                }
+            ?>
+            <img src="<?= $ruta_icono ?>" alt="Icono Usuario">
+
+            <span> <?= $nombre_usuario ?></span>
+
+            <?php if ($rol == 1) { ?>
+                <small class="badge bg-danger"> Administrador </small>
+            <?php } else { ?>
+                <small class="badge bg-info"> Empleado </small>
+            <?php } ?>
+        </div>
+        <div class="list-group pt-3">
+            <a href="../clientes/gestion_clientes.php" class="list-group-item list-group-item-action">👥 Clientes</a>
+            <a href="../productos/gestion_productos.php" class="list-group-item list-group-item-action">📦 Productos</a>
+            <a href="gestion_categorias.php" class="list-group-item list-group-item-action active">🏷️ Categorías</a>
+            <a href="../pedidos/gestion_pedidos.php" class="list-group-item list-group-item-action">🧾 Pedidos</a>
+            <a href="../usuarios/gestion_usuarios.php" class="list-group-item list-group-item-action">🛡️ Usuarios</a>
+        </div>
+
+        <div class="mt-auto">
+            <div class="d-flex justify-content-between mb-3 fs-5">
+                <a href="../menu/menu_inicio.php">
+                    <span>🏠️</span>
+                </a>
+
+                <a href="../configuracion/configuracion.php" class="text-decoration-none">
+                    <span>⚙️</span>
+                </a>
+                
+            </div>
+
+            <a href="../logout.php" class="btn btn-danger w-100">Cerrar Sesión</a>
+        </div>
+    </aside>
+
+    <main class="container mt-5">
         <div class="card shadow">
-            <div class="card-header bg-warning">
-                <h4 class="mb-0">✏️ Editar Categoría</h4>
+            <div class="card-header bg-primary text-white">
+                <h2 class="h4 mb-0">✏️ Editar Categoría</h2>
             </div>
             <div class="card-body">
+
+            <?php
+                $id = intval($_GET["id"]);
+                $sql = "SELECT * FROM categorias WHERE id = $id";
+                $res = mysqli_query($conn, $sql);
+                
+                if (mysqli_num_rows($res) > 0) {
+                    $cat = mysqli_fetch_assoc($res);
+                } else {
+                    header("location:gestion_categorias.php");
+                    die();
+                }
+            ?>
+
                 <form method="POST">
+                    <input type="hidden" name="id" value="<?=$id;?>">
                     <input type="hidden" name="accion" value="editar">
-                    <input type="hidden" name="id" value="<?= $cat['id'] ?>">
-
-                    <div class="mb-3">
-                        <label class="form-label">Nombre</label>
-                        <input type="text" name="nombre" class="form-control" 
-                            value="<?= htmlspecialchars($cat['nombre']) ?>" maxlength="50" required>
-                    </div>
                     
-                    <div class="mb-3">
-                        <label class="form-label">Estado</label>
-                        <select name="estado" class="form-select">
-                            <option value="1" <?= $cat['estado'] == 1 ? 'selected' : '' ?>>Activa</option>
-                            <option value="0" <?= $cat['estado'] == 0 ? 'selected' : '' ?>>Inactiva</option>
-                        </select>
-                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-8">
+                            <label for="nombre" class="form-label">Nombre de la Categoría:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre"
+                                value="<?= htmlspecialchars($cat["nombre"]) ?>" required>
+                        </div>
 
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary">Actualizar</button>
-                        <a href="gestion_categorias.php" class="btn btn-secondary">Cancelar</a>
+                        <div class="col-md-4">
+                            <label for="estado" class="form-label">Estado:</label>
+                            <select name="estado" id="estado" class="form-select" required>
+                                <?php
+                                    $est = $cat['estado'];
+                                    echo '<option value="1" ' . ($est == 1 ? 'selected' : '') . '>Activo</option>';
+                                    echo '<option value="0" ' . ($est == 0 ? 'selected' : '') . '>Inactivo</option>';
+                                ?>
+                            </select>
+                        </div>
+
+                        <div class="col-12 mt-4">
+                            <button type="submit" class="btn btn-success w-100">Guardar Cambios</button>
+                            <a href="gestion_categorias.php" class="btn btn-secondary w-100 mt-2">Cancelar</a>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
-    </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@ const secciones = [
     { titulo: "Productos", imagen: "../img/menu/caja.svg", ruta: "../productos/gestion_productos.php"},
     { titulo: "Clientes", imagen: "../img/menu/personas.svg", ruta: "../clientes/gestion_clientes.php"},
     { titulo: "Pedidos", imagen: "../img/menu/entrega-de-pedidos.svg", ruta: "../pedidos/gestion_pedidos.php"},
-    { titulo: "Categorías", imagen: "../img/menu/lista.svg", ruta: "../clientes/gestion_clientes.php"},
+    { titulo: "Categorías", imagen: "../img/menu/lista.svg", ruta: "../categorias/gestion_categorias.php"},
     { titulo: "Usuarios", imagen: "../img/menu/usuario.svg", ruta: "../usuarios/gestion_usuarios.php"},
     { titulo: "Configuración", imagen: "../img/menu/ajuste.svg", ruta: "../configuracion/configuracion.php"},
 ]

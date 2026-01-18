@@ -9,41 +9,35 @@
     if(isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
         
         $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
-        $descripcion = mysqli_real_escape_string($conn, $_POST["descripcion"]);
-        
-        
-        $precio = floatval($_POST["precio"]);
-        $stock = intval($_POST["stock"]);
-        $categoria_id = intval($_POST["categoria_id"]);
-        
-        
-        $imagen = mysqli_real_escape_string($conn, $_POST["imagen"]);
-        $estado = intval($_POST["estado"]); // 1 o 0
+        $apellidos = mysqli_real_escape_string($conn, $_POST["apellidos"]);
+        $email = mysqli_real_escape_string($conn, $_POST["email"]);
+        $password = md5(mysqli_real_escape_string($conn, $_POST["password"]));
+        $direccion = mysqli_real_escape_string($conn, $_POST["direccion"]);
+        $genero = mysqli_real_escape_string($conn, $_POST["genero"]);
+        $codpostal = mysqli_real_escape_string($conn, $_POST["codpostal"]);
+        $poblacion = mysqli_real_escape_string($conn, $_POST["poblacion"]);
+        $provincia = mysqli_real_escape_string($conn, $_POST["provincia"]);
 
-        
-        $sql_check = "SELECT * FROM productos WHERE nombre='$nombre'";
+        // Comprobar duplicidad de email
+        $sql_check = "SELECT * FROM clientes WHERE email='$email'";
         $res = mysqli_query($conn, $sql_check);
         
         if (mysqli_num_rows($res) > 0)
         {
-            
-            header("location:gestion_productos.php?prod=1");
+            header("location:gestion_clientes.php?msg=error");
             die();
         }
         
         try {
-                $sql = "INSERT INTO productos (nombre, descripcion, precio, stock, categoria_id, imagen, estado)
-                VALUES ('$nombre', '$descripcion', '$precio', '$stock', '$categoria_id', '$imagen', '$estado');";
+                $sql = "INSERT INTO clientes (nombre, apellidos, email, password, direccion, genero, codpostal, poblacion, provincia)
+                VALUES ('$nombre', '$apellidos', '$email', '$password', '$direccion', '$genero', '$codpostal', '$poblacion', '$provincia');";
 
                 mysqli_query($conn, $sql);
 
-                header("location:gestion_productos.php?msg=0");
+                header("location:gestion_clientes.php?msg=0");
             }
             catch (mysqli_sql_exception $e) {
-
-                // Debug: descomentar si falla para ver el error real
-                //mysqli_error($conn); die();
-                header("location:gestion_productos.php?msg=error");
+                header("location:gestion_clientes.php?msg=error");
             }
     }
 ?>
@@ -55,7 +49,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/tablas.css">
-    <title>Nuevo Producto</title>
+    <title>Nuevo Cliente</title>
 </head>
 <body class="bg-light">
     <aside id="sidebar" class="text-white d-flex flex-column p-3">
@@ -106,54 +100,58 @@
     <main class="container mt-5">
         <div class="card shadow">
             <div class="card-header bg-success text-white">
-                <h2 class="h4 mb-0">📦 Añadir Producto</h2>
+                <h2 class="h4 mb-0">👥 Añadir Cliente</h2>
             </div>
             <div class="card-body">
                 <form method="POST">
                     <div class="row g-3">
                         
                         <div class="col-md-6">
-                            <label for="nombre" class="form-label">Nombre del Producto</label>
+                            <label for="nombre" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="apellidos" class="form-label">Apellidos</label>
+                            <input type="text" class="form-control" id="apellidos" name="apellidos" required>
                         </div>
 
                         <div class="col-md-6">
-                            <label for="categoria_id" class="form-label">ID de Categoría</label>
-                            <input type="number" class="form-control" id="categoria_id" name="categoria_id" required>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
                         </div>
 
                         <div class="col-12">
-                            <label for="descripcion" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="descripcion" name="descripcion" rows="2" required></textarea>
+                            <label for="direccion" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" required>
                         </div>
 
                         <div class="col-md-4">
-                            <label for="precio" class="form-label">Precio (€)</label>
-                            <input type="number" step="0.01" class="form-control" id="precio" name="precio" required>
+                            <label for="poblacion" class="form-label">Población</label>
+                            <input type="text" class="form-control" id="poblacion" name="poblacion" required>
                         </div>
-
                         <div class="col-md-4">
-                            <label for="stock" class="form-label">Stock (Unidades)</label>
-                            <input type="number" class="form-control" id="stock" name="stock" required>
+                            <label for="provincia" class="form-label">Provincia</label>
+                            <input type="text" class="form-control" id="provincia" name="provincia" required>
                         </div>
-
-                        <div class="col-md-4">
-                            <label for="estado" class="form-label">Estado</label>
-                            <select name="estado" id="estado" class="form-select" required>
-                                <option value="1" selected>Activo</option>
-                                <option value="0">Inactivo</option>
+                        <div class="col-md-2">
+                            <label for="codpostal" class="form-label">C.P.</label>
+                            <input type="text" class="form-control" id="codpostal" name="codpostal" maxlength="5" required>
+                        </div>
+                         <div class="col-md-2">
+                            <label for="genero" class="form-label">Género</label>
+                            <select class="form-select" id="genero" name="genero">
+                                <option value="M">Hombre</option>
+                                <option value="F">Mujer</option>
                             </select>
                         </div>
 
-                        <div class="col-md-12">
-                            <label for="imagen" class="form-label">Nombre del archivo de imagen</label>
-                            <input type="text" class="form-control" id="imagen" name="imagen" placeholder="Ej: monitor.jpg">
-                            <div class="form-text">Asegúrate de subir el archivo físico a la carpeta /img/productos/ manualmente.</div>
-                        </div>
-
                         <div class="col-12 mt-4">
-                            <button type="submit" class="btn btn-success w-100">Guardar Producto</button>
-                            <a href="gestion_productos.php" class="btn btn-secondary w-100 mt-2">Cancelar</a>
+                            <button type="submit" class="btn btn-success w-100">Guardar Cliente</button>
+                            <a href="gestion_clientes.php" class="btn btn-secondary w-100 mt-2">Cancelar</a>
                         </div>
                     </div>
                 </form>

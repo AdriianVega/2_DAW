@@ -1,23 +1,66 @@
 <?php
     session_start();
-    if(!isset($_SESSION["nombre"])) {
-        header("location:../index.php");
-        die();
-    }
 
-    // Incluimos la conexión a la BD
-    include("../db/db_pdo.inc"); 
-    // Obtener todos los clientes
-    $clientes = $pdo->query("SELECT * FROM clientes ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
-    $nombre = $_SESSION["nombre"];
-    $rol = $_SESSION["rol"];
+    if(!isset($_SESSION["nombre"])) { header("location:../index.php"); die(); }
+    include "../db/db.inc";
 
-    if (isset($_GET["eliminar"])) {
-        $id_cliente = intval($_GET["eliminar"]); // código en mi bd del cliente a eliminar
-        $pdo->prepare("DELETE FROM clientes WHERE id = ?")->execute([$id_cliente]);
-        header("location:gestion_clientes.php");
+    if (isset($_GET["crear_test"])) {
+
+        $rand = random_int(1000, 9999);
+        $nombre = "Cliente Test " . $rand;
+        $apellidos = "Apellido " . $rand;
+        $email = "test" . $rand . "@correo.com";
+        $password = md5("1234");
+        $direccion = "Calle Falsa " . $rand;
+        $genero = ($rand % 2 == 0) ? 'M' : 'F';
+        $codpostal = "46" . random_int(10, 99);
+        $poblacion = "Valencia";
+        $provincia = "Valencia";
+
+        $sql = "INSERT INTO clientes (nombre, apellidos, email, password, direccion, genero, codpostal, poblacion, provincia)
+                VALUES ('$nombre', '$apellidos', '$email', '$password', '$direccion', '$genero', '$codpostal', '$poblacion', '$provincia')";
+        
+        if(mysqli_query($conn, $sql)){
+            header("location:gestion_clientes.php?msg=test_ok");
+        } else {
+            header("location:gestion_clientes.php?msg=error");
+        }
         exit;
     }
+
+    $registros_por_pagina = 15;
+    $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+
+    if ($pagina < 1) {
+            $pagina = 1;
+    }
+
+    $offset = ($pagina - 1) * $registros_por_pagina;
+
+    $sql_total = "SELECT COUNT(*) as total FROM clientes";
+    $result_total = mysqli_query($conn, $sql_total);
+    $row_total = mysqli_fetch_assoc($result_total);
+    $total_registros = $row_total['total'];
+    $total_paginas = ceil($total_registros / $registros_por_pagina);
+
+    if (isset($_GET["eliminar"])) {
+        $id = intval($_GET["eliminar"]);
+
+        $sql = "DELETE FROM clientes WHERE id = $id";
+        
+        if(mysqli_query($conn, $sql)){
+            header("location:gestion_clientes.php?msg=deleted");
+        } else {
+            header("location:gestion_clientes.php?msg=error");
+        }
+        exit;
+    }
+
+    $sql = "SELECT * FROM clientes ORDER BY id DESC LIMIT $offset, $registros_por_pagina";
+    $res = mysqli_query($conn, $sql);
+
+    $nombre_usuario = $_SESSION["nombre"];
+    $rol = $_SESSION["rol"];
 ?>
 
 <!DOCTYPE html>
@@ -25,74 +68,78 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestión de Clientes</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/tablas.css">
 </head>
 <body class="bg-light">
-    <aside class="bg-primary text-white d-flex flex-column p-3"
-            style="width: 260px; min-height: 100vh; position: fixed; left:0; top:0;">
 
-        <div class="text-center mb-4">
-            <img src="../img/admin.jpg"
-                    class="rounded-circle mb-2" width="80" height="80" alt="avatar">
+    <aside id="sidebar" class="text-white d-flex flex-column p-3">
+        <h4 class="mb-4 text-center">Admin Panel</h4>
 
-            <h5 class="mb-0"><?= htmlspecialchars($nombre) ?></h5>
-            <small class="text-light"><?= htmlspecialchars($rol) == 1 ? "Administrador" : "Usuario" ?></small>
+        <div class="d-flex flex-column justify-content-center align-items-center border-bottom pb-4">
+            <?php
+                $ruta_icono = "../img/usuarios/" . $_SESSION["nombre"] .".jpg";
 
-            <div class="mt-2">
-                <a href="../logout.php" class="btn btn-danger">Cerrar sesión</a>
+                if (!file_exists($ruta_icono)) {
+                    $ruta_icono = "../img/usuarios/admin.jpg";
+                }
+            ?>
+            <img src="<?= $ruta_icono ?>" alt="Icono Usuario">
+
+            <span> <?= $nombre_usuario ?></span>
+
+            <?php if ($rol == 1) { ?>
+                <small class="badge bg-danger"> Administrador </small>
+            <?php } else { ?>
+                <small class="badge bg-info"> Empleado </small>
+            <?php } ?>
+        </div>
+        <div class="list-group pt-3">
+            <a href="gestion_clientes.php" class="list-group-item list-group-item-action active">👥 Clientes</a>
+            <a href="../productos/gestion_productos.php" class="list-group-item list-group-item-action">📦 Productos</a>
+            <a href="../categorias/gestion_categorias.php" class="list-group-item list-group-item-action">🏷️ Categorías</a>
+            <a href="../pedidos/gestion_pedidos.php" class="list-group-item list-group-item-action">🧾 Pedidos</a>
+            <a href="../usuarios/gestion_usuarios.php" class="list-group-item list-group-item-action">🛡️ Usuarios</a>
+        </div>
+
+        <div class="mt-auto">
+            <div class="d-flex justify-content-between mb-3 fs-5">
+                <a href="../menu/menu_inicio.php">
+                    <span>🏠️</span>
+                </a>
+
+                <a href="../configuracion/configuracion.php" class="text-decoration-none">
+                    <span>⚙️</span>
+                </a>
+                
             </div>
+
+            <a href="../logout.php" class="btn btn-danger w-100">Cerrar Sesión</a>
         </div>
-
-        <hr>
-
-        <div class="list-group">
-
-            <a href="gestion_clientes.php"
-                class="list-group-item list-group-item-action"
-                <?= basename($_SERVER['PHP_SELF']) == 'gestion_clientes.php' ? 'active' : '' ?>">
-                👥 Clientes
-            </a>
-
-            <a href="../productos/gestion_productos.php" 
-                class="list-group-item list-group-item-action">
-                📦 Productos
-            </a>
-
-            <a href="../pedidos/gestion_pedidos.php" 
-                class="list-group-item list-group-item-action">
-                🧾 Pedidos
-            </a>
-
-        </div>
-
     </aside>
 
-    <div class="container mt-4" style="margin-left: 280px;">
+    <div class="container-fluid mt-4">
+        <div class="card shadow mt-5">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <span>Gestión de Clientes</span>
 
-        <h2 class="text-center mb-4">📋 Gestión de Clientes</h2>
-
-        <div class="card shadow">
-            <div class="card-header bg-primary text-white">📋 Lista de Clientes</div>
-            <div class="card-body">
-
-                <?php
-                    if (isset($_GET["cli"])) {
-                        if ($_GET["cli"] == 0) {
-                            echo '<div class="alert alert-success">✅ Cliente insertado correctamente.</div>';
-                        }
-                        if ($_GET["cli"] == 1) {
-                            echo '<div class="alert alert-warning">⚠️ El email ya existe en la base de datos.</div>';
-                        }
-                        if ($_GET["cli"] == 2) {
-                            echo '<div class="alert alert-danger">❌ Ha ocurrido un error al intentar insertar el usuario.</div>';
-                        }
-                    }
-                ?>
-
-                <div class="row mb-3 me-2 float-end">
-                    <a href="ins_cli_mysqli.php" class="btn btn-success">➕ Nuevo Cliente</a>
+                <div>
+                    <a href="?crear_test=1" class="btn btn-light btn-sm text-primary fw-bold me-2">
+                        🎲 Generar Test
+                    </a>
+                    <a href="ins_cliente.php" class="btn btn-success btn-sm">
+                        ➕ Nuevo Cliente
+                    </a>
                 </div>
+            </div>
+            <div class="card-body">
+                
+                <?php if(isset($_GET['msg'])): ?>
+                    <?php if($_GET['msg'] == 'test_ok') { echo '<div class="alert alert-info">🤖 Cliente de prueba generado.</div>'; } ?>
+                    <?php if($_GET['msg'] == '0') { echo '<div class="alert alert-success">✅ Cliente guardado correctamente.</div>'; } ?>
+                    <?php if($_GET['msg'] == 'deleted') { echo '<div class="alert alert-success">🗑️ Cliente eliminado.</div>'; } ?>
+                    <?php if($_GET['msg'] == 'error') { echo '<div class="alert alert-danger">❌ Error en la base de datos. El email podría estar duplicado.</div>'; } ?>
+                <?php endif; ?>
 
                 <table class="table table-striped table-hover align-middle">
                     <thead class="table-dark">
@@ -101,45 +148,69 @@
                             <th>Nombre</th>
                             <th>Apellidos</th>
                             <th>Email</th>
-                            <th>Género</th>
-                            <th>Dirección</th>
-                            <th>Código Postal</th>
                             <th>Población</th>
-                            <th>Provincia</th>
-                            <th>Acciones</th>
+                            <th>Genero</th>
+                            <th>Fecha Registro</th>
+                            <th class="text-end">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($clientes as $c): ?>
+                        <?php while($row = mysqli_fetch_assoc($res)): ?>
                         <tr>
-                            <td><?= $c['id'] ?></td>
-                            <td><?= htmlspecialchars($c['nombre']) ?></td>
-                            <td><?= htmlspecialchars($c['apellidos']) ?></td>
-                            <td><?= htmlspecialchars($c['email']) ?></td>
-                            <td><?= $c['genero'] ?></td>
-                            <td><?= htmlspecialchars($c['direccion']) ?></td>
-                            <td><?= $c['codpostal'] ?></td>
-                            <td><?= htmlspecialchars($c['poblacion']) ?></td>
-                            <td><?= htmlspecialchars($c['provincia']) ?></td>
+                            <td><?= $row['id'] ?></td>
+                            <td><strong><?= htmlspecialchars($row['nombre']) ?></strong></td>
+                            <td><?= htmlspecialchars($row['apellidos']) ?></td>
+                            <td><?= htmlspecialchars($row['email']) ?></td>
+                            <td><?= htmlspecialchars($row['poblacion']) ?> (<?= $row['codpostal']?>)</td>
                             <td>
-                                <a href="edit_cli_mysqli.php?edit=<?= $c['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
-                                <button type="button" class="btn btn-danger" onclick="eliminarCliente(<?=
-                                $c['id']; ?>)">🗑️ </button>
+                                <?php if($row['genero'] == 'M'): ?>
+                                    <span class="badge bg-primary">M</span>
+                                <?php elseif($row['genero'] == 'F'): ?>
+                                    <span class="badge bg-danger">F</span>
+                                <?php else: ?>
+                                    <span class="badge bg-secondary">?</span>
+                                <?php endif; ?>
+                            </td>
+                            <td><small><?= date("d/m/Y", strtotime($row['create_time'])) ?></small></td>
+                            <td class="text-end">
+                                <a href="edit_cliente.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
+                                <button onclick="eliminar(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">🗑️</button>
                             </td>
                         </tr>
-                        <?php endforeach; ?>
+                        <?php endwhile; ?>
                     </tbody>
                 </table>
 
+                <nav aria-label="Navegación de página" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        
+                        <li class="page-item <?= ($pagina <= 1) ? 'disabled' : '' ?>">
+                            <a class="page-link" href="?pagina=<?= $pagina - 1 ?>" aria-label="Anterior">
+                                <span aria-hidden="true">&laquo; Anterior</span>
+                            </a>
+                        </li>
+
+                        <li class="page-item disabled">
+                            <span class="page-link">
+                                Página <?= $pagina ?> de <?= $total_paginas ?>
+                            </span>
+                        </li>
+
+                        <li class="page-item <?= ($pagina >= $total_paginas) ? 'disabled' : '' ?>">
+                            <a class="page-link" href="?pagina=<?= $pagina + 1 ?>" aria-label="Siguiente">
+                                <span aria-hidden="true">Siguiente &raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
-    <!-- Modal de confirmación (añádelo al final del body) -->
     <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Confirmar eliminación</h5>
+                    <h5 class="modal-title text-white">Confirmar eliminación</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -154,18 +225,17 @@
     </div>
 
     <script>
-        function eliminarCliente(numcliente) 
+        function eliminar(id)
         {
-            const modal = new bootstrap.Modal(document.getElementById('confirmModal'));
+            const modal = new
+            bootstrap.Modal(document.getElementById('confirmModal'));
             modal.show();
-            document.getElementById('confirmDeleteBtn').onclick = () => 
-            {
-                window.location.href = 'gestion_clientes.php?eliminar=' + numcliente;
-                modal.hide();
+            document.getElementById('confirmDeleteBtn').onclick = () => {
+            window.location.href = 'gestion_clientes.php?eliminar=' + id;
+            modal.hide();
             };
         }
     </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
