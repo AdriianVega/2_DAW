@@ -53,25 +53,23 @@ body::before {
 }
 #sidebar .icon {
   width: 20px;
-  filter: invert(100);
+  filter: invert(1);
 }
 #sidebar::after {
   content: "";
   position: absolute;
   top: 0;
-  right: -200px;
+  right: -100px;
   width: 200px;
   height: 100%;
   background: transparent;
 }
 #sidebar:hover {
   left: 0;
-  right: -100px;
+  right: -50px;
 }
 #sidebar h4 {
   color: #00E5FF;
-  text-transform: uppercase;
-  letter-spacing: 2px;
   text-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
   font-weight: 700;
 }
@@ -80,7 +78,7 @@ body::before {
   color: rgba(255, 255, 255, 0.7);
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-out;
 }
 #sidebar .list-group-item:hover, #sidebar .list-group-item.active {
   background: linear-gradient(90deg, rgba(213, 0, 249, 0.2), transparent);
@@ -94,7 +92,7 @@ body::before {
   border: 1px solid #ff1744;
   color: #ff1744;
   width: 100%;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-out;
 }
 #sidebar .mt-auto .btn-danger:hover {
   background: #ff1744;
@@ -128,10 +126,7 @@ body::before {
 }
 .table tr, .table th, .table td {
   color: white;
-  white-space: nowrap;
-  vertical-align: middle;
   background-color: transparent;
-  box-shadow: none;
   border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 .table thead th {
@@ -139,7 +134,7 @@ body::before {
   border-bottom: 2px solid #D500F9;
 }
 .table tbody tr {
-  transition: background-color 0.2s ease-in-out;
+  transition: all 0.3s ease-out;
 }
 .table tbody tr:hover {
   background-color: rgba(0, 229, 255, 0.15) !important;
@@ -213,7 +208,7 @@ body::before {
 }
 
 .btn-sm {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-out;
 }
 .btn-sm.btn-warning {
   background: transparent;
@@ -289,13 +284,13 @@ body::before {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 .modal-header .modal-title {
-  color: #ff1744;
+  color: #e2e8f0;
   font-weight: bold;
   text-transform: uppercase;
   text-shadow: 0 0 5px rgba(255, 23, 68, 0.5);
 }
 .modal-header .btn-close {
-  filter: invert(1) grayscale(100%) brightness(200%);
+  filter: invert(1);
 }
 
 .modal-body {

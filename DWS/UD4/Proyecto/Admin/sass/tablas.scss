@@ -11,10 +11,13 @@ $gradiente_cabecera: linear-gradient(135deg, #240b36, #2d1b4e);
 $gradiente_hover: linear-gradient(90deg, rgba(213, 0, 249, 0.2), transparent);
 
 $btn_success: #2ecc71;
-$btn_sm: $btn_sm;
+$btn_sm: #ffca28;
 
-@mixin transicion($propiedad: all, $tiempo: 0.3s) {
-    transition: $propiedad $tiempo ease-in-out;
+@mixin transition($property, $duration, $timing: linear) {
+    -webkit-transition: $property $duration $timing;
+    -moz-transition: $property $duration $timing;
+    -o-transition: $property $duration $timing;
+    transition: $property $duration $timing;
 }
 
 body {
@@ -55,7 +58,7 @@ body {
     border-right: 1px solid $neon_magenta;
     box-shadow: 5px 0 25px rgba(213, 0, 249, 0.2);
 
-    @include transicion(left);
+    @include transition(left, 0.3s, ease-in-out);
 
     img
     {
@@ -81,14 +84,14 @@ body {
     {
         width: 20px;
 
-        filter: invert(100);
+        filter: invert(1);
     }
     
     &::after {
         content: "";
         position: absolute;
         top: 0;
-        right: -200px;
+        right: -100px;
         width: 200px;
         height: 100%;
         background: transparent;
@@ -96,13 +99,11 @@ body {
 
     &:hover {
         left: 0;
-        right: -100px;
+        right: -50px;
     }
 
     h4 {
         color: $neon_cian;
-        text-transform: uppercase;
-        letter-spacing: 2px;
         text-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
         font-weight: 700;
     }
@@ -112,7 +113,7 @@ body {
         color: rgba(255, 255, 255, 0.7);
         border: none;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        @include transicion;
+        @include transition(all, 0.3s, ease-out);
 
         &:hover,
         &.active {
@@ -129,7 +130,7 @@ body {
         border: 1px solid $neon_rojo;
         color: $neon_rojo;
         width: 100%;
-        @include transicion;
+        @include transition(all, 0.3s, ease-out);
 
         &:hover {
             background: $neon_rojo;
@@ -164,10 +165,7 @@ body {
 
     tr, th, td {
         color: white;
-        white-space: nowrap;
-        vertical-align: middle;
         background-color: transparent;
-        box-shadow: none;
         border-bottom-color: rgba(255, 255, 255, 0.1);
     }
 
@@ -177,7 +175,7 @@ body {
     }
 
     tbody tr {
-        @include transicion(background-color, 0.2s);
+        @include transition(all, 0.3s, ease-out);
 
         &:hover {
             background-color: rgba(0, 229, 255, 0.15) !important;
@@ -252,7 +250,7 @@ body {
 }
 
 .btn-sm {
-    @include transicion;
+    @include transition(all, 0.3s, ease-out);
 
     &.btn-warning {
         background: transparent;
@@ -333,14 +331,14 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
     .modal-title {
-        color: #ff1744;
+        color: $texto_claro;
         font-weight: bold;
         text-transform: uppercase;
         text-shadow: 0 0 5px rgba(255, 23, 68, 0.5);
     }
 
     .btn-close {
-        filter: invert(1) grayscale(100%) brightness(200%);
+        filter: invert(1);
     }
 }
 

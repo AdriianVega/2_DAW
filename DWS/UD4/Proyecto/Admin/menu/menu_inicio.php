@@ -19,7 +19,7 @@
 </head>
 <body>
     <header>
-        <img src="../img/admin.jpg" alt="Foto de perfil">
+        <img src="../img/usuarios/admin.jpg" alt="Foto de perfil">
         <h1>Bienvenido <?= $nombre; ?> </h1>
         <h2>
             <?php
