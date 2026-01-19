@@ -64,6 +64,7 @@ body {
     {
         margin: 0 auto;
         border-radius: 100%;
+        width: 5px;
     }
     span
     {
@@ -189,18 +190,16 @@ body {
 .form-control,
 .form-select {
     background-color: rgba(0, 0, 0, 0.2) !important;
-    /* Un fondo oscuro sutil */
+
     border: $borde_cristal;
     color: white !important;
-    /* Fuerza el color del texto */
+
     backdrop-filter: blur(5px);
 
-    /* El placeholder (texto de ayuda) necesita su propio color */
     &::placeholder {
         color: rgba(255, 255, 255, 0.5);
     }
 
-    /* IMPORTANTE: Gestionar el foco (cuando escribes) */
     &:focus {
         background-color: rgba(0, 0, 0, 0.4) !important;
         border-color: $neon_cian;
@@ -208,8 +207,6 @@ body {
         box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
     }
 
-    /* Para el select, las opciones suelen ser blancas por defecto del SO, 
-           pero podemos intentar oscurecerlas */
     option {
         background-color: #1a1a1a;
         color: white;
@@ -322,7 +319,6 @@ body {
     background-color: rgba(15, 23, 42, 0.98);
     backdrop-filter: blur(10px);
     border: 1px solid #ff1744;
-    /* Rojo neón */
     color: white;
     box-shadow: 0 0 30px rgba(255, 23, 68, 0.4);
 }

@@ -6,6 +6,9 @@
     }
     include "../db/db.inc";
 
+    $nombre_usuario = $_SESSION["nombre"];
+    $rol = $_SESSION["rol"];
+
     if(isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
         
         $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
@@ -86,7 +89,7 @@
                 
             </div>
 
-            <a href="../logout.php" class="btn btn-danger w-100">Cerrar Sesión</a>
+            <a href="../index.php" class="btn btn-danger w-100">Cerrar Sesión</a>
         </div>
     </aside>
     

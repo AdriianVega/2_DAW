@@ -25,7 +25,7 @@
         exit;
     }
 
-    $registros_por_pagina = 15;
+    $registros_por_pagina = 14;
     $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 
     if ($pagina < 1) {
@@ -119,7 +119,7 @@
                 
             </div>
 
-            <a href="../logout.php" class="btn btn-danger w-100">Cerrar Sesión</a>
+            <a href="../index.php" class="btn btn-danger w-100">Cerrar Sesión</a>
         </div>
     </aside>
 

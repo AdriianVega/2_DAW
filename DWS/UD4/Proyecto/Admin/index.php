@@ -29,7 +29,7 @@
                             $password = htmlspecialchars(sha1($_POST["password"]));
 
                             $check = $conn->prepare(
-                                "SELECT nombre, email, rol FROM usuarios
+                                "SELECT nombre, email, rol, icono FROM usuarios
                                 WHERE email = ? AND password = ?"
                             );
 
@@ -47,12 +47,13 @@
                                 session_start();
 
                                 // Vinculo las variables donde se guardarán los resultados
-                                $check->bind_result($nombre, $emailDB, $rol);
+                                $check->bind_result($nombre, $emailDB, $rol, $icono);
                                 $check->fetch();
 
                                 $_SESSION["nombre"] = $nombre;
                                 $_SESSION["rol"] = $rol;
                                 $_SESSION["email"] = $emailDB;
+                                $_SESSION["icono"] = $icono;
 
                                 header("location: ./menu/menu_inicio.php");
                                 die();

@@ -13,9 +13,10 @@
         $email = "test_" . $random_suffix . "@gmail.com";
         $password = sha1("1234"); // Contraseña por defecto: 1234
         $rol = 0; // Rol empleado por defecto
+        $icono = "../img/usuarios/admin.jpg";
 
-        $sql = "INSERT INTO usuarios (nombre, email, password, rol)
-                VALUES ('$nombre', '$email', '$password', '$rol')";
+        $sql = "INSERT INTO usuarios (nombre, email, password, rol, icono)
+                VALUES ('$nombre', '$email', '$password', '$rol', '$icono')";
         
         if(mysqli_query($conn, $sql)){
             header("location:gestion_usuarios.php?msg=test_ok");
@@ -51,7 +52,7 @@
         $id_usu = intval($_GET["eliminar"]);
         
         // Evitar que se borre al usuario 'admin' principal (id 1) por seguridad básica
-        if($id_usu == 1) {
+        if($rol == 1) {
             header("location:gestion_usuarios.php?msg=error_admin");
             die();
         }
@@ -124,7 +125,7 @@
                 
             </div>
 
-            <a href="../logout.php" class="btn btn-danger w-100">Cerrar Sesión</a>
+            <a href="../index.php" class="btn btn-danger w-100">Cerrar Sesión</a>
         </div>
     </aside>
 
@@ -179,7 +180,7 @@
                             <td><small><?= date("d/m/Y", strtotime($row['create_time'])) ?></small></td>
                             <td class="text-end">
                                 <a href="edit_usuario.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
-                                <?php if($row['id'] != 1): // Ocultar borrar para ID 1 ?>
+                                <?php if($row['rol'] != 1): // Ocultar borrar para ID 1 ?>
                                     <button onclick="eliminar(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">🗑️</button>
                                 <?php endif; ?>
                             </td>

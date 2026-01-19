@@ -4,9 +4,11 @@
     if (!isset($_SESSION["nombre"]))
     {
         header("location: ../../index.php");
+        die();
     }
     $nombre = htmlspecialchars($_SESSION["nombre"]);
     $rol = $_SESSION["rol"];
+    $icono = $_SESSION["icono"];
 ?>
 
 <!DOCTYPE html>
@@ -14,25 +16,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/estilo_menu.css">
     <title>Menú</title>
 </head>
 <body>
     <header>
-        <img src="../img/usuarios/admin.jpg" alt="Foto de perfil">
-        <h1>Bienvenido <?= $nombre; ?> </h1>
-        <h2>
+        <img src="<?= $icono ?>" alt="Foto de perfil">
+        <h1 class="my-3">Bienvenido <?= $nombre; ?> </h1>
             <?php
                 if ($rol === 1)
                 {
-                    echo "Administrador";
+            ?>
+                <h2 class="fs-4">
+                    <span>Administrador</span> 
+                </h2>
+            <?php
                 }
                 else
                 {
-                    echo "Usuario";
-                }
             ?>
-        </h2>
+                <h2 class="fs-4 mt-4">
+                    <span class="badge bg-info"> Empleado </span>
+                </h2>
+            <?php } ?>
 
     </header>
     <main>

@@ -1,49 +1,101 @@
 <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     session_start();
-    if(!isset($_SESSION["nombre"])) { header("location:../index.php"); die(); }
-    include("../db/db.inc");
 
-    // PROCESAR EDICIÓN
-    if (isset($_POST["accion"]) && $_POST["accion"] == "editar") {
-        $id = intval($_POST["id"]);
-        $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
-        $email = mysqli_real_escape_string($conn, $_POST["email"]);
-        $rol = intval($_POST["rol"]);
-
-        // Validar email duplicado (excluyendo el propio ID)
-        $check = mysqli_query($conn, "SELECT id FROM usuarios WHERE email = '$email' AND id != $id");
-        if(mysqli_num_rows($check) > 0){
-            // Aquí deberías redirigir con un error, por brevedad redirijo al listado
-            header("location:gestion_usuarios.php?msg=error");
-            die();
-        }
-
-        // Construcción dinámica de la query
-        // Si el campo password NO está vacío, lo actualizamos. Si está vacío, lo ignoramos.
-        $sql = "UPDATE usuarios SET nombre='$nombre', email='$email', rol='$rol'";
-        
-        if(!empty($_POST['password'])) {
-            $pass_hash = sha1($_POST['password']);
-            $sql .= ", password='$pass_hash'";
-        }
-
-        $sql .= " WHERE id=$id";
-        
-        if (mysqli_query($conn, $sql)) {
-            header("location:gestion_usuarios.php?msg=0");
-        } else {
-            header("location:gestion_usuarios.php?msg=error");
-        }
+    if(!isset($_SESSION["nombre"])) {
+        header("location:../index.php");
         die();
     }
+    include "../db/db.inc";
 
-    // OBTENER DATOS
-    if(!isset($_GET["id"])) { header("location:gestion_usuarios.php"); die(); }
-    $id = intval($_GET["id"]);
-    $res = mysqli_query($conn, "SELECT * FROM usuarios WHERE id = $id");
-    
-    if(!($usu = mysqli_fetch_assoc($res))){
-        header("location:gestion_usuarios.php"); die();
+    $directorio = "../img/usuarios/";
+    $error = "";
+
+    $nombre_usuario = $_SESSION["nombre"];
+    $rol_usuario = $_SESSION["rol"];
+    $icono = $_SESSION["icono"];
+
+    if (isset($_POST["email"])) {
+        // Obtenemos la ruta temporal y el nombre original del archivo subido
+        $archivo_temporal = $_FILES["imagen"]["tmp_name"];
+        $archivo_original = uniqid().$_FILES["imagen"]["name"];
+
+        // Comprobamos si se ha subido un archivo correctamente
+        if (!isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] != 0)
+        {
+            $error = "No se ha subido una imagen o la imagen es demasiado grande";
+        }
+        // Verificamos si el archivo subido es una imagen
+        elseif (getimagesize($archivo_temporal))
+        {
+            // Construimos la ruta final donde guardaremos la imagen
+            $ruta_final = $directorio . $archivo_original;
+
+            // Movemos la imagen desde la ruta temporal al directorio final
+            if(move_uploaded_file($archivo_temporal, $ruta_final))
+            {
+                echo "<h1> $archivo_original </h1>";
+                echo "<img src='$ruta_final' alt='$archivo_original'>";
+            }
+            //Si ha ocurrido un error mostramos por pantalla
+            else
+            {
+                $error = "Se ha producido un error subiendo el icono";
+            }
+        }
+        else
+        {
+            // Redirigimos al formulario con error si el archivo no es una imagen
+            $error = "Sólo se permiten imagenes";
+        }
+    }
+    if (empty($error))
+    {
+        if (isset($_POST["accion"]) && $_POST["accion"] == "editar") {
+        
+            if(isset($_POST["id"]) && !empty($_POST["id"])) {
+                $id = intval($_POST["id"]);
+                $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
+                $email = mysqli_real_escape_string($conn, $_POST["email"]);
+                $rol = intval($_POST["rol"]);
+                $icono = $ruta_final;
+
+                // Lógica para actualizar password solo si se escribe una nueva
+                $sql_pass = "";
+                if (!empty($_POST["password"])) {
+                    $pass = md5(mysqli_real_escape_string($conn, $_POST["password"]));
+                    $sql_pass = ", password = '$pass'";
+                }
+
+                try {
+                    $sql = "UPDATE usuarios SET
+                            nombre = '$nombre',
+                            email = '$email',
+                            rol = $rol,
+                            icono = '$icono'
+                            $sql_pass
+                        WHERE id = $id";
+
+                    mysqli_query($conn, $sql);
+
+                    header("location:gestion_usuarios.php?msg=0");
+                }
+                catch (mysqli_sql_exception $e) {
+                    //mysqli_error($conn); die();
+                    header("location:gestion_usuarios.php?msg=error");
+                }
+
+                die();
+            }
+        }
+    }
+
+    if(!isset($_GET["id"])) {
+        header("location:gestion_usuarios.php");
+        die();
     }
 ?>
 
@@ -51,53 +103,134 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Usuario</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/tablas.css">
+    <title>Editar Usuario</title>
 </head>
 <body class="bg-light">
-    <div class="container mt-5" style="max-width: 600px;">
+
+    <aside id="sidebar" class="text-white d-flex flex-column p-3">
+        <h4 class="mb-4 text-center">Admin Panel</h4>
+
+        <div class="d-flex flex-column justify-content-center align-items-center border-bottom pb-4">
+            <?php
+                $ruta_icono = "../img/usuarios/" . $_SESSION["nombre"] .".jpg";
+
+                if (!file_exists($ruta_icono)) {
+                    $ruta_icono = "../img/usuarios/admin.jpg";
+                }
+            ?>
+            <img src="<?= $ruta_icono ?>" alt="Icono Usuario">
+
+            <span> <?= $nombre_usuario ?></span>
+
+            <?php if ($rol_usuario == 1) { ?>
+                <small class="badge bg-danger"> Administrador </small>
+            <?php } else { ?>
+                <small class="badge bg-info"> Empleado </small>
+            <?php } ?>
+        </div>
+        <div class="list-group pt-3">
+            <a href="../clientes/gestion_clientes.php" class="list-group-item list-group-item-action">👥 Clientes</a>
+            <a href="../productos/gestion_productos.php" class="list-group-item list-group-item-action">📦 Productos</a>
+            <a href="../categorias/gestion_categorias.php" class="list-group-item list-group-item-action">🏷️ Categorías</a>
+            <a href="../pedidos/gestion_pedidos.php" class="list-group-item list-group-item-action">🧾 Pedidos</a>
+            <a href="gestion_usuarios.php" class="list-group-item list-group-item-action active">🛡️ Usuarios</a>
+        </div>
+
+        <div class="mt-auto">
+            <div class="d-flex justify-content-between mb-3 fs-5">
+                <a href="../menu/menu_inicio.php">
+                    <span>🏠️</span>
+                </a>
+
+                <a href="../configuracion/configuracion.php" class="text-decoration-none">
+                    <span>⚙️</span>
+                </a>
+                
+            </div>
+
+            <a href="../index.php" class="btn btn-danger w-100">Cerrar Sesión</a>
+        </div>
+    </aside>
+
+    <main class="container mt-5">
         <div class="card shadow">
-            <div class="card-header bg-warning">
-                <h4 class="mb-0">✏️ Editar Perfil: <?= htmlspecialchars($usu['nombre']) ?></h4>
+            <div class="card-header bg-primary text-white">
+                <h2 class="h4 mb-0">✏️ Editar Usuario</h2>
             </div>
             <div class="card-body">
-                <form method="POST" autocomplete="off">
+
+            <?php
+                $id = intval($_GET["id"]);
+                $sql = "SELECT * FROM usuarios WHERE id = $id";
+                $res = mysqli_query($conn, $sql);
+                
+                if (mysqli_num_rows($res) > 0) {
+                    $user = mysqli_fetch_assoc($res);
+                } else {
+                    header("location:gestion_usuarios.php");
+                    die();
+                }
+
+                // Comprobamos si se ha recibido un error y mostramos un mensaje de alerta correspondiente al error indicado
+                if (!empty($error))
+                {
+                    echo "<div class='alert alert-danger' role='alert'>❌ Error: ". $error. "</div>";
+                }
+                else
+                {
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        $icono = $ruta_final;
+
+                        header("location:gestion_usuarios.php?msg=0");
+                    }
+
+                }
+            ?>
+
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="<?=$id;?>">
                     <input type="hidden" name="accion" value="editar">
-                    <input type="hidden" name="id" value="<?= $usu['id'] ?>">
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="nombre" class="form-label">Nombre de Usuario:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre"
+                                value="<?= htmlspecialchars($user["nombre"]) ?>" required>
+                        </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Nombre Completo</label>
-                        <input type="text" name="nombre" class="form-control"
-                            value="<?= htmlspecialchars($usu['nombre']) ?>" required>
-                    </div>
+                        <div class="col-md-6">
+                            <label for="rol" class="form-label">Rol:</label>
+                            <select name="rol" id="rol" class="form-select" required>
+                                <option value="1" <?= ($user['rol'] == 1) ? 'selected' : '' ?>>Administrador</option>
+                                <option value="0" <?= ($user['rol'] == 0) ? 'selected' : '' ?>>Empleado</option>
+                            </select>
+                        </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" 
-                               value="<?= htmlspecialchars($usu['email']) ?>" required>
-                    </div>
+                        <div class="col-md-12">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                value="<?= htmlspecialchars($user["email"]) ?>" required>
+                        </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Contraseña</label>
-                        <input type="password" name="password" class="form-control" placeholder="(Dejar en blanco para no cambiar)">
-                        <div class="form-text">Solo rellena este campo si quieres generar una nueva contraseña.</div>
-                    </div>
+                        <div class="mb-3">
+                            <label for="imagen">Seleccione una imagen:</label>
+                            <input type="file" name="imagen" id="imagen" required>
+                        </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Rol</label>
-                        <select name="rol" class="form-select">
-                            <option value="0" <?= $usu['rol'] == 0 ? 'selected' : '' ?>>Empleado</option>
-                            <option value="1" <?= $usu['rol'] == 1 ? 'selected' : '' ?>>Administrador</option>
-                        </select>
-                    </div>
+                        <div class="col-12 mt-4">
+                            <button type="submit" class="btn btn-success w-100">Guardar Cambios</button>
+                            <a href="gestion_usuarios.php" class="btn btn-secondary w-100 mt-2">Cancelar</a>
+                        </div>
 
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary">Actualizar Datos</button>
-                        <a href="gestion_usuarios.php" class="btn btn-secondary">Cancelar</a>
+                        
                     </div>
                 </form>
             </div>
         </div>
-    </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

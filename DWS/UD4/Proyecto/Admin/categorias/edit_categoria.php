@@ -98,7 +98,7 @@
                 
             </div>
 
-            <a href="../logout.php" class="btn btn-danger w-100">Cerrar Sesión</a>
+            <a href="../index.php" class="btn btn-danger w-100">Cerrar Sesión</a>
         </div>
     </aside>
 

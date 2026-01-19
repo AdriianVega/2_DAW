@@ -1,10 +1,15 @@
 <?php
     session_start();
+
     if(!isset($_SESSION["nombre"])) {
         header("location:../index.php");
         die();
     }
+
     include "../db/db.inc";
+
+    $nombre_usuario = $_SESSION["nombre"];
+    $rol = $_SESSION["rol"];
 
     if(isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
         
@@ -74,9 +79,9 @@
             <?php } ?>
         </div>
         <div class="list-group pt-3">
-            <a href="../clientes/gestion_clientes.php" class="list-group-item list-group-item-action">👥 Clientes</a>
+            <a href="gestion_clientes.php" class="list-group-item list-group-item-action active">👥 Clientes</a>
             <a href="../productos/gestion_productos.php" class="list-group-item list-group-item-action">📦 Productos</a>
-            <a href="gestion_categorias.php" class="list-group-item list-group-item-action active">🏷️ Categorías</a>
+            <a href="../categorias/gestion_categorias.php" class="list-group-item list-group-item-action">🏷️ Categorías</a>
             <a href="../pedidos/gestion_pedidos.php" class="list-group-item list-group-item-action">🧾 Pedidos</a>
             <a href="../usuarios/gestion_usuarios.php" class="list-group-item list-group-item-action">🛡️ Usuarios</a>
         </div>
@@ -93,7 +98,7 @@
                 
             </div>
 
-            <a href="../logout.php" class="btn btn-danger w-100">Cerrar Sesión</a>
+            <a href="../index.php" class="btn btn-danger w-100">Cerrar Sesión</a>
         </div>
     </aside>
     
