@@ -29,7 +29,7 @@
                 {
             ?>
                 <h2 class="fs-4">
-                    <span>Administrador</span> 
+                    <span class="badge bg-danger">Administrador</span> 
                 </h2>
             <?php
                 }
@@ -43,7 +43,6 @@
 
     </header>
     <main>
-        
     </main>
     <footer></footer>
 

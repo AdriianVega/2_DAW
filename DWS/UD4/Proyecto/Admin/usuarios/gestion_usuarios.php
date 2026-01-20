@@ -12,11 +12,11 @@
         // Formato solicitado: randomizado + @gmail.com
         $email = "test_" . $random_suffix . "@gmail.com";
         $password = sha1("1234"); // Contraseña por defecto: 1234
-        $rol = 0; // Rol empleado por defecto
+        $rol_empleado = 0; // Rol empleado por defecto
         $icono = "../img/usuarios/admin.jpg";
 
         $sql = "INSERT INTO usuarios (nombre, email, password, rol, icono)
-                VALUES ('$nombre', '$email', '$password', '$rol', '$icono')";
+                VALUES ('$nombre', '$email', '$password', '$rol_empleado', '$icono')";
         
         if(mysqli_query($conn, $sql)){
             header("location:gestion_usuarios.php?msg=test_ok");
@@ -71,7 +71,8 @@
     $res = mysqli_query($conn, $sql);
     
     $nombre_usuario = $_SESSION["nombre"];
-    $rol_sesion = $_SESSION["rol"];
+    $rol = $_SESSION["rol"];
+    $pagina_activa = "usuarios";
 ?>
 
 <!DOCTYPE html>
@@ -83,52 +84,8 @@
     <link rel="stylesheet" href="../css/tablas.css">
 </head>
 <body class="bg-light">
-
-    <aside id="sidebar" class="text-white d-flex flex-column p-3">
-        <h4 class="mb-4 text-center">Admin Panel</h4>
-
-        <div class="d-flex flex-column justify-content-center align-items-center border-bottom pb-4">
-            <?php
-                $ruta_icono = "../img/usuarios/" . $_SESSION["nombre"] .".jpg";
-
-                if (!file_exists($ruta_icono)) {
-                    $ruta_icono = "../img/usuarios/admin.jpg";
-                }
-            ?>
-            <img src="<?= $ruta_icono ?>" alt="Icono Usuario">
-
-            <span> <?= $nombre_usuario ?></span>
-
-            <?php if ($rol_sesion == 1) { ?>
-                <small class="badge bg-danger"> Administrador </small>
-            <?php } else { ?>
-                <small class="badge bg-info"> Empleado </small>
-            <?php } ?>
-        </div>
-        <div class="list-group pt-3">
-            <a href="../clientes/gestion_clientes.php" class="list-group-item list-group-item-action">👥 Clientes</a>
-            <a href="../productos/gestion_productos.php" class="list-group-item list-group-item-action">📦 Productos</a>
-            <a href="../categorias/gestion_categorias.php" class="list-group-item list-group-item-action">🏷️ Categorías</a>
-            <a href="../pedidos/gestion_pedidos.php" class="list-group-item list-group-item-action">🧾 Pedidos</a>
-            <a href="gestion_usuarios.php" class="list-group-item list-group-item-action active">🛡️ Usuarios</a>
-        </div>
-
-        <div class="mt-auto">
-            <div class="d-flex justify-content-between mb-3 fs-5">
-                <a href="../menu/menu_inicio.php">
-                    <span>🏠️</span>
-                </a>
-
-                <a href="../configuracion/configuracion.php" class="text-decoration-none">
-                    <span>⚙️</span>
-                </a>
-                
-            </div>
-
-            <a href="../index.php" class="btn btn-danger w-100">Cerrar Sesión</a>
-        </div>
-    </aside>
-
+    <?php include "../php/panel_administrador.php"; ?>
+    
     <div class="container-fluid mt-4">
         <div class="card shadow mt-5">
             <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">

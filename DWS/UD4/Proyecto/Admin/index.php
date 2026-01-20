@@ -1,5 +1,67 @@
 <?php
+    function conectar_DB($conn, $email_post, $password_post, $psswd_encriptada = false) {
+        
+        $email = htmlspecialchars(trim($email_post));
+
+        if ($psswd_encriptada) {
+            $password = $password_post;
+        }
+        else {
+            $password = htmlspecialchars(sha1($password_post));
+        }
+
+        $check = $conn->prepare(
+            "SELECT nombre, email, rol, icono FROM usuarios
+            WHERE email = ? AND password = ?"
+        );
+
+        // Utilizamos bind_param para evitar inyecciones SQL
+        // Asocio las variables PHP a los placeholders (?)
+        $check->bind_param("ss", $email, $password);
+
+        // Ejecutamos la consulta
+        $check->execute();
+        $check->store_result();
+
+        return $check;
+    }
+    function crear_sesion($check) {
+
+        /*Línea necesaria para que el compilador PHP no salte diciendo
+        que las variables no están definidas aunque se definan en bind_result*/
+        $nombre = $emailDB = $rol = $icono = null;
+
+        // Vinculo las variables donde se guardarán los resultados
+        $check->bind_result($nombre, $emailDB, $rol, $icono);
+
+        $check->fetch();
+
+        $_SESSION["nombre"] = $nombre;
+        $_SESSION["email"]  = $emailDB;
+        $_SESSION["rol"]    = $rol;
+        $_SESSION["icono"]  = $icono;
+    }
+
     include "db/db.inc";
+
+    session_start();
+
+    if (isset($_SESSION["email"])) {
+        header("location: ./menu/menu_inicio.php"); 
+        die();
+    }
+    else if (isset($_COOKIE["email"]) && isset($_COOKIE["password"])) {
+
+        $check = conectar_DB($conn, $_COOKIE["email"], $_COOKIE["password"], true);
+
+        if ($check->num_rows > 0) {
+            
+            crear_sesion($check);
+
+            header("location: ./menu/menu_inicio.php");
+            die();
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -24,36 +86,18 @@
                         filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
 
                         if (isset($_POST["password"]) && !empty($_POST["password"])) {
-
-                            $email = htmlspecialchars(trim($_POST["email"]));
-                            $password = htmlspecialchars(sha1($_POST["password"]));
-
-                            $check = $conn->prepare(
-                                "SELECT nombre, email, rol, icono FROM usuarios
-                                WHERE email = ? AND password = ?"
-                            );
-
-                            // Utilizamos bind_param para evitar inyecciones SQL
-                            // Asocio las variables PHP a los placeholders (?)
-                            $check->bind_param("ss", $email, $password);
-
-                            // Ejecutamos la consulta
-                            $check->execute();
-                            $check->store_result();
+                            
+                            $check = conectar_DB($conn, $_POST["email"], $_POST["password"]);
 
                             // Si las credenciales son válidas -> hay una fila coincidente
                             if ($check->num_rows > 0) {
 
-                                session_start();
+                                crear_sesion($check);
 
-                                // Vinculo las variables donde se guardarán los resultados
-                                $check->bind_result($nombre, $emailDB, $rol, $icono);
-                                $check->fetch();
-
-                                $_SESSION["nombre"] = $nombre;
-                                $_SESSION["rol"] = $rol;
-                                $_SESSION["email"] = $emailDB;
-                                $_SESSION["icono"] = $icono;
+                                $expiracion = time() + (60 * 60 * 24 * 30);
+                                
+                                setcookie("email", $email, $expiracion, "/");
+                                setcookie("password", htmlspecialchars(sha1($_POST["password"])), $expiracion, "/");
 
                                 header("location: ./menu/menu_inicio.php");
                                 die();
@@ -80,7 +124,7 @@
                     <input type="email" id="email" name="email" class="form-control mb-3" placeholder="example@gmail.com" data-bs-theme="dark" required>
 
                     <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" id="password" name="password" placeholder="psswd1234" class="form-control" data-bs-theme="dark" required>
+                    <input type="password" id="password" name="password" placeholder="contraseña" class="form-control" data-bs-theme="dark" required>
 
                     <input type="submit" value="Acceder" id="submit" name="submit" class="gradient-button btn btn-primary w-100 mt-4">
                 </form>

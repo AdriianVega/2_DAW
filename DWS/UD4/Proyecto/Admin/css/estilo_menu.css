@@ -55,8 +55,9 @@ main a {
 main a article {
   text-align: center;
   border-radius: 10px;
-  background-color: white;
+  background-color: black;
   border: 3px solid rgb(87.3298969072, 131.4536082474, 208.6701030928);
+  color: white;
   transition: all 0.3s ease-out;
 }
 main a article:hover {
@@ -66,6 +67,7 @@ main a article:hover {
 main a article img {
   width: 70px;
   padding: 30px 0;
+  filter: invert(1);
 }
 main a article h3 {
   padding: 0;

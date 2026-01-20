@@ -1,4 +1,3 @@
-@charset "UTF-8";
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #e2e8f0;
@@ -38,6 +37,7 @@ body::before {
 #sidebar img {
   margin: 0 auto;
   border-radius: 100%;
+  width: 5px;
 }
 #sidebar span {
   font-weight: bold;
@@ -146,16 +146,10 @@ body::before {
 .form-control,
 .form-select {
   background-color: rgba(0, 0, 0, 0.2) !important;
-  /* Un fondo oscuro sutil */
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: white !important;
-  /* Fuerza el color del texto */
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
-  /* El placeholder (texto de ayuda) necesita su propio color */
-  /* IMPORTANTE: Gestionar el foco (cuando escribes) */
-  /* Para el select, las opciones suelen ser blancas por defecto del SO, 
-         pero podemos intentar oscurecerlas */
 }
 .form-control::-moz-placeholder, .form-select::-moz-placeholder {
   color: rgba(255, 255, 255, 0.5);
@@ -275,7 +269,6 @@ body::before {
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
   border: 1px solid #ff1744;
-  /* Rojo neón */
   color: white;
   box-shadow: 0 0 30px rgba(255, 23, 68, 0.4);
 }

@@ -11,6 +11,7 @@
     $nombre_usuario = $_SESSION["nombre"];
     $rol = $_SESSION["rol"];
     $icono = $_SESSION["icono"];
+    $pagina_activa = "usuarios";
 
     if (isset($_POST["email"])) {
         // Obtenemos la ruta temporal y el nombre original del archivo subido
@@ -74,9 +75,7 @@
                 header("location:gestion_usuarios.php?msg=error");
             }
             die();
-        }
-
-        
+        }        
     }
 ?>
 
@@ -89,43 +88,7 @@
     <link rel="stylesheet" href="../css/tablas.css">
 </head>
 <body class="bg-light">
-    <aside id="sidebar" class="text-white d-flex flex-column p-3">
-        <h4 class="mb-4 text-center">Admin Panel</h4>
-
-        <div class="d-flex flex-column justify-content-center align-items-center border-bottom pb-4">
-            <img src="<?= $icono ?>" alt="Icono Usuario" class="w-50">
-
-            <span> <?= $nombre_usuario ?></span>
-
-            <?php if ($rol == 1) { ?>
-                <small class="badge bg-danger"> Administrador </small>
-            <?php } else { ?>
-                <small class="badge bg-info"> Empleado </small>
-            <?php } ?>
-        </div>
-        <div class="list-group pt-3">
-            <a href="../clientes/gestion_clientes.php" class="list-group-item list-group-item-action">👥 Clientes</a>
-            <a href="../productos/gestion_productos.php" class="list-group-item list-group-item-action">📦 Productos</a>
-            <a href="../categorias/gestion_categorias.php" class="list-group-item list-group-item-action">🏷️ Categorías</a>
-            <a href="../pedidos/gestion_pedidos.php" class="list-group-item list-group-item-action">🧾 Pedidos</a>
-            <a href="gestion_usuarios.php" class="list-group-item list-group-item-action active">🛡️ Usuarios</a>
-        </div>
-
-        <div class="mt-auto">
-            <div class="d-flex justify-content-between mb-3 fs-5">
-                <a href="../menu/menu_inicio.php">
-                    <span>🏠️</span>
-                </a>
-
-                <a href="../configuracion/configuracion.php" class="text-decoration-none">
-                    <span>⚙️</span>
-                </a>
-                
-            </div>
-
-            <a href="../index.php" class="btn btn-danger w-100">Cerrar Sesión</a>
-        </div>
-    </aside>
+    <?php include "../php/panel_administrador.php"; ?>
     
     <div class="container mt-5" style="max-width: 600px;">
         <div class="card shadow">
