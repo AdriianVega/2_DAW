@@ -1,5 +1,5 @@
 <aside id="sidebar" class="text-white d-flex flex-column p-3">
-        <h4 class="mb-4 text-center">Admin Panel</h4>
+        <h4 class="mb-4 text-center">Panel de Control</h4>
 
         <div class="d-flex flex-column justify-content-center align-items-center border-bottom pb-4">
             <?php

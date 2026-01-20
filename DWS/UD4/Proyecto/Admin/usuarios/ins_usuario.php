@@ -88,7 +88,7 @@
     <link rel="stylesheet" href="../css/tablas.css">
 </head>
 <body class="bg-light">
-    <?php include "../php/panel_administrador.php"; ?>
+    <?php include "../php/panel_control.php"; ?>
     
     <div class="container mt-5" style="max-width: 600px;">
         <div class="card shadow">

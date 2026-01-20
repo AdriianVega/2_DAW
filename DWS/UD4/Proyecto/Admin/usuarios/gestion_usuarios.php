@@ -84,7 +84,7 @@
     <link rel="stylesheet" href="../css/tablas.css">
 </head>
 <body class="bg-light">
-    <?php include "../php/panel_administrador.php"; ?>
+    <?php include "../php/panel_control.php"; ?>
     
     <div class="container-fluid mt-4">
         <div class="card shadow mt-5">
@@ -172,13 +172,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function eliminar(id) {
-            if(confirm('¿Estás seguro? Esta acción borrará el acceso al panel para este usuario.')) {
-                window.location.href = 'gestion_usuarios.php?eliminar=' + id;
-            }
-        }
-    </script>
+    <?php include "../php/custom_delete.php"; ?>
 </body>
 </html>

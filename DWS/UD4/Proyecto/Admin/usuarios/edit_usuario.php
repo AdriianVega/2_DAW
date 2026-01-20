@@ -110,7 +110,7 @@
     <title>Editar Usuario</title>
 </head>
 <body class="bg-light">
-    <?php include "../php/panel_administrador.php"; ?>
+    <?php include "../php/panel_control.php"; ?>
 
     <main class="container mt-5">
         <div class="card shadow">
