@@ -20,11 +20,17 @@
     function eliminar(id)
     {
         const modal = new
+        
         bootstrap.Modal(document.getElementById('confirmModal'));
+        
         modal.show();
+
         document.getElementById('confirmDeleteBtn').onclick = () => {
-        window.location.href = 'gestion_pedidos.php?eliminar=' + id;
-        modal.hide();
+            const archivoActual = window.location.pathname.split("/").pop();
+
+            window.location.href = archivoActual + '?eliminar=' + id;
+
+            modal.hide();
         };
     }
 </script>
