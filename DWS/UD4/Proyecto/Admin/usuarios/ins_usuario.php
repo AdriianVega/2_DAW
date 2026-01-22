@@ -52,7 +52,7 @@
         $rol = intval($_POST["rol"]);
 
         // Cifrado SHA1 para coincidir con char(40)
-        $password = sha1($_POST["password"]); 
+        $password = password_hash($_POST["password"], PASSWORD_DEFAULT); 
 
         if (empty($error))
         {
@@ -67,8 +67,8 @@
 
             // 2. Insertar
             $sql = "INSERT INTO usuarios (nombre, email, password, rol, icono) 
-                    VALUES ('$nombre', '$email', '$password', '$rol', '$icono')";
-            
+                    VALUES ('$nombre', '$email', '$password', '$rol', '$icono')";       
+
             if (mysqli_query($conn, $sql)) {
                 header("location:gestion_usuarios.php?msg=0");
             } else {

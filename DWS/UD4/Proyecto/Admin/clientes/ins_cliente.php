@@ -17,8 +17,7 @@
         $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
         $apellidos = mysqli_real_escape_string($conn, $_POST["apellidos"]);
         $email = mysqli_real_escape_string($conn, $_POST["email"]);
-        $password = md5(mysqli_real_escape_string($conn, $_POST["password"]));
-        $direccion = mysqli_real_escape_string($conn, $_POST["direccion"]);
+        $password = mysqli_real_escape_string($conn, password_hash($_POST["password"], PASSWORD_DEFAULT));        $direccion = mysqli_real_escape_string($conn, $_POST["direccion"]);
         $genero = mysqli_real_escape_string($conn, $_POST["genero"]);
         $codpostal = mysqli_real_escape_string($conn, $_POST["codpostal"]);
         $poblacion = mysqli_real_escape_string($conn, $_POST["poblacion"]);
@@ -104,7 +103,7 @@
                             <label for="codpostal" class="form-label">C.P.</label>
                             <input type="text" class="form-control" id="codpostal" name="codpostal" maxlength="5" required>
                         </div>
-                         <div class="col-md-2">
+                        <div class="col-md-2">
                             <label for="genero" class="form-label">Género</label>
                             <select class="form-select" id="genero" name="genero">
                                 <option value="M">Hombre</option>

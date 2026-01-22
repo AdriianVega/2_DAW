@@ -1,45 +1,10 @@
 <?php
-    function conectar_DB($conn, $email_post, $password_post, $psswd_encriptada = false) {
-        
-        $email = htmlspecialchars(trim($email_post));
+    function crear_sesion($datos) {
 
-        if ($psswd_encriptada) {
-            $password = $password_post;
-        }
-        else {
-            $password = htmlspecialchars(sha1($password_post));
-        }
-
-        $check = $conn->prepare(
-            "SELECT nombre, email, rol, icono FROM usuarios
-            WHERE email = ? AND password = ?"
-        );
-
-        // Utilizamos bind_param para evitar inyecciones SQL
-        // Asocio las variables PHP a los placeholders (?)
-        $check->bind_param("ss", $email, $password);
-
-        // Ejecutamos la consulta
-        $check->execute();
-        $check->store_result();
-
-        return $check;
-    }
-    function crear_sesion($check) {
-
-        /*Línea necesaria para que el compilador PHP no salte diciendo
-        que las variables no están definidas aunque se definan en bind_result*/
-        $nombre = $emailDB = $rol = $icono = null;
-
-        // Vinculo las variables donde se guardarán los resultados
-        $check->bind_result($nombre, $emailDB, $rol, $icono);
-
-        $check->fetch();
-
-        $_SESSION["nombre"] = $nombre;
-        $_SESSION["email"]  = $emailDB;
-        $_SESSION["rol"]    = $rol;
-        $_SESSION["icono"]  = $icono;
+        $_SESSION["nombre"] = $datos["nombre"];
+        $_SESSION["email"]  = $datos["email"];
+        $_SESSION["rol"]    = $datos["rol"];
+        $_SESSION["icono"]  = $datos["icono"];
     }
 
     include "db/db.inc";
@@ -50,18 +15,34 @@
         header("location: ./menu/menu_inicio.php"); 
         die();
     }
-    else if (isset($_COOKIE["email"]) && isset($_COOKIE["password"])) {
+    if (isset($_COOKIE["token"])) {
 
-        $check = conectar_DB($conn, $_COOKIE["email"], $_COOKIE["password"], true);
+        $verificador =  explode(":", $_COOKIE["token"]);
 
-        if ($check->num_rows > 0) {
-            
-            crear_sesion($check);
-
-            header("location: ./menu/menu_inicio.php");
-            die();
+        if (count($verificador) == 2) {
+            $selector = $verificador[0];
+            $validador = $verificador[1];
         }
-    }
+
+        $check = $conn->prepare(
+            "SELECT t.id, t.validador, t.usuario_id, u.*
+            FROM tokens t
+            JOIN usuarios u ON t.usuario_id = u.id
+            WHERE t.selector = ? AND t.expiracion > NOW()
+        ");
+
+        $check->bind_param("s", $selector);
+        $check->execute();
+        $res = $check->get_result();
+        $datos = $res->fetch_assoc();
+
+        if ($datos && hash_equals($datos["validador"], hash("sha256", $validador))) {
+                crear_sesion($datos);
+
+                header("location: ./menu/menu_inicio.php");
+                die();
+            }
+        }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -86,21 +67,41 @@
                         filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
 
                         if (isset($_POST["password"]) && !empty($_POST["password"])) {
-                            
-                            $check = conectar_DB($conn, $_POST["email"], $_POST["password"]);
 
-                            // Si las credenciales son válidas -> hay una fila coincidente
-                            if ($check->num_rows > 0) {
+                                $email = trim($_POST["email"]);
+                                $password = $_POST["password"];
 
-                                crear_sesion($check);
-
-                                $expiracion = time() + (60 * 60 * 24 * 30);
+                                $check = $conn->prepare("SELECT * FROM usuarios WHERE email = ?");
+                                $check->bind_param("s", $email);
                                 
-                                setcookie("email", $email, $expiracion, "/");
-                                setcookie("password", htmlspecialchars(sha1($_POST["password"])), $expiracion, "/");
+                                $check->execute();
+                                
+                                $res = $check->get_result();
 
-                                header("location: ./menu/menu_inicio.php");
+                                $datos = $res->fetch_assoc();
+
+                                if ($datos && password_verify($password, $datos["password"])) {
+                                    crear_sesion($datos);
+
+                                    $selector = bin2hex(random_bytes(6));
+                                    $validador = bin2hex(random_bytes(12));
+                                    $validador_hash = hash('sha256', $validador);
+
+                                    $mes = (60 * 60 * 24 * 30);
+                                    $expiracion = date('Y-m-d H:i:s', time() + $mes);
+
+                                    $check = $conn->prepare("INSERT INTO tokens
+                                                (selector, validador, usuario_id, expiracion)
+                                                VALUES (?, ?, ?, ?)"
+                                    );
+                                    $check->bind_param("ssis", $selector, $validador, $datos["id"], $expiracion);
+                                    $check->execute();
+
+                                    setcookie("token", "$selector:$validador", $expiracion, "/", "", true, true);
+
+                                    header("location: ./menu/menu_inicio.php");
                                 die();
+                                }
 
                             } else {
                                 // Si no existe el email o contraseña incorrectos
