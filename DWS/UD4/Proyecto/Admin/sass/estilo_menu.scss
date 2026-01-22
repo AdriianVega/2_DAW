@@ -1,20 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-$color-inicio: #1e3c72;
-$color-fin: #2a5298;
-$texto-claro: white;
-$texto-oscuro: black;
-$fondo-tarjeta: black;
-$borde-tarjeta: 3px solid lighten(#2a5298, 20%);
-$color-magenta: #f06;
+$fondo: #1a1a2e;
+$fondo-tarjeta: rgba(11, 20, 42, 0.7);
+$borde-tarjeta: 1px solid rgba(255, 255, 255, 0.1);
 
-$duracion-entrada: 0.4s;
-$duracion-hover: 0.3s;
-
-$radio-tarjeta: 10px;
-$radio-circulo: 100%;
-$tamano-img-tarjeta: 70px;
-$tamano-img-perfil: 150px;
+$texto-primario: #ffffff;
+$texto-secundario: #b0b0b0;
+$color-primario: #e94560;
+$color-secundario: #0f3460;
 
 @mixin animation($name, $duration, $timing: linear) {
     -webkit-animation: $name $duration $timing;
@@ -30,6 +23,14 @@ $tamano-img-perfil: 150px;
     transition: $prop $duration $timing;
 }
 
+@mixin glassefect {
+    background: $fondo-tarjeta;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: $borde-tarjeta;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
 @keyframes animacion_inicial {
     from {
         opacity: 0;
@@ -43,7 +44,8 @@ $tamano-img-perfil: 150px;
 }
 
 body {
-    @include animation(animacion_inicial, $duracion-entrada);
+    @include animation(animacion_inicial, 0.3s);
+
     font-family: 'Inter', sans-serif;
     position: relative;
 
@@ -68,11 +70,11 @@ body {
 header {
     text-align: center;
     padding-top: 50px;
-    color: $texto-claro;
+    color: $texto-primario;
 
     img {
-        border-radius: $radio-circulo;
-        width: $tamano-img-perfil;
+        border-radius: 16px;
+        width: 10%;
     }
 }
 
@@ -86,28 +88,29 @@ main {
 
     a {
         text-decoration: none;
-        color: $texto-oscuro;
 
         flex: 0 1 30%;
 
         article {
+            @include glassefect();
+            
             text-align: center;
-            border-radius: $radio-tarjeta;
-            background-color: $fondo-tarjeta;
-            border: $borde-tarjeta;
-            color: $texto-claro;
+            color: $texto-primario;
+            
+            border-radius: 16px;
 
-            @include transition(all, $duracion-hover, ease-out);
+            @include transition(all, 0.3s, ease-out);
 
             &:hover {
-                transform: scale(1.1);
-                border-color: $color-magenta;
+                transform: translateY(-5px);
+                border-color: $color-primario;
+                box-shadow: 0 0 15px rgba(233, 69, 96, 0.4);
             }
 
             img {
-                width: $tamano-img-tarjeta;
-                padding: 30px 0;
                 filter: invert(1);
+                width: 13%;
+                padding: 30px 0;
             }
 
             h3 {

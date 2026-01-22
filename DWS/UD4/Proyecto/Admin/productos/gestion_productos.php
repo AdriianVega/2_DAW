@@ -133,7 +133,7 @@
                                 <?php if($row['estado'] == 0): ?>
                                     <span class="badge bg-danger">Inactivo</span>
                                 <?php else: ?>
-                                    <span class="badge bg-info text-dark">Activo</span>
+                                    <span class="badge bg-success">Activo</span>
                                 <?php endif; ?>
                             </td>
                             <td><small><?= date("d/m/Y", strtotime($row['create_time'])) ?></small></td>
