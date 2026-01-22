@@ -22,7 +22,7 @@ try:
     while True:
         response = requests.get(URL, headers=headers,timeout=10)
         soup = BeautifulSoup(response.text, "html.parser")
-        
+
 
         titulos = soup.find_all("a", attrs={"title": True})
         precios = soup.find_all("p", class_="price_color")
