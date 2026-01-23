@@ -1,6 +1,8 @@
 <?php
     function crear_sesion($datos) {
 
+        session_regenerate_id(true);
+
         $_SESSION["nombre"] = $datos["nombre"];
         $_SESSION["email"]  = $datos["email"];
         $_SESSION["rol"]    = $datos["rol"];
@@ -22,27 +24,27 @@
         if (count($verificador) == 2) {
             $selector = $verificador[0];
             $validador = $verificador[1];
-        }
 
-        $check = $conn->prepare(
+            $check = $conn->prepare(
             "SELECT t.id, t.validador, t.usuario_id, u.*
             FROM tokens t
             JOIN usuarios u ON t.usuario_id = u.id
             WHERE t.selector = ? AND t.expiracion > NOW()
-        ");
+            ");
 
-        $check->bind_param("s", $selector);
-        $check->execute();
-        $res = $check->get_result();
-        $datos = $res->fetch_assoc();
+            $check->bind_param("s", $selector);
+            $check->execute();
+            $res = $check->get_result();
+            $datos = $res->fetch_assoc();
 
-        if ($datos && hash_equals($datos["validador"], hash("sha256", $validador))) {
+            if ($datos && hash_equals($datos["validador"], hash("sha256", $validador))) {
                 crear_sesion($datos);
 
                 header("location: ./menu/menu_inicio.php");
                 die();
             }
         }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -63,10 +65,12 @@
                 </div>
 
                 <?php
-                    if (isset($_POST["email"]) && !empty($_POST["email"]) &&
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        
+                        if (isset($_POST["email"]) && !empty($_POST["email"]) &&
                         filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
 
-                        if (isset($_POST["password"]) && !empty($_POST["password"])) {
+                            if (isset($_POST["password"]) && !empty($_POST["password"])) {
 
                                 $email = trim($_POST["email"]);
                                 $password = $_POST["password"];
@@ -94,38 +98,33 @@
                                                 (selector, validador, usuario_id, expiracion)
                                                 VALUES (?, ?, ?, ?)"
                                     );
-                                    $check->bind_param("ssis", $selector, $validador, $datos["id"], $expiracion);
+                                    $check->bind_param("ssis", $selector, $validador_hash, $datos["id"], $expiracion);
                                     $check->execute();
 
-                                    setcookie("token", "$selector:$validador", $expiracion, "/", "", true, true);
+                                    setcookie("token", "$selector:$validador", time() + $mes, "/", "", false, true);
 
                                     header("location: ./menu/menu_inicio.php");
-                                die();
-                                }
-
-                            } else {
+                                    die();
+                                } else {
                                 // Si no existe el email o contraseña incorrectos
-                                echo '<div class="alert alert-warning">⚠️ El email y la contraseña NO existen.</div>';
-                            }
-
+                                echo '<div class="alert alert-warning">⚠️ El email y/o la contraseña son incorrectos.</div>'; 
+                                }
+                            } else {
+                                 // Password vacío o no enviado 
+                                echo '<div class="alert alert-warning">⚠️ Error en el campo Password </div>';
+                            }  
                         } else {
-                            // Password vacío o no enviado
-                            echo '<div class="alert alert-warning">⚠️ Error en el campo Password.</div>';
+                            // Email no válido 
+                            echo '<div class="alert alert-warning">⚠️ Introduce un email válido.</div>';
                         }
-
-                    } else {
-                        // Email no válido
-                        if (isset($_POST["email"])) {
-                            echo '<div class="alert alert-warning">⚠️ El email no es válido.</div>';
-                        }
-                    }
+                    } 
                 ?>
                 <form method="post">
                     <label for="email" class="form-label">Email:</label>
                     <input type="email" id="email" name="email" class="form-control mb-3" placeholder="example@gmail.com" data-bs-theme="dark" required>
 
-                    <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" id="password" name="password" placeholder="contraseña" class="form-control" data-bs-theme="dark" required>
+                    <label for="password" class="form-label">Contraseña:</label>
+                    <input type="password" id="password" name="password" placeholder="Password" class="form-control" data-bs-theme="dark" required>
 
                     <input type="submit" value="Acceder" id="submit" name="submit" class="gradient-button btn btn-primary w-100 mt-4">
                 </form>

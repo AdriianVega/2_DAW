@@ -6,8 +6,9 @@ const secciones = [
     { titulo: "Pedidos", imagen: "../img/menu/entrega-de-pedidos.svg", ruta: "../pedidos/gestion_pedidos.php"},
     { titulo: "Categorías", imagen: "../img/menu/lista.svg", ruta: "../categorias/gestion_categorias.php"},
     { titulo: "Usuarios", imagen: "../img/menu/usuario.svg", ruta: "../usuarios/gestion_usuarios.php"},
+    { titulo: "Tokens", imagen: "../img/menu/tokens.svg", ruta: "../tokens/gestion_tokens.php"},
     { titulo: "Configuración", imagen: "../img/menu/ajuste.svg", ruta: "../configuracion/configuracion.php"},
-    { titulo: "Cerrar Sesión", imagen: "../img/menu/logout.svg", ruta: "../php/logout.php"}
+    { titulo: "Cerrar Sesión", imagen: "../img/menu/logout.svg", ruta: "../php/logout.php"},
 ]
 
 for (let seccion of secciones) {

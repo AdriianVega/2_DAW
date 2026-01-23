@@ -17,7 +17,8 @@
         $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
         $apellidos = mysqli_real_escape_string($conn, $_POST["apellidos"]);
         $email = mysqli_real_escape_string($conn, $_POST["email"]);
-        $password = mysqli_real_escape_string($conn, password_hash($_POST["password"], PASSWORD_DEFAULT));        $direccion = mysqli_real_escape_string($conn, $_POST["direccion"]);
+        $password = mysqli_real_escape_string($conn, password_hash($_POST["password"], PASSWORD_DEFAULT));        
+        $direccion = mysqli_real_escape_string($conn, $_POST["direccion"]);
         $genero = mysqli_real_escape_string($conn, $_POST["genero"]);
         $codpostal = mysqli_real_escape_string($conn, $_POST["codpostal"]);
         $poblacion = mysqli_real_escape_string($conn, $_POST["poblacion"]);

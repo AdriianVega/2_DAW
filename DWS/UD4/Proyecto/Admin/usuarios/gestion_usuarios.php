@@ -11,7 +11,7 @@
         $nombre = "Usuario Test " . $random_suffix;
         // Formato solicitado: randomizado + @gmail.com
         $email = "test_" . $random_suffix . "@gmail.com";
-        $password = sha1("1234"); // Contraseña por defecto: 1234
+        $password = password_hash("1234", PASSWORD_DEFAULT); // Contraseña por defecto: 1234
         $rol_empleado = 0; // Rol empleado por defecto
         $icono = "../img/usuarios/admin.jpg";
 
