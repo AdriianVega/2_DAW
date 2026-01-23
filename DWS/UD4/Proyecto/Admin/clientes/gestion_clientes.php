@@ -4,6 +4,8 @@
     if(!isset($_SESSION["nombre"])) { header("location:../index.php"); die(); }
     include "../db/db.inc";
 
+    $directorio = "../img/clientes/";
+
     if (isset($_GET["crear_test"])) {
 
         $rand = random_int(1000, 9999);
@@ -11,6 +13,7 @@
         $apellidos = "Apellido " . $rand;
         $email = "test" . $rand . "@correo.com";
         $password = md5("1234");
+        $icono = $directorio . "admin.jpg";
         $direccion = "Calle Falsa " . $rand;
         $genero = ($rand % 2 == 0) ? 'M' : 'F';
         $codpostal = "46" . random_int(10, 99);

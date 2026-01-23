@@ -25,7 +25,7 @@
         exit;
     }
 
-    $registros_por_pagina = 14;
+    $registros_por_pagina = 10;
     $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 
     if ($pagina < 1) {
@@ -63,6 +63,8 @@
             LIMIT $offset, $registros_por_pagina";
 
     $res = mysqli_query($conn, $sql);
+
+    $directorio = "../img/productos/";
 
     $nombre_usuario = $_SESSION["nombre"];
     $rol = $_SESSION["rol"];
@@ -123,7 +125,7 @@
                         <?php while($row = mysqli_fetch_assoc($res)): ?>
                         <tr>
                             <td><?= $row['id'] ?></td>
-                            <td><img src="<?= $row['imagen'] ?>" alt="Preview del producto" style="width: 200px; text-align:center;"></td>
+                            <td><img src="<?= $directorio. $row['imagen'] ?>" alt="<?= $directorio. $row['imagen'] ?>" style="width: 200px; height: 150px; text-align:center;"></td>
                             <td><strong><?= htmlspecialchars($row['nombre']) ?></strong></td>
                             <td><?= htmlspecialchars($row["nombre_categoria"] ?? "NaN") ?></td>
                             <td><?= htmlspecialchars($row['descripcion']) ?></td>

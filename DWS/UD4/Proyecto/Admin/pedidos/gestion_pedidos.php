@@ -22,7 +22,7 @@
         exit;
     }
 
-    $registros_por_pagina = 15;
+    $registros_por_pagina = 25;
     $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 
     if ($pagina < 1) {

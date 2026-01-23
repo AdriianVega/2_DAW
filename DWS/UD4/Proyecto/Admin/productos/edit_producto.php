@@ -11,11 +11,60 @@
     }
     include "../db/db.inc";
 
+    function nombre_imagen($str) {
+        $str = strtolower(trim($str)); // Convertir a minúsculas y quitar espacios
+        $str = preg_replace('/[^a-z0-9-]/', '-', $str); // Reemplazar todo lo que no sea letra o número por un guión
+        $str = preg_replace('/-+/', '-', $str); // Evitar guiones dobles (---)
+        return trim($str, '-'); // Quitar guiones al principio y al final
+    }
+
     $nombre_usuario = $_SESSION["nombre"];
     $rol = $_SESSION["rol"];
     $pagina_activa = "productos";
 
     if (isset($_POST["accion"]) && $_POST["accion"] == "editar") {
+
+        $directorio = "../img/productos/";
+
+        // Obtenemos la ruta temporal y el nombre original del archivo subido
+        $archivo_temporal = $_FILES["imagen"]["tmp_name"];
+        $archivo_original = uniqid().$_FILES["imagen"]["name"];
+
+        $extension = pathinfo($archivo_original, PATHINFO_EXTENSION);
+
+        $nombre_imagen = $prod["imagen"];
+
+        // Comprobamos si se ha subido un archivo correctamente
+        if (!isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] != 0)
+        {
+            $error = "No se ha subido una imagen o la imagen es demasiado grande";
+        }
+        // Verificamos si el archivo subido es una imagen
+        elseif (getimagesize($archivo_temporal))
+        {
+            // Cambiamos el nombre de la imagen final
+            $nuevo_nombre = nombre_imagen($_POST["nombre"]) . "_" . time() . "." . $extension;
+
+            // Construimos la ruta final donde guardaremos la imagen
+            $ruta_final = $directorio . $nuevo_nombre;
+
+            // Movemos la imagen desde la ruta temporal al directorio final
+            if(move_uploaded_file($archivo_temporal, $directorio . $nuevo_nombre))
+            {
+                echo "<h1> $nuevo_nombre </h1>";
+                echo "<img src='$ruta_final' alt='$archivo_original'>";
+            }
+            //Si ha ocurrido un error mostramos por pantalla
+            else
+            {
+                $error = "Se ha producido un error subiendo el icono";
+            }
+        }
+        else
+        {
+            // Redirigimos al formulario con error si el archivo no es una imagen
+            $error = "Sólo se permiten imagenes";
+        }
         
         if(isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
             $id = intval($_POST["id"]);
@@ -36,7 +85,7 @@
                         precio = $precio,
                         stock = $stock,
                         categoria_id = $categoria_id,
-                        imagen = '$imagen',
+                        imagen = '$nuevo_nombre',
                         estado = $estado
                     WHERE id = $id";
 
@@ -94,7 +143,7 @@
                 }
             ?>
 
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="<?=$id;?>">
                     <input type="hidden" name="accion" value="editar">
                     
@@ -141,9 +190,7 @@
 
                         <div class="col-12">
                             <label for="imagen" class="form-label">Nombre archivo imagen:</label>
-                            <input type="text" class="form-control" id="imagen" name="imagen"
-                                value="<?= htmlspecialchars($prod["imagen"]) ?>" placeholder="ej: producto1.jpg">
-                            <div class="form-text text-white">Introduce solo el nombre del archivo. La imagen física debe existir en /img/</div>
+                            <input type="file" class="form-control" id="imagen" name="imagen">
                         </div>
 
                         <div class="col-12 mt-4">

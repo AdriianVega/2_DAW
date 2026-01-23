@@ -51,13 +51,11 @@
         $email = mysqli_real_escape_string($conn, $_POST["email"]);
         $rol = intval($_POST["rol"]);
 
-        // Cifrado SHA1 para coincidir con char(40)
+        // Cifrado passwrod_hash de PHP
         $password = password_hash($_POST["password"], PASSWORD_DEFAULT); 
 
         if (empty($error))
         {
-            $icono = $ruta_final;
-
             // 1. Comprobar si el email ya existe
             $check = mysqli_query($conn, "SELECT id FROM usuarios WHERE email = '$email'");
             if(mysqli_num_rows($check) > 0){
@@ -67,7 +65,7 @@
 
             // 2. Insertar
             $sql = "INSERT INTO usuarios (nombre, email, password, rol, icono) 
-                    VALUES ('$nombre', '$email', '$password', '$rol', '$icono')";       
+                    VALUES ('$nombre', '$email', '$password', '$rol', '$archivo_original')";       
 
             if (mysqli_query($conn, $sql)) {
                 header("location:gestion_usuarios.php?msg=0");
@@ -139,8 +137,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="imagen">Seleccione una imagen:</label>
-                        <input type="file" name="imagen" id="imagen" required>
+                        <label for="imagen" class="form-label">Seleccione una imagen:</label>
+                        <input type="file" name="imagen" id="imagen" class="form-control">
                     </div>
 
                     <div class="d-grid gap-2 mt-4">

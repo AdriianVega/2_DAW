@@ -8,6 +8,8 @@
 
     include "../db/db.inc";
 
+    $directorio = "../img/clientes/";
+
     $nombre_usuario = $_SESSION["nombre"];
     $rol = $_SESSION["rol"];
     $pagina_activa = "clientes";
@@ -18,6 +20,7 @@
         $apellidos = mysqli_real_escape_string($conn, $_POST["apellidos"]);
         $email = mysqli_real_escape_string($conn, $_POST["email"]);
         $password = mysqli_real_escape_string($conn, password_hash($_POST["password"], PASSWORD_DEFAULT));        
+        $icono = mysqli_real_escape_string($conn, $_POST["icono"]);
         $direccion = mysqli_real_escape_string($conn, $_POST["direccion"]);
         $genero = mysqli_real_escape_string($conn, $_POST["genero"]);
         $codpostal = mysqli_real_escape_string($conn, $_POST["codpostal"]);

@@ -1,12 +1,14 @@
 <?php
     function crear_sesion($datos) {
 
+        $directorio = "../img/usuarios/";
+
         session_regenerate_id(true);
 
         $_SESSION["nombre"] = $datos["nombre"];
         $_SESSION["email"]  = $datos["email"];
         $_SESSION["rol"]    = $datos["rol"];
-        $_SESSION["icono"]  = $datos["icono"];
+        $_SESSION["icono"]  = $directorio. $datos["icono"];
     }
 
     include "db/db.inc";

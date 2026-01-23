@@ -5,12 +5,10 @@
             <?php
                 $ruta_icono = $_SESSION["icono"];
 
-                if (!file_exists($ruta_icono)) {
-                    $ruta_icono = "../img/usuarios/admin.jpg";
-                }
+        
             ?>
             <img src="<?= $ruta_icono ?>" alt="Icono Usuario" style="width: 50%;">
-
+            
             <span> <?= $nombre_usuario ?></span>
 
             <?php if ($rol == 1) { ?>

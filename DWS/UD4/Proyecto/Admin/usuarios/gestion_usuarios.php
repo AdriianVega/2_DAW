@@ -2,7 +2,10 @@
     session_start();
 
     if(!isset($_SESSION["nombre"])) { header("location:../index.php"); die(); }
+
     include "../db/db.inc";
+
+    $directorio = "../img/usuarios/";
 
     if (isset($_GET["crear_test"])) {
         // Generamos un sufijo aleatorio de 6 caracteres hex
@@ -13,7 +16,7 @@
         $email = "test_" . $random_suffix . "@gmail.com";
         $password = password_hash("1234", PASSWORD_DEFAULT); // Contraseña por defecto: 1234
         $rol_empleado = 0; // Rol empleado por defecto
-        $icono = "../img/usuarios/admin.jpg";
+        $icono = "admin.jpg";
 
         $sql = "INSERT INTO usuarios (nombre, email, password, rol, icono)
                 VALUES ('$nombre', '$email', '$password', '$rol_empleado', '$icono')";
@@ -114,6 +117,7 @@
                     <thead class="table-dark">
                         <tr>
                             <th>ID</th>
+                            <th>Icono</th>
                             <th>Nombre</th>
                             <th>Email</th>
                             <th>Rol</th>
@@ -125,6 +129,7 @@
                         <?php while($row = mysqli_fetch_assoc($res)): ?>
                         <tr>
                             <td><?= $row['id'] ?></td>
+                            <td><img src="<?=  $directorio.$row["icono"] ?>" alt="Icono de usuario" style="width: 100px;"></td>
                             <td><strong><?= htmlspecialchars($row['nombre']) ?></strong></td>
                             <td><?= htmlspecialchars($row['email']) ?></td>
                             <td>
