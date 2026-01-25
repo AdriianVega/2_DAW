@@ -15,13 +15,15 @@
 
             <?php
                 // Metemos un badge diferente según si el rol es administrador o empleado
-                if ($rol == 1) { ?>
+                if ($rol == 1) {
+            ?>
                 <small class="badge bg-danger"> Administrador </small>
-            <?php } else { ?>
+            <?php } else {
+            ?>
                 <small class="badge bg-info"> Empleado </small>
-            <?php } ?>
+            <?php }
+            ?>
         </div>
-
         <div class="list-group pt-3">
             <a href="../clientes/gestion_clientes.php" class="list-group-item list-group-item-action <?php echo ($pagina_activa == "clientes") ? "active" : ""; ?>">👥 Clientes</a>
             <a href="../productos/gestion_productos.php" class="list-group-item list-group-item-action <?php echo ($pagina_activa == "productos") ? "active" : ""; ?>">📦 Productos</a>
@@ -30,9 +32,11 @@
             
             <?php
                 // Solo el admin puede ver el acceso a la gestión de usuarios
-                if ($rol == 1): ?>
+                if ($rol == 1) {
+            ?>
                 <a href="../usuarios/gestion_usuarios.php" class="list-group-item list-group-item-action <?php echo ($pagina_activa == "usuarios") ? "active" : ""; ?>"">🛡️ Usuarios</a>
-            <?php endif; ?>
+            <?php }
+            ?>
         </div>
 
         <div class="mt-auto">

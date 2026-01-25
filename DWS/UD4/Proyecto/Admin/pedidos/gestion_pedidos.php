@@ -79,7 +79,7 @@
             FROM pedidos p
             LEFT JOIN clientes c ON p.cliente_id = c.id
             LEFT JOIN productos pr ON p.producto_id = pr.id
-            ORDER BY p.id DESC
+            ORDER BY p.id ASC
             LIMIT $offset, $registros_por_pagina";
 
     $res = mysqli_query($conn, $sql);
@@ -120,12 +120,12 @@
                 
                 <?php
                     // Mostramos los avisos según el mensaje que llegue por la URL
-                    if(isset($_GET['msg'])): ?>
-                    <?php if($_GET['msg'] == 'test_ok') { echo '<div class="alert alert-info">🤖 Pedido de prueba generado.</div>'; } ?>
-                    <?php if($_GET['msg'] == '0') { echo '<div class="alert alert-success">✅ Pedido guardado correctamente.</div>'; } ?>
-                    <?php if($_GET['msg'] == 'deleted') { echo '<div class="alert alert-success">🗑️ Pedido eliminado.</div>'; } ?>
-                    <?php if($_GET['msg'] == 'error') { echo '<div class="alert alert-danger">❌ Error en la base de datos. Verifique que los clientes/productos existan.</div>'; } ?>
-                <?php endif; ?>
+                    if(isset($_GET['msg'])) {
+                        if($_GET['msg'] == 'test_ok') { echo '<div class="alert alert-info">🤖 Pedido de prueba generado.</div>'; }
+                        if($_GET['msg'] == '0') { echo '<div class="alert alert-success">✅ Pedido guardado correctamente.</div>'; }
+                        if($_GET['msg'] == 'deleted') { echo '<div class="alert alert-success">🗑️ Pedido eliminado.</div>'; }
+                        if($_GET['msg'] == 'error') { echo '<div class="alert alert-danger">❌ Error en la base de datos. Verifique que los clientes/productos existan.</div>'; }
+                    } ?>
 
                 <table class="table table-striped table-hover align-middle">
                     <thead class="table-dark">
@@ -140,22 +140,23 @@
                     <tbody>
                         <?php
                             // Recorremos los resultados para mostrar la tabla
-                            while($row = mysqli_fetch_assoc($res)): ?>
-                        <tr>
-                            <td><?= $row['id'] ?></td>
-                            <td><strong><?= htmlspecialchars($row['nombre_cliente'] ?? "Desconocido/Borrado") ?></strong></td>
-                            <td><?= htmlspecialchars($row["nombre_producto"] ?? "Desconocido/Borrado") ?></td>
-                            <td><small><?= date("d/m/Y H:i", strtotime($row['create_time'])) ?></small></td>
-                            <td class="text-end">
-                                <a href="edit_pedido.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
-                                <?php
-                                    // Solo el admin puede ver el botón de borrar
-                                    if ($_SESSION["rol"] == "1"): ?>
-                                    <button onclick="eliminar(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">🗑️</button>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                        <?php endwhile; ?>
+                            while($row = mysqli_fetch_assoc($res)) { ?>
+                            <tr>
+                                <td><?= $row['id'] ?></td>
+                                <td><strong><?= htmlspecialchars($row['nombre_cliente'] ?? "Desconocido/Borrado") ?></strong></td>
+                                <td><?= htmlspecialchars($row["nombre_producto"] ?? "Desconocido/Borrado") ?></td>
+                                <td><small><?= date("d/m/Y H:i", strtotime($row['create_time'])) ?></small></td>
+                                <td class="text-end">
+                                    <a href="edit_pedido.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
+                                    <?php
+                                        // Solo el admin puede ver el botón de borrar
+                                        if ($_SESSION["rol"] == "1") {
+                                            echo '<button onclick="eliminar(' . $row['id'] . ')" class="btn btn-sm btn-danger">🗑️</button>';
+                                        }
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
 

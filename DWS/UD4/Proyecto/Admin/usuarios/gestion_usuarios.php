@@ -129,15 +129,15 @@
                 
                 <?php
                     // Mostramos los avisos según el mensaje que llegue por la URL
-                    if(isset($_GET['msg'])): ?>
-                    <?php if($_GET['msg'] == 'test_ok') { echo '<div class="alert alert-info">🤖 Usuario de prueba generado (Pass: 1234).</div>'; } ?>
-                    <?php if($_GET['msg'] == '0') { echo '<div class="alert alert-success">✅ Usuario guardado correctamente.</div>'; } ?>
-                    <?php if($_GET['msg'] == 'deleted') { echo '<div class="alert alert-success">🗑️ Usuario eliminado.</div>'; } ?>
-                    <?php if($_GET['msg'] == 'error') { echo '<div class="alert alert-danger">❌ Error en la base de datos.</div>'; } ?>
-                    <?php if($_GET['msg'] == 'error_admin') { echo '<div class="alert alert-warning">⚠️ No puedes eliminar al Super Admin.</div>'; } ?>
-                    <?php if($_GET['msg'] == 'error_mail') { echo '<div class="alert alert-warning">⚠️ Ya existe un usuario con ese email.</div>'; } ?>
-                <?php endif; ?>
-
+                    if(isset($_GET['msg'])) {
+                        if($_GET['msg'] == 'test_ok') { echo '<div class="alert alert-info">🤖 Usuario de prueba generado (Pass: 1234).</div>'; }
+                        if($_GET['msg'] == '0') { echo '<div class="alert alert-success">✅ Usuario guardado correctamente.</div>'; }
+                        if($_GET['msg'] == 'deleted') { echo '<div class="alert alert-success">🗑️ Usuario eliminado.</div>'; }
+                        if($_GET['msg'] == 'error') { echo '<div class="alert alert-danger">❌ Error en la base de datos.</div>'; }
+                        if($_GET['msg'] == 'error_admin') { echo '<div class="alert alert-warning">⚠️ No puedes eliminar al Super Admin.</div>'; }
+                        if($_GET['msg'] == 'error_mail') { echo '<div class="alert alert-warning">⚠️ Ya existe un usuario con ese email.</div>'; }
+                    }
+                ?>
                 <table class="table table-striped table-hover align-middle">
                     <thead class="table-dark">
                         <tr>
@@ -153,7 +153,8 @@
                     <tbody>
                         <?php
                             // Recorremos los resultados para mostrar la tabla
-                            while($row = mysqli_fetch_assoc($res)): ?>
+                            while($row = mysqli_fetch_assoc($res)) {
+                        ?>
                             <tr>
                                 <td><?= $row['id'] ?></td>
                                 <td><img src="<?=  $directorio.$row["icono"] ?>" alt="Icono de usuario" style="width: 100px;"></td>
@@ -162,11 +163,14 @@
                                 <td>
                                     <?php
                                         // Mostramos el badge según el rol
-                                        if($row['rol'] == 1): ?>
+                                        if($row['rol'] == 1) {
+                                    ?>
                                         <span class="badge bg-danger">Administrador</span>
-                                    <?php else: ?>
+                                    <?php } else {
+                                    ?>
                                         <span class="badge bg-info text-dark">Empleado</span>
-                                    <?php endif; ?>
+                                    <?php }
+                                    ?>
                                 </td>
                                 <td><small><?= date("d/m/Y", strtotime($row['create_time'])) ?></small></td>
                                 <td class="text-end">
@@ -174,7 +178,8 @@
                                     <button onclick="eliminar(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">🗑️</button>
                                 </td>
                             </tr>
-                        <?php endwhile; ?>
+                        <?php }
+                        ?>
                     </tbody>
                 </table>
 

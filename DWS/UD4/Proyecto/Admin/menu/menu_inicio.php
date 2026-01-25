@@ -31,21 +31,18 @@
         <h1 class="my-3">Bienvenido <?= $nombre; ?> </h1>
             <?php
                 // Metemos un badge diferente según si es admin o empleado
-                if ($rol === 1)
-                {
+                if ($rol === 1) {
             ?>
                 <h2 class="fs-4">
                     <span class="badge bg-danger">Administrador</span>
                 </h2>
-            <?php
-                }
-                else
-                {
+            <?php } else {
             ?>
                 <h2 class="fs-4 mt-4">
                     <span class="badge bg-info"> Empleado </span>
                 </h2>
-            <?php } ?>
+            <?php }
+            ?>
 
     </header>
     <main>

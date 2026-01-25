@@ -21,7 +21,6 @@
         $nombre = "Cliente Test " . $rand;
         $apellidos = "Apellido " . $rand;
         $email = "test" . $rand . "@correo.com";
-        $password = md5("1234");
         $icono = $directorio . "admin.jpg";
         $direccion = "Calle Falsa " . $rand;
         $genero = ($rand % 2 == 0) ? 'M' : 'F';
@@ -86,7 +85,7 @@
 
     // Sacamos los clientes que tocan en esta página
     // Usamos offset para marcar el inicio correcto y el límite de registros
-    $sql = "SELECT * FROM clientes ORDER BY id DESC LIMIT $offset, $registros_por_pagina";
+    $sql = "SELECT * FROM clientes ORDER BY id ASC LIMIT $offset, $registros_por_pagina";
     $res = mysqli_query($conn, $sql);
 
     // Sacamos los datos de la sesión para el panel
@@ -125,13 +124,14 @@
                 
                 <?php
                     // Mostramos los avisos según el mensaje que llegue por la URL
-                    if(isset($_GET['msg'])): ?>
-                    <?php if($_GET['msg'] == 'test_ok') { echo '<div class="alert alert-info">🤖 Cliente de prueba generado.</div>'; } ?>
-                    <?php if($_GET['msg'] == '0') { echo '<div class="alert alert-success">✅ Cliente guardado correctamente.</div>'; } ?>
-                    <?php if($_GET['msg'] == 'deleted') { echo '<div class="alert alert-success">🗑️ Cliente eliminado.</div>'; } ?>
-                    <?php if($_GET['msg'] == 'error') { echo '<div class="alert alert-danger">❌ Error en la base de datos. El email podría estar duplicado.</div>'; } ?>
-                <?php endif; ?>
-
+                    if(isset($_GET['msg'])) {
+                        if($_GET['msg'] == 'test_ok') { echo '<div class="alert alert-info">🤖 Cliente de prueba generado.</div>'; }
+                        if($_GET['msg'] == '0') { echo '<div class="alert alert-success">✅ Cliente guardado correctamente.</div>'; }
+                        if($_GET['msg'] == 'deleted') { echo '<div class="alert alert-success">🗑️ Cliente eliminado.</div>'; }
+                        if($_GET['msg'] == 'error') { echo '<div class="alert alert-danger">❌ Error en la base de datos.</div>'; }
+                        if($_GET['msg'] == 'error_gmail') { echo '<div class="alert alert-warning">⚠️ El email ya está en uso.</div>'; }
+                    }
+                ?>
                 <table class="table table-striped table-hover align-middle">
                     <thead class="table-dark">
                         <tr>
@@ -148,7 +148,8 @@
                     <tbody>
                         <?php
                             // Recorremos los resultados para mostrar la tabla
-                            while($row = mysqli_fetch_assoc($res)): ?>
+                            while($row = mysqli_fetch_assoc($res)) {
+                        ?>
                         <tr>
                             <td><?= $row['id'] ?></td>
                             <td><strong><?= htmlspecialchars($row['nombre']) ?></strong></td>
@@ -158,25 +159,32 @@
                             <td>
                                 <?php
                                     // Mostramos el badge según el género
-                                    if($row['genero'] == 'M'): ?>
+                                    if($row['genero'] == 'M') {
+                                ?>
                                     <span class="badge bg-primary">M</span>
-                                <?php elseif($row['genero'] == 'F'): ?>
+                                <?php } elseif($row['genero'] == 'F') {
+                                ?>
                                     <span class="badge bg-danger">F</span>
-                                <?php else: ?>
+                                <?php } else {
+                                ?>
                                     <span class="badge bg-secondary">?</span>
-                                <?php endif; ?>
+                                <?php }
+                                ?>
                             </td>
                             <td><small><?= date("d/m/Y", strtotime($row['create_time'])) ?></small></td>
                             <td class="text-end">
                                 <a href="edit_cliente.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
                                 <?php
                                     // Solo el admin puede ver el botón de borrar
-                                    if ($_SESSION["rol"] == "1"): ?>
+                                    if ($_SESSION["rol"] == "1") {
+                                ?>
                                     <button onclick="eliminar(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">🗑️</button>
-                                <?php endif; ?>
+                                <?php }
+                                ?>
                             </td>
                         </tr>
-                        <?php endwhile; ?>
+                        <?php }
+                        ?>
                     </tbody>
                 </table>
 

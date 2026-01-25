@@ -19,7 +19,7 @@
         $precio = random_int(0, 100000);
         $stock = random_int(0, 500);
         $categoria_id = 1;
-        $imagen = "../img/fondo.jpg";
+        $imagen = "fondo.jpg";
         $estado = 1;
 
         // Preparamos la consulta para meter el producto de prueba
@@ -126,13 +126,13 @@
                 
                 <?php
                     // Mostramos los avisos según el mensaje que llegue por la URL
-                    if(isset($_GET['msg'])): ?>
-                    <?php if($_GET['msg'] == 'test_ok') { echo '<div class="alert alert-info">🤖 Producto de prueba generado.</div>'; } ?>
-                    <?php if($_GET['msg'] == '0') { echo '<div class="alert alert-success">✅ Producto guardado correctamente.</div>'; } ?>
-                    <?php if($_GET['msg'] == 'deleted') { echo '<div class="alert alert-success">🗑️ Producto eliminado.</div>'; } ?>
-                    <?php if($_GET['msg'] == 'error') { echo '<div class="alert alert-danger">❌ Error en la base de datos. ¿Quizás se escribió una clave foránea que no existe?</div>'; } ?>
-                <?php endif; ?>
-
+                    if(isset($_GET['msg'])) {
+                        if($_GET['msg'] == 'test_ok') { echo '<div class="alert alert-info">🤖 Producto de prueba generado.</div>'; }
+                        if($_GET['msg'] == '0') { echo '<div class="alert alert-success">✅ Producto guardado correctamente.</div>'; }
+                        if($_GET['msg'] == 'deleted') { echo '<div class="alert alert-success">🗑️ Producto eliminado.</div>'; }
+                        if($_GET['msg'] == 'error') { echo '<div class="alert alert-danger">❌ Error en la base de datos. ¿Quizás se escribió una categoría que no existe?</div>'; }
+                    }
+                ?>
                 <table class="table table-striped table-hover align-middle">
                     <thead class="table-dark">
                         <tr>
@@ -151,7 +151,8 @@
                     <tbody>
                         <?php
                             // Recorremos los resultados para mostrar la tabla
-                            while($row = mysqli_fetch_assoc($res)): ?>
+                            while($row = mysqli_fetch_assoc($res)) {
+                        ?>
                         <tr>
                             <td><?= $row['id'] ?></td>
                             <td><img src="<?= $directorio. $row['imagen'] ?>" alt="Preview" style="width: 200px; height: 150px;"></td>
@@ -163,23 +164,29 @@
                             <td>
                                 <?php
                                     // Mostramos el badge según el estado activo o inactivo
-                                    if($row['estado'] == 0): ?>
+                                    if($row['estado'] == 0) {
+                                ?>
                                     <span class="badge bg-danger">Inactivo</span>
-                                <?php else: ?>
+                                <?php } else {
+                                ?>
                                     <span class="badge bg-success">Activo</span>
-                                <?php endif; ?>
+                                <?php }
+                                ?>
                             </td>
                             <td><small><?= date("d/m/Y", strtotime($row['create_time'])) ?></small></td>
                             <td class="text-end">
                                 <a href="edit_producto.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
                                 <?php
                                     // Solo el admin puede ver el botón de borrar
-                                    if ($_SESSION["rol"] == "1"): ?>
+                                    if ($_SESSION["rol"] == "1") {
+                                ?>
                                     <button onclick="eliminar(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">🗑️</button>
-                                <?php endif; ?>
+                                <?php }
+                                ?>
                             </td>
                         </tr>
-                        <?php endwhile; ?>
+                        <?php }
+                        ?>
                     </tbody>
                 </table>
 

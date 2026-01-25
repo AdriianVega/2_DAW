@@ -124,14 +124,10 @@
                                 value="<?= htmlspecialchars($cli["apellidos"]) ?>" required>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <label for="email" class="form-label">Email:</label>
                             <input type="email" class="form-control" id="email" name="email"
                                 value="<?= htmlspecialchars($cli["email"]) ?>" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="password" class="form-label">Contraseña (Dejar en blanco para mantener):</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="******">
                         </div>
 
                         <div class="col-12">

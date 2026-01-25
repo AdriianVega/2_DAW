@@ -33,7 +33,7 @@
         // Miramos si se ha subido alguna imagen correctamente
         if (!isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] != 0)
         {
-            $error = "No se ha subido una imagen o la imagen es demasiado grande";
+            $archivo_original = "admin.jpg";
         }
         // Comprobamos que sea una imagen de verdad
         elseif (getimagesize($archivo_temporal))
@@ -106,12 +106,9 @@
             <div class="card-body">
                 <?php
                     // Mostramos el aviso si hay algún error durante el proceso
-                    if (!empty($error))
-                    {
+                    if (!empty($error)) {
                         echo "<div class='alert alert-danger' role='alert'>❌ Error: ". $error. "</div>";
-                    }
-                    else
-                    {
+                    } else {
                         // Si se ha envia el formulario con éxito, mandamos a la gestión
                         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             header("location:gestion_usuarios.php?msg=0");

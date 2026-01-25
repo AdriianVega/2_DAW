@@ -40,7 +40,7 @@
         // Comprobamos si se ha subido bien la imagen
         if (!isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] != 0)
         {
-            $error = "No se ha subido una imagen o la imagen es demasiado grande";
+            $nuevo_nombre = "fondo.jpg";
         }
         // Comprobamos que el archivo sea una imagen real
         elseif (getimagesize($archivo_temporal))

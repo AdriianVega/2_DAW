@@ -1,0 +1,6 @@
+Usuario Administrador:
+    email: adrvegper@gmail.com
+    contraseña: Adrian
+Usuario Empleado:
+    email: alejandro@gmail.com
+    contraseña: Alejandro

@@ -1,10 +1,17 @@
 <?php
+    // Iniciamos la sesión
     session_start();
 
-    if(!isset($_SESSION["nombre"])) { header("location:../index.php"); die(); }
+    // Comprobamos si el usuario está logueado, si no, lo mandamos al index
+    if(!isset($_SESSION["nombre"])) {
+        header("location:../index.php");
+        die();
+    }
 
+    // Iniciamos la conexión a la base de datos
     include "../db/db.inc";
 
+    // Sacamos los datos de la sesión para el panel y el usuario
     $nombre_usuario = $_SESSION["nombre"];
     $rol = $_SESSION["rol"];
 ?>
@@ -19,7 +26,10 @@
 </head>
 <body class="bg-light">
 
-    <?php include "../php/panel_control.php"; ?>
+    <?php
+        // Metemos el panel de control lateral
+        include "../php/panel_control.php";
+    ?>
 
     <div class="container-fluid mt-4">
         <div class="card shadow mt-5">
@@ -32,6 +42,10 @@
         </div>
     </div>
 
-    <?php include "../php/custom_delete.php"; ?>
+    <?php
+        // Metemos el script para la lógica de borrado personalizada
+        include "../php/custom_delete.php";
+    ?>
+
 </body>
 </html>

@@ -41,7 +41,7 @@
         if (mysqli_num_rows($res) > 0)
         {
             // Si el email ya existe, mandamos error
-            header("location:gestion_clientes.php?msg=error");
+            header("location:gestion_clientes.php?msg=error_gmail");
             die();
         }
         
