@@ -1,54 +1,59 @@
 <?php
+    // Iniciamos la sesión
     session_start();
     
+    // Si no está logueado, redirigimos al inicio
     if(!isset($_SESSION["nombre"])) {
         header("location:../index.php");
         die();
     }
+
+    // Iniciamos la conexión a la base de datos
     include "../db/db.inc";
 
+    // Función para limpiar el nombre de la imagen
     function nombreImagen($str) {
-        $str = strtolower(trim($str)); // Convertir a minúsculas y quitar espacios
-        $str = preg_replace('/[^a-z0-9-]/', '-', $str); // Reemplazar todo lo que no sea letra o número por un guión
-        $str = preg_replace('/-+/', '-', $str); // Evitar guiones dobles (---)
-        return trim($str, '-'); // Quitar guiones al principio y al final
+        $str = strtolower(trim($str));
+        $str = preg_replace('/[^a-z0-9-]/', '-', $str);
+        $str = preg_replace('/-+/', '-', $str);
+        return trim($str, '-');
     }
 
+    // Sacamos los datos de la sesión
     $nombre_usuario = $_SESSION["nombre"];
     $rol= $_SESSION["rol"];
     $pagina_activa = "productos";
 
+    // Si recibimos los datos del producto
     if(isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
         
         $directorio = "../img/productos/";
 
-        // Obtenemos la ruta temporal y el nombre original del archivo subido
+        // Sacamos la ruta temporal y preparamos un nombre único
         $archivo_temporal = $_FILES["imagen"]["tmp_name"];
         $archivo_original = uniqid().$_FILES["imagen"]["name"];
-
         $extension = pathinfo($archivo_original, PATHINFO_EXTENSION);
 
-        // Cambiamos el nombre de la imagen final
+        // Generamos el nombre final basado en el producto y el timestamp
         $nuevo_nombre = nombreImagen($_POST["nombre"]) . "_" . time() . "." . $extension;
 
-        // Comprobamos si se ha subido un archivo correctamente
+        // Comprobamos si se ha subido bien la imagen
         if (!isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] != 0)
         {
             $error = "No se ha subido una imagen o la imagen es demasiado grande";
         }
-        // Verificamos si el archivo subido es una imagen
+        // Comprobamos que el archivo sea una imagen real
         elseif (getimagesize($archivo_temporal))
         {
-            // Construimos la ruta final donde guardaremos la imagen
+            // Colocamos la ruta donde vamos a guardar la foto
             $ruta_final = $directorio . $nuevo_nombre;
 
-            // Movemos la imagen desde la ruta temporal al directorio final
+            // Movemos el archivo de la carpeta temporal a la final
             if(move_uploaded_file($archivo_temporal, $directorio . $nuevo_nombre))
             {
                 echo "<h1> $nuevo_nombre </h1>";
                 echo "<img src='$ruta_final' alt='$archivo_original'>";
             }
-            //Si ha ocurrido un error mostramos por pantalla
             else
             {
                 $error = "Se ha producido un error subiendo el icono";
@@ -56,45 +61,29 @@
         }
         else
         {
-            // Redirigimos al formulario con error si el archivo no es una imagen
             $error = "Sólo se permiten imagenes";
         }
         
+        // Limpiamos los datos del formulario para evitar inyecciones SQL
         $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
         $descripcion = mysqli_real_escape_string($conn, $_POST["descripcion"]);
-        
-        
         $precio = floatval($_POST["precio"]);
         $stock = intval($_POST["stock"]);
         $categoria_id = intval($_POST["categoria_id"]);
-        
-        
-        $imagen = mysqli_real_escape_string($conn, $archivo_original);
-        $estado = intval($_POST["estado"]); // 1 o 0
-
-        
-        $sql_check = "SELECT * FROM productos WHERE nombre='$nombre'";
-        $res = mysqli_query($conn, $sql_check);
-        
-        if (mysqli_num_rows($res) > 0)
-        {
-            
-            header("location:gestion_productos.php?prod=1");
-            die();
-        }
+        $estado = intval($_POST["estado"]);
         
         try {
+                // Metemos el nuevo producto en la base de datos
                 $sql = "INSERT INTO productos (nombre, descripcion, precio, stock, categoria_id, imagen, estado)
                 VALUES ('$nombre', '$descripcion', '$precio', '$stock', '$categoria_id', '$nuevo_nombre', '$estado');";
 
+                // Ejecutamos la inserción
                 mysqli_query($conn, $sql);
 
+                // Redirigimos a la gestión con mensaje de éxito
                 header("location:gestion_productos.php?msg=0");
             }
             catch (mysqli_sql_exception $e) {
-
-                // Debug: descomentar si falla para ver el error real
-                //mysqli_error($conn); die();
                 header("location:gestion_productos.php?msg=error");
             }
     }

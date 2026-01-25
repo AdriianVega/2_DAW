@@ -1,53 +1,70 @@
 <?php
+    // Configuramos los errores para que se muestren por pantalla
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
+    // Iniciamos la sesión
     session_start();
 
+    // Comprobamos el rol para que solo entren administradores
     if (!isset($_SESSION["rol"]) || (int)$_SESSION["rol"] !== 1) {
+
+        // Redirigimos al inicio si no es admin
         header("location:../index.php");
         die();
     }
-    
+
+    // Iniciamos la conexión a la base de datos
     include "../db/db.inc";
 
+    // Definimos el directorio donde guardaremos la imagen e inicializamos la variable de error
     $directorio = "../img/usuarios/";
     $error = "";
 
+    // Sacamos los datos de la sesión
     $nombre_usuario = $_SESSION["nombre"];
     $rol = $_SESSION["rol"];
     $icono = $_SESSION["icono"];
     $pagina_activa = "usuarios";
 
+    // Si recibimos el email, empezamos con la edición
     if (isset($_POST["email"])) {
 
+        // Recogemos el id del usuario
         $id = intval($_POST["id"]);
+
+        // Sacamos el icono actual del usuario
         $sql = "SELECT icono FROM usuarios WHERE id = $id";
+
+        // Ejecutamos la consulta
         $res_icono = mysqli_query($conn, $sql);
+
+        // Obtenemos los datos
         $datos = mysqli_fetch_assoc($res_icono);
 
+        // Guardamos la ruta por defecto por si no se cambia la imagen
         $ruta_final = $datos["icono"];
 
-        // Obtenemos la ruta temporal y el nombre original del archivo subido
+        // Sacamos la ruta temporal y le metemos un nombre único al archivo
         $archivo_temporal = $_FILES["imagen"]["tmp_name"];
         $archivo_original = uniqid().$_FILES["imagen"]["name"];
 
-        // Comprobamos si se ha subido un archivo correctamente
+        // Miramos si se ha subido alguna imagen
         if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] == 0)
         {
+            // Comprobamos que sea una imagen de verdad
             if (getimagesize($archivo_temporal))
             {
-                // Construimos la ruta final donde guardaremos la imagen
+                // Colocamos la ruta donde vamos a guardar la foto
                 $ruta_final = $directorio . $archivo_original;
 
-                // Movemos la imagen desde la ruta temporal al directorio final
+                // Movemos la foto de la carpeta temporal a la final
                 if(move_uploaded_file($archivo_temporal, $ruta_final))
                 {
                     echo "<h1> $archivo_original </h1>";
                     echo "<img src='$ruta_final' alt='$archivo_original'>";
                 }
-                //Si ha ocurrido un error mostramos por pantalla
                 else
                 {
                     $error = "Se ha producido un error subiendo el icono";
@@ -55,29 +72,28 @@
             }
             else
             {
-                // Redirigimos al formulario con error si el archivo no es una imagen
                 $error = "Sólo se permiten imagenes";
             }
         }
     }
+
+    // Si no hay fallos, actualizamos los datos en la base de datos
     if (empty($error))
     {
+        // Si es la acción de editar
         if (isset($_POST["accion"]) && $_POST["accion"] == "editar") {
         
+            // Comprobamos si se ha mandado el formulario
             if(isset($_POST["id"]) && !empty($_POST["id"])) {
+
+                // Recogemos los datos del formulario, usamos mysqli_real_escape_string para evitar inyecciones SQL
                 $id = intval($_POST["id"]);
                 $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
                 $email = mysqli_real_escape_string($conn, $_POST["email"]);
                 $rol = intval($_POST["rol"]);
                 $icono = $ruta_final;
 
-                // Lógica para actualizar password solo si se escribe una nueva
-                $sql_pass = "";
-                if (!empty($_POST["password"])) {
-                    $pass = md5(mysqli_real_escape_string($conn, $_POST["password"]));
-                    $sql_pass = ", password = '$pass'";
-                }
-
+                // Actualizamos los datos del usuario con id = $id
                 try {
                     $sql = "UPDATE usuarios SET
                             nombre = '$nombre',
@@ -87,8 +103,10 @@
                             $sql_pass
                         WHERE id = $id";
 
+                    // Ejecutamos la consulta
                     mysqli_query($conn, $sql);
 
+                    // Redirigimos a la gestión de usuarios con mensaje de éxito
                     header("location:gestion_usuarios.php?msg=0");
                 }
                 catch (mysqli_sql_exception $e) {
@@ -99,7 +117,7 @@
             }
         }
     }
-
+    // Si no recibimos el id, redirigimos a la lista de usuarios
     if(!isset($_GET["id"])) {
         header("location:gestion_usuarios.php");
         die();
@@ -126,10 +144,12 @@
             <div class="card-body">
 
             <?php
+                // Sacamos los datos del usuario para rellenar el formulario
                 $id = intval($_GET["id"]);
                 $sql = "SELECT * FROM usuarios WHERE id = $id";
                 $res = mysqli_query($conn, $sql);
                 
+                // Si no existe el usuario, redirigimos a la lista
                 if (mysqli_num_rows($res) > 0) {
                     $user = mysqli_fetch_assoc($res);
                 } else {
@@ -137,19 +157,18 @@
                     die();
                 }
 
-                // Comprobamos si se ha recibido un error y mostramos un mensaje de alerta correspondiente al error indicado
+                // Mostramos el aviso si hay algún error
                 if (!empty($error))
                 {
                     echo "<div class='alert alert-danger' role='alert'>❌ Error: ". $error. "</div>";
                 }
                 else
                 {
+                    // Si todo va bien tras el POST, mandamos a la lista
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $icono = $ruta_final;
-
                         header("location:gestion_usuarios.php?msg=0");
                     }
-
                 }
             ?>
 
@@ -187,8 +206,6 @@
                             <button type="submit" class="btn btn-success w-100">Guardar Cambios</button>
                             <a href="gestion_usuarios.php" class="btn btn-secondary w-100 mt-2">Cancelar</a>
                         </div>
-
-                        
                     </div>
                 </form>
             </div>

@@ -1,23 +1,33 @@
 <?php
+    // Configuramos los errores para que se muestren por pantalla
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
+    // Iniciamos la sesión
     session_start();
 
+    // Comprobamos si el usuario está logueado
     if(!isset($_SESSION["nombre"])) {
         header("location:../index.php");
         die();
     }
+    
+    // Iniciamos la conexión a la base de datos
     include "../db/db.inc";
 
+    // Sacamos los datos de la sesión
     $nombre_usuario = $_SESSION["nombre"];
     $rol = $_SESSION["rol"];
     $pagina_activa = "clientes";
 
+    // Si recibimos la acción de editar desde el formulario
     if (isset($_POST["accion"]) && $_POST["accion"] == "editar") {
         
+        // Comprobamos si se ha mandado el formulario
         if(isset($_POST["id"]) && !empty($_POST["id"])) {
+
+            // Recogemos los datos del formulario limpiando strings para evitar inyecciones SQL
             $id = intval($_POST["id"]);
             $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
             $apellidos = mysqli_real_escape_string($conn, $_POST["apellidos"]);
@@ -28,14 +38,8 @@
             $poblacion = mysqli_real_escape_string($conn, $_POST["poblacion"]);
             $provincia = mysqli_real_escape_string($conn, $_POST["provincia"]);
 
-            // Lógica para actualizar password solo si se escribe una nueva
-            $sql_pass = "";
-            if (!empty($_POST["password"])) {
-                $pass = md5(mysqli_real_escape_string($conn, $_POST["password"]));
-                $sql_pass = ", password = '$pass'";
-            }
-
             try {
+                // Montamos la consulta para actualizar los datos del cliente
                 $sql = "UPDATE clientes SET
                         nombre = '$nombre',
                         apellidos = '$apellidos',
@@ -48,8 +52,10 @@
                         $sql_pass
                     WHERE id = $id";
 
+                // Ejecutamos la consulta
                 mysqli_query($conn, $sql);
 
+                // Redirigimos a la gestión de clientes con mensaje de éxito
                 header("location:gestion_clientes.php?msg=0");
             }
             catch (mysqli_sql_exception $e) {
@@ -60,6 +66,7 @@
         }
     }
 
+    // Si no recibimos el id, volvemos a la lista de clientes
     if(!isset($_GET["id"])) {
         header("location:gestion_clientes.php");
         die();
@@ -87,10 +94,12 @@
             <div class="card-body">
 
             <?php
+                // Recogemos los datos del cliente para rellenar el formulario
                 $id = intval($_GET["id"]);
                 $sql = "SELECT * FROM clientes WHERE id = $id";
                 $res = mysqli_query($conn, $sql);
                 
+                // Si existe el cliente, recogemos los datos, si no, redirigimos
                 if (mysqli_num_rows($res) > 0) {
                     $cli = mysqli_fetch_assoc($res);
                 } else {

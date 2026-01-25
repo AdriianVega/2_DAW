@@ -1,17 +1,27 @@
 <?php
+    // Iniciamos la sesión
     session_start();
 
-    if(!isset($_SESSION["nombre"])) { header("location:../index.php"); die(); }
+    // Comprobamos la sesión para entrar
+    if(!isset($_SESSION["nombre"])) {
+        header("location:../index.php");
+        die();
+    }
+
+    // Iniciamos la conexión a la base de datos
     include "../db/db.inc";
 
+    // Si recibimos la orden de crear una categoría de prueba
     if (isset($_GET["crear_test"])) {
 
         $nombre = "Categoria Test " . random_int(1, 1000);
         $estado = 1;
 
+        // Preparamos la consulta para meter la categoría de prueba
         $sql = "INSERT INTO categorias (nombre, estado)
                 VALUES ('$nombre', '$estado')";
         
+        // Ejecutamos y redirigimos según el resultado
         if(mysqli_query($conn, $sql)){
             header("location:gestion_categorias.php?msg=test_ok");
         } else {
@@ -20,24 +30,38 @@
         exit;
     }
 
+    // Configuramos la paginación: registros por página y página actual
     $registros_por_pagina = 15;
+
+    // Obtenemos la página actual de la URL, si no está definida, por defecto será la 1
     $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 
+    // Nos aseguramos que la página no sea menor que 1
     if ($pagina < 1) {
             $pagina = 1;
     }
 
+    // Calculamos el offset para la consulta SQL
+    // La lógica del calculo es le restamos 1 a la página actual y lo multiplicamos por los registros por página
+    // Esto es porque la primera página es la 1, pero en SQL el offset empieza en 0
     $offset = ($pagina - 1) * $registros_por_pagina;
 
+    // Sacamos el total de categorías para saber cuántas páginas hay
     $sql_total = "SELECT COUNT(*) as total FROM categorias";
     $result_total = mysqli_query($conn, $sql_total);
     $row_total = mysqli_fetch_assoc($result_total);
+
+    // Calculamos el total de páginas
     $total_registros = $row_total['total'];
     $total_paginas = ceil($total_registros / $registros_por_pagina);
 
+    // Si recibimos la orden de eliminar una categoría
     if (isset($_GET["eliminar"])) {
+        
+        // Recogemos el id a borrar
         $id = intval($_GET["eliminar"]);
 
+        // Lanzamos la consulta para borrar por id
         $sql = "DELETE FROM categorias WHERE id = $id";
         
         if(mysqli_query($conn, $sql)){
@@ -48,12 +72,15 @@
         exit;
     }
 
+    // Sacamos las categorías que tocan en esta página
+    // Usamos offset para marcar el inicio correcto y el límite de registros
     $sql = "SELECT * FROM categorias
             ORDER BY id ASC
             LIMIT $offset, $registros_por_pagina";
 
     $res = mysqli_query($conn, $sql);
 
+    // Sacamos los datos de la sesión para el panel
     $nombre_usuario = $_SESSION["nombre"];
     $rol = $_SESSION["rol"];
     $pagina_activa = "categorias";
@@ -87,7 +114,9 @@
             </div>
             <div class="card-body">
                 
-                <?php if(isset($_GET['msg'])): ?>
+                <?php
+                    // Mostramos los avisos según el mensaje que llegue por la URL
+                    if(isset($_GET['msg'])): ?>
                     <?php if($_GET['msg'] == 'test_ok') { echo '<div class="alert alert-info">🤖 Categoría de prueba generada.</div>'; } ?>
                     <?php if($_GET['msg'] == '0') { echo '<div class="alert alert-success">✅ Categoría guardada correctamente.</div>'; } ?>
                     <?php if($_GET['msg'] == 'deleted') { echo '<div class="alert alert-success">🗑️ Categoría eliminada.</div>'; } ?>
@@ -105,12 +134,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while($row = mysqli_fetch_assoc($res)): ?>
+                        <?php
+                            // Recorremos los resultados para mostrar la tabla
+                            while($row = mysqli_fetch_assoc($res)): ?>
                         <tr>
                             <td><?= $row['id'] ?></td>
                             <td><strong><?= htmlspecialchars($row['nombre']) ?></strong></td>
                             <td>
-                                <?php if($row['estado'] == 0): ?>
+                                <?php
+                                    // Mostramos el badge según el estado activo o inactivo
+                                    if($row['estado'] == 0): ?>
                                     <span class="badge bg-danger">Inactivo</span>
                                 <?php else: ?>
                                     <span class="badge bg-info text-dark">Activo</span>
@@ -119,7 +152,9 @@
                             <td><small><?= date("d/m/Y H:i", strtotime($row['create_time'])) ?></small></td>
                             <td class="text-end">
                                 <a href="edit_categoria.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
-                                <?php if ($_SESSION["rol"] == "1"): ?>
+                                <?php
+                                    // Solo el admin puede ver el botón de borrar
+                                    if ($_SESSION["rol"] == "1"): ?>
                                     <button onclick="eliminar(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">🗑️</button>
                                 <?php endif; ?>
                             </td>

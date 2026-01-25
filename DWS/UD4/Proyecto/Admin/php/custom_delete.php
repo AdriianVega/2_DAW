@@ -17,17 +17,21 @@
 </div>
 
 <script>
+    // Función que lanza el modal y gestiona el clic en eliminar
     function eliminar(id)
     {
-        const modal = new
+        // Creamos la instancia del modal de Bootstrap
+        const modal = new bootstrap.Modal(document.getElementById('confirmModal'));
         
-        bootstrap.Modal(document.getElementById('confirmModal'));
-        
+        // Mostramos el modal
         modal.show();
 
+        // Al pulsar en eliminar, redirigimos a la misma página mandando el id
         document.getElementById('confirmDeleteBtn').onclick = () => {
+            // Sacamos el nombre del archivo actual para la URL
             const archivoActual = window.location.pathname.split("/").pop();
 
+            // Mandamos el parámetro eliminar por GET
             window.location.href = archivoActual + '?eliminar=' + id;
 
             modal.hide();

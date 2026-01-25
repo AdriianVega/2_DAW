@@ -1,29 +1,38 @@
 <?php
+    // Iniciamos la sesión
     session_start();
 
+    // Comprobamos el rol para que solo entren administradores
     if (!isset($_SESSION["rol"]) || (int)$_SESSION["rol"] !== 1) {
+        
+        // Redirigimos al inicio si no es admin
         header("location:../index.php");
         die();
     }
 
+    // Iniciamos la conexión a la base de datos
     include "../db/db.inc";
 
+    // Definimos el directorio donde están las fotos
     $directorio = "../img/usuarios/";
 
+    // Si recibimos la orden de crear un test
     if (isset($_GET["crear_test"])) {
-        // Generamos un sufijo aleatorio de 6 caracteres hex
+        
+        // Generamos un sufijo aleatorio para el nombre y email
         $random_suffix = substr(md5(uniqid(mt_rand(), true)), 0, 6);
         
         $nombre = "Usuario Test " . $random_suffix;
-        // Formato solicitado: randomizado + @gmail.com
         $email = "test_" . $random_suffix . "@gmail.com";
-        $password = password_hash("1234", PASSWORD_DEFAULT); // Contraseña por defecto: 1234
-        $rol_empleado = 0; // Rol empleado por defecto
+        $password = password_hash("1234", PASSWORD_DEFAULT);
+        $rol_empleado = 0;
         $icono = "admin.jpg";
 
+        // Preparamos la consulta para meter el usuario de prueba
         $sql = "INSERT INTO usuarios (nombre, email, password, rol, icono)
                 VALUES ('$nombre', '$email', '$password', '$rol_empleado', '$icono')";
         
+        // Ejecutamos y redirigimos según el resultado
         if(mysqli_query($conn, $sql)){
             header("location:gestion_usuarios.php?msg=test_ok");
         } else {
@@ -32,38 +41,46 @@
         exit;
     }
 
-    // 1. CONFIGURACIÓN DE PAGINACIÓN
+    // Configuramos la paginación: registros por página y página actual
     $registros_por_pagina = 15;
+
+    // Obtenemos la página actual de la URL, si no está definida, por defecto será la 1
     $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+
+    // Nos aseguramos que la página no sea menor que 1
     if ($pagina < 1) {
             $pagina = 1;
     }
 
+    // Calculamos el offset para la consulta SQL
+    // La lógica del calculo es le restamos 1 a la página actual y lo multiplicamos por los registros por página
+    // Esto es porque la primera página es la 1, pero en SQL el offset empieza en 0
     $offset = ($pagina - 1) * $registros_por_pagina;
 
-    // 2. OBTENER TOTAL DE REGISTROS (Para saber cuántas páginas hay)
-    // Cambia 'productos' por la tabla que estés usando (clientes, pedidos, usuarios)
+    // Sacamos el total de usuarios para saber cuántas páginas hay
     $sql_total = "SELECT COUNT(*) as total FROM usuarios";
     $result_total = mysqli_query($conn, $sql_total);
     $row_total = mysqli_fetch_assoc($result_total);
+
+    // Calculamos el total de páginas
     $total_registros = $row_total['total'];
     $total_paginas = ceil($total_registros / $registros_por_pagina);
 
-    // 3. CONSULTA CON LÍMITE
-    // OJO: Si tienes JOINs u ORDER BY, el LIMIT va siempre AL FINAL
-    $sql = "SELECT * FROM usuarios ORDER BY id DESC LIMIT $offset, $registros_por_pagina";
-    $res = mysqli_query($conn, $sql); // Aquí guardamos los resultados de ESTA página
-    // BORRAR USUARIO
+    // Si recibimos la orden de eliminar un usuario
     if (isset($_GET["eliminar"])) {
-        $id_usu = intval($_GET["eliminar"]);
         
-        // Evitar que se borre al usuario 'admin' principal (id 1) por seguridad básica
-        if($rol == 1) {
+        // Recogemos el id a borrar
+        $id_usu = intval($_GET["eliminar"]);
+
+        // No dejamos que se borre al admin principal con id 1
+        if($id_usu == 1) {
             header("location:gestion_usuarios.php?msg=error_admin");
             die();
         }
 
+        // Lanzamos la consulta para borrar
         $sql = "DELETE FROM usuarios WHERE id = $id_usu";
+        
         if(mysqli_query($conn, $sql)){
             header("location:gestion_usuarios.php?msg=deleted");
         } else {
@@ -72,10 +89,12 @@
         exit;
     }
 
-    // LISTAR USUARIOS
+    // Sacamos los usuarios que tocan en esta página
+    // Usamos offset para marcar el inicio correcto y el límite de registros
     $sql = "SELECT * FROM usuarios ORDER BY id ASC LIMIT $offset, $registros_por_pagina";
     $res = mysqli_query($conn, $sql);
     
+    // Sacamos los datos de la sesión para el panel
     $nombre_usuario = $_SESSION["nombre"];
     $rol = $_SESSION["rol"];
     $pagina_activa = "usuarios";
@@ -108,12 +127,15 @@
             </div>
             <div class="card-body">
                 
-                <?php if(isset($_GET['msg'])): ?>
+                <?php
+                    // Mostramos los avisos según el mensaje que llegue por la URL
+                    if(isset($_GET['msg'])): ?>
                     <?php if($_GET['msg'] == 'test_ok') { echo '<div class="alert alert-info">🤖 Usuario de prueba generado (Pass: 1234).</div>'; } ?>
                     <?php if($_GET['msg'] == '0') { echo '<div class="alert alert-success">✅ Usuario guardado correctamente.</div>'; } ?>
                     <?php if($_GET['msg'] == 'deleted') { echo '<div class="alert alert-success">🗑️ Usuario eliminado.</div>'; } ?>
                     <?php if($_GET['msg'] == 'error') { echo '<div class="alert alert-danger">❌ Error en la base de datos.</div>'; } ?>
-                    <?php if($_GET['msg'] == 'error_admin') { echo '<div class="alert alert-warning">⚠️ No puedes eliminar al Super Admin (ID 1).</div>'; } ?>
+                    <?php if($_GET['msg'] == 'error_admin') { echo '<div class="alert alert-warning">⚠️ No puedes eliminar al Super Admin.</div>'; } ?>
+                    <?php if($_GET['msg'] == 'error_mail') { echo '<div class="alert alert-warning">⚠️ Ya existe un usuario con ese email.</div>'; } ?>
                 <?php endif; ?>
 
                 <table class="table table-striped table-hover align-middle">
@@ -129,14 +151,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while($row = mysqli_fetch_assoc($res)): ?>
+                        <?php
+                            // Recorremos los resultados para mostrar la tabla
+                            while($row = mysqli_fetch_assoc($res)): ?>
                             <tr>
                                 <td><?= $row['id'] ?></td>
                                 <td><img src="<?=  $directorio.$row["icono"] ?>" alt="Icono de usuario" style="width: 100px;"></td>
                                 <td><strong><?= htmlspecialchars($row['nombre']) ?></strong></td>
                                 <td><?= htmlspecialchars($row['email']) ?></td>
                                 <td>
-                                    <?php if($row['rol'] == 1): ?>
+                                    <?php
+                                        // Mostramos el badge según el rol
+                                        if($row['rol'] == 1): ?>
                                         <span class="badge bg-danger">Administrador</span>
                                     <?php else: ?>
                                         <span class="badge bg-info text-dark">Empleado</span>

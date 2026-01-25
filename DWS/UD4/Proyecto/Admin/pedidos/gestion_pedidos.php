@@ -1,20 +1,28 @@
 <?php
+    // Iniciamos la sesión
     session_start();
 
-    if(!isset($_SESSION["nombre"])) { header("location:../index.php"); die(); }
+    // Comprobamos la sesión para entrar
+    if(!isset($_SESSION["nombre"])) {
+        header("location:../index.php");
+        die();
+    }
+    
+    // Iniciamos la conexión a la base de datos
     include "../db/db.inc";
 
+    // Si recibimos la orden de crear un pedido de prueba
     if (isset($_GET["crear_test"])) {
 
-        /* Asignamos IDs aleatorios asumiendo que existen esos registros
-        en las tablas clientes y productos para testear */
-
+        // Asignamos IDs por defecto asumiendo que existen para testear
         $cliente_id = 1;
         $producto_id = 1;
 
+        // Preparamos la consulta para meter el pedido de prueba
         $sql = "INSERT INTO pedidos (cliente_id, producto_id)
                 VALUES ('$cliente_id', '$producto_id')";
         
+        // Ejecutamos y redirigimos según el resultado
         if(mysqli_query($conn, $sql)){
             header("location:gestion_pedidos.php?msg=test_ok");
         } else {
@@ -23,24 +31,38 @@
         exit;
     }
 
+    // Configuramos la paginación: registros por página y página actual
     $registros_por_pagina = 25;
+
+    // Obtenemos la página actual de la URL, si no está definida, por defecto será la 1
     $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 
+    // Nos aseguramos que la página no sea menor que 1
     if ($pagina < 1) {
             $pagina = 1;
     }
 
+    // Calculamos el offset para la consulta SQL
+    // La lógica del calculo es le restamos 1 a la página actual y lo multiplicamos por los registros por página
+    // Esto es porque la primera página es la 1, pero en SQL el offset empieza en 0
     $offset = ($pagina - 1) * $registros_por_pagina;
 
+    // Sacamos el total de pedidos para saber cuántas páginas hay
     $sql_total = "SELECT COUNT(*) as total FROM pedidos";
     $result_total = mysqli_query($conn, $sql_total);
     $row_total = mysqli_fetch_assoc($result_total);
+
+    // Calculamos el total de páginas
     $total_registros = $row_total['total'];
     $total_paginas = ceil($total_registros / $registros_por_pagina);
 
+    // Si recibimos la orden de eliminar un pedido
     if (isset($_GET["eliminar"])) {
+        
+        // Recogemos el id a borrar
         $id = intval($_GET["eliminar"]);
 
+        // Lanzamos la consulta para borrar por id
         $sql = "DELETE FROM pedidos WHERE id = $id";
         
         if(mysqli_query($conn, $sql)){
@@ -51,7 +73,8 @@
         exit;
     }
 
-    // Consulta con JOINS para obtener nombres en lugar de IDs
+    // Sacamos los pedidos con JOINS para obtener los nombres en lugar de los IDs
+    // Usamos offset para marcar el inicio correcto y el límite de registros
     $sql = "SELECT p.*, c.nombre AS nombre_cliente, pr.nombre AS nombre_producto
             FROM pedidos p
             LEFT JOIN clientes c ON p.cliente_id = c.id
@@ -61,6 +84,7 @@
 
     $res = mysqli_query($conn, $sql);
 
+    // Sacamos los datos de la sesión para el panel
     $nombre_usuario = $_SESSION["nombre"];
     $rol = $_SESSION["rol"];
     $pagina_activa = "pedidos";
@@ -94,7 +118,9 @@
             </div>
             <div class="card-body">
                 
-                <?php if(isset($_GET['msg'])): ?>
+                <?php
+                    // Mostramos los avisos según el mensaje que llegue por la URL
+                    if(isset($_GET['msg'])): ?>
                     <?php if($_GET['msg'] == 'test_ok') { echo '<div class="alert alert-info">🤖 Pedido de prueba generado.</div>'; } ?>
                     <?php if($_GET['msg'] == '0') { echo '<div class="alert alert-success">✅ Pedido guardado correctamente.</div>'; } ?>
                     <?php if($_GET['msg'] == 'deleted') { echo '<div class="alert alert-success">🗑️ Pedido eliminado.</div>'; } ?>
@@ -112,7 +138,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while($row = mysqli_fetch_assoc($res)): ?>
+                        <?php
+                            // Recorremos los resultados para mostrar la tabla
+                            while($row = mysqli_fetch_assoc($res)): ?>
                         <tr>
                             <td><?= $row['id'] ?></td>
                             <td><strong><?= htmlspecialchars($row['nombre_cliente'] ?? "Desconocido/Borrado") ?></strong></td>
@@ -120,7 +148,9 @@
                             <td><small><?= date("d/m/Y H:i", strtotime($row['create_time'])) ?></small></td>
                             <td class="text-end">
                                 <a href="edit_pedido.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
-                                <?php if ($_SESSION["rol"] == "1"): ?>
+                                <?php
+                                    // Solo el admin puede ver el botón de borrar
+                                    if ($_SESSION["rol"] == "1"): ?>
                                     <button onclick="eliminar(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">🗑️</button>
                                 <?php endif; ?>
                             </td>

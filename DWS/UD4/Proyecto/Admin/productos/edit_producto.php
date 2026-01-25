@@ -1,65 +1,71 @@
 <?php
+    // Configuramos los errores para que se muestren por pantalla
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
+    // Iniciamos la sesión
     session_start();
 
+    // Comprobamos si el usuario está logueado
     if(!isset($_SESSION["nombre"])) {
         header("location:../index.php");
         die();
     }
+
+    // Iniciamos la conexión a la base de datos
     include "../db/db.inc";
 
+    // Función para limpiar el nombre de la imagen y evitar caracteres raros
     function nombreImagen($str) {
-        $str = strtolower(trim($str)); // Convertir a minúsculas y quitar espacios
-        $str = preg_replace('/[^a-z0-9-]/', '-', $str); // Reemplazar todo lo que no sea letra o número por un guión
-        $str = preg_replace('/-+/', '-', $str); // Evitar guiones dobles (---)
-        return trim($str, '-'); // Quitar guiones al principio y al final
+        $str = strtolower(trim($str));
+        $str = preg_replace('/[^a-z0-9-]/', '-', $str);
+        $str = preg_replace('/-+/', '-', $str);
+        return trim($str, '-');
     }
 
+    // Sacamos los datos de la sesión
     $nombre_usuario = $_SESSION["nombre"];
     $rol = $_SESSION["rol"];
     $pagina_activa = "productos";
 
+    // Si recibimos la acción de editar desde el formulario
     if (isset($_POST["accion"]) && $_POST["accion"] == "editar") {
 
         $directorio = "../img/productos/";
 
+        // Recogemos el id del producto
         $id = intval($_POST["id"]);
+
+        // Sacamos la imagen actual por si no se cambia
         $sql = "SELECT imagen FROM productos WHERE id = $id";
         $res_icono = mysqli_query($conn, $sql);
         $datos = mysqli_fetch_assoc($res_icono);
 
+        // Guardamos la ruta por defecto
         $ruta_final = $datos["imagen"];
 
-        // Comprobamos si se ha subido un archivo correctamente
+        // Miramos si se ha subido una imagen nueva
         if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] == 0)
         {
-            $nombre_imagen = $prod["imagen"];
-
-            // Obtenemos la ruta temporal y el nombre original del archivo subido
+            // Sacamos la ruta temporal y preparamos el nombre único
             $archivo_temporal = $_FILES["imagen"]["tmp_name"];
             $archivo_original = uniqid().$_FILES["imagen"]["name"];
-
             $extension = pathinfo($archivo_original, PATHINFO_EXTENSION);
 
-            // Verificamos si el archivo subido es una imagen
+            // Comprobamos que sea una imagen de verdad
             if (getimagesize($archivo_temporal))
             {
-                // Cambiamos el nombre de la imagen final
+                // Colocamos el nuevo nombre basado en el producto y el tiempo
                 $nuevo_nombre = nombreImagen($_POST["nombre"]) . "_" . time() . "." . $extension;
-
-                // Construimos la ruta final donde guardaremos la imagen
                 $ruta_final = $directorio . $nuevo_nombre;
 
-                // Movemos la imagen desde la ruta temporal al directorio final
+                // Movemos la foto de la carpeta temporal a la final
                 if(move_uploaded_file($archivo_temporal, $directorio . $nuevo_nombre))
                 {
                     echo "<h1> $nuevo_nombre </h1>";
                     echo "<img src='$ruta_final' alt='$archivo_original'>";
                 }
-                //Si ha ocurrido un error mostramos por pantalla
                 else
                 {
                     $error = "Se ha producido un error subiendo el icono";
@@ -67,24 +73,24 @@
             }
             else
             {
-                // Redirigimos al formulario con error si el archivo no es una imagen
                 $error = "Sólo se permiten imagenes";
             }
         }
         
+        // Si recibimos el nombre, procedemos a actualizar
         if(isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
+
+            // Recogemos los datos del formulario limpiando strings para evitar inyecciones SQL
             $id = intval($_POST["id"]);
             $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
             $descripcion = mysqli_real_escape_string($conn, $_POST["descripcion"]);
             $precio = floatval($_POST["precio"]);
             $stock = intval($_POST["stock"]);
             $categoria_id = intval($_POST["categoria_id"]);
-            $imagen = mysqli_real_escape_string($conn, $_POST["imagen"]);
             $estado = intval($_POST["estado"]);
-            $sql_check = "SELECT * FROM productos WHERE nombre='$nombre' AND id != $id";
-            $res = mysqli_query($conn, $sql_check);
 
             try {
+                // Montamos la consulta para actualizar los datos
                 $sql = "UPDATE productos SET
                     nombre = '$nombre',
                     descripcion = '$descripcion',
@@ -92,20 +98,20 @@
                     stock = $stock,
                     categoria_id = $categoria_id, ";
                 
+                // Si hay una imagen nueva, la metemos en la consulta
                 if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] == 0) {
                     $sql .= "imagen = '$nuevo_nombre', ";
                 }
 
                 $sql .= "estado = $estado WHERE id = $id";
 
+                // Ejecutamos la actualización
                 mysqli_query($conn, $sql);
 
+                // Redirigimos a la gestión con mensaje de éxito
                 header("location:gestion_productos.php?msg=0");
             }
             catch (mysqli_sql_exception $e) {
-
-                // Debug: descomentar si falla para ver el error real
-                //mysqli_error($conn); die();
                 header("location:gestion_productos.php?msg=error");
             }
 
@@ -113,6 +119,7 @@
         }
     }
 
+    // Si no recibimos el id por GET, volvemos a la lista
     if(!isset($_GET["id"])) {
         header("location:gestion_productos.php");
         die();
@@ -140,10 +147,12 @@
             <div class="card-body">
 
             <?php
+                // Sacamos los datos del producto para rellenar el formulario
                 $id = intval($_GET["id"]);
                 $sql = "SELECT * FROM productos WHERE id = $id";
                 $res = mysqli_query($conn, $sql);
                 
+                // Si existe el producto, recogemos los datos, si no, redirigimos
                 if (mysqli_num_rows($res) > 0) {
                     $prod = mysqli_fetch_assoc($res);
                 } else {
@@ -190,6 +199,7 @@
                             <label for="estado" class="form-label">Estado:</label>
                             <select name="estado" id="estado" class="form-select" required>
                                 <?php
+                                    // Comprobamos el estado actual para marcar el select
                                     $est = $prod['estado'];
                                     echo '<option value="1" ' . ($est == 1 ? 'selected' : '') . '>Activo</option>';
                                     echo '<option value="0" ' . ($est == 0 ? 'selected' : '') . '>Inactivo</option>';

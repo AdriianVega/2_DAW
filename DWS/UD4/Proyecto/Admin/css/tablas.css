@@ -34,6 +34,22 @@ body::before {
   box-shadow: 5px 0 25px rgba(213, 0, 249, 0.2);
   transition: left 0.3s ease-in-out;
 }
+#sidebar #flecha {
+  position: absolute;
+  top: 30px;
+  right: -28px;
+  background-color: rgba(15, 23, 42, 0.9);
+  border-top: 1px solid #D500F9;
+  border-right: 1px solid #D500F9;
+  border-bottom: 1px solid #D500F9;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+#sidebar #flecha img {
+  width: 25px;
+  filter: invert(1);
+  border-radius: 0px;
+}
 #sidebar img {
   margin: 0 auto;
   border-radius: 100%;
@@ -53,15 +69,15 @@ body::before {
 }
 #sidebar .icon {
   width: 20px;
-  filter: invert(1);
 }
 #sidebar::after {
   content: "";
   position: absolute;
+  width: 100px;
   top: 0;
   right: -100px;
-  width: 200px;
   height: 100%;
+  z-index: 0;
   background: transparent;
 }
 #sidebar:hover {

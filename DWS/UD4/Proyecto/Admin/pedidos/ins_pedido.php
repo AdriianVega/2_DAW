@@ -1,26 +1,37 @@
 <?php
+    // Iniciamos la sesión
     session_start();
+
+    // Comprobamos si el usuario está logueado
     if(!isset($_SESSION["nombre"])) {
         header("location:../index.php");
         die();
     }
+
+    // Iniciamos la conexión a la base de datos
     include "../db/db.inc";
 
+    // Sacamos los datos de la sesión
     $nombre_usuario = $_SESSION["nombre"];
     $rol = $_SESSION["rol"];
     $pagina_activa = "pedidos";
 
+    // Si recibimos los datos del pedido
     if(isset($_POST["cliente_id"]) && !empty($_POST["cliente_id"])) {
         
+        // Recogemos los datos del formulario
         $cliente_id = intval($_POST["cliente_id"]);
         $producto_id = intval($_POST["producto_id"]);
         
         try {
+                // Metemos el nuevo pedido en la base de datos
                 $sql = "INSERT INTO pedidos (cliente_id, producto_id)
                 VALUES ('$cliente_id', '$producto_id');";
 
+                // Ejecutamos la consulta
                 mysqli_query($conn, $sql);
 
+                // Redirigimos a la gestión de pedidos con mensaje de éxito
                 header("location:gestion_pedidos.php?msg=0");
             }
             catch (mysqli_sql_exception $e) {

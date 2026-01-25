@@ -1,21 +1,28 @@
 <?php
+    // Iniciamos la sesión
     session_start();
 
+    // Comprobamos si el usuario está logueado
     if(!isset($_SESSION["nombre"])) {
         header("location:../index.php");
         die();
     }
 
+    // Iniciamos la conexión a la base de datos
     include "../db/db.inc";
 
+    // Definimos el directorio donde están las fotos
     $directorio = "../img/clientes/";
 
+    // Sacamos los datos de la sesión
     $nombre_usuario = $_SESSION["nombre"];
     $rol = $_SESSION["rol"];
     $pagina_activa = "clientes";
 
+    // Si recibimos los datos del cliente
     if(isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
         
+        // Recogemos los datos del formulario limpiando strings para evitar inyecciones SQL
         $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
         $apellidos = mysqli_real_escape_string($conn, $_POST["apellidos"]);
         $email = mysqli_real_escape_string($conn, $_POST["email"]);
@@ -27,22 +34,26 @@
         $poblacion = mysqli_real_escape_string($conn, $_POST["poblacion"]);
         $provincia = mysqli_real_escape_string($conn, $_POST["provincia"]);
 
-        // Comprobar duplicidad de email
+        // Comprobamos si el email ya existe en la base de datos
         $sql_check = "SELECT * FROM clientes WHERE email='$email'";
         $res = mysqli_query($conn, $sql_check);
         
         if (mysqli_num_rows($res) > 0)
         {
+            // Si el email ya existe, mandamos error
             header("location:gestion_clientes.php?msg=error");
             die();
         }
         
         try {
+                // Metemos el nuevo cliente en la base de datos
                 $sql = "INSERT INTO clientes (nombre, apellidos, email, password, direccion, genero, codpostal, poblacion, provincia)
                 VALUES ('$nombre', '$apellidos', '$email', '$password', '$direccion', '$genero', '$codpostal', '$poblacion', '$provincia');";
 
+                // Ejecutamos la consulta
                 mysqli_query($conn, $sql);
 
+                // Redirigimos a la gestión de clientes con mensaje de éxito
                 header("location:gestion_clientes.php?msg=0");
             }
             catch (mysqli_sql_exception $e) {

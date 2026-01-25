@@ -1,51 +1,144 @@
-$color-magenta: #f06;
-$color-blue: #4a90e2;
-$color-dark: #1a1a1a;
-$border-thickness: 6px;
-$card-radius: 12px;
-$color_texto: white;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-@mixin gradient-border-effect($bg-color, $gradient) {
-    border: $border-thickness solid transparent;
-    background-image: linear-gradient($bg-color, $bg-color), $gradient;
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    border-radius: $card-radius !important;
+// Variables de colores
+$fondo: #1a1a2e;
+$fondo-tarjeta: rgba(11, 20, 42, 0.7);
+$borde-tarjeta: 1px solid rgba(255, 255, 255, 0.1);
+
+$texto-primario: #ffffff;
+$texto-secundario: #b0b0b0;
+$color-primario: #e94560;
+$color-secundario: #0f3460;
+
+// Mixin para las animaciones
+@mixin animation($name, $duration, $timing: linear) {
+    -webkit-animation: $name $duration $timing;
+    -moz-animation: $name $duration $timing;
+    -o-animation: $name $duration $timing;
+    animation: $name $duration $timing;
+}
+
+// Mixin para las transiciones
+@mixin transition($prop, $duration, $timing: ease-out) {
+    -webkit-transition: $prop $duration $timing;
+    -moz-transition: $prop $duration $timing;
+    -o-transition: $prop $duration $timing;
+    transition: $prop $duration $timing;
+}
+
+// Mixin para el efecto cristal
+@mixin glassefect {
+    background: $fondo-tarjeta;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: $borde-tarjeta;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+// Animación para que el contenido aparezca bajando
+@keyframes animacion_inicial {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 body {
-    background: {
-        image: url("../img/fondo.jpg");
-        repeat: no-repeat;
-        size: cover;
+    // Lanzamos la animación al cargar la página
+    @include animation(animacion_inicial, 0.3s);
+
+    font-family: 'Inter', sans-serif;
+    position: relative;
+
+    // Colocamos el fondo fijo para que ocupe toda la pantalla
+    &::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+
+        // Mandamos el fondo hacia atrás de todo
+        z-index: -1;
+
+        background-image: url("../img/fondo.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        // Metemos el efecto difuminado y un poco de zoom
+        filter: blur(8px);
+        transform: scale(1.1);
     }
+}
 
-    min-height: 100vh;
+header {
+    // Centramos el texto y le damos espacio por arriba
+    text-align: center;
+    padding-top: 50px;
+    color: $texto-primario;
 
-    form 
-    {
-        label
-        {
-            color: $color_texto;
+    img {
+        // Redondeamos los bordes y le damos tamaño a la imagen
+        border-radius: 16px;
+        width: 10%;
+    }
+}
+
+main {
+    // Usamos flex para colocar las tarjetas y que se centren
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 100px;
+    margin: 0 auto;
+
+    a {
+        // Quitamos el subrayado de los enlaces
+        text-decoration: none;
+
+        // Le damos un tamaño base para que entren 3 por fila
+        flex: 0 1 30%;
+
+        article {
+            // Aplicamos el efecto cristal que hemos definido arriba
+            @include glassefect();
+
+            text-align: center;
+            color: $texto-primario;
+            border-radius: 16px;
+
+            // Metemos una transición para los cambios
+            @include transition(all, 0.3s, ease-out);
+
+            // Efectos al pasar el ratón por encima
+            &:hover {
+                // Movemos la tarjeta un poco hacia arriba y cambiamos el color del borde
+                transform: translateY(-5px);
+                border-color: $color-primario;
+
+                // Ponemos una sombra con el color principal
+                box-shadow: 0 0 15px rgba(233, 69, 96, 0.4);
+            }
+
+            img {
+                // Invertimos el color de los iconos y le damos tamaño
+                filter: invert(1);
+                width: 13%;
+                padding: 30px 0;
+            }
+
+            h3 {
+                // Quitamos el margen para que el título quede ajustado
+                padding: 0;
+                margin-top: 0;
+            }
         }
-    }
-}
-
-.gradient-border-card {
-    @include gradient-border-effect($color-dark, linear-gradient(45deg, $color-magenta, $color-blue));
-    
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.gradient-button {
-    border: 2px solid $color-magenta;
-    background-color: $color-magenta;
-    transition: all 0.3s ease;
-    font-weight: bold;
-
-    &:hover {
-        background-color: $color-magenta;
-        border-color: $color-blue;
-        transform: translateY(-2px);
     }
 }

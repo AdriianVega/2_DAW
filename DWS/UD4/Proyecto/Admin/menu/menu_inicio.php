@@ -1,13 +1,16 @@
 <?php
+    // Iniciamos la sesión
     session_start();
 
+    // Comprobamos si el usuario ha iniciado sesión
     if (!isset($_SESSION["nombre"]))
     {
+        // Si no ha iniciado sesión, lo mandamos al index
         header("location: ../../index.php");
         die();
     }
 
-
+    // Sacamos los datos de la sesión para mostrarlos en la cabecera
     $nombre = htmlspecialchars($_SESSION["nombre"]);
     $rol = $_SESSION["rol"];
     $icono = $_SESSION["icono"];
@@ -27,6 +30,7 @@
         <img src="<?= $icono ?>" alt="Foto de perfil">
         <h1 class="my-3">Bienvenido <?= $nombre; ?> </h1>
             <?php
+                // Metemos un badge diferente según si es admin o empleado
                 if ($rol === 1)
                 {
             ?>
@@ -45,9 +49,10 @@
 
     </header>
     <main>
-    </main>
+        </main>
 
     <script>
+        // Guardamos el rol en un objeto global para que el script JS pueda leerlo
         const USER_CONFIG = {
             rol: <?= json_encode($_SESSION["rol"]) ?>,
         };
