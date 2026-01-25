@@ -63,7 +63,7 @@
     $res = mysqli_query($conn, $sql);
 
     $nombre_usuario = $_SESSION["nombre"];
-    $rol = $_SESSION["rol"];    
+    $rol = $_SESSION["rol"];
     $pagina_activa = "clientes";
 ?>
 
@@ -135,7 +135,9 @@
                             <td><small><?= date("d/m/Y", strtotime($row['create_time'])) ?></small></td>
                             <td class="text-end">
                                 <a href="edit_cliente.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
-                                <button onclick="eliminar(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">🗑️</button>
+                                <?php if ($_SESSION["rol"] == "1"): ?>
+                                    <button onclick="eliminar(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">🗑️</button>
+                                <?php endif; ?>
                             </td>
                         </tr>
                         <?php endwhile; ?>

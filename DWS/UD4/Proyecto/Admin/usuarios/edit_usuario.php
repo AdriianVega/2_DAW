@@ -5,10 +5,11 @@
 
     session_start();
 
-    if(!isset($_SESSION["nombre"])) {
+    if (!isset($_SESSION["rol"]) || (int)$_SESSION["rol"] !== 1) {
         header("location:../index.php");
         die();
     }
+    
     include "../db/db.inc";
 
     $directorio = "../img/usuarios/";
@@ -20,37 +21,43 @@
     $pagina_activa = "usuarios";
 
     if (isset($_POST["email"])) {
+
+        $id = intval($_POST["id"]);
+        $sql = "SELECT icono FROM usuarios WHERE id = $id";
+        $res_icono = mysqli_query($conn, $sql);
+        $datos = mysqli_fetch_assoc($res_icono);
+
+        $ruta_final = $datos["icono"];
+
         // Obtenemos la ruta temporal y el nombre original del archivo subido
         $archivo_temporal = $_FILES["imagen"]["tmp_name"];
         $archivo_original = uniqid().$_FILES["imagen"]["name"];
 
         // Comprobamos si se ha subido un archivo correctamente
-        if (!isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] != 0)
+        if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] == 0)
         {
-            $error = "No se ha subido una imagen o la imagen es demasiado grande";
-        }
-        // Verificamos si el archivo subido es una imagen
-        elseif (getimagesize($archivo_temporal))
-        {
-            // Construimos la ruta final donde guardaremos la imagen
-            $ruta_final = $directorio . $archivo_original;
-
-            // Movemos la imagen desde la ruta temporal al directorio final
-            if(move_uploaded_file($archivo_temporal, $ruta_final))
+            if (getimagesize($archivo_temporal))
             {
-                echo "<h1> $archivo_original </h1>";
-                echo "<img src='$ruta_final' alt='$archivo_original'>";
+                // Construimos la ruta final donde guardaremos la imagen
+                $ruta_final = $directorio . $archivo_original;
+
+                // Movemos la imagen desde la ruta temporal al directorio final
+                if(move_uploaded_file($archivo_temporal, $ruta_final))
+                {
+                    echo "<h1> $archivo_original </h1>";
+                    echo "<img src='$ruta_final' alt='$archivo_original'>";
+                }
+                //Si ha ocurrido un error mostramos por pantalla
+                else
+                {
+                    $error = "Se ha producido un error subiendo el icono";
+                }
             }
-            //Si ha ocurrido un error mostramos por pantalla
             else
             {
-                $error = "Se ha producido un error subiendo el icono";
+                // Redirigimos al formulario con error si el archivo no es una imagen
+                $error = "Sólo se permiten imagenes";
             }
-        }
-        else
-        {
-            // Redirigimos al formulario con error si el archivo no es una imagen
-            $error = "Sólo se permiten imagenes";
         }
     }
     if (empty($error))
@@ -85,7 +92,6 @@
                     header("location:gestion_usuarios.php?msg=0");
                 }
                 catch (mysqli_sql_exception $e) {
-                    //mysqli_error($conn); die();
                     header("location:gestion_usuarios.php?msg=error");
                 }
 
@@ -174,7 +180,7 @@
 
                         <div class="mb-3">
                             <label for="imagen">Seleccione una imagen:</label>
-                            <input type="file" name="imagen" id="imagen" required>
+                            <input type="file" name="imagen" id="imagen" >
                         </div>
 
                         <div class="col-12 mt-4">

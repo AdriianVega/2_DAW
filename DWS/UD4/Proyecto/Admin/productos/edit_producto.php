@@ -11,7 +11,7 @@
     }
     include "../db/db.inc";
 
-    function nombre_imagen($str) {
+    function nombreImagen($str) {
         $str = strtolower(trim($str)); // Convertir a minúsculas y quitar espacios
         $str = preg_replace('/[^a-z0-9-]/', '-', $str); // Reemplazar todo lo que no sea letra o número por un guión
         $str = preg_replace('/-+/', '-', $str); // Evitar guiones dobles (---)
@@ -26,44 +26,50 @@
 
         $directorio = "../img/productos/";
 
-        // Obtenemos la ruta temporal y el nombre original del archivo subido
-        $archivo_temporal = $_FILES["imagen"]["tmp_name"];
-        $archivo_original = uniqid().$_FILES["imagen"]["name"];
+        $id = intval($_POST["id"]);
+        $sql = "SELECT imagen FROM productos WHERE id = $id";
+        $res_icono = mysqli_query($conn, $sql);
+        $datos = mysqli_fetch_assoc($res_icono);
 
-        $extension = pathinfo($archivo_original, PATHINFO_EXTENSION);
-
-        $nombre_imagen = $prod["imagen"];
+        $ruta_final = $datos["imagen"];
 
         // Comprobamos si se ha subido un archivo correctamente
-        if (!isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] != 0)
+        if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] == 0)
         {
-            $error = "No se ha subido una imagen o la imagen es demasiado grande";
-        }
-        // Verificamos si el archivo subido es una imagen
-        elseif (getimagesize($archivo_temporal))
-        {
-            // Cambiamos el nombre de la imagen final
-            $nuevo_nombre = nombre_imagen($_POST["nombre"]) . "_" . time() . "." . $extension;
+            $nombre_imagen = $prod["imagen"];
 
-            // Construimos la ruta final donde guardaremos la imagen
-            $ruta_final = $directorio . $nuevo_nombre;
+            // Obtenemos la ruta temporal y el nombre original del archivo subido
+            $archivo_temporal = $_FILES["imagen"]["tmp_name"];
+            $archivo_original = uniqid().$_FILES["imagen"]["name"];
 
-            // Movemos la imagen desde la ruta temporal al directorio final
-            if(move_uploaded_file($archivo_temporal, $directorio . $nuevo_nombre))
+            $extension = pathinfo($archivo_original, PATHINFO_EXTENSION);
+
+            // Verificamos si el archivo subido es una imagen
+            if (getimagesize($archivo_temporal))
             {
-                echo "<h1> $nuevo_nombre </h1>";
-                echo "<img src='$ruta_final' alt='$archivo_original'>";
+                // Cambiamos el nombre de la imagen final
+                $nuevo_nombre = nombreImagen($_POST["nombre"]) . "_" . time() . "." . $extension;
+
+                // Construimos la ruta final donde guardaremos la imagen
+                $ruta_final = $directorio . $nuevo_nombre;
+
+                // Movemos la imagen desde la ruta temporal al directorio final
+                if(move_uploaded_file($archivo_temporal, $directorio . $nuevo_nombre))
+                {
+                    echo "<h1> $nuevo_nombre </h1>";
+                    echo "<img src='$ruta_final' alt='$archivo_original'>";
+                }
+                //Si ha ocurrido un error mostramos por pantalla
+                else
+                {
+                    $error = "Se ha producido un error subiendo el icono";
+                }
             }
-            //Si ha ocurrido un error mostramos por pantalla
             else
             {
-                $error = "Se ha producido un error subiendo el icono";
+                // Redirigimos al formulario con error si el archivo no es una imagen
+                $error = "Sólo se permiten imagenes";
             }
-        }
-        else
-        {
-            // Redirigimos al formulario con error si el archivo no es una imagen
-            $error = "Sólo se permiten imagenes";
         }
         
         if(isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
@@ -80,14 +86,17 @@
 
             try {
                 $sql = "UPDATE productos SET
-                        nombre = '$nombre',
-                        descripcion = '$descripcion',
-                        precio = $precio,
-                        stock = $stock,
-                        categoria_id = $categoria_id,
-                        imagen = '$nuevo_nombre',
-                        estado = $estado
-                    WHERE id = $id";
+                    nombre = '$nombre',
+                    descripcion = '$descripcion',
+                    precio = $precio,
+                    stock = $stock,
+                    categoria_id = $categoria_id, ";
+                
+                if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] == 0) {
+                    $sql .= "imagen = '$nuevo_nombre', ";
+                }
+
+                $sql .= "estado = $estado WHERE id = $id";
 
                 mysqli_query($conn, $sql);
 

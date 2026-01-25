@@ -6,8 +6,9 @@
 
     if (isset($_GET["crear_test"])) {
 
-        // Asignamos IDs aleatorios asumiendo que existen esos registros 
-        // en las tablas clientes y productos para testear
+        /* Asignamos IDs aleatorios asumiendo que existen esos registros
+        en las tablas clientes y productos para testear */
+
         $cliente_id = 1;
         $producto_id = 1;
 
@@ -119,7 +120,9 @@
                             <td><small><?= date("d/m/Y H:i", strtotime($row['create_time'])) ?></small></td>
                             <td class="text-end">
                                 <a href="edit_pedido.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
-                                <button onclick="eliminar(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">🗑️</button>
+                                <?php if ($_SESSION["rol"] == "1"): ?>
+                                    <button onclick="eliminar(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">🗑️</button>
+                                <?php endif; ?>
                             </td>
                         </tr>
                         <?php endwhile; ?>

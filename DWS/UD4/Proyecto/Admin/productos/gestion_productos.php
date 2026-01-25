@@ -125,7 +125,7 @@
                         <?php while($row = mysqli_fetch_assoc($res)): ?>
                         <tr>
                             <td><?= $row['id'] ?></td>
-                            <td><img src="<?= $directorio. $row['imagen'] ?>" alt="<?= $directorio. $row['imagen'] ?>" style="width: 200px; height: 150px; text-align:center;"></td>
+                            <td><img src="<?= $directorio. $row['imagen'] ?>" alt="Preview del producto" style="width: 200px; height: 150px; text-align:center;"></td>
                             <td><strong><?= htmlspecialchars($row['nombre']) ?></strong></td>
                             <td><?= htmlspecialchars($row["nombre_categoria"] ?? "NaN") ?></td>
                             <td><?= htmlspecialchars($row['descripcion']) ?></td>
@@ -141,7 +141,9 @@
                             <td><small><?= date("d/m/Y", strtotime($row['create_time'])) ?></small></td>
                             <td class="text-end">
                                 <a href="edit_producto.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
-                                <button onclick="eliminar(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">🗑️</button>
+                                <?php if ($_SESSION["rol"] == "1"): ?>
+                                    <button onclick="eliminar(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">🗑️</button>
+                                <?php endif; ?>
                             </td>
                         </tr>
                         <?php endwhile; ?>

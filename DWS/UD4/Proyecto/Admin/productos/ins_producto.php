@@ -4,11 +4,10 @@
     if(!isset($_SESSION["nombre"])) {
         header("location:../index.php");
         die();
-
     }
     include "../db/db.inc";
 
-    function nombre_imagen($str) {
+    function nombreImagen($str) {
         $str = strtolower(trim($str)); // Convertir a minúsculas y quitar espacios
         $str = preg_replace('/[^a-z0-9-]/', '-', $str); // Reemplazar todo lo que no sea letra o número por un guión
         $str = preg_replace('/-+/', '-', $str); // Evitar guiones dobles (---)
@@ -30,7 +29,7 @@
         $extension = pathinfo($archivo_original, PATHINFO_EXTENSION);
 
         // Cambiamos el nombre de la imagen final
-        $nuevo_nombre = nombre_imagen($_POST["nombre"]) . "_" . time() . "." . $extension;
+        $nuevo_nombre = nombreImagen($_POST["nombre"]) . "_" . time() . "." . $extension;
 
         // Comprobamos si se ha subido un archivo correctamente
         if (!isset($_FILES["imagen"]) || $_FILES["imagen"]["error"] != 0)

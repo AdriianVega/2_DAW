@@ -6,6 +6,8 @@
         header("location: ../../index.php");
         die();
     }
+
+
     $nombre = htmlspecialchars($_SESSION["nombre"]);
     $rol = $_SESSION["rol"];
     $icono = $_SESSION["icono"];
@@ -29,7 +31,7 @@
                 {
             ?>
                 <h2 class="fs-4">
-                    <span class="badge bg-danger">Administrador</span> 
+                    <span class="badge bg-danger">Administrador</span>
                 </h2>
             <?php
                 }
@@ -44,7 +46,12 @@
     </header>
     <main>
     </main>
-    <footer></footer>
+
+    <script>
+        const USER_CONFIG = {
+            rol: <?= json_encode($_SESSION["rol"]) ?>,
+        };
+    </script>
 
     <script src="../js/secciones_menu.js"></script>
 </body>

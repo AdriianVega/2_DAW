@@ -1,12 +1,15 @@
 <?php
     session_start();
-    if(!isset($_SESSION["nombre"])) { header("location:../index.php"); die(); }
 
+    if (!isset($_SESSION["rol"]) || (int)$_SESSION["rol"] !== 1) {
+        header("location:../index.php");
+        die();
+    }
     // Definimos el directorio donde guardaremos la imagen
     $directorio = "../img/usuarios/";
-    $error = "";    
+    $error = "";
     
-    include("../db/db.inc");
+    include "../db/db.inc";
 
     $nombre_usuario = $_SESSION["nombre"];
     $rol = $_SESSION["rol"];
@@ -52,28 +55,28 @@
         $rol = intval($_POST["rol"]);
 
         // Cifrado passwrod_hash de PHP
-        $password = password_hash($_POST["password"], PASSWORD_DEFAULT); 
+        $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
         if (empty($error))
         {
             // 1. Comprobar si el email ya existe
             $check = mysqli_query($conn, "SELECT id FROM usuarios WHERE email = '$email'");
+
             if(mysqli_num_rows($check) > 0){
                 header("location:gestion_usuarios.php?msg=error_mail"); // Podrías manejar este código en el listado
                 die();
             }
 
             // 2. Insertar
-            $sql = "INSERT INTO usuarios (nombre, email, password, rol, icono) 
-                    VALUES ('$nombre', '$email', '$password', '$rol', '$archivo_original')";       
-
+            $sql = "INSERT INTO usuarios (nombre, email, password, rol, icono)
+                    VALUES ('$nombre', '$email', '$password', '$rol', '$archivo_original')";
             if (mysqli_query($conn, $sql)) {
                 header("location:gestion_usuarios.php?msg=0");
             } else {
                 header("location:gestion_usuarios.php?msg=error");
             }
             die();
-        }        
+        }
     }
 ?>
 
@@ -113,24 +116,24 @@
                 <form method="POST" autocomplete="off" enctype="multipart/form-data">
                     
                     <div class="mb-3">
-                        <label class="form-label">Nombre Completo</label>
-                        <input type="text" name="nombre" class="form-control" required>
+                        <label for="nombre" class="form-label">Nombre Completo</label>
+                        <input type="text" name="nombre" id="nombre" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Email (Usuario de acceso)</label>
-                        <input type="email" name="email" class="form-control" required>
+                        <label for="email" class="form-label">Email (Usuario de acceso)</label>
+                        <input type="email" name="email" id="email" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Contraseña</label>
+                        <label for="password" class="form-label">Contraseña</label>
                         <input type="password" name="password" class="form-control" required>
                         <div class="form-text text-white">Se guardará cifrada en la base de datos.</div>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Rol</label>
-                        <select name="rol" class="form-select">
+                        <label for="rol" class="form-label">Rol</label>
+                        <select name="rol" id="rol" class="form-select">
                             <option value="0">Empleado</option>
                             <option value="1">Administrador</option>
                         </select>

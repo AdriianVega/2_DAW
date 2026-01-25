@@ -1,18 +1,20 @@
 const main = document.getElementsByTagName("main")[0];
 
 const secciones = [
-    { titulo: "Productos", imagen: "../img/menu/caja.svg", ruta: "../productos/gestion_productos.php"},
-    { titulo: "Clientes", imagen: "../img/menu/personas.svg", ruta: "../clientes/gestion_clientes.php"},
-    { titulo: "Pedidos", imagen: "../img/menu/entrega-de-pedidos.svg", ruta: "../pedidos/gestion_pedidos.php"},
-    { titulo: "Categorías", imagen: "../img/menu/lista.svg", ruta: "../categorias/gestion_categorias.php"},
-    { titulo: "Usuarios", imagen: "../img/menu/usuario.svg", ruta: "../usuarios/gestion_usuarios.php"},
-    { titulo: "Tokens", imagen: "../img/menu/tokens.svg", ruta: "../tokens/gestion_tokens.php"},
-    { titulo: "Configuración", imagen: "../img/menu/ajuste.svg", ruta: "../configuracion/configuracion.php"},
-    { titulo: "Cerrar Sesión", imagen: "../img/menu/logout.svg", ruta: "../php/logout.php"},
+    { titulo: "Productos", imagen: "../img/menu/caja.svg", ruta: "../productos/gestion_productos.php", admin: false},
+    { titulo: "Clientes", imagen: "../img/menu/personas.svg", ruta: "../clientes/gestion_clientes.php", admin: false},
+    { titulo: "Pedidos", imagen: "../img/menu/entrega-de-pedidos.svg", ruta: "../pedidos/gestion_pedidos.php", admin: false},
+    { titulo: "Categorías", imagen: "../img/menu/lista.svg", ruta: "../categorias/gestion_categorias.php", admin: false},
+    { titulo: "Usuarios", imagen: "../img/menu/usuario.svg", ruta: "../usuarios/gestion_usuarios.php", admin: true},
+    { titulo: "Configuración", imagen: "../img/menu/ajuste.svg", ruta: "../configuracion/configuracion.php", admin: false},
+    { titulo: "Cerrar Sesión", imagen: "../img/menu/logout.svg", ruta: "../php/logout.php", admin: false},
 ]
 
 for (let seccion of secciones) {
 
+    if (seccion.admin && USER_CONFIG.rol != 1) {
+        continue;
+    }
     const enlace = document.createElement("a");
     enlace.href = seccion.ruta;
 
@@ -31,4 +33,7 @@ for (let seccion of secciones) {
 
     main.appendChild(enlace)
 }
+
+
+
 

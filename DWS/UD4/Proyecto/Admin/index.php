@@ -1,5 +1,5 @@
 <?php
-    function crear_sesion($datos) {
+    function crearSesion($datos) {
 
         $directorio = "../img/usuarios/";
 
@@ -13,10 +13,13 @@
 
     include "db/db.inc";
 
+    // Define constant for menu location
+    define('MENU_INICIO_LOCATION', "location: ./menu/menu_inicio.php");
+
     session_start();
 
     if (isset($_SESSION["email"])) {
-        header("location: ./menu/menu_inicio.php"); 
+        header(MENU_INICIO_LOCATION);
         die();
     }
     if (isset($_COOKIE["token"])) {
@@ -40,9 +43,9 @@
             $datos = $res->fetch_assoc();
 
             if ($datos && hash_equals($datos["validador"], hash("sha256", $validador))) {
-                crear_sesion($datos);
+                crearSesion($datos);
 
-                header("location: ./menu/menu_inicio.php");
+                header(MENU_INICIO_LOCATION);
                 die();
             }
         }
@@ -87,7 +90,7 @@
                                 $datos = $res->fetch_assoc();
 
                                 if ($datos && password_verify($password, $datos["password"])) {
-                                    crear_sesion($datos);
+                                    crearSesion($datos);
 
                                     $selector = bin2hex(random_bytes(6));
                                     $validador = bin2hex(random_bytes(12));
@@ -105,21 +108,21 @@
 
                                     setcookie("token", "$selector:$validador", time() + $mes, "/", "", false, true);
 
-                                    header("location: ./menu/menu_inicio.php");
+                                    header(MENU_INICIO_LOCATION);
                                     die();
                                 } else {
                                 // Si no existe el email o contraseña incorrectos
-                                echo '<div class="alert alert-warning">⚠️ El email y/o la contraseña son incorrectos.</div>'; 
+                                echo '<div class="alert alert-warning">⚠️ El email y/o la contraseña son incorrectos.</div>';
                                 }
                             } else {
-                                 // Password vacío o no enviado 
+                                 // Password vacío o no enviado
                                 echo '<div class="alert alert-warning">⚠️ Error en el campo Password </div>';
-                            }  
+                            }
                         } else {
-                            // Email no válido 
+                            // Email no válido
                             echo '<div class="alert alert-warning">⚠️ Introduce un email válido.</div>';
                         }
-                    } 
+                    }
                 ?>
                 <form method="post">
                     <label for="email" class="form-label">Email:</label>

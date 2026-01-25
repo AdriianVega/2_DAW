@@ -1,7 +1,10 @@
 <?php
     session_start();
 
-    if(!isset($_SESSION["nombre"])) { header("location:../index.php"); die(); }
+    if (!isset($_SESSION["rol"]) || (int)$_SESSION["rol"] !== 1) {
+        header("location:../index.php");
+        die();
+    }
 
     include "../db/db.inc";
 
@@ -127,26 +130,24 @@
                     </thead>
                     <tbody>
                         <?php while($row = mysqli_fetch_assoc($res)): ?>
-                        <tr>
-                            <td><?= $row['id'] ?></td>
-                            <td><img src="<?=  $directorio.$row["icono"] ?>" alt="Icono de usuario" style="width: 100px;"></td>
-                            <td><strong><?= htmlspecialchars($row['nombre']) ?></strong></td>
-                            <td><?= htmlspecialchars($row['email']) ?></td>
-                            <td>
-                                <?php if($row['rol'] == 1): ?>
-                                    <span class="badge bg-danger">Administrador</span>
-                                <?php else: ?>
-                                    <span class="badge bg-info text-dark">Empleado</span>
-                                <?php endif; ?>
-                            </td>
-                            <td><small><?= date("d/m/Y", strtotime($row['create_time'])) ?></small></td>
-                            <td class="text-end">
-                                <a href="edit_usuario.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
-                                <?php if($row['rol'] != 1): // Ocultar borrar para ID 1 ?>
+                            <tr>
+                                <td><?= $row['id'] ?></td>
+                                <td><img src="<?=  $directorio.$row["icono"] ?>" alt="Icono de usuario" style="width: 100px;"></td>
+                                <td><strong><?= htmlspecialchars($row['nombre']) ?></strong></td>
+                                <td><?= htmlspecialchars($row['email']) ?></td>
+                                <td>
+                                    <?php if($row['rol'] == 1): ?>
+                                        <span class="badge bg-danger">Administrador</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-info text-dark">Empleado</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td><small><?= date("d/m/Y", strtotime($row['create_time'])) ?></small></td>
+                                <td class="text-end">
+                                    <a href="edit_usuario.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
                                     <button onclick="eliminar(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">🗑️</button>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
                         <?php endwhile; ?>
                     </tbody>
                 </table>

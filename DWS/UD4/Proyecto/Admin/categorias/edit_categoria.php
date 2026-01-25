@@ -33,7 +33,6 @@
                 header("location:gestion_categorias.php?msg=0");
             }
             catch (mysqli_sql_exception $e) {
-                //mysqli_error($conn); die();
                 header("location:gestion_categorias.php?msg=error");
             }
 
