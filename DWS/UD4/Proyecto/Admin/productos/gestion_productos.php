@@ -176,13 +176,6 @@
                             <td><small><?= date("d/m/Y", strtotime($row['create_time'])) ?></small></td>
                             <td class="text-end">
                                 <a href="edit_producto.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">✏️</a>
-                                <?php
-                                    // Solo el admin puede ver el botón de borrar
-                                    if ($_SESSION["rol"] == "1") {
-                                ?>
-                                    <button onclick="eliminar(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">🗑️</button>
-                                <?php }
-                                ?>
                             </td>
                         </tr>
                         <?php }
@@ -215,7 +208,5 @@
             </div>
         </div>
     </div>
-
-    <?php include "../php/custom_delete.php"; ?>
 </body>
 </html>

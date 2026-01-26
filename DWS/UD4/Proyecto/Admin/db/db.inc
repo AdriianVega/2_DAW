@@ -1,6 +1,6 @@
 <?php
     $host = "localhost"; //Dirección del servidor
-    $nombreBD = "videojuegos"; //Nombre de la BD
+    $nombreBD = "videojuegos_2"; //Nombre de la BD
     $usuario = "root"; //usuario con acceso a la BD
     $password = ""; //Contraseña del usuario
     // Crear conexión
