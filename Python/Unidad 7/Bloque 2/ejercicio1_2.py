@@ -1,3 +1,6 @@
+"""
+    Ejercicio 1_2
+"""
 from bs4 import BeautifulSoup
 
 HTML_DOC = """

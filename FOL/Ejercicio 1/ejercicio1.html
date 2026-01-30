@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+</head>
+<body>
+    <form>
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name">
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email">
+
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password">
+    </form>
+
+    <script>
+        const formulario = document.getElementsByTagName("form")[0]
+        const name = document.getElementById("name")
+        const email = document.getElementById("email")
+        const password = document.getElementById("password")
+
+        formulario.addEventListener("submit", (e) => {
+            
+            if(name === "") {
+                
+            }
+        });
+        
+        
+        
+    </script>
+</body>
+</html>
