@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+$color-fondo: #0C2342;
+$color-header: rgba(25, 25, 25, 0.7);
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: white;
+}
+
+body {
+    background-color: $color-fondo;
+    padding: 40px 100px;
+    border: 2px solid black;
+
+    > div {
+        border: 1px solid black;
+        border-radius: 10px;
+
+        header > nav {
+            margin: 50px 30px;
+            border-radius: 200px;
+            background-color: $color-header;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            div {
+                display: flex;
+                align-items: center;
+                font-size: large;
+
+                img[alt="Logo Página"] {
+                    padding-left: 20px;
+                    width: 200px;
+                    display: block;
+                }
+            
+                ul {
+                    display: flex;
+                    padding: 0 50px;
+                    list-style-type: none;
+            
+                    a {
+                        text-decoration: none;
+
+                        li {
+                            width: 250px;
+                            text-align: center;
+                            padding: 30px;
+                        }
+
+                        &:hover {
+                            background-color: lighten($color-header, 10%);
+                            border-radius: 10px;
+                            
+                            li {
+                                color: darken(white, 20%);
+                            }
+                        }
+                    }
+                }
+                button {
+                    padding: 10px;
+                    margin: 0 20px;
+                    width: 150px;
+                    border-radius: 25px;
+                }
+            }
+        }
+    }
+}
