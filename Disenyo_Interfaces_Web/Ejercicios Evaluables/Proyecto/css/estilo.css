@@ -20,6 +20,11 @@ body {
   background-color: #133058;
   padding: 50px;
 }
+@media (max-width: 1024px) {
+  body {
+    padding: 20px;
+  }
+}
 body > div {
   border: 1px solid rgba(205, 205, 205, 0.1);
   background: radial-gradient(circle at center, rgba(170, 72, 250, 0.35) 60%, rgba(41, 95, 172, 0.5) 90%);
@@ -54,10 +59,29 @@ body > div header > nav {
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
 }
+@media (max-width: 1024px) {
+  body > div header > nav {
+    width: 95%;
+    margin: 20px 10px;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 20px;
+    padding: 15px;
+    position: relative;
+    top: 0;
+  }
+}
 body > div header > nav div {
   display: flex;
   align-items: center;
   font-size: large;
+}
+@media (max-width: 1024px) {
+  body > div header > nav div {
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+  }
 }
 body > div header > nav div img[alt="Logo Página"] {
   padding-left: 20px;
@@ -65,11 +89,26 @@ body > div header > nav div img[alt="Logo Página"] {
   display: block;
   transform: scale(1.5);
 }
+@media (max-width: 1024px) {
+  body > div header > nav div img[alt="Logo Página"] {
+    padding-left: 0;
+    margin-bottom: 10px;
+  }
+}
 body > div header > nav div ul:not(.dropdown-content) {
   display: flex;
   padding: 0 50px;
   gap: 40px;
   list-style-type: none;
+}
+@media (max-width: 1024px) {
+  body > div header > nav div ul:not(.dropdown-content) {
+    padding: 0;
+    gap: 15px;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
 }
 body > div header > nav div ul:not(.dropdown-content) .dropdown {
   position: relative;
@@ -89,6 +128,15 @@ body > div header > nav div ul:not(.dropdown-content) .dropdown .dropdown-conten
   visibility: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+@media (max-width: 1024px) {
+  body > div header > nav div ul:not(.dropdown-content) .dropdown .dropdown-content {
+    position: static;
+    transform: none;
+    width: 100%;
+    display: none;
+    margin-top: 10px;
+  }
+}
 body > div header > nav div ul:not(.dropdown-content) .dropdown .dropdown-content li {
   border-radius: 20px;
 }
@@ -96,6 +144,12 @@ body > div header > nav div ul:not(.dropdown-content) .dropdown:hover .dropdown-
   opacity: 1;
   visibility: visible;
   transform: translateY(20px);
+}
+@media (max-width: 1024px) {
+  body > div header > nav div ul:not(.dropdown-content) .dropdown:hover .dropdown-content {
+    transform: none;
+    display: block;
+  }
 }
 body > div header > nav div ul:not(.dropdown-content) .dropdown:hover .dropdown-content li {
   transition: all 0.3s ease-in-out;
@@ -117,6 +171,11 @@ body > div header > nav div ul:not(.dropdown-content) a li {
   text-align: center;
   padding: 30px;
 }
+@media (max-width: 1024px) {
+  body > div header > nav div ul:not(.dropdown-content) a li {
+    padding: 15px;
+  }
+}
 body > div header > nav div ul:not(.dropdown-content) a:hover {
   background-size: 80% 1px;
 }
@@ -125,6 +184,12 @@ body > div header > nav div li.language .dropdown-content {
   width: -moz-max-content;
   width: max-content;
   min-width: 200px;
+}
+@media (max-width: 1024px) {
+  body > div header > nav div li.language .dropdown-content {
+    top: 0;
+    width: 100%;
+  }
 }
 body > div header > nav div li.language .dropdown-content li {
   padding: 30px;
@@ -147,9 +212,18 @@ body > div header > nav div button {
   font-weight: bold;
   transition: all 0.5s ease-in-out;
 }
+@media (max-width: 1024px) {
+  body > div header > nav div button {
+    margin: 20px 0;
+    width: 100%;
+    max-width: 300px;
+  }
+}
 body > div header > nav div button:hover {
   background-position: 100% center;
-  box-shadow: 0 0 8px color-sombra-cyan;
+  border: rgba(0, 255, 255, 0.7) 2px solid;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+  cursor: pointer;
   animation: efecto-futurista 1.3s ease forwards;
   transform: scale(1.05);
 }
@@ -161,6 +235,12 @@ body > div main #subir-curriculum {
   align-items: center;
   text-align: center;
   gap: 20px;
+}
+@media (max-width: 1024px) {
+  body > div main #subir-curriculum {
+    flex-direction: column;
+    padding: 50px 20px;
+  }
 }
 body > div main #subir-curriculum h3 {
   padding: 5px 0;
@@ -177,6 +257,13 @@ body > div main #subir-curriculum article:last-child {
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
 }
+@media (max-width: 1024px) {
+  body > div main #subir-curriculum article:last-child {
+    margin-left: 0;
+    width: 100%;
+    padding: 30px;
+  }
+}
 body > div main #subir-curriculum article:last-child div:not(.prompt-container) {
   border: 1px dashed white;
   border-radius: 10px;
@@ -188,6 +275,11 @@ body > div main #subir-curriculum article:last-child div:not(.prompt-container) 
   cursor: pointer;
   padding: 100px 50px;
 }
+@media (max-width: 1024px) {
+  body > div main #subir-curriculum article:last-child div:not(.prompt-container) label {
+    padding: 50px 20px;
+  }
+}
 body > div main #subir-curriculum article:last-child div:not(.prompt-container):hover {
   transform: scale(1.02);
 }
@@ -196,6 +288,13 @@ body > div main #subir-curriculum article:last-child .prompt-container {
   width: 500px;
   margin-top: 30px;
   display: flex;
+}
+@media (max-width: 1024px) {
+  body > div main #subir-curriculum article:last-child .prompt-container {
+    width: 100%;
+    flex-direction: column;
+    gap: 15px;
+  }
 }
 body > div main #subir-curriculum article:last-child .prompt-container #prompt {
   width: 81%;
@@ -208,6 +307,13 @@ body > div main #subir-curriculum article:last-child .prompt-container #prompt {
   font-size: 15px;
   transition: all 0.1s ease-in-out;
 }
+@media (max-width: 1024px) {
+  body > div main #subir-curriculum article:last-child .prompt-container #prompt {
+    width: 100%;
+    border-radius: 20px;
+    padding: 15px;
+  }
+}
 body > div main #subir-curriculum article:last-child .prompt-container #prompt::-moz-placeholder {
   color: rgba(178, 178, 178, 0.4);
   padding-left: 55px;
@@ -215,6 +321,16 @@ body > div main #subir-curriculum article:last-child .prompt-container #prompt::
 body > div main #subir-curriculum article:last-child .prompt-container #prompt::placeholder {
   color: rgba(178, 178, 178, 0.4);
   padding-left: 55px;
+}
+@media (max-width: 1024px) {
+  body > div main #subir-curriculum article:last-child .prompt-container #prompt::-moz-placeholder {
+    padding-left: 0;
+    text-align: center;
+  }
+  body > div main #subir-curriculum article:last-child .prompt-container #prompt::placeholder {
+    padding-left: 0;
+    text-align: center;
+  }
 }
 body > div main #subir-curriculum article:last-child .prompt-container #prompt:focus {
   outline: none;
@@ -241,6 +357,14 @@ body > div main #subir-curriculum article:last-child .prompt-container #submit {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
+@media (max-width: 1024px) {
+  body > div main #subir-curriculum article:last-child .prompt-container #submit {
+    position: static;
+    transform: none;
+    width: 100%;
+    border-radius: 20px;
+  }
+}
 body > div main #subir-curriculum article:last-child .prompt-container #submit:hover {
   background-color: rgba(0, 255, 255, 0.7);
   box-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
@@ -253,7 +377,14 @@ body > div main #tarjetas {
   gap: 100px;
   padding: 100px;
 }
-body > div main #tarjetas #tarjeta1, body > div main #tarjetas #tarjeta2 {
+@media (max-width: 1024px) {
+  body > div main #tarjetas {
+    padding: 50px 20px;
+    gap: 50px;
+  }
+}
+body > div main #tarjetas #tarjeta1,
+body > div main #tarjetas #tarjeta2 {
   display: flex;
   justify-content: space-between;
   border-radius: 15px;
@@ -261,27 +392,72 @@ body > div main #tarjetas #tarjeta1, body > div main #tarjetas #tarjeta2 {
   box-shadow: 10px 8px 5px rgba(25, 25, 25, 0.5);
   border: 2px solid rgba(255, 255, 255, 0.2);
 }
-body > div main #tarjetas #tarjeta1 div, body > div main #tarjetas #tarjeta2 div {
+@media (max-width: 1024px) {
+  body > div main #tarjetas #tarjeta1,
+  body > div main #tarjetas #tarjeta2 {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+body > div main #tarjetas #tarjeta1 div,
+body > div main #tarjetas #tarjeta2 div {
   padding: 50px;
 }
-body > div main #tarjetas #tarjeta1 div h2, body > div main #tarjetas #tarjeta2 div h2 {
+@media (max-width: 1024px) {
+  body > div main #tarjetas #tarjeta1 div,
+  body > div main #tarjetas #tarjeta2 div {
+    padding: 30px;
+    text-align: center;
+  }
+}
+body > div main #tarjetas #tarjeta1 div h2,
+body > div main #tarjetas #tarjeta2 div h2 {
   font-family: "IBM Plex Mono", monospace;
   font-size: 30px;
   padding-bottom: 75px;
 }
-body > div main #tarjetas #tarjeta1 div p, body > div main #tarjetas #tarjeta2 div p {
+@media (max-width: 1024px) {
+  body > div main #tarjetas #tarjeta1 div h2,
+  body > div main #tarjetas #tarjeta2 div h2 {
+    padding-bottom: 30px;
+  }
+}
+body > div main #tarjetas #tarjeta1 div p,
+body > div main #tarjetas #tarjeta2 div p {
   font-family: "Inter", sans-serif;
   padding: 10px;
   line-height: 1.5;
 }
-body > div main #tarjetas #tarjeta1 img, body > div main #tarjetas #tarjeta2 img {
+body > div main #tarjetas #tarjeta1 img,
+body > div main #tarjetas #tarjeta2 img {
   border-radius: 15px;
-  width: 500px;
-  height: 500px;
+  width: 600px;
+  height: 600px;
+}
+@media (max-width: 1024px) {
+  body > div main #tarjetas #tarjeta1 img,
+  body > div main #tarjetas #tarjeta2 img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    margin: 20px;
+  }
 }
 body > div main #tarjetas #tarjeta2 {
   background-color: rgba(25, 25, 25, 0.5);
   border: 2px solid rgba(25, 25, 25, 0.3);
+}
+body > div main #tarjetas #tarjeta2 img {
+  width: 700px;
+  height: 700px;
+}
+@media (max-width: 1024px) {
+  body > div main #tarjetas #tarjeta2 img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    margin: 20px;
+  }
 }
 body > div main #tarjetas hr {
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -292,6 +468,13 @@ body > div main #bento-grid {
   gap: 25px;
   grid-template-columns: 1fr 1.5fr;
   grid-template-areas: "area-gratis area-bigdata" "area-gratis area-inferencia" "area-datos  area-datos";
+}
+@media (max-width: 1024px) {
+  body > div main #bento-grid {
+    padding: 50px 20px;
+    grid-template-columns: 1fr;
+    grid-template-areas: "area-gratis" "area-bigdata" "area-inferencia" "area-datos";
+  }
 }
 body > div main #bento-grid article {
   background-color: rgba(25, 25, 25, 0.5);
@@ -334,20 +517,46 @@ body > div main #bento-grid .datos {
 body > div footer {
   margin: 100px 0 30px 0;
 }
+@media (max-width: 1024px) {
+  body > div footer {
+    margin: 50px 0 20px 0;
+  }
+}
 body > div footer article:first-child {
   padding-left: 100px;
   display: flex;
   align-items: flex-start;
   gap: 20px;
 }
+@media (max-width: 1024px) {
+  body > div footer article:first-child {
+    padding-left: 0;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
 body > div footer article:first-child img {
   width: 25px;
   transform: scale(5) translateX(-10px);
   padding-top: 1px;
 }
+@media (max-width: 1024px) {
+  body > div footer article:first-child img {
+    transform: scale(3);
+    margin-bottom: 30px;
+    margin-right: 0;
+  }
+}
 body > div footer article:first-child .mapa-web {
   display: flex;
   gap: 100px;
+}
+@media (max-width: 1024px) {
+  body > div footer article:first-child .mapa-web {
+    flex-direction: column;
+    gap: 30px;
+  }
 }
 body > div footer article:first-child .mapa-web .columna {
   display: flex;
@@ -375,6 +584,13 @@ body > div footer article:last-child {
   font-family: "Inter", sans-serif;
   display: flex;
   justify-content: space-between;
+}
+@media (max-width: 1024px) {
+  body > div footer article:last-child {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
 }
 body > div footer article:last-child div a {
   text-decoration: none;

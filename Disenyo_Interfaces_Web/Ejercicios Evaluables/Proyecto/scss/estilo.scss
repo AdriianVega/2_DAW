@@ -18,13 +18,12 @@ $color-borde-tarjeta-claro: rgba(255, 255, 255, 0.2);
 $color-borde-tarjeta-oscuro: rgba(25, 25, 25, 0.3);
 
 $color-fondo: #133058;
-$color-radial-fondo: radial-gradient(circle at center, rgb(170, 72, 250, 0.35) 60%,rgb(41, 95, 172, 0.5) 90%);
+$color-radial-fondo: radial-gradient(circle at center, rgb(170, 72, 250, 0.35) 60%, rgb(41, 95, 172, 0.5) 90%);
 $color-fondo-cv: rgb(40, 82, 139, 0.65);
 $color-fondo-tarjetas: rgba(25, 25, 25, 0.5);
 $color-fondo-tarjeta-claro: rgba(255, 255, 255, 0.1);
 $color-fondo-tarjeta-oscuro: rgba(25, 25, 25, 0.5);
 
-// Creamos un mixin para las transiciones 
 @mixin transition($property, $duration, $timing: ease-in-out) {
     -webkit-transition: $property $duration $timing;
     -moz-transition: $property $duration $timing;
@@ -32,13 +31,13 @@ $color-fondo-tarjeta-oscuro: rgba(25, 25, 25, 0.5);
     transition: $property $duration $timing;
 }
 
-// Creamos un mixin para las animaciones
 @mixin animation($name, $duration, $timing: ease-in-out, $fill: forwards) {
     -webkit-animation: $name $duration $timing $fill;
     -moz-animation: $name $duration $timing $fill;
     -o-animation: $name $duration $timing $fill;
     animation: $name $duration $timing $fill;
 }
+
 @mixin efecto-ruido($opacity: 0.5, $mode: overlay) {
     position: relative;
     overflow: hidden;
@@ -63,10 +62,25 @@ $color-fondo-tarjeta-oscuro: rgba(25, 25, 25, 0.5);
     -webkit-backdrop-filter: blur($blur);
 }
 
+@mixin responsive($size) {
+    @if $size ==medium {
+        @media (max-width: 1024px) {
+            @content
+        }
+    }
+
+    @else if $size ==small {
+        @media (max-width: 800px) {
+            @content
+        }
+    }
+}
+
 @keyframes efecto-futurista {
     0% {
         background-position: 0% 50%;
     }
+
     100% {
         background-position: -200% 50%;
     }
@@ -83,15 +97,19 @@ body {
     background-color: $color-fondo;
     padding: 50px;
 
-    > div {
+    @include responsive(medium) {
+        padding: 20px;
+    }
+
+    >div {
         border: 1px solid $color-borde-main;
         background: $color-radial-fondo;
         border-radius: 10px;
         box-shadow: 15px -10px 15px 0px $color-sombra-default;
-        
+
         @include efecto-ruido();
 
-        header > nav {
+        header>nav {
             margin: 50px 30px;
             border-radius: 200px;
             background-color: $color-header;
@@ -107,23 +125,53 @@ body {
 
             @include desenfoque(2px);
 
+            @include responsive(medium) {
+                width: 95%;
+                margin: 20px 10px;
+                flex-direction: column;
+                gap: 20px;
+                border-radius: 20px;
+                padding: 15px;
+                position: relative;
+                top: 0;
+            }
+
             div {
                 display: flex;
                 align-items: center;
                 font-size: large;
+
+                @include responsive(medium) {
+                    flex-direction: column;
+                    width: 100%;
+                    gap: 20px;
+                }
 
                 img[alt="Logo Página"] {
                     padding-left: 20px;
                     width: 150px;
                     display: block;
                     transform: scale(1.5);
+
+                    @include responsive(medium) {
+                        padding-left: 0;
+                        margin-bottom: 10px;
+                    }
                 }
-            
+
                 ul:not(.dropdown-content) {
                     display: flex;
                     padding: 0 50px;
                     gap: 40px;
                     list-style-type: none;
+
+                    @include responsive(medium) {
+                        padding: 0;
+                        gap: 15px;
+                        flex-direction: column;
+                        width: 100%;
+                        align-items: center;
+                    }
 
                     .dropdown {
                         position: relative;
@@ -131,7 +179,7 @@ body {
                         .dropdown-content {
                             list-style-type: none;
                             position: absolute;
-                            
+
                             top: 100%;
                             transform: translate(-50px);
                             width: max-content;
@@ -145,16 +193,30 @@ body {
 
                             @include transition(all, 0.3s, cubic-bezier(0.4, 0, 0.2, 1));
 
+                            @include responsive(medium) {
+                                position: static;
+                                transform: none;
+                                width: 100%;
+                                display: none;
+                                margin-top: 10px;
+                            }
+
 
                             li {
                                 border-radius: 20px;
                             }
                         }
+
                         &:hover {
                             .dropdown-content {
                                 opacity: 1;
                                 visibility: visible;
                                 transform: translateY(20px);
+
+                                @include responsive(medium) {
+                                    transform: none;
+                                    display: block;
+                                }
 
                                 li {
                                     @include transition(all, 0.3s);
@@ -167,7 +229,7 @@ body {
                             }
                         }
                     }
-            
+
                     a {
                         text-decoration: none;
                         background-color: rgba(0, 0, 0, 0);
@@ -183,6 +245,10 @@ body {
                         li {
                             text-align: center;
                             padding: 30px;
+
+                            @include responsive(medium) {
+                                padding: 15px;
+                            }
                         }
 
                         &:hover {
@@ -190,12 +256,18 @@ body {
                         }
                     }
                 }
+
                 li.language {
 
                     .dropdown-content {
                         top: 50%;
                         width: max-content;
                         min-width: 200px;
+
+                        @include responsive(medium) {
+                            top: 0;
+                            width: 100%;
+                        }
 
                         li {
                             padding: 30px;
@@ -206,9 +278,11 @@ body {
                         }
                     }
                 }
+
                 #svg_language {
                     padding-right: 20px;
                 }
+
                 button {
                     padding: 10px;
                     margin: 0 20px;
@@ -225,9 +299,18 @@ body {
 
                     @include transition(all, 0.5s);
 
+                    @include responsive(medium) {
+                        margin: 20px 0;
+                        width: 100%;
+                        max-width: 300px;
+                    }
+
                     &:hover {
                         background-position: 100% center;
-                        box-shadow: 0 0 8px color-sombra-cyan;
+                        border: $color-sombra-cyan 2px solid;
+                        box-shadow: 0 0 8px $color-sombra-cyan;
+
+                        cursor: pointer;
 
                         @include animation(efecto-futurista, 1.3s, ease);
 
@@ -236,6 +319,7 @@ body {
                 }
             }
         }
+
         main {
             #subir-curriculum {
                 padding: 150px 50px;
@@ -248,9 +332,15 @@ body {
                 text-align: center;
                 gap: 20px;
 
+                @include responsive(medium) {
+                    flex-direction: column;
+                    padding: 50px 20px;
+                }
+
                 h3 {
                     padding: 5px 0;
                 }
+
                 h5 {
                     padding-top: 15px;
                 }
@@ -265,17 +355,26 @@ body {
 
                     @include desenfoque(2px);
 
+                    @include responsive(medium) {
+                        margin-left: 0;
+                        width: 100%;
+                        padding: 30px;
+                    }
+
                     div:not(.prompt-container) {
                         border: 1px dashed white;
                         border-radius: 10px;
                         display: flex;
                         flex-direction: column;
-                        
+
                         label {
                             cursor: pointer;
                             padding: 100px 50px;
-                            
-                            
+
+                            @include responsive(medium) {
+                                padding: 50px 20px;
+                            }
+
                         }
 
                         @include transition(all, 0.2s, ease-out);
@@ -284,41 +383,59 @@ body {
                             transform: scale(1.02);
                         }
 
-                            
+
                     }
-                    
+
                     .prompt-container {
                         position: relative;
                         width: 500px;
                         margin-top: 30px;
                         display: flex;
 
+                        @include responsive(medium) {
+                            width: 100%;
+                            flex-direction: column;
+                            gap: 15px;
+                        }
+
                         #prompt {
                             width: 81%;
                             padding: 10px;
-                            
+
                             border-radius: 20px 0 0 20px;
                             border: lighten($color-cv, 50%) 2px solid;
                             background-color: $color-cv;
-                    
+
                             box-shadow: 2px 5px 13px -4px black;
-                    
+
                             font-family: $fuente-titulo;
                             font-size: 15px;
-                    
+
+                            @include responsive(medium) {
+                                width: 100%;
+                                border-radius: 20px;
+                                padding: 15px;
+                            }
+
                             @include transition(all, 0.1s);
-                    
+
                             &::placeholder {
                                 color: lighten($color-cv, 60%);
                                 padding-left: 55px;
+
+                                @include responsive(medium) {
+                                    padding-left: 0;
+                                    text-align: center;
+                                }
                             }
-                    
+
                             &:focus {
                                 outline: none;
                                 border: $color-sombra-cyan 2px solid;
                                 box-shadow: 0 0 8px $color-sombra-cyan;
                             }
                         }
+
                         #submit {
                             position: absolute;
                             right: 0;
@@ -344,6 +461,13 @@ body {
 
                             cursor: pointer;
 
+                            @include responsive(medium) {
+                                position: static;
+                                transform: none;
+                                width: 100%;
+                                border-radius: 20px;
+                            }
+
                             @include transition(all, 0.2s);
 
                             &:hover {
@@ -356,6 +480,7 @@ body {
                     }
                 }
             }
+
             #tarjetas {
                 background-color: $color-fondo-tarjetas;
                 display: flex;
@@ -363,8 +488,14 @@ body {
                 gap: 100px;
                 padding: 100px;
 
-                #tarjeta1, #tarjeta2 {
-                    
+                @include responsive(medium) {
+                    padding: 50px 20px;
+                    gap: 50px;
+                }
+
+                #tarjeta1,
+                #tarjeta2 {
+
                     display: flex;
                     justify-content: space-between;
                     border-radius: 15px;
@@ -372,34 +503,72 @@ body {
                     box-shadow: 10px 8px 5px $color-sombra-default;
                     border: 2px solid $color-borde-tarjeta-claro;
 
+                    @include responsive(medium) {
+                        flex-direction: column;
+                        align-items: center;
+                    }
+
                     div {
                         padding: 50px;
-                        
+
+                        @include responsive(medium) {
+                            padding: 30px;
+                            text-align: center;
+                        }
+
                         h2 {
                             font-family: $fuente-titulo;
                             font-size: 30px;
                             padding-bottom: 75px;
+
+                            @include responsive(medium) {
+                                padding-bottom: 30px;
+                            }
                         }
+
                         p {
                             font-family: $fuente-texto;
                             padding: 10px;
                             line-height: 1.5;
                         }
                     }
+
                     img {
                         border-radius: 15px;
-                        width: 500px;
-                        height: 500px;
+                        width: 600px;
+                        height: 600px;
+
+                        @include responsive(medium) {
+                            width: 100%;
+                            height: auto;
+                            max-width: 400px;
+                            margin: 20px;
+                        }
                     }
                 }
+
                 #tarjeta2 {
                     background-color: $color-fondo-tarjeta-oscuro;
                     border: 2px solid $color-borde-tarjeta-oscuro;
+
+                    img {
+                        width: 700px;
+                        height: 700px;
+
+                        @include responsive(medium) {
+                            width: 100%;
+                            height: auto;
+                            max-width: 400px;
+                            margin: 20px;
+                        }
+                    }
                 }
+
                 hr {
                     border: 1px solid $color-borde-tarjeta-claro;
                 }
             }
+
             #bento-grid {
                 padding: 100px;
 
@@ -412,6 +581,16 @@ body {
                     "area-gratis area-bigdata"
                     "area-gratis area-inferencia"
                     "area-datos  area-datos";
+
+                @include responsive(medium) {
+                    padding: 50px 20px;
+                    grid-template-columns: 1fr;
+                    grid-template-areas:
+                        "area-gratis"
+                        "area-bigdata"
+                        "area-inferencia"
+                        "area-datos";
+                }
 
                 article {
                     background-color: $color-fondo-tarjeta-oscuro;
@@ -427,10 +606,12 @@ body {
                         font-size: 25px;
                         padding: 10px 20px;
                     }
+
                     p {
                         font-family: $fuente-texto;
                         padding: 10px 30px 30px 30px;
                     }
+
                     div {
                         display: flex;
                         align-items: center;
@@ -438,11 +619,12 @@ body {
                         img {
                             width: 100px;
                             height: 100px;
-                            
+
                             transform: scale(0.5);
                         }
                     }
                 }
+
                 .gratuito {
                     grid-area: area-gratis;
                 }
@@ -460,8 +642,13 @@ body {
                 }
             }
         }
+
         footer {
             margin: 100px 0 30px 0;
+
+            @include responsive(medium) {
+                margin: 50px 0 20px 0;
+            }
 
             article:first-child {
                 padding-left: 100px;
@@ -469,15 +656,33 @@ body {
                 align-items: flex-start;
                 gap: 20px;
 
+                @include responsive(medium) {
+                    padding-left: 0;
+                    flex-direction: column;
+                    align-items: center;
+                    text-align: center;
+                }
+
                 img {
                     width: 25px;
                     transform: scale(5) translateX(-10px);
                     padding-top: 1px;
+
+                    @include responsive(medium) {
+                        transform: scale(3);
+                        margin-bottom: 30px;
+                        margin-right: 0;
+                    }
                 }
 
                 .mapa-web {
                     display: flex;
                     gap: 100px;
+
+                    @include responsive(medium) {
+                        flex-direction: column;
+                        gap: 30px;
+                    }
 
                     .columna {
                         display: flex;
@@ -502,21 +707,29 @@ body {
                     }
                 }
             }
+
             hr {
                 margin: 20px;
                 border: 1px solid $color-borde-tarjeta-claro;
             }
+
             article:last-child {
                 padding: 0 20px;
                 font-family: $fuente-texto;
-                
+
                 display: flex;
                 justify-content: space-between;
+
+                @include responsive(medium) {
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 20px;
+                }
 
                 div {
                     a {
                         text-decoration: none;
-                
+
                         svg {
                             width: 25px;
 
@@ -527,6 +740,7 @@ body {
                             }
                         }
                     }
+
                     a:nth-child(1) {
                         svg {
                             transform: scale(1.3);
@@ -538,6 +752,7 @@ body {
                             }
                         }
                     }
+
                     a:nth-child(3) {
                         svg {
                             transform: scale(0.9);
@@ -549,6 +764,7 @@ body {
                             }
                         }
                     }
+
                     a:nth-child(4) {
                         img {
                             width: 20px;
