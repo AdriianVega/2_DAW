@@ -1,9 +1,16 @@
 """
-Docstring for Python.Unidad 7.SQLite y DAO.ejercicio_3
-"""
+Docstring for Python.Unidad 7.SQLite y DAO.clases.book"""
 import sqlite3
-from clases.book import Book
 
+class Book:
+    """
+    Docstring for Book
+    """
+    def __init__(self, titulo, precio, disponible, url):
+        self.titulo = titulo
+        self.precio = precio
+        self.disponible = disponible
+        self.url = url
 class BookDAO:
     """
     Docstring for BookDAO
