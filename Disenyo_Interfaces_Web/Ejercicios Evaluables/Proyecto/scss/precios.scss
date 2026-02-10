@@ -38,6 +38,11 @@ main {
         display: grid;
         grid-template-columns: 0.8fr 1fr 0.8fr;
         gap: 50px;
+
+        @include responsive(medium) {
+            grid-template-columns: 1fr;
+            width: 70%;
+        }
         
         section {
             background-color: $color-fondo-tarjeta;

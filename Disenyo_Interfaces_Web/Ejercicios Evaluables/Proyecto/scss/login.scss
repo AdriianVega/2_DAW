@@ -1,0 +1,148 @@
+@use "estilo" as *;
+
+$color-enlaces: #30C5D2;
+
+main {
+    padding: 250px 0 100px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include responsive(medium) {
+        padding: 150px 0 50px 0;
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3vh;
+        padding: 60px;
+
+        width: 800px;
+        height: 550px;
+
+        border-radius: 10px;
+
+        background-color: $color-fondo-tarjeta-oscuro;
+
+        @include responsive(600px) {
+            width: 90%;
+            padding: 40px;
+        }
+
+        article {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+
+            gap: 20px;
+
+            h2 {
+                    font-family: $fuente-titulo;
+                    font-size: 28px;
+                }
+            
+                form {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+            
+            
+                    font-family: $fuente-texto;
+            
+                    label {
+                        visibility: hidden;
+                    }
+            
+                    input {
+                        width: 150%;
+                        padding: 10px;
+                        border-radius: 15px;
+                        border: 1px solid gray;
+                        background-color: $color-fondo-tarjeta-oscuro;
+            
+                        @include transition(border-color, 0.3s);
+            
+                        &:focus {
+                            outline: none;
+                            border-color: $color-enlaces;
+                        }
+                    }
+                }
+            
+                small {
+                    position: relative;
+            
+                    a {
+                        color: $color-enlaces;
+                        font-family: $fuente-texto;
+                    }
+            
+                    @include responsive(medium) {
+                        top: 0;
+                    }
+                }
+            
+                #forget-password {
+                    left: 60px;
+                    bottom: 10px;
+                }
+            
+                #register-account {
+                    right: 60px;
+                    bottom: 10px;
+                }
+            
+                button {
+                    display: flex;
+            
+                    padding: 10px 20px;
+                    border-radius: 15px;
+                    border: 1px solid gray;
+                    font-family: $fuente-titulo;
+                    min-width: 300px;
+            
+                    cursor: pointer;
+            
+                    @include transition(all, 0.3s);
+            
+                    &:hover {
+                        border-color: $color-enlaces;
+                        transform: scale(1.05);
+                    }
+            
+                    @include responsive(medium) {
+                        width: 52%;
+                    }
+                }
+            
+                #google-login {
+                    align-items: center;
+                    background-color: $color-header;
+                    gap: 20px;
+            
+                    img {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            
+                #login-button {
+                    align-items: center;
+                    justify-content: center;
+            
+                    background-image: $gradiente-button;
+                    background-size: 200% auto;
+            
+                    &:hover {
+                        @include animation(efecto-futurista, 1.3s, ease);
+                    }
+                }
+        }
+    }
+}
