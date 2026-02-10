@@ -26,198 +26,6 @@ body {
     padding: 20px;
   }
 }
-body header > nav {
-  margin: 50px 30px;
-  border-radius: 200px;
-  background-color: rgba(25, 25, 25, 0.9);
-  font-family: "Space Grotesk", sans-serif;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px;
-  position: fixed;
-  width: 91%;
-  top: 10px;
-  z-index: 100;
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-}
-@media (max-width: 1024px) {
-  body header > nav {
-    width: 95%;
-    margin: 20px 10px;
-    flex-direction: column;
-    gap: 20px;
-    border-radius: 20px;
-    padding: 15px;
-    position: relative;
-    top: 0;
-  }
-}
-body header > nav div {
-  display: flex;
-  align-items: center;
-  font-size: large;
-}
-@media (max-width: 1024px) {
-  body header > nav div {
-    flex-direction: column;
-    width: 100%;
-    gap: 20px;
-  }
-}
-body header > nav div img[alt="Logo Página"] {
-  padding-left: 20px;
-  width: 150px;
-  display: block;
-  transform: scale(1.5);
-}
-@media (max-width: 1024px) {
-  body header > nav div img[alt="Logo Página"] {
-    padding-left: 0;
-    margin-bottom: 10px;
-  }
-}
-body header > nav div ul:not(.dropdown-content) {
-  display: flex;
-  padding: 0 50px;
-  gap: 40px;
-  list-style-type: none;
-}
-@media (max-width: 1024px) {
-  body header > nav div ul:not(.dropdown-content) {
-    padding: 0;
-    gap: 15px;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-  }
-}
-body header > nav div ul:not(.dropdown-content) .dropdown {
-  position: relative;
-}
-body header > nav div ul:not(.dropdown-content) .dropdown .dropdown-content {
-  list-style-type: none;
-  position: absolute;
-  top: 100%;
-  transform: translate(-50px);
-  width: -moz-max-content;
-  width: max-content;
-  min-width: 200px;
-  background-color: rgba(25, 25, 25, 0.95);
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-@media (max-width: 1024px) {
-  body header > nav div ul:not(.dropdown-content) .dropdown .dropdown-content {
-    position: static;
-    transform: none;
-    width: 100%;
-    display: none;
-    margin-top: 10px;
-  }
-}
-body header > nav div ul:not(.dropdown-content) .dropdown .dropdown-content li {
-  border-radius: 20px;
-}
-body header > nav div ul:not(.dropdown-content) .dropdown .dropdown-content li a {
-  display: block;
-  padding: 30px;
-  text-decoration: none;
-}
-body header > nav div ul:not(.dropdown-content) .dropdown:hover .dropdown-content {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(20px);
-}
-@media (max-width: 1024px) {
-  body header > nav div ul:not(.dropdown-content) .dropdown:hover .dropdown-content {
-    transform: none;
-    display: block;
-  }
-}
-body header > nav div ul:not(.dropdown-content) .dropdown:hover .dropdown-content li {
-  transition: all 0.3s ease-in-out;
-  border-radius: 20px;
-}
-body header > nav div ul:not(.dropdown-content) .dropdown:hover .dropdown-content li:hover {
-  background-color: rgba(50.5, 50.5, 50.5, 0.9);
-}
-body header > nav div ul:not(.dropdown-content) a:not(.dropdown-content a) {
-  text-decoration: none;
-  background-color: rgba(0, 0, 0, 0);
-  background-image: linear-gradient(white, white);
-  background-position: center 100%;
-  background-repeat: no-repeat;
-  background-size: 0% 2px;
-  transition: background-size 0.3s ease-in-out;
-}
-body header > nav div ul:not(.dropdown-content) a:not(.dropdown-content a) li {
-  text-align: center;
-  padding: 30px;
-}
-@media (max-width: 1024px) {
-  body header > nav div ul:not(.dropdown-content) a:not(.dropdown-content a) li {
-    padding: 15px;
-  }
-}
-body header > nav div ul:not(.dropdown-content) a:not(.dropdown-content a):hover {
-  background-size: 80% 1px;
-}
-body header > nav div li.language .dropdown-content {
-  top: 50%;
-  width: -moz-max-content;
-  width: max-content;
-  min-width: 200px;
-}
-body header > nav div li.language .dropdown-content a {
-  text-decoration: none;
-}
-@media (max-width: 1024px) {
-  body header > nav div li.language .dropdown-content {
-    top: 0;
-    width: 100%;
-  }
-}
-body header > nav div li.language .dropdown-content li {
-  padding: 30px;
-}
-body header > nav div li.language .dropdown-content li a {
-  background-image: none;
-}
-body header > nav div #svg_language {
-  padding-right: 20px;
-}
-body header > nav div button {
-  padding: 10px;
-  margin: 0 20px;
-  width: 170px;
-  border-radius: 25px;
-  border: transparent;
-  background-size: 200% auto;
-  background-image: linear-gradient(90deg, #30C5D2 0%, #471069 50%, #30C5D2 100%);
-  font-family: "Space Grotesk", sans-serif;
-  font-weight: bold;
-  transition: all 0.5s ease-in-out;
-}
-@media (max-width: 1024px) {
-  body header > nav div button {
-    margin: 20px 0;
-    width: 100%;
-    max-width: 300px;
-  }
-}
-body header > nav div button:hover {
-  background-position: 100% center;
-  border: rgba(0, 255, 255, 0.7) 2px solid;
-  box-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
-  cursor: pointer;
-  animation: efecto-futurista 1.3s ease forwards;
-  transform: scale(1.05);
-}
 body > div {
   border: 1px solid rgba(205, 205, 205, 0.1);
   background: radial-gradient(circle at center, rgba(170, 72, 250, 0.35) 60%, rgba(41, 95, 172, 0.5) 90%);
@@ -238,6 +46,189 @@ body > div::after {
   opacity: 0.2;
   mix-blend-mode: overlay;
   pointer-events: none;
+}
+body > div header > nav {
+  margin: 50px 30px;
+  border-radius: 200px;
+  background-color: rgba(25, 25, 25, 0.9);
+  font-family: "Space Grotesk", sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 91%;
+  top: 10px;
+  z-index: 100;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+@media (max-width: 1024px) {
+  body > div header > nav {
+    width: 95%;
+    margin: 20px 10px;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 20px;
+    padding: 15px;
+    position: relative;
+    top: 0;
+  }
+}
+body > div header > nav div {
+  display: flex;
+  align-items: center;
+  font-size: large;
+}
+@media (max-width: 1024px) {
+  body > div header > nav div {
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+  }
+}
+body > div header > nav div img[alt="Logo Página"] {
+  padding-left: 20px;
+  width: 150px;
+  display: block;
+  transform: scale(1.5);
+}
+@media (max-width: 1024px) {
+  body > div header > nav div img[alt="Logo Página"] {
+    padding-left: 0;
+    margin-bottom: 10px;
+  }
+}
+body > div header > nav div ul:not(.dropdown-content) {
+  display: flex;
+  padding: 0 50px;
+  gap: 40px;
+  list-style-type: none;
+}
+@media (max-width: 1024px) {
+  body > div header > nav div ul:not(.dropdown-content) {
+    padding: 0;
+    gap: 15px;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+}
+body > div header > nav div ul:not(.dropdown-content) .dropdown {
+  position: relative;
+}
+body > div header > nav div ul:not(.dropdown-content) .dropdown .dropdown-content {
+  list-style-type: none;
+  position: absolute;
+  top: 100%;
+  transform: translate(-50px);
+  width: -moz-max-content;
+  width: max-content;
+  min-width: 200px;
+  background-color: rgba(25, 25, 25, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@media (max-width: 1024px) {
+  body > div header > nav div ul:not(.dropdown-content) .dropdown .dropdown-content {
+    position: static;
+    transform: none;
+    width: 100%;
+    display: none;
+    margin-top: 10px;
+  }
+}
+body > div header > nav div ul:not(.dropdown-content) .dropdown .dropdown-content li {
+  border-radius: 20px;
+}
+body > div header > nav div ul:not(.dropdown-content) .dropdown:hover .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(20px);
+}
+@media (max-width: 1024px) {
+  body > div header > nav div ul:not(.dropdown-content) .dropdown:hover .dropdown-content {
+    transform: none;
+    display: block;
+  }
+}
+body > div header > nav div ul:not(.dropdown-content) .dropdown:hover .dropdown-content li {
+  transition: all 0.3s ease-in-out;
+  border-radius: 20px;
+}
+body > div header > nav div ul:not(.dropdown-content) .dropdown:hover .dropdown-content li:hover {
+  background-color: rgba(50.5, 50.5, 50.5, 0.9);
+}
+body > div header > nav div ul:not(.dropdown-content) a {
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: linear-gradient(white, white);
+  background-position: center 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  transition: background-size 0.3s ease-in-out;
+}
+body > div header > nav div ul:not(.dropdown-content) a li {
+  text-align: center;
+  padding: 30px;
+}
+@media (max-width: 1024px) {
+  body > div header > nav div ul:not(.dropdown-content) a li {
+    padding: 15px;
+  }
+}
+body > div header > nav div ul:not(.dropdown-content) a:hover {
+  background-size: 80% 1px;
+}
+body > div header > nav div li.language .dropdown-content {
+  top: 50%;
+  width: -moz-max-content;
+  width: max-content;
+  min-width: 200px;
+}
+@media (max-width: 1024px) {
+  body > div header > nav div li.language .dropdown-content {
+    top: 0;
+    width: 100%;
+  }
+}
+body > div header > nav div li.language .dropdown-content li {
+  padding: 30px;
+}
+body > div header > nav div li.language .dropdown-content li a {
+  background-image: none;
+}
+body > div header > nav div #svg_language {
+  padding-right: 20px;
+}
+body > div header > nav div button {
+  padding: 10px;
+  margin: 0 20px;
+  width: 170px;
+  border-radius: 25px;
+  border: transparent;
+  background-size: 200% auto;
+  background-image: linear-gradient(90deg, #30C5D2 0%, #471069 50%, #30C5D2 100%);
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: bold;
+  transition: all 0.5s ease-in-out;
+}
+@media (max-width: 1024px) {
+  body > div header > nav div button {
+    margin: 20px 0;
+    width: 100%;
+    max-width: 300px;
+  }
+}
+body > div header > nav div button:hover {
+  background-position: 100% center;
+  border: rgba(0, 255, 255, 0.7) 2px solid;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+  cursor: pointer;
+  animation: efecto-futurista 1.3s ease forwards;
+  transform: scale(1.05);
 }
 body > div main #subir-curriculum {
   padding: 150px 50px;
@@ -637,4 +628,159 @@ body > div footer article:last-child div a:nth-child(4) img {
 }
 body > div footer article:last-child div a:nth-child(4) img:hover {
   transform: scale(1.4);
-}/*# sourceMappingURL=estilo.css.map */
+}
+
+@keyframes pulso-boton {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(2);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  padding: 250px 0 25px 0;
+}
+main h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+main div {
+  display: grid;
+  grid-template-columns: 0.6fr 1fr 0.6fr;
+  gap: 50px;
+}
+main div section {
+  background-color: rgba(40, 82, 139, 0.5);
+  border-radius: 10px;
+  height: 600px;
+  position: relative;
+}
+main div section h3,
+main div section h5,
+main div section h6,
+main div section p,
+main div section span,
+main div section button {
+  font-family: "Space Grotesk", sans-serif;
+}
+main div section article:first-of-type {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+main div section h3 {
+  font-size: 25px;
+  margin: 40px 40px 15px 40px;
+}
+main div section h5 {
+  font-size: 20px;
+  margin: 0 40px 10px 40px;
+}
+main div section h5 span {
+  font-size: 16px;
+  color: gray;
+}
+main div section h6 {
+  font-size: 13px;
+  margin: 0 40px 20px 40px;
+}
+main div section p {
+  font-size: 16px;
+  margin: 0 40px 20px 40px;
+  background-color: rgba(71, 16, 105, 0.5);
+  padding: 2px 15px;
+  border-radius: 25px;
+}
+main div section ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+main div section ul li {
+  font-family: "DM Sans", sans-serif;
+  padding-left: 25px;
+  position: relative;
+}
+main div section ul li::before {
+  content: "✓";
+  color: green;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: bold;
+  font-size: 1.2em;
+}
+main div section article:last-of-type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  padding: 0 40px;
+  line-height: 2;
+}
+main div section button {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-size: 200% auto;
+  border: 1px solid transparent;
+  border-radius: 25px;
+  width: 250px;
+  height: 50px;
+  font-size: 17px;
+  cursor: pointer;
+}
+main div section button:hover {
+  border: 2px solid rgba(0, 255, 255, 0.7);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+}
+main div #essential {
+  border: 2px solid #576161;
+  box-shadow: 0 0 10px #576161;
+}
+main div #essential button {
+  background: #0C2342;
+  transition: all 0.5s ease-in-out;
+}
+main div #essential button:hover {
+  transform: translateX(-50%) scale(1.2);
+  animation: pulso-boton 1s ease-in-out forwards;
+}
+main div #pro {
+  border: 2px solid #3CC9C9;
+  box-shadow: 0 0 10px #3CC9C9;
+}
+main div #pro button {
+  background-image: linear-gradient(90deg, #30C5D2 0%, #471069 50%, #30C5D2 100%);
+  transition: all 0.5s ease-in-out;
+}
+main div #pro button:hover {
+  transform: translateX(-50%) scale(1.2);
+  animation: efecto-futurista 1.3s ease forwards;
+}
+main div #empreneur {
+  border: 2px solid #471069;
+  box-shadow: 0 0 10px #471069;
+}
+main div #empreneur button {
+  background: #471069;
+  transition: all 0.5s ease-in-out;
+}
+main div #empreneur button:hover {
+  transform: translateX(-50%) scale(1.2);
+  animation: pulso-boton 1s ease-in-out forwards;
+}/*# sourceMappingURL=precios.css.map */

@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&display=swap');
 
 $color-header: rgba(25, 25, 25, 0.9);
 $color-li: rgba(25, 25, 25, 0.95);
@@ -7,8 +7,8 @@ $color-cv: rgba(25, 25, 25, 0.4);
 
 $gradiente-button: linear-gradient(90deg, #30C5D2 0%, #471069 50%, #30C5D2 100%);
 
-$fuente-texto: 'Inter', sans-serif;
-$fuente-titulo: 'IBM Plex Mono', monospace;
+$fuente-texto: 'DM Sans', sans-serif;
+$fuente-titulo: 'Space Grotesk', sans-serif;
 
 $color-sombra-default: rgba(25, 25, 25, 0.5);
 $color-sombra-cyan: rgba(0, 255, 255, 0.7);
@@ -24,6 +24,8 @@ $color-fondo-tarjetas: rgba(25, 25, 25, 0.5);
 $color-fondo-tarjeta-claro: rgba(255, 255, 255, 0.1);
 $color-fondo-tarjeta-oscuro: rgba(25, 25, 25, 0.5);
 
+$imagen-fondo: url("../img/fondo.jpg");
+
 @mixin transition($property, $duration, $timing: ease-in-out) {
     -webkit-transition: $property $duration $timing;
     -moz-transition: $property $duration $timing;
@@ -38,7 +40,7 @@ $color-fondo-tarjeta-oscuro: rgba(25, 25, 25, 0.5);
     animation: $name $duration $timing $fill;
 }
 
-@mixin efecto-ruido($opacity: 0.5, $mode: overlay) {
+@mixin efecto-ruido($opacity: 0.2, $mode: overlay) {
     position: relative;
     overflow: hidden;
 
@@ -95,10 +97,233 @@ $color-fondo-tarjeta-oscuro: rgba(25, 25, 25, 0.5);
 
 body {
     background-color: $color-fondo;
+    background-image: $imagen-fondo;
     padding: 50px;
 
     @include responsive(medium) {
         padding: 20px;
+    }
+
+        header>nav {
+        margin: 50px 30px;
+        border-radius: 200px;
+        background-color: $color-header;
+        font-family: $fuente-titulo;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px;
+
+        position: fixed;
+        width: 91%;
+        top: 10px;
+        z-index: 100;
+
+        @include desenfoque(3px);
+
+        @include responsive(medium) {
+            width: 95%;
+            margin: 20px 10px;
+            flex-direction: column;
+            gap: 20px;
+            border-radius: 20px;
+            padding: 15px;
+            position: relative;
+            top: 0;
+        }
+
+        div {
+            display: flex;
+            align-items: center;
+            font-size: large;
+
+            @include responsive(medium) {
+                flex-direction: column;
+                width: 100%;
+                gap: 20px;
+            }
+
+            img[alt="Logo Página"] {
+                padding-left: 20px;
+                width: 150px;
+                display: block;
+                transform: scale(1.5);
+
+                @include responsive(medium) {
+                    padding-left: 0;
+                    margin-bottom: 10px;
+                }
+            }
+
+            ul:not(.dropdown-content) {
+                display: flex;
+                padding: 0 50px;
+                gap: 40px;
+                list-style-type: none;
+
+                @include responsive(medium) {
+                    padding: 0;
+                    gap: 15px;
+                    flex-direction: column;
+                    width: 100%;
+                    align-items: center;
+                }
+
+                .dropdown {
+                    position: relative;
+
+                    .dropdown-content {
+                        list-style-type: none;
+                        position: absolute;
+
+                        top: 100%;
+                        transform: translate(-50px);
+                        width: max-content;
+                        min-width: 200px;
+
+                        background-color: $color-li;
+                        border-radius: 20px;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                        opacity: 0;
+                        visibility: hidden;
+
+                        @include transition(all, 0.3s, cubic-bezier(0.4, 0, 0.2, 1));
+
+                        @include responsive(medium) {
+                            position: static;
+                            transform: none;
+                            width: 100%;
+                            display: none;
+                            margin-top: 10px;
+                        }
+
+
+                        li {
+                            border-radius: 20px;
+
+                            a {
+                                display: block;
+                                padding: 30px;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+
+                    &:hover {
+                        .dropdown-content {
+                            opacity: 1;
+                            visibility: visible;
+                            transform: translateY(20px);
+
+                            @include responsive(medium) {
+                                transform: none;
+                                display: block;
+                            }
+
+                            li {
+                                @include transition(all, 0.3s);
+                                border-radius: 20px;
+
+                                &:hover {
+                                    background-color: lighten($color-header, 10%);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                a:not(.dropdown-content a) {
+                    text-decoration: none;
+                    background-color: rgba(0, 0, 0, 0);
+
+                    background-image: linear-gradient(white, white);
+
+                    background-position: center 100%;
+                    background-repeat: no-repeat;
+                    background-size: 0% 2px;
+
+                    @include transition(background-size, 0.3s, ease-in-out);
+
+                    li {
+                        text-align: center;
+                        padding: 30px;
+
+                        @include responsive(medium) {
+                            padding: 15px;
+                        }
+                    }
+
+                    &:hover {
+                        background-size: 80% 1px;
+                    }
+                }
+            }
+
+            li.language {
+
+                .dropdown-content {
+                    top: 50%;
+                    width: max-content;
+                    min-width: 200px;
+
+                    a {
+                        text-decoration: none;
+                    }
+
+                    @include responsive(medium) {
+                        top: 0;
+                        width: 100%;
+                    }
+
+                    li {
+                        padding: 30px;
+
+                        a {
+                            background-image: none;
+                        }
+                    }
+                }
+            }
+
+            #svg_language {
+                padding-right: 20px;
+            }
+
+            button {
+                padding: 10px;
+                margin: 0 20px;
+                width: 170px;
+                border-radius: 25px;
+                border: transparent;
+
+                background-size: 200% auto;
+
+                background-image: $gradiente-button;
+
+                font-family: $fuente-titulo;
+                font-weight: bold;
+
+                @include transition(all, 0.5s);
+
+                @include responsive(medium) {
+                    margin: 20px 0;
+                    width: 100%;
+                    max-width: 300px;
+                }
+
+                &:hover {
+                    background-position: 100% center;
+                    border: $color-sombra-cyan 2px solid;
+                    box-shadow: 0 0 8px $color-sombra-cyan;
+
+                    cursor: pointer;
+
+                    @include animation(efecto-futurista, 1.3s, ease);
+
+                    transform: scale(1.05);
+                }
+            }
+        }
     }
 
     >div {
@@ -108,222 +333,13 @@ body {
         box-shadow: 15px -10px 15px 0px $color-sombra-default;
 
         @include efecto-ruido();
-
-        header>nav {
-            margin: 50px 30px;
-            border-radius: 200px;
-            background-color: $color-header;
-            font-family: $fuente-titulo;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            position: fixed;
-            width: 91%;
-            top: 10px;
-            z-index: 100;
-
-            @include desenfoque(2px);
-
-            @include responsive(medium) {
-                width: 95%;
-                margin: 20px 10px;
-                flex-direction: column;
-                gap: 20px;
-                border-radius: 20px;
-                padding: 15px;
-                position: relative;
-                top: 0;
-            }
-
-            div {
-                display: flex;
-                align-items: center;
-                font-size: large;
-
-                @include responsive(medium) {
-                    flex-direction: column;
-                    width: 100%;
-                    gap: 20px;
-                }
-
-                img[alt="Logo Página"] {
-                    padding-left: 20px;
-                    width: 150px;
-                    display: block;
-                    transform: scale(1.5);
-
-                    @include responsive(medium) {
-                        padding-left: 0;
-                        margin-bottom: 10px;
-                    }
-                }
-
-                ul:not(.dropdown-content) {
-                    display: flex;
-                    padding: 0 50px;
-                    gap: 40px;
-                    list-style-type: none;
-
-                    @include responsive(medium) {
-                        padding: 0;
-                        gap: 15px;
-                        flex-direction: column;
-                        width: 100%;
-                        align-items: center;
-                    }
-
-                    .dropdown {
-                        position: relative;
-
-                        .dropdown-content {
-                            list-style-type: none;
-                            position: absolute;
-
-                            top: 100%;
-                            transform: translate(-50px);
-                            width: max-content;
-                            min-width: 200px;
-
-                            background-color: $color-li;
-                            border-radius: 20px;
-                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-                            opacity: 0;
-                            visibility: hidden;
-
-                            @include transition(all, 0.3s, cubic-bezier(0.4, 0, 0.2, 1));
-
-                            @include responsive(medium) {
-                                position: static;
-                                transform: none;
-                                width: 100%;
-                                display: none;
-                                margin-top: 10px;
-                            }
-
-
-                            li {
-                                border-radius: 20px;
-                            }
-                        }
-
-                        &:hover {
-                            .dropdown-content {
-                                opacity: 1;
-                                visibility: visible;
-                                transform: translateY(20px);
-
-                                @include responsive(medium) {
-                                    transform: none;
-                                    display: block;
-                                }
-
-                                li {
-                                    @include transition(all, 0.3s);
-                                    border-radius: 20px;
-
-                                    &:hover {
-                                        background-color: lighten($color-header, 10%);
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    a {
-                        text-decoration: none;
-                        background-color: rgba(0, 0, 0, 0);
-
-                        background-image: linear-gradient(white, white);
-
-                        background-position: center 100%;
-                        background-repeat: no-repeat;
-                        background-size: 0% 2px;
-
-                        @include transition(background-size, 0.3s, ease-in-out);
-
-                        li {
-                            text-align: center;
-                            padding: 30px;
-
-                            @include responsive(medium) {
-                                padding: 15px;
-                            }
-                        }
-
-                        &:hover {
-                            background-size: 80% 1px;
-                        }
-                    }
-                }
-
-                li.language {
-
-                    .dropdown-content {
-                        top: 50%;
-                        width: max-content;
-                        min-width: 200px;
-
-                        @include responsive(medium) {
-                            top: 0;
-                            width: 100%;
-                        }
-
-                        li {
-                            padding: 30px;
-
-                            a {
-                                background-image: none;
-                            }
-                        }
-                    }
-                }
-
-                #svg_language {
-                    padding-right: 20px;
-                }
-
-                button {
-                    padding: 10px;
-                    margin: 0 20px;
-                    width: 170px;
-                    border-radius: 25px;
-                    border: transparent;
-
-                    background-size: 200% auto;
-
-                    background-image: $gradiente-button;
-
-                    font-family: $fuente-titulo;
-                    font-weight: bold;
-
-                    @include transition(all, 0.5s);
-
-                    @include responsive(medium) {
-                        margin: 20px 0;
-                        width: 100%;
-                        max-width: 300px;
-                    }
-
-                    &:hover {
-                        background-position: 100% center;
-                        border: $color-sombra-cyan 2px solid;
-                        box-shadow: 0 0 8px $color-sombra-cyan;
-
-                        cursor: pointer;
-
-                        @include animation(efecto-futurista, 1.3s, ease);
-
-                        transform: scale(1.05);
-                    }
-                }
-            }
-        }
+        @include desenfoque(10px);
 
         main {
             #subir-curriculum {
                 padding: 150px 50px;
                 background-color: $color-fondo-cv;
+                font-family: $fuente-titulo;
 
                 display: flex;
                 justify-content: center;
@@ -654,7 +670,8 @@ body {
                 padding-left: 100px;
                 display: flex;
                 align-items: flex-start;
-                gap: 20px;
+                justify-content: center;
+                gap: 200px;
 
                 @include responsive(medium) {
                     padding-left: 0;
@@ -709,12 +726,12 @@ body {
             }
 
             hr {
-                margin: 20px;
+                margin: 30px 80px;
                 border: 1px solid $color-borde-tarjeta-claro;
             }
 
             article:last-child {
-                padding: 0 20px;
+                padding: 0 80px;
                 font-family: $fuente-texto;
 
                 display: flex;

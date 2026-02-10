@@ -1,0 +1,195 @@
+@use "estilo" as *;
+
+$color-button-essential: #0C2342;
+$color-button-empreneur: #471069;
+
+$color-fondo-tarjeta: rgb(40, 82, 139, 0.5);
+$color-badget: rgb(71, 16, 105, 0.5);
+
+$color-tarjeta-essential: #576161;
+$color-tarjeta-pro: #3CC9C9;
+$color-tarjeta-empreneur: #471069;
+
+@keyframes pulso-boton {
+    0% {
+        filter: brightness(1);
+    }
+    50% {
+        filter: brightness(2);
+    }
+    100% {
+        filter: brightness(1);
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    padding: 250px 0 25px 0;
+
+    h2 {
+        font-family: $fuente-titulo;
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    div {
+        display: grid;
+        grid-template-columns: 0.6fr 1fr 0.6fr;
+        gap: 50px;
+        
+        section {
+            background-color: $color-fondo-tarjeta;
+            border-radius: 10px;
+            height: 600px;
+            position: relative;
+
+            h3,
+            h5,
+            h6,
+            p,
+            span,
+            button {
+                font-family: $fuente-titulo;
+            }
+            article:first-of-type {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            h3 {
+                font-size: 25px;
+                margin: 40px 40px 15px 40px;
+            }
+            h5 {
+                font-size: 20px;
+                margin: 0 40px 10px 40px;
+
+                span {
+                    font-size: 16px;
+                    color: gray;
+                }
+            }
+            h6 {
+                font-size: 13px;
+                margin: 0 40px 20px 40px;
+            }
+            p {
+                font-size: 16px;
+                margin: 0 40px 20px 40px;
+                background-color: $color-badget;
+                padding: 2px 15px;
+                border-radius: 25px;
+            }
+    
+            ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+                
+                li {
+                    font-family: $fuente-texto;
+                    padding-left: 25px;
+                    position: relative;
+
+                    &::before {
+                        content: "✓";
+                        color: green;
+                        position: absolute;
+                        left: 0;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        font-weight: bold;
+                        font-size: 1.2em;
+                    }
+                }
+            }
+
+            article:last-of-type {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 50px;
+                padding: 0 40px;
+                line-height: 2;                
+            }
+
+            button {
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+
+                background-size: 200% auto;
+                border: 1px solid transparent;
+
+                border-radius: 25px;
+                width: 250px;
+                height: 50px;
+
+                font-size: 17px;
+
+                cursor: pointer;
+
+                &:hover {
+                    border: 2px solid $color-sombra-cyan;
+                    box-shadow: 0 0 8px $color-sombra-cyan;
+                }
+            }
+        }
+        #essential {
+            border: 2px solid $color-tarjeta-essential;
+            box-shadow: 0 0 10px $color-tarjeta-essential;
+
+            button {
+                background: $color-button-essential;
+
+                @include transition(all, 0.5s);
+                
+                &:hover {
+                    transform: translateX(-50%) scale(1.2) ;
+                    
+                    @include animation(pulso-boton, 1s );
+                }
+            }
+        }
+        #pro {
+            border: 2px solid $color-tarjeta-pro;
+            box-shadow: 0 0 10px $color-tarjeta-pro;
+
+            button {
+                background-image: $gradiente-button;
+                
+                @include transition(all, 0.5s);
+
+                &:hover {
+                    transform: translateX(-50%) scale(1.2) ;
+
+                    @include animation(efecto-futurista, 1.3s, ease);
+                }
+            }
+        }
+        #empreneur {
+            border: 2px solid $color-tarjeta-empreneur;
+            box-shadow: 0 0 10px $color-tarjeta-empreneur;
+
+            button {
+                background: $color-button-empreneur;
+
+                @include transition(all, 0.5s);
+
+                &:hover {
+                    transform: translateX(-50%) scale(1.2) ;
+                    
+                    @include animation(pulso-boton, 1s );
+                }
+            }
+        }
+    }
+    
+}
