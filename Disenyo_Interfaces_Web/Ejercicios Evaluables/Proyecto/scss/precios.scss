@@ -1,14 +1,11 @@
 @use "estilo" as *;
 
 $color-button-essential: #0C2342;
-$color-button-empreneur: #471069;
+$color-button-entrepreneur: #471069;
 
-$color-fondo-tarjeta: rgb(40, 82, 139, 0.5);
+$color-fondo-tarjeta: rgba(15, 15, 16, 0.5);
 $color-badget: rgb(71, 16, 105, 0.5);
 
-$color-tarjeta-essential: #576161;
-$color-tarjeta-pro: #3CC9C9;
-$color-tarjeta-empreneur: #471069;
 
 @keyframes pulso-boton {
     0% {
@@ -39,14 +36,16 @@ main {
 
     div {
         display: grid;
-        grid-template-columns: 0.6fr 1fr 0.6fr;
+        grid-template-columns: 0.8fr 1fr 0.8fr;
         gap: 50px;
         
         section {
             background-color: $color-fondo-tarjeta;
             border-radius: 10px;
-            height: 600px;
+            height: 700px;
             position: relative;
+
+            box-shadow: 4px 4px 5px $color-button-entrepreneur;
 
             h3,
             h5,
@@ -99,7 +98,6 @@ main {
 
                     &::before {
                         content: "✓";
-                        color: green;
                         position: absolute;
                         left: 0;
                         top: 50%;
@@ -120,6 +118,7 @@ main {
             }
 
             button {
+                
                 position: absolute;
                 bottom: 20px;
                 left: 50%;
@@ -143,8 +142,6 @@ main {
             }
         }
         #essential {
-            border: 2px solid $color-tarjeta-essential;
-            box-shadow: 0 0 10px $color-tarjeta-essential;
 
             button {
                 background: $color-button-essential;
@@ -159,8 +156,6 @@ main {
             }
         }
         #pro {
-            border: 2px solid $color-tarjeta-pro;
-            box-shadow: 0 0 10px $color-tarjeta-pro;
 
             button {
                 background-image: $gradiente-button;
@@ -174,12 +169,10 @@ main {
                 }
             }
         }
-        #empreneur {
-            border: 2px solid $color-tarjeta-empreneur;
-            box-shadow: 0 0 10px $color-tarjeta-empreneur;
+        #entrepreneur {
 
             button {
-                background: $color-button-empreneur;
+                background: $color-button-entrepreneur;
 
                 @include transition(all, 0.5s);
 
