@@ -24,7 +24,6 @@ $color-borde-tarjeta-oscuro: rgba(25, 25, 25, 0.3);
 
 // Colores de fondo
 $color-fondo: #133058;
-$color-radial-fondo: radial-gradient(circle at center, rgb(170, 72, 250, 0.35) 60%, rgb(41, 95, 172, 0.5) 90%);
 $color-fondo-cv: rgb(40, 82, 139, 0.65);
 $color-fondo-tarjetas: rgba(25, 25, 25, 0.5);
 $color-fondo-tarjeta-claro: rgba(255, 255, 255, 0.1);
@@ -416,7 +415,6 @@ body {
 
     >div {
         border: 1px solid $color-borde-main;
-        background: $color-radial-fondo;
         border-radius: 10px;
         box-shadow: 15px -10px 15px 0px $color-sombra-default;
 
