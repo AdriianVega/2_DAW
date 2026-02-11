@@ -1,15 +1,20 @@
+// Importamos las fuentes que usaremos
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&display=swap');
 
+// Variables de colores de la paleta
 $color-header: rgba(25, 25, 25, 0.9);
 $color-li: rgba(25, 25, 25, 0.95);
 $color-cv: rgba(25, 25, 25, 0.4);
 
+// Gradiente para botones
 $gradiente-button: linear-gradient(90deg, #30C5D2 0%, #471069 50%, #30C5D2 100%);
 
+// Fuentes para texto y títulos
 $fuente-texto: 'DM Sans', sans-serif;
 $fuente-titulo: 'Space Grotesk', sans-serif;
 
+// Colores para sombras y bordes
 $color-sombra-default: rgba(25, 25, 25, 0.5);
 $color-sombra-cyan: rgba(0, 255, 255, 0.7);
 
@@ -17,6 +22,7 @@ $color-borde-main: rgba(205, 205, 205, 0.1);
 $color-borde-tarjeta-claro: rgba(255, 255, 255, 0.2);
 $color-borde-tarjeta-oscuro: rgba(25, 25, 25, 0.3);
 
+// Colores de fondo
 $color-fondo: #133058;
 $color-radial-fondo: radial-gradient(circle at center, rgb(170, 72, 250, 0.35) 60%, rgb(41, 95, 172, 0.5) 90%);
 $color-fondo-cv: rgb(40, 82, 139, 0.65);
@@ -24,8 +30,10 @@ $color-fondo-tarjetas: rgba(25, 25, 25, 0.5);
 $color-fondo-tarjeta-claro: rgba(255, 255, 255, 0.1);
 $color-fondo-tarjeta-oscuro: rgba(25, 25, 25, 0.5);
 
+// Imagen de fondo para el body
 $imagen-fondo: url("../img/fondo.jpg");
 
+// Mixins para transicion soportando varias navegadores
 @mixin transition($property, $duration, $timing: ease-in-out) {
     -webkit-transition: $property $duration $timing;
     -moz-transition: $property $duration $timing;
@@ -33,6 +41,7 @@ $imagen-fondo: url("../img/fondo.jpg");
     transition: $property $duration $timing;
 }
 
+// Mixin para animaciones soportando varias navegadores
 @mixin animation($name, $duration, $timing: ease-in-out, $fill: forwards) {
     -webkit-animation: $name $duration $timing $fill;
     -moz-animation: $name $duration $timing $fill;
@@ -40,30 +49,53 @@ $imagen-fondo: url("../img/fondo.jpg");
     animation: $name $duration $timing $fill;
 }
 
-@mixin efecto-ruido($opacity: 0.2, $mode: overlay) {
+// Mixin para efecto de ruido usando un filtro SVG usando como fondo en un pseudo-elemento ::after
+@mixin efecto-ruido($opacity: 0.5, $mode: overlay) {
+    // la posición en relativo es necesaria para que el pseudo-elemento ::after se posicione correctamente 
     position: relative;
+
+    // el overflow hidden es necesario para que el pseudo-elemento ::after no se salga del contenedor
     overflow: hidden;
 
+    // usamos un pseudoe-elemento ::after para colocar el efecto de ruido sobre el fondo y no sobre el contenido
     &::after {
+        // el contenido vacío es necesario para que el pseudo-elemento se muestre
         content: "";
+        
+        // la posición absoluta es necesaria para que el pseudo-elemento se coloque sobre el fondo
         position: absolute;
+
+        // inset == top, right, bottom, left a 0 para que el pseudo-elemento ocupe todo el espacio del contenedor
         inset: 0;
+
+        // el z-index hace que el pseudo-elemento se coloque por debajo del contenido pero por encima del fondo
         z-index: 1;
 
+        // el background-image con un filtro SVG de ruido fractal crea el efecto de ruido
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+
+        // el background-size controla el tamaño del patrón de ruido, un valor más pequeño hace que el ruido sea más denso, mientras que un valor más grande lo hace más disperso
         background-size: 100px;
 
+        // repetimos el ruido y establecemos la opacidad para ajustarlo a nuestro diseño
         opacity: $opacity;
+
+        // el mix-blend-mode controla cómo se mezcla el pseudo-elemento con el fondo, 
+        // el modo overlay mejora como se ve el ruido sobre fondos oscuros
         mix-blend-mode: $mode;
+
+        // pointer-events none hace que se pueda seguir interactuando con el contenido debajo del pseudo-elemento
         pointer-events: none;
     }
 }
 
+// Mixin para aplicar un efecto de desenfoque usando backdrop-filter con soporte para navegadores
 @mixin desenfoque($blur) {
     backdrop-filter: blur($blur);
     -webkit-backdrop-filter: blur($blur);
 }
 
+// Mixin para aplicar estilos responsivos según el tamaño de pantalla
 @mixin responsive($size) {
     @if $size ==medium {
         @media (max-width: 1024px) {
@@ -78,7 +110,11 @@ $imagen-fondo: url("../img/fondo.jpg");
     }
 }
 
+// Animación para el efecto futurista en los botones (movimiento del gradiente de izquierda a derecha)
+// Para esto jugamos con la propiedad background-position del gradiente, 
+// moviéndolo de 0% a -200% para crear un efecto de desplazamiento continuo
 @keyframes efecto-futurista {
+
     0% {
         background-position: 0% 50%;
     }
@@ -88,6 +124,7 @@ $imagen-fondo: url("../img/fondo.jpg");
     }
 }
 
+// Estilos globales
 * {
     padding: 0;
     margin: 0;
@@ -96,31 +133,41 @@ $imagen-fondo: url("../img/fondo.jpg");
 }
 
 body {
+    // Aplicamos un color de fondo por defecto si la imagen no carga
     background-color: $color-fondo;
     background-image: $imagen-fondo;
+
+    // Padding para separar el contenido de los bordes de la ventana
     padding: 50px;
 
+    // Bajamos el padding para el responsive
     @include responsive(medium) {
         padding: 20px;
     }
 
-        header>nav {
+    header>nav {
+        // Aplicamos margenes, bordes redondeados, un fondo semitransparente, y una fuente para el header
         margin: 50px 30px;
         border-radius: 200px;
         background-color: $color-header;
         font-family: $fuente-titulo;
+
+        // Usamos flexbox para distribuir los elementos del header con espacio entre ellos y alineados verticalmente
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 5px;
 
+        // position fixed para que el header permanezca en pantalla y z-index para que esté por encima de los elementos
         position: fixed;
         width: 91%;
         top: 10px;
         z-index: 100;
 
+        // Aplicamos el desenfoque en el header
         @include desenfoque(3px);
 
+        // Bajamos el ancho, cambiamos la dirección a columna, y ajustamos los margenes para el responsive
         @include responsive(medium) {
             width: 95%;
             margin: 20px 10px;
@@ -131,8 +178,9 @@ body {
             position: relative;
             top: 0;
         }
-
+    
         div {
+            // Usamos flexbox para alinear los elementos del header, y ajustamos la dirección a columna para el responsive
             display: flex;
             align-items: center;
             font-size: large;
@@ -143,9 +191,13 @@ body {
                 gap: 20px;
             }
 
+            // Estilos para el logo del header
             img[alt="Logo Página"] {
                 padding-left: 20px;
                 width: 150px;
+                
+                // transform scale para aumentar el tamaño del logo sin afectar a su tamaño real
+                // display block para evitar que el espacio debajo del logo afecte al layout, ya que por defecto las imágenes son inline
                 display: block;
                 transform: scale(1.5);
 
@@ -155,6 +207,7 @@ body {
                 }
             }
 
+            // Estilos para el menú de navegación sin contar el contenido del dropdown
             ul:not(.dropdown-content) {
                 display: flex;
                 padding: 0 50px;
@@ -170,14 +223,22 @@ body {
                 }
 
                 .dropdown {
+                    // posicion relativa para que el contenido del dropdown
                     position: relative;
 
                     .dropdown-content {
                         list-style-type: none;
+
+                        // posicion absoluta para colocar el contenido del dropdown debajo del elemento padre
                         position: absolute;
 
+                        // centramos el dropdown horizontalmente usando top
+                        // transform translate para darle efecto de desplazamiento al momento de animarlo
                         top: 100%;
                         transform: translate(-50px);
+
+                        // width max-content para que el dropdown se ajuste al contenido
+                        // y min-width para evitar que sea demasiado pequeño
                         width: max-content;
                         min-width: 200px;
 
@@ -185,13 +246,18 @@ body {
                         border-radius: 20px;
                         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
                         opacity: 0;
+
+                        // visibility hidden para que el dropdown no sea interactivo ni visible cuando no se está mostrando
                         visibility: hidden;
 
+                        // aplicamos transicion para animar el dropdown al mostrarlo y ocultarlo
+                        // usamos cubic-bezier para darle un efecto de aceleración y desaceleración más suave de forma más específica que con ease
                         @include transition(all, 0.3s, cubic-bezier(0.4, 0, 0.2, 1));
 
                         @include responsive(medium) {
+                            // posicion static para que el dropdown vuelva a ser parte del contenido del body
                             position: static;
-                            transform: none;
+
                             width: 100%;
                             display: none;
                             margin-top: 10px;
@@ -201,7 +267,8 @@ body {
                         li {
                             border-radius: 20px;
 
-                            a {
+                            a 
+                            {
                                 display: block;
                                 padding: 30px;
                                 text-decoration: none;
@@ -211,17 +278,19 @@ body {
 
                     &:hover {
                         .dropdown-content {
+                            // Al hacer hover en el elemento padre, mostramos el dropdown cambiando su opacidad y visibilidad
                             opacity: 1;
                             visibility: visible;
+
+                            // Aplicamos translateY para posicionar bien el elemento y sobreescribir el transform anterior
                             transform: translateY(20px);
 
                             @include responsive(medium) {
-                                transform: none;
                                 display: block;
                             }
 
                             li {
-                                @include transition(all, 0.3s);
+                                @include transition(background-color, 0.3s);
                                 border-radius: 20px;
 
                                 &:hover {
@@ -232,16 +301,24 @@ body {
                     }
                 }
 
+                // Aplicamos le estilo solamente a la lista principal
                 a:not(.dropdown-content a) {
                     text-decoration: none;
-                    background-color: rgba(0, 0, 0, 0);
 
+                    // Usamos background-ímage para crear una línea debajo del texto que se animará al hacer hover
                     background-image: linear-gradient(white, white);
 
+                    // Ajustamos la línea en el centro horizontalmente y justo debajo del texto
                     background-position: center 100%;
+                    
+                    //Le quitamos la repetición para que solo aparezca esa línea
                     background-repeat: no-repeat;
-                    background-size: 0% 2px;
 
+                    // Especificamos su tamaño, esto es similar al border: 1px solid white
+                    // por defecto no se mostrará
+                    background-size: 0% 1px;
+
+                    // Aplicamos transición para animar la línea
                     @include transition(background-size, 0.3s, ease-in-out);
 
                     li {
@@ -254,14 +331,17 @@ body {
                     }
 
                     &:hover {
+                        // Al hacer hover, animamos la línea aumentando su tamaño al 80% del ancho del texto    
                         background-size: 80% 1px;
                     }
                 }
             }
 
             li.language {
+                cursor: pointer;
 
                 .dropdown-content {
+                    
                     top: 50%;
                     width: max-content;
                     min-width: 200px;
@@ -279,6 +359,7 @@ body {
                         padding: 30px;
 
                         a {
+                            // Para el caso del menú de idiomas, quitamos la animación de la línea
                             background-image: none;
                         }
                     }
@@ -294,11 +375,16 @@ body {
                 margin: 0 20px;
                 width: 170px;
                 border-radius: 25px;
+                // Quitamos el borde por defecto del botón
                 border: transparent;
 
-                background-size: 200% auto;
-
+                // Usamos un gradiente como fondo del botón, usamos background-image nuevamente
+                // Para aplicar la animación, ya que con simplemente background no se aplicaría correctamente
                 background-image: $gradiente-button;
+
+                // Ajustamos el tamaño del fondo para que el gradiente se pueda animar correctamente
+                // El gradiente estará formado de 3 colores para que el efecto de la animación sea más fluida
+                background-size: 200% auto;
 
                 font-family: $fuente-titulo;
                 font-weight: bold;
@@ -318,8 +404,10 @@ body {
 
                     cursor: pointer;
 
+                    // Aplicamos la animación del gradiente para que se mueva de izquierda a derecha al hacer hover
                     @include animation(efecto-futurista, 1.3s, ease);
 
+                    // Lo escalamos un poco para dar sensación de interactividad
                     transform: scale(1.05);
                 }
             }
@@ -332,6 +420,7 @@ body {
         border-radius: 10px;
         box-shadow: 15px -10px 15px 0px $color-sombra-default;
 
+        // Aplicamos el efecto de ruido y y desenfoque al contenedor para que se vea el fondo desenfocado
         @include efecto-ruido();
         @include desenfoque(10px);
 
@@ -378,6 +467,7 @@ body {
                     }
 
                     div:not(.prompt-container) {
+                        // Aplicamos un borde discontinuo en el contenedor del formulario
                         border: 1px dashed white;
                         border-radius: 10px;
                         display: flex;
@@ -446,24 +536,32 @@ body {
                             }
 
                             &:focus {
+                                // Eliminamos al hacer focus la línea por defecto del button
                                 outline: none;
+
+                                // Aplicamos un borde y sombra cian, esto da estilo neón al input
                                 border: $color-sombra-cyan 2px solid;
                                 box-shadow: 0 0 8px $color-sombra-cyan;
                             }
                         }
 
                         #submit {
+                            // El botón de envío lo posicionamos al lado derecho dando un efecto de botón integrado con el input
                             position: absolute;
                             right: 0;
                             top: 50%;
 
+                            // Usamos transform translate para centrar el botón verticalmente respecto al input
                             transform: translateY(-50%);
 
                             width: 20%;
                             height: 45px;
                             border-radius: 0 20px 20px 0;
+
+                            // Quitamos el borde por defecto del botón
                             border: transparent;
 
+                            // Hacemos el mismo proceso que con el botón de inicio de sesión del header
                             background-image: $gradiente-button;
                             background-size: 200% auto;
 
@@ -478,6 +576,8 @@ body {
                             cursor: pointer;
 
                             @include responsive(medium) {
+                                // En dispositivos móviles, le devolvemos el comportamiento normal 
+                                // y le quitamos el transform para que se muestre debajo del input y no al lado 
                                 position: static;
                                 transform: none;
                                 width: 100%;
@@ -489,6 +589,8 @@ body {
                             &:hover {
                                 background-color: $color-sombra-cyan;
                                 box-shadow: 0 0 8px $color-sombra-cyan;
+
+                                // Aplicamos la animación del gradiente para que se mueva de izquierda a derecha al hacer hover
 
                                 @include animation(efecto-futurista, 1.3s, ease);
                             }
@@ -585,14 +687,21 @@ body {
                 }
             }
 
+            // Para la sección de "bento-grid" usamos display grid para crear una tabla estilo bento 
+            // con diferentes áreas para cada tarjeta, esto nos permite crear un diseño más dinámico
             #bento-grid {
                 padding: 100px;
 
+                // Aplicamos display grid
                 display: grid;
                 gap: 25px;
 
+                // Definimos el tamaño de las columnas (izquierda tamaño nartural y derecha un poco más grande)
                 grid-template-columns: 1fr 1.5fr;
 
+                // Definimos las áreas de la grid para colocar cada tarjeta en su lugar 
+                // esto nos da mucha flexibilidad para crear un diseño más dinámico
+                // Repetimos el nombre si queremos que ocupen varias filas o columnas
                 grid-template-areas:
                     "area-gratis area-bigdata"
                     "area-gratis area-inferencia"
@@ -600,6 +709,9 @@ body {
 
                 @include responsive(medium) {
                     padding: 50px 20px;
+
+                    // Para el modelo responsive, devolvemos a un diseño de una sola columna
+                    // y devolvemos un orden lógico a las áreas para eliminar el diseño bento
                     grid-template-columns: 1fr;
                     grid-template-areas:
                         "area-gratis"
@@ -636,11 +748,15 @@ body {
                             width: 100px;
                             height: 100px;
 
+                            // Para las imágenes de esta sección, las escalamos un poco para que se vean más pequeñas 
+                            // y encajen mejor en el diseño
                             transform: scale(0.5);
                         }
                     }
                 }
 
+                // Asignamos cada tarjeta a su área correspondiente usando grid-area 
+                // y el nombre definido en grid-template-areas
                 .gratuito {
                     grid-area: area-gratis;
                 }
@@ -669,6 +785,8 @@ body {
             article:first-child {
                 padding-left: 100px;
                 display: flex;
+
+                // Alineamos el contenido al inicio verticalmente y centrado horizontalmente
                 align-items: flex-start;
                 justify-content: center;
                 gap: 200px;
@@ -682,11 +800,14 @@ body {
 
                 img {
                     width: 25px;
+                    
+                    // Usamos de nuevo el truco de transform scale para aumentar el tamaño del logo sin afectar a su tamaño real
                     transform: scale(5) translateX(-10px);
                     padding-top: 1px;
 
                     @include responsive(medium) {
-                        transform: scale(3);
+                        gap: 0;
+                        transform: scale(5) translate(0, 25px);
                         margin-bottom: 30px;
                         margin-right: 0;
                     }

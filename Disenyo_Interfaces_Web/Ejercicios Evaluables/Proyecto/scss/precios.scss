@@ -1,12 +1,15 @@
+// Importamos el estilo general, usamos * para acceder a las variables y mixins sin necesidad de prefijo
 @use "estilo" as *;
 
+// Variables de colores específicos para esta página
 $color-button-essential: #0C2342;
 $color-button-entrepreneur: #471069;
 
 $color-fondo-tarjeta: rgba(15, 15, 16, 0.5);
 $color-badget: rgb(71, 16, 105, 0.5);
 
-
+// Creamos un nuevo keyframe para el efecto de pulso del botón
+// Este aumentará el brillo del botón y despues volverá a su estado normal para crear un efecto de pulso
 @keyframes pulso-boton {
     0% {
         filter: brightness(1);
@@ -35,11 +38,15 @@ main {
     }
 
     div {
+        // Usamos grid para crear una estructura de 3 columnas para las tarjetas de precios
         display: grid;
+
+        // Usamos fr para que las columnas se adapten al espacio disponible, dejando un poco más de espacio a la columna central
         grid-template-columns: 0.8fr 1fr 0.8fr;
         gap: 50px;
 
         @include responsive(medium) {
+            // En pantallas más pequeñas, cambiamos a una estructura de una sola columna para que las tarjetas se apilen verticalmente
             grid-template-columns: 1fr;
             width: 70%;
         }
@@ -60,6 +67,8 @@ main {
             button {
                 font-family: $fuente-titulo;
             }
+
+            // Editamos solamente el primer articulo
             article:first-of-type {
                 display: flex;
                 flex-direction: column;
@@ -99,11 +108,22 @@ main {
                 li {
                     font-family: $fuente-texto;
                     padding-left: 25px;
+
+                    // Aplicamos position relative al li para poder posicionar el pseudo-elemento respecto a él
                     position: relative;
 
-                    &::before {
+                    // Creamos un pseudo-elemento para cambiar la viñeta por un checkmark
+                    &::after {
+                        // Especificamos el contenido del pseudo-elemento como un checkmark usando el caracter ✓
                         content: "✓";
+
+                        // Posicionamos el pseudo-elemento a la izquierda del texto de la lista, centrado verticalmente
                         position: absolute;
+
+                        // Centramos el checkmark verticalmente respecto al texto usando top 50% y transform translateY(-50%)
+                        // Usamos translate para quitar el espacio que ocupa el checkmark
+                        // top 50% = elemento padre 50% + contenido checkmark, 
+                        // si hacemos translateY(-50%) el checkmark se mueve a donde debería
                         left: 0;
                         top: 50%;
                         transform: translateY(-50%);

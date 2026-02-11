@@ -1,5 +1,7 @@
+// Importamos el estilo general, usamos * para acceder a las variables y mixins sin necesidad de prefijo
 @use "estilo" as *;
 
+// Variable de enlaces, la usamos para el color de los enlaces y también para el hover del botón de login
 $color-enlaces: #30C5D2;
 
 main {
@@ -16,6 +18,8 @@ main {
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        // Aplicamos gap basandonos en el viewport para que se adapte mejor a diferentes tamaños de pantalla
         gap: 3vh;
         padding: 60px;
 
@@ -36,8 +40,7 @@ main {
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 100%;
-            height: 100%;
+            inset: 0;
 
             gap: 20px;
 
@@ -56,6 +59,7 @@ main {
                     font-family: $fuente-texto;
             
                     label {
+                        // Aplicamos un truco para ocultar el texto del label pero manteniendo su función de accesibilidad
                         visibility: hidden;
                     }
             
@@ -76,6 +80,8 @@ main {
                 }
             
                 small {
+                    // Aplicamos position relative para además de centrarlo vertical y horizontalmente
+                    // poder posicionarlo respecto al formulario usando position left, right, top o bottom
                     position: relative;
             
                     a {
@@ -89,11 +95,13 @@ main {
                 }
             
                 #forget-password {
+                    // Posicionamos el enlace de olvidar contraseña abajo a la derecha del input contraseña
                     left: 60px;
                     bottom: 10px;
                 }
             
                 #register-account {
+                    // Posicionamos el enlace de registrar cuenta abajo a la izquierda del botón de login
                     right: 60px;
                     bottom: 10px;
                 }
@@ -136,10 +144,13 @@ main {
                     align-items: center;
                     justify-content: center;
             
+                    // Aplicamos un gradiente lineal con los colores de los enlaces para el fondo del botón
+                    // y lo hacemos más grande que el botón para que los colores se vean como se debe y poder animarlo
                     background-image: $gradiente-button;
                     background-size: 200% auto;
             
                     &:hover {
+                        // Animamos el fondo del botón para que se mueva el gradiente y se vea un efecto de movimiento en los colores
                         @include animation(efecto-futurista, 1.3s, ease);
                     }
                 }

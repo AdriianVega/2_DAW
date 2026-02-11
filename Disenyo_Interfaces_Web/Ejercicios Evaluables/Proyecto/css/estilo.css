@@ -114,7 +114,6 @@ body header > nav div ul:not(.dropdown-content) .dropdown .dropdown-content {
 @media (max-width: 1024px) {
   body header > nav div ul:not(.dropdown-content) .dropdown .dropdown-content {
     position: static;
-    transform: none;
     width: 100%;
     display: none;
     margin-top: 10px;
@@ -135,12 +134,11 @@ body header > nav div ul:not(.dropdown-content) .dropdown:hover .dropdown-conten
 }
 @media (max-width: 1024px) {
   body header > nav div ul:not(.dropdown-content) .dropdown:hover .dropdown-content {
-    transform: none;
     display: block;
   }
 }
 body header > nav div ul:not(.dropdown-content) .dropdown:hover .dropdown-content li {
-  transition: all 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
   border-radius: 20px;
 }
 body header > nav div ul:not(.dropdown-content) .dropdown:hover .dropdown-content li:hover {
@@ -148,11 +146,10 @@ body header > nav div ul:not(.dropdown-content) .dropdown:hover .dropdown-conten
 }
 body header > nav div ul:not(.dropdown-content) a:not(.dropdown-content a) {
   text-decoration: none;
-  background-color: rgba(0, 0, 0, 0);
   background-image: linear-gradient(white, white);
   background-position: center 100%;
   background-repeat: no-repeat;
-  background-size: 0% 2px;
+  background-size: 0% 1px;
   transition: background-size 0.3s ease-in-out;
 }
 body header > nav div ul:not(.dropdown-content) a:not(.dropdown-content a) li {
@@ -166,6 +163,9 @@ body header > nav div ul:not(.dropdown-content) a:not(.dropdown-content a) li {
 }
 body header > nav div ul:not(.dropdown-content) a:not(.dropdown-content a):hover {
   background-size: 80% 1px;
+}
+body header > nav div li.language {
+  cursor: pointer;
 }
 body header > nav div li.language .dropdown-content {
   top: 50%;
@@ -197,8 +197,8 @@ body header > nav div button {
   width: 170px;
   border-radius: 25px;
   border: transparent;
-  background-size: 200% auto;
   background-image: linear-gradient(90deg, #30C5D2 0%, #471069 50%, #30C5D2 100%);
+  background-size: 200% auto;
   font-family: "Space Grotesk", sans-serif;
   font-weight: bold;
   transition: all 0.5s ease-in-out;
@@ -235,7 +235,7 @@ body > div::after {
   z-index: 1;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
   background-size: 100px;
-  opacity: 0.2;
+  opacity: 0.5;
   mix-blend-mode: overlay;
   pointer-events: none;
 }
@@ -557,7 +557,8 @@ body > div footer article:first-child img {
 }
 @media (max-width: 1024px) {
   body > div footer article:first-child img {
-    transform: scale(3);
+    gap: 0;
+    transform: scale(5) translate(0, 25px);
     margin-bottom: 30px;
     margin-right: 0;
   }
