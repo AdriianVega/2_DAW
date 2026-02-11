@@ -255,7 +255,7 @@ body > div main #subir-curriculum {
     padding: 50px 20px;
   }
 }
-body > div main #subir-curriculum h3 {
+body > div main #subir-curriculum h1, body > div main #subir-curriculum h3 {
   padding: 5px 0;
 }
 body > div main #subir-curriculum h5 {
@@ -670,9 +670,8 @@ main section article {
   inset: 0;
   gap: 20px;
 }
-main section article h2 {
+main section article h1 {
   font-family: "Space Grotesk", sans-serif;
-  font-size: 28px;
 }
 main section article form {
   display: flex;

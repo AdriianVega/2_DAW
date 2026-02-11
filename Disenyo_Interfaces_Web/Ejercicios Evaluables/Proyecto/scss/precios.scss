@@ -30,9 +30,8 @@ main {
     gap: 100px;
     padding: 250px 0 25px 0;
 
-    h2 {
+    h1, h2 {
         font-family: $fuente-titulo;
-        font-size: 28px;
         text-align: center;
         margin-bottom: 40px;
     }
