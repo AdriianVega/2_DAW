@@ -220,7 +220,6 @@ body header > nav div button:hover {
 }
 body > div {
   border: 1px solid rgba(205, 205, 205, 0.1);
-  background: radial-gradient(circle at center, rgba(170, 72, 250, 0.35) 60%, rgba(41, 95, 172, 0.5) 90%);
   border-radius: 10px;
   box-shadow: 15px -10px 15px 0px rgba(25, 25, 25, 0.5);
   position: relative;
