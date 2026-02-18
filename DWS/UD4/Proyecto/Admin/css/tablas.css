@@ -28,8 +28,7 @@ body::before {
   height: 100vh;
   z-index: 1050;
   background-color: rgba(15, 23, 42, 0.9);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border-right: 1px solid #D500F9;
   box-shadow: 5px 0 25px rgba(213, 0, 249, 0.2);
   transition: left 0.3s ease-in-out;
@@ -42,8 +41,7 @@ body::before {
   border-top: 1px solid #D500F9;
   border-right: 1px solid #D500F9;
   border-bottom: 1px solid #D500F9;
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 #sidebar #flecha img {
   width: 25px;
@@ -118,8 +116,7 @@ body::before {
 
 .card {
   background-color: rgba(0, 0, 0, 0.65);
-  -webkit-backdrop-filter: blur(15px);
-          backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.6);
   color: white;
@@ -164,8 +161,7 @@ body::before {
   background-color: rgba(0, 0, 0, 0.2) !important;
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: white !important;
-  -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
 }
 .form-control::-moz-placeholder, .form-select::-moz-placeholder {
   color: rgba(255, 255, 255, 0.5);
@@ -282,8 +278,7 @@ body::before {
 
 .modal-content {
   background-color: rgba(15, 23, 42, 0.98);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border: 1px solid #ff1744;
   color: white;
   box-shadow: 0 0 30px rgba(255, 23, 68, 0.4);

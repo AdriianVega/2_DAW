@@ -43,7 +43,6 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgb(229.5, 229.5, 229.5);
 }
 nav a {
   color: rgb(229.5, 229.5, 229.5) !important;
@@ -64,6 +63,9 @@ nav .cesta {
 }
 nav .cesta:hover {
   transform: scale(1.2);
+}
+nav {
+  border-bottom: 1px solid rgb(229.5, 229.5, 229.5);
 }
 
 main {

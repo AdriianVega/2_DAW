@@ -224,8 +224,6 @@ body > div {
   box-shadow: 15px -10px 15px 0px rgba(25, 25, 25, 0.5);
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 body > div::after {
   content: "";
@@ -237,6 +235,10 @@ body > div::after {
   opacity: 0.5;
   mix-blend-mode: overlay;
   pointer-events: none;
+}
+body > div {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 body > div main #subir-curriculum {
   padding: 150px 50px;
@@ -281,7 +283,6 @@ body > div main #subir-curriculum article:last-child div:not(.prompt-container) 
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  transition: all 0.2s ease-out;
 }
 body > div main #subir-curriculum article:last-child div:not(.prompt-container) label {
   cursor: pointer;
@@ -291,6 +292,9 @@ body > div main #subir-curriculum article:last-child div:not(.prompt-container) 
   body > div main #subir-curriculum article:last-child div:not(.prompt-container) label {
     padding: 50px 20px;
   }
+}
+body > div main #subir-curriculum article:last-child div:not(.prompt-container) {
+  transition: all 0.2s ease-out;
 }
 body > div main #subir-curriculum article:last-child div:not(.prompt-container):hover {
   transform: scale(1.02);
@@ -317,7 +321,6 @@ body > div main #subir-curriculum article:last-child .prompt-container #prompt {
   box-shadow: 2px 5px 13px -4px black;
   font-family: "Space Grotesk", sans-serif;
   font-size: 15px;
-  transition: all 0.1s ease-in-out;
 }
 @media (max-width: 1024px) {
   body > div main #subir-curriculum article:last-child .prompt-container #prompt {
@@ -325,6 +328,9 @@ body > div main #subir-curriculum article:last-child .prompt-container #prompt {
     border-radius: 20px;
     padding: 15px;
   }
+}
+body > div main #subir-curriculum article:last-child .prompt-container #prompt {
+  transition: all 0.1s ease-in-out;
 }
 body > div main #subir-curriculum article:last-child .prompt-container #prompt::-moz-placeholder {
   color: rgba(178, 178, 178, 0.4);
@@ -367,7 +373,6 @@ body > div main #subir-curriculum article:last-child .prompt-container #submit {
   font-weight: bold;
   font-family: "Space Grotesk", sans-serif;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
 }
 @media (max-width: 1024px) {
   body > div main #subir-curriculum article:last-child .prompt-container #submit {
@@ -376,6 +381,9 @@ body > div main #subir-curriculum article:last-child .prompt-container #submit {
     width: 100%;
     border-radius: 20px;
   }
+}
+body > div main #subir-curriculum article:last-child .prompt-container #submit {
+  transition: all 0.2s ease-in-out;
 }
 body > div main #subir-curriculum article:last-child .prompt-container #submit:hover {
   background-color: rgba(0, 255, 255, 0.7);

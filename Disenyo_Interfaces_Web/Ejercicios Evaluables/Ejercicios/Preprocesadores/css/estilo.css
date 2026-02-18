@@ -32,7 +32,6 @@ nav ul {
 nav ul li {
   padding: 0 70px;
   transition: background-color 0.5s ease-out;
-  position: relative;
 }
 nav ul li ul {
   display: none;
@@ -58,6 +57,9 @@ nav ul li:hover ul {
 }
 nav ul li:hover ul li {
   margin: 10px 0;
+}
+nav ul li {
+  position: relative;
 }
 @media (max-width: 800px) {
   nav {
