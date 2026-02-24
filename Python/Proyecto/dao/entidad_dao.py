@@ -25,7 +25,7 @@ class BaseDAO:
         return conn
 
     def _crear_tablas(self):
-        """Ejecutamos el esquema relacional si no existe."""
+        """Creamos las tablas si no existen."""
         with self._get_connection() as conn:
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS categorias (
@@ -88,7 +88,7 @@ class LibroDAO(BaseDAO):
             for libro in libros:
                 datos.append((libro.titulo, libro.precio, libro.en_stock, libro.categoria_id))
 
-            # Usamos executemany para insertar el bloque entero en una sola transacción eficiente
+            # Usamos executemany para insertar el bloque entero de un solo golpe
             conn.executemany(
                 "INSERT INTO libros (titulo, precio, en_stock, categoria_id) VALUES (?, ?, ?, ?)",
                 datos
