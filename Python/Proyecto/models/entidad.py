@@ -1,19 +1,7 @@
-"""
-Proyecto Final Python
-"""
 import re
 
-
-
-# ==========================================
-# 1. MODELOS DE DOMINIO
-# ==========================================
-
-
 class Categoria:
-    """Modelo para la entidad Categoría."""
-
-    def __init__(self, nombre: str, url: str, categoria_id: int = None):
+    def __init__(self, nombre, url, categoria_id=None):
         self.id = categoria_id
         self.nombre = nombre.strip()
         self.url = url.strip()
@@ -31,16 +19,7 @@ class Categoria:
 
 
 class Libro:
-    """Modelo para la entidad Libro, con relación a Categoría."""
-
-    def __init__(
-        self,
-        titulo: str,
-        precio_raw: str,
-        stock_raw: str,
-        categoria_id: int,
-        libro_id: int = None,
-    ):
+    def __init__(self, titulo, precio_raw, stock_raw, categoria_id, libro_id=None):
         self.id = libro_id
         self.titulo = titulo.strip()
         self.precio = self._limpiar_precio(precio_raw)
@@ -48,14 +27,13 @@ class Libro:
         self.categoria_id = categoria_id
         self._validar()
 
-    def _limpiar_precio(self, precio_str: str) -> float:
-        """Uso de RegEx para limpiar el precio extraído."""
+    def _limpiar_precio(self, precio_str):
         match = re.search(r"\d+\.\d+", precio_str)
         if match:
             return float(match.group(0))
         raise ValueError(f"Formato de precio inválido: {precio_str}")
 
-    def _verificar_stock(self, stock_str: str) -> bool:
+    def _verificar_stock(self, stock_str):
         return "in stock" in stock_str.lower()
 
     def _validar(self):
@@ -72,10 +50,3 @@ class Libro:
             f"precio={self.precio}, stock={self.en_stock}, "
             f"cat_id={self.categoria_id})"
         )
-
-
-# ==========================================
-# 2. CAPA DE PERSISTENCIA (DAO)
-# ==========================================
-
-
