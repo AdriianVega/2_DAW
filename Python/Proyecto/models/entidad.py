@@ -6,7 +6,7 @@ import re
 class Categoria:
     """Modelo para la entidad Categoría."""
 
-    def __init__(self, nombre, url, categoria_id):
+    def __init__(self, nombre, url, categoria_id=None):
         """Inicializamos y limpiamos los datos de la categoría."""
         self.id = categoria_id
         # Usamos strip() para limpiar espacios sobrantes
@@ -29,7 +29,7 @@ class Categoria:
 class Libro:
     """Modelo para la entidad Libro."""
 
-    def __init__(self, titulo, precio_raw, stock_raw, categoria_id, libro_id):
+    def __init__(self, titulo, precio_raw, stock_raw, categoria_id, libro_id=None):
         """Inicializamos y procesamos los datos del libro."""
         self.id = libro_id
         self.titulo = titulo.strip()
