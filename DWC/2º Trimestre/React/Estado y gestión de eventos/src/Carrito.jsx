@@ -1,58 +1,83 @@
-import { useState } from "react"
+import { useState } from "react";
 
 function Carrito() {
-    const [carrito, setCarrito] = useState([["Producto A", "99€"], ["Producto B", "149€"]])
+    // Iniciamos con dos productos base
+    const [carrito, setCarrito] = useState([
+        { nombre: "Producto A", precio: 99 },
+        { nombre: "Producto B", precio: 149 },
+    ]);
 
-    function agregarAlCarrito(producto) {
-        setCarrito([...carrito, producto])
-    }
+    const agregarProducto = () => {
+        // Definimos los nuevos productos y expandimos el carrito actual sumandolos
+        const productos = [
+            { nombre: "Producto A", precio: 99 },
+            { nombre: "Producto B", precio: 149 }
+        ];
+        setCarrito([...carrito, ...productos]);
+    };
 
-    function vaciarCarrito() {
-        setCarrito([])
-    }
+    // Limpiamos el carrito
+    const vaciarCarrito = () => setCarrito([]);
 
-    function cantidadCarrito(value) {
-        const n = Number(value) || 0
-        const nuevo = Array.from({ length: n }, () => [["Producto A", "99€"], ["Producto B", "149€"]])
-        setCarrito(nuevo)
-    }
+    const ajustarCantidad = (n) => {
+        // Guarda el valor del input y si no tiene valor empieza en 0
+        const valor = Number.parseInt(n) || 0;
+
+        // Si el valor es menos o igual a 0 devolvemos el carrito vacio
+        // Así evitamos números negativos
+        if (valor <= 0) {
+            return setCarrito([]);
+        }
+        
+        // Introducimos los productos según el valor del input
+        // Si es impar, producto A, si no, producto B
+        const nuevoCarrito = Array.from({ length: valor }, (_, i) => ({
+            nombre: i % 2 === 0 ? "Producto A" : "Producto B",
+            precio: i % 2 === 0 ? 99 : 149
+        }));
+        setCarrito(nuevoCarrito);
+    };
+
+    // Sumamos el precio total del carrito
+    const precioTotal = carrito.reduce((total, p) => total + p.precio, 0);
 
     return (
-        <div>
+        <div style={{ padding: "20px", fontFamily: "sans-serif" }}>
             <h2>Carrito de Compras</h2>
-            <button 
-                onClick={() => agregarAlCarrito([["Producto A", "99€"], ["Producto B", "149€"]])} 
-                style={{ padding: "15px", marginRight: "25px" }}>
-                Agregar Producto
+            
+            <button onClick={agregarProducto} style={{ padding: "10px", marginRight: "10px" }}>
+                Agregar Pack
             </button>
-            <button 
-                onClick={vaciarCarrito} 
-                style={{ padding: "15px" }}
-                disabled={carrito.length === 0}>
-                    Vaciar Carrito
+            
+            <button onClick={vaciarCarrito} disabled={carrito.length === 0} style={{ padding: "10px" }}>
+                Vaciar Carrito
             </button>
 
             <input
                 type="number"
-                onChange={(e) => cantidadCarrito(e.target.value)}
-                style={{ marginLeft: "15px", padding: "10px" }} 
-                defaultValue={1}
+                min="0"
                 value={carrito.length}
-                id={"cantidad"}
+                onChange={(e) => ajustarCantidad(e.target.value)}
+                style={{ marginLeft: "15px", padding: "10px", width: "50px" }}
+                step="2"
             />
 
-            <h3>Productos en el Carrito:</h3>
+            <h3>Productos ({carrito.length}):</h3>
             <ul style={{ listStyleType: "none", padding: 0 }}>
-                {carrito.length === 0 
-                ? <li>El carrito está vacío</li> 
-                : carrito.map((producto, index) => (
-                    <li key={index}>{producto[0]} - {producto[1]}</li>
-                ))}
+                {carrito.length === 0 ? (
+                    <li>El carrito está vacío</li>
+                ) : (
+                    // Mapeamos los objetos para dibujarlos en la lista
+                    carrito.map((p, index) => (
+                        <li key={index}>{p.nombre} - {p.precio}€</li>
+                    ))
+                )}
             </ul>
-            <p>{carrito.length >= 5 ? "La cantidad de productos es mayor a 5" : null}</p>
-            <p>Precio total: {carrito.reduce((total, producto) => total + parseFloat(producto[1].replace("€", "")), 0)}€</p>
+
+            {carrito.length >= 5 && <p><strong>Aviso:</strong> Tienes más de 5 productos.</p>}
+            <p><strong>Precio total:</strong> {precioTotal}€</p>
         </div>
-    )
+    );
 }
 
-export default Carrito
+export default Carrito;
