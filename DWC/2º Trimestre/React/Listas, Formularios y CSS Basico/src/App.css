@@ -1,0 +1,32 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 20px;
+}
+
+.usuarios {
+  list-style: none;
+  padding: 0;
+
+  position: relative;
+  
+}
+
+.usuarios li {
+  padding: 4px 0;
+}
+.usuarios li::after {
+  position: absolute;
+  content: attr(id);
+
+  left: 0;
+}
