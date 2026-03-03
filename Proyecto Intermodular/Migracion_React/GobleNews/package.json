@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev:vite": "vite",
-    "dev:php": "C:/xampp/php/php.exe -S localhost:8000",
+    "dev:php": "node serve-php.js",
     "dev": "concurrently -n \"Vite,PHP\" -c \"cyan,magenta\" \"npm run dev:vite\" \"npm run dev:php\"",
     "build": "vite build",
     "lint": "eslint .",
