@@ -1,0 +1,64 @@
+@use "../Variables.module" as *;
+@use "../Mixins.module" as *;
+@use "../Keyframes.module" as *;
+@use "Header.module" as *;
+@use "Aside.module" as *;
+@use "TarjetaPrincipal.module" as *;
+@use "BentoGrid.module" as *;
+@use "Footer.module" as *;
+
+.page {
+    font-family: $fuente-principal;
+    background-color: $color-fondo;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    @include animation(fadeIn, 1s, ease-in-out, 1, forwards);
+
+    &::after {
+        position: fixed;
+        content: '';
+        width: 60vmin;
+        height: 60vmin;
+        top: 0;
+        left: 0;
+        background: radial-gradient(circle at 30% 30%, rgba(14, 133, 180, 0.45), rgba(255, 255, 255, 0) 65%);
+        filter: blur(10px);
+        opacity: 0.7;
+        mix-blend-mode: screen;
+        @include animation(drift, 25s, ease-in-out, infinite, both);
+        pointer-events: none;
+        z-index: 0;
+    }
+}
+
+.pageScroll {
+    height: 100vh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+
+    >header, footer {
+        scroll-snap-align: start;
+    }
+
+    > header {
+        min-height: 100vh;
+    }
+}
+
+.mainSnap {
+    > section {
+        min-height: 100vh;
+        scroll-snap-align: start;
+    }
+}
+
+.fadeInElement {
+    opacity: 0;
+    @include transition(all, 0.8s, ease-out);
+
+    &.visible {
+        opacity: 1;
+    }
+}

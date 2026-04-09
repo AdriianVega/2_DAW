@@ -1,0 +1,117 @@
+@use "../Variables.module" as *;
+@use "../Mixins.module" as *;
+
+.headerContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.videoBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+
+.logoLink {
+    position: absolute;
+    top: 80px;
+    left: 40px;
+    font-family: $fuente-secundaria;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    @include transition(transform, 0.3s);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+
+    @include responsive(medium) {
+        top: 40px;
+        left: 20px;
+    }
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.logoImg {
+    width: 75px;
+    height: 75px;
+
+    @include responsive(small) {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.textWrapper {
+    padding: 100px;
+    @include animation(efecto-neon, 5s, ease-in-out, infinite);
+
+    @include responsive(medium) {
+        padding: 40px;
+        margin-top: 60px;
+    }
+
+    @include responsive(small) {
+        padding: 20px;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+.title {
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-weight: 900;
+
+    @include responsive(small) {
+        font-size: 36px;
+    }
+}
+
+.subtitle {
+    font-family: $fuente-secundaria;
+    margin-top: 15px;
+
+    @include responsive(small) {
+        font-size: 18px;
+    }
+}
+
+.menuBtn {
+    position: fixed;
+    top: 40px;
+    left: 60px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    z-index: 10;
+
+    @include responsive(medium) {
+        left: auto;
+        right: 40px;
+    }
+
+    @include responsive(small) {
+        right: 20px;
+        top: 30px;
+    }
+
+    svg {
+        width: 32px;
+        height: 32px;
+        display: block;
+    }
+}

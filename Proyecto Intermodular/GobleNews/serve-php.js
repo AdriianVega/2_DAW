@@ -1,0 +1,29 @@
+import { spawn } from 'node:child_process';
+import { existsSync } from 'node:fs';
+
+const possiblePaths = [
+    '/opt/lampp/bin/php',
+    'C:/xampp/php/php.exe', 
+    'php'                  
+];
+
+const phpBinary = possiblePaths.find(path => {
+    if (path === 'php') return true;
+    return existsSync(path);
+});
+
+if (!phpBinary) {
+    console.error('Error: No se encontró PHP en las rutas definidas.');
+    process.exit(1);
+}
+
+console.log(`Usando binario en: ${phpBinary}`);
+
+const phpServer = spawn(phpBinary, ['-S', 'localhost:8000', '-t', '.'], {
+    stdio: 'inherit',
+    shell: false
+});
+
+phpServer.on('error', (err) => {
+    console.error(`Error al iniciar el servidor: ${err.message}`);
+});

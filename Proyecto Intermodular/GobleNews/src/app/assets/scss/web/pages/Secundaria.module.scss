@@ -1,0 +1,182 @@
+@use "../Variables.module" as *;
+@use "../Mixins.module" as *;
+@use '../Keyframes.module' as *;
+@use 'SobreNosotros.module' as *;
+
+.page {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-weight: 900;
+        color: white;
+    }
+
+    font-family: $fuente-principal;
+    background-color: $color-fondo;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    padding: 80px;
+
+    @include responsive(medium) {
+        padding: 40px;
+    }
+
+    @include responsive(small) {
+        padding: 20px;
+    }
+
+    @include animation(fadeIn, 1s, ease-in-out, 1, forwards);
+
+    &::after {
+        position: absolute;
+        content: '';
+        width: 60vmin;
+        height: 60vmin;
+        top: 0;
+        left: 0;
+        background: radial-gradient(circle at 30% 30%, rgba(180, 89, 14, 0.45), rgba(255, 255, 255, 0) 65%);
+        filter: blur(10px);
+        opacity: 0.7;
+        mix-blend-mode: screen;
+        @include animation(drift, 25s, ease-in-out, infinite, both);
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .page-scroll {
+        height: 100vh;
+        overflow-y: auto;
+        background-color: $color-fondo-tarjeta-oscuro;
+        border-radius: 20px;
+    }
+
+    .navMenu {
+        position: fixed; 
+        background: transparent;
+        border: none;
+        padding: 40px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+
+        @include responsive(medium) {
+            position: relative;
+        }
+    
+        @include responsive(small) {
+            position: relative;
+        }
+
+        svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+            @include transition(transform, 0.3s);
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        margin-top: 150px;
+
+        article {
+            padding: 40px 150px;
+            line-height: 2;
+
+            @include responsive(medium) {
+                padding: 40px 80px;
+            }
+
+            @include responsive(small) {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            img {
+                max-width: 100%;
+                width: 800px;
+                display: block;
+                margin: 40px auto;
+                height: auto;
+            }
+        }
+
+        video {
+            max-width: 100%;
+            width: 800px;
+            display: block;
+            margin: 40px auto;
+        }
+
+        .navegador {
+            display: flex;
+            justify-content: center;
+            margin: 40px 150px;
+            gap: 20px;
+
+            @include responsive(small) {
+                margin: 40px 20px;
+                flex-wrap: wrap;
+            }
+
+            button {
+                background-color: transparent;
+                border: 0;
+                border-radius: 5px;
+                padding: 10px;
+                cursor: pointer;
+
+                svg {
+                    width: 24px;
+                    height: 24px;
+                }
+
+                &:hover {
+                    background-color: darken($color-fondo-tarjeta-claro, 10%);
+                }
+            }
+
+            span {
+                transform: translateY(6px);
+            }
+        }
+    }
+
+    .logo {
+        width: 75px;
+        height: 75px;
+
+        @include responsive(small) {
+            width: 50px;
+            height: 50px;
+        }
+    }
+    p[class*="copyright"] {
+        transform: translateY(-65px);
+    }
+
+    div[class*="socialLinks"] {
+        a:nth-child(4) img {
+            transform: translateY(2px) scale(1.2) !important;
+            @include transition(transform, 0.3s);
+
+            &:hover {
+                transform: translateY(2px) scale(1.4) !important;
+
+                @include responsive(small) {
+                    transform: translateY(2px) scale(1.4) !important;
+                }
+            }
+        }
+    }
+}
